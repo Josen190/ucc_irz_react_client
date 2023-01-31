@@ -7,23 +7,17 @@ import Account from '../Pages/Account'
 import News from '../Pages/News'
 import Messenger from '../Pages/Messenger'
 import Calendar from '../Pages/Calendar'
+import ButtonMenu from './ButtonMenu';
 
 export default class Menu extends Component {
   render() {
     return (
         <div>
-            <div>
-                <a href='/account'>Личный кабинет</a>
-            </div>
-            <div>
-                <a href='/news'>Новости</a>
-            </div>
-            <div>
-                <a href='/messenger'>Мессенджер</a>
-            </div>
-            <div>
-                <a href='/calendar'>Календарь</a>
-            </div>
+          <ButtonMenu href='/account' value='Личный кабинет' ></ButtonMenu>
+          <ButtonMenu href='/news' value='Новости' ></ButtonMenu>
+          <ButtonMenu href='/messenger' value='Мессенджер' ></ButtonMenu>
+          <ButtonMenu href='/calendar' value='Календарь' ></ButtonMenu>
+
             <BrowserRouter>
               <Routes>
                 <Route path='/account' element={<Account />}/>
