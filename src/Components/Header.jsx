@@ -4,11 +4,12 @@ export default class Header extends Component {
   render() {
     return (
         <header>
-            <div>
-                logo
-            </div>
-
-            
+          <div class='content-centr'>
+            <h1>IRZ</h1>
+          </div>
+          <div class='content-centr'>
+            <input type='search'></input>
+          </div>
         </header>
     )
   }
