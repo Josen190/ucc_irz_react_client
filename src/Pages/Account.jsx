@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Personal_Information from '../Components/Profile/Personal_Information'
 import Profile_Navigation from '../Components/Profile/Profile_Navigation'
 import Profile_Picture from '../Components/Profile/Profile_Picture'
-import Tidings from '../Components/Tidings'
+import Tidings from '../Components/News/Tidings'
 
 
 export default class Account extends Component {

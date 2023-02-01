@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Profile_Picture from '../Components/Profile/Profile_Picture'
+import Profile_Picture from '../Profile/Profile_Picture'
 
 export default class AuthorNews extends Component {
   render() {

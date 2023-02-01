@@ -9,7 +9,7 @@ import Messenger from './Pages/Messenger'
 import Calendar from './Pages/Calendar'
 
 import Header from './Components/Header';
-import Menu from './Components/Menu';
+import Menu from './Components/Menu/Menu';
 
 function App() {
   return (

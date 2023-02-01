@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
 
-// import {Account, Messenger, Calendar, News} from '../Pages'
-
-
 import ButtonMenu from './ButtonMenu';
 
 export default class Menu extends Component {
