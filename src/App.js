@@ -19,16 +19,16 @@ function App() {
         <Menu></Menu>
         <BrowserRouter>
           <Routes>
-            <Route path='/account' element={<Account />}/>
-            <Route path='/news' element={<News />}/>
-            <Route path='/messenger' element={<Messenger />}/>
-            <Route path='/calendar' element={<Calendar />}/>
+            <Route path='/account' element={<Account />} />
+            <Route path='/news' element={<News />} />
+            <Route path='/messenger' element={<Messenger />} />
+            <Route path='/calendar' element={<Calendar />} />
           </Routes>
         </BrowserRouter>
       </div>
-      
+
     </>
-    
+
   );
 }
 
