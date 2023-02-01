@@ -1,68 +1,104 @@
-.App {
-  text-align: center;
+body {
+  background-color: #EDEDED;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.tile {
+  background-color: white;
+  padding: 8px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.bgc-grey-1 {
+  background-color: #EDEDED;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.bgc-white {
+  background-color: white;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* временный код */
 
 header {
   display: flex;
   flex-direction: row;
   height: 40px;
-
   border: 1px solid black;
-
-  
-
 }
 
-.content-centr{
+.content-centr {
   display: flex;
   align-content: center;
   justify-content: center;
 }
 
-h1{
+h1 {
   height: 100%;
   margin: 0 15px;
 }
 
 input {
-  height: 100% - 10px;
-  width: 100% - 10px;
+  height: calc(100% - 10px);
+  width: calc(100% - 10px);
   margin: 5px;
 }
+
+.menu {
+  border-radius: 5px;
+  max-width: 150px;
+  min-width: 100px;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  padding: 8px;
+}
+.menu .button {
+  border-radius: 2px;
+  padding: 4px;
+  display: flex;
+  align-content: center;
+  justify-content: start;
+}
+
+.logo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+.column * {
+  margin: 4px 0;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.mg-10-auto {
+  margin: 10px auto;
+}
+
+.mg-0-5 {
+  margin: 0 20px;
+}
+
+.grid-col-2 {
+  display: grid;
+  grid-template-columns: -webkit-max-content -webkit-max-content;
+  grid-template-columns: max-content max-content;
+  justify-content: center;
+}
+
+.main-feed {
+  width: 100%;
+  max-width: 700px;
+  min-width: 500px;
+}/*# sourceMappingURL=App.css.map */

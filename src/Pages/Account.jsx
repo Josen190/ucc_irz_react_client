@@ -1,26 +1,19 @@
 import React, { Component } from 'react'
-import Personal_Information from '../Components/Personal_Information'
+import Personal_Information from '../Components/Profile/Personal_Information'
+import Profile_Navigation from '../Components/Profile/Profile_Navigation'
+import Profile_Picture from '../Components/Profile/Profile_Picture'
 import Tidings from '../Components/Tidings'
-import logo from '../logo.svg'
+
 
 export default class Account extends Component {
   render() {
     return (
-      <main>
-        <div>
-          <div>
-            <img src={logo} alt="аватар" />
-          </div>
-          <div>
-            <div>
-              <a href='/setting'>Настройки</a>
-            </div>
-            <div>
-              <button>Подписаться</button>
-            </div>
-          </div>
+      <main className='grid-col-2'>
+        <div className='mg-0-5 tile'>
+          <Profile_Picture></Profile_Picture>
+          <Profile_Navigation></Profile_Navigation>
         </div>
-        <div>
+        <div className='mg-0-5 main-feed'>
           <Personal_Information></Personal_Information>
           <div>
             <Tidings></Tidings>
