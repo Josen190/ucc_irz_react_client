@@ -1,0 +1,16 @@
+export { default as AddCircleOutline } from "./AddCircleOutline";
+export { default as CalendarNumberOutline } from "./CalendarNumberOutline";
+export { default as CalendarOutline } from "./CalendarOutline";
+export { default as ChatbubbleOutline } from "./ChatbubbleOutline";
+export { default as HeartOutline } from "./HeartOutline";
+export { default as Heart } from "./Heart";
+export { default as LogOutOutline } from "./LogOutOutline";
+export { default as NewspaperOutline } from "./NewspaperOutline";
+export { default as OptionsOutline } from "./OptionsOutline";
+export { default as PaperPlaneOutline } from "./PaperPlaneOutline";
+export { default as PersonOutline } from "./PersonOutline";
+export { default as PushOutline } from "./PushOutline";
+export { default as SaveOutline } from "./SaveOutline";
+export { default as SettingsOutline } from "./SettingsOutline";
+export { default as ThumbsUpOutline } from "./ThumbsUpOutline";
+export { default as TodayOutline } from "./TodayOutline";

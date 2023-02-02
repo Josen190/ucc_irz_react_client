@@ -1,12 +1,40 @@
 import React, { Component } from 'react'
-// import like_off from '../../icon/heart-outline.svg'
+import SvgHeart from '../icons/Heart';
+import SvgHeartOutline from '../icons/HeartOutline';
+
+
 
 export default class Like extends Component {
+  constructor(props) {
+    super();
+    this.isLike = false;
+    this.like_use;
+    this.isButton = 'enable';
+    this.size = "25px";
+    this.switchLike = () => {
+      this.isLike = !this.isLike;
+      if (this.isLike) {
+        this.like_use = <SvgHeart size={this.size}></SvgHeart>;
+      }
+      else {
+        this.like_use = <SvgHeartOutline size={this.size}></SvgHeartOutline>;
+      }
+    }
+  }
+
   render() {
-    let like_off = <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><title>Heart</title><path d="M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" /></svg>;
+    if (this.isLike) {
+      this.like_use = <SvgHeart size={this.size}></SvgHeart>;
+    }
+    else {
+      this.like_use = <SvgHeartOutline size={this.size}></SvgHeartOutline>;
+    }
+
     return (
       <div>
-        <svg class="ionicon" viewBox="0 0 512 512"><title>Heart</title><path d="M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" /></svg>
+        <button disabled={this.isButton} className='icon' onClick={this.switchLike}>
+          {like_use}
+        </button>
       </div>
     )
   }

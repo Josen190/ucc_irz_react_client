@@ -124,4 +124,24 @@ input {
 }
 .content P {
   margin: 0;
+}
+
+.ionicon {
+  width: 25px;
+  height: 25px;
+}
+
+button.icon {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
 }/*# sourceMappingURL=App.css.map */
