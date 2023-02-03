@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import AuthorNews from './AuthorNews'
-import ContentNews from './ContentNews'
+import Content from './Content'
 import Like from './Like'
 import CommentsIcon from './CommentsIcon'
 
@@ -12,7 +12,7 @@ export default class Tidings extends Component {
     return (
       <div className='tile'>
         <AuthorNews></AuthorNews>
-        <ContentNews></ContentNews>
+        <Content></Content>
         <div className='row'>
           <Like></Like>
           <CommentsIcon></CommentsIcon>

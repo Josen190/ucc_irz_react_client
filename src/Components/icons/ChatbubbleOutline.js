@@ -1,7 +1,7 @@
 import * as React from "react";
-const SvgChatbubbleOutline = ({ title, titleId, size='25px', fill='none', ...props }) => (
+const SvgChatbubbleOutline = ({ title, titleId, className='', size='25px', fill='none', ...props }) => (
   <svg
-    className="chatbubble-outline_svg__ionicon"
+    className={className}
     viewBox="0 0 512 512"
     width={size}
     height={size}

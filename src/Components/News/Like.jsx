@@ -1,41 +1,38 @@
-import React, { Component } from 'react'
+import React, {useState} from 'react'
 import SvgHeart from '../icons/Heart';
 import SvgHeartOutline from '../icons/HeartOutline';
 
+const size="25px";
+let isLike = false;
 
 
-export default class Like extends Component {
-  constructor(props) {
-    super();
-    this.isLike = false;
-    this.like_use;
-    this.isButton = 'enable';
-    this.size = "25px";
-    this.switchLike = () => {
-      this.isLike = !this.isLike;
-      if (this.isLike) {
-        this.like_use = <SvgHeart size={this.size}></SvgHeart>;
-      }
-      else {
-        this.like_use = <SvgHeartOutline size={this.size}></SvgHeartOutline>;
-      }
-    }
-  }
+const Like = () => {
+  const llke_off = <SvgHeart size={size}></SvgHeart>;
+  const like_on = <SvgHeartOutline size={size}></SvgHeartOutline>;
 
-  render() {
-    if (this.isLike) {
-      this.like_use = <SvgHeart size={this.size}></SvgHeart>;
+  const [like_use, setLikeUse] = useState(isLike ? llke_off : like_on);
+  const disableBtnProps = {};
+  
+  const switchLike = () => {
+    disableBtnProps.disabled = false;
+    isLike = !isLike;
+    
+    if (isLike) {
+      setLikeUse(llke_off);
     }
     else {
-      this.like_use = <SvgHeartOutline size={this.size}></SvgHeartOutline>;
+      setLikeUse(like_on);
     }
 
-    return (
-      <div>
-        <button disabled={this.isButton} className='icon' onClick={this.switchLike}>
-          {like_use}
-        </button>
-      </div>
-    )
+    disableBtnProps.disabled = true;
   }
+
+  let button = <button {...disableBtnProps}  onClick={switchLike} >{like_use}</button>;
+  
+
+  return (
+    <div className='icon' >{button}</div>
+  )
 }
+
+export default Like;

@@ -1,7 +1,7 @@
 import * as React from "react";
-const SvgHeartOutline = ({ title, titleId, size='25px', fill='none', ...props }) => (
+const SvgHeartOutline = ({ title, titleId, className='', size='25px', fill='none', ...props }) => (
   <svg
-    className="heart-outline_svg__ionicon"
+    className={className}
     viewBox="0 0 512 512"
     width={size}
     height={size}

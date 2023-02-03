@@ -37,7 +37,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "svgr": "svgr --icon --title-prop -d src/Components/icons src/icon"
+    "svgr": "svgr icon:'{size}' replaceAttrValues:{className:'{className}', fill:'{fill}'} --title-prop -d src/Components/icons src/icon"
   },
   "devDependencies": {
     "@svgr/cli": "^6.5.1",

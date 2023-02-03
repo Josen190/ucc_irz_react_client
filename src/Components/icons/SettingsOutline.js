@@ -1,7 +1,7 @@
 import * as React from "react";
-const SvgSettingsOutline = ({ title, titleId, size='25px', fill='none', ...props }) => (
+const SvgSettingsOutline = ({ title, titleId, className='', size='25px', fill='none', ...props }) => (
   <svg
-    className="settings-outline_svg__ionicon"
+    className={className}
     viewBox="0 0 512 512"
     width={size}
     height={size}

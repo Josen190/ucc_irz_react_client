@@ -1,9 +1,17 @@
 import React, { Component } from 'react'
+import Button from '../Button'
+import Content from './Content'
 
 export default class Comment extends Component {
   render() {
     return (
-      <div>Comment</div>
+      <div className='tile'>
+        <div className='row'>
+          <h5>{fio}</h5>
+          <Button value="Удалить"/>
+        </div>
+        <Content></Content>
+      </div>
     )
   }
 }

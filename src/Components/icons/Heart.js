@@ -1,9 +1,9 @@
 import * as React from "react";
-const SvgHeart = ({ title, titleId, size='25px', fill='red', ...props }) => (
+const SvgHeart = ({ title, titleId, className='', size='25px', fill='red', ...props }) => (
 
 
   <svg
-    className="heart_svg__ionicon"
+    className={className}
     viewBox="0 0 512 512"
     width={size}
     height={size}
