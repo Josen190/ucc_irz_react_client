@@ -10,8 +10,9 @@ import Calendar from './Pages/Calendar'
 
 import Header from './Components/Header';
 import Menu from './Components/Menu/Menu';
+import Edit from './Pages/Edit';
 
-function App() {
+function User() {
   return (
     <>
       <Header></Header>
@@ -20,6 +21,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path='/account' element={<Account />} />
+            <Route path='/account/edit' element={<Edit />} />
             <Route path='/news' element={<News />} />
             <Route path='/messenger' element={<Messenger />} />
             <Route path='/calendar' element={<Calendar />} />
@@ -32,4 +34,4 @@ function App() {
   );
 }
 
-export default App;
+export default User;

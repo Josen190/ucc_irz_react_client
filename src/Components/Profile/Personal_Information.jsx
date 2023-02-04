@@ -7,9 +7,9 @@ export default class Personal_Information extends Component {
     let date = "05.06.2001";
     let dateReceptPosition = "15.01.2023";
     let position = 'веб-разработчик';
-    let myself = 'человек свободных взглядов любящий аниме, мангу и особено раноюэ';
+    let myself = 'человек свободных взглядов любящий аниме, мангу и особенно раноюэ';
     let iDid = 'чем нибудь';
-    let achievements = "идельная посещяемость, прогулка на 30 000 шагов";
+    let achievements = "идеальная посещаемость, прогулка на 30 000 шагов";
     let skillsAndCompetencies = 'рисование на уровне младшеклашки и игра на флейте';
 
     return (

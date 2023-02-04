@@ -10,6 +10,8 @@ body {
     border-radius: 6px;
     margin-bottom: 20px;
     height: min-content;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .bgc-grey-1 {
@@ -55,9 +57,10 @@ input {
 
 .menu {
     border-radius: 5px;
-    max-width: 150px;
+    max-width: 200px;
     min-width: 100px;
     height: max-content;
+    width: max-content;
     padding: 8px;
 
     .button {
@@ -76,10 +79,11 @@ input {
     // width: 150px;
     // height: 150px;
     border-radius: 50%;
+    margin: 0;
 
     &.norm {
-        width: 150px;
-        height: 150px;
+        width: 180px;
+        height: 180px;
     }
 
 
@@ -114,12 +118,16 @@ input {
     margin: 10px auto;
 }
 
-.mg-0-5 {
+.mg-0-20 {
     margin: 0 20px;
 }
 
 .mg-top-10 {
     margin-top: 10px;
+}
+
+.mg-buttom-10 {
+    margin-bottom: 10px;
 }
 
 .mg-0{
@@ -131,6 +139,7 @@ input {
     display: grid;
     grid-template-columns: max-content max-content;
     justify-content: center;
+    grid-column-gap: 20px;
 }
 
 .main-feed {
@@ -174,4 +183,40 @@ input {
     }
 
 
+}
+
+button {
+    width: auto;
+}
+
+.w-100{
+    width: 100%;
+}
+
+.w-200px {
+    width: 180px;
+}
+
+textarea {
+    display: block;
+    resize: none;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 3em;
+
+
+    
+}
+
+main {
+    min-width: 400px;
+    max-width: 1200px;
+    width: 100%;
+    border: 1px solid black;
+}
+
+.col-space-between {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between
 }
