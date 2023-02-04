@@ -2,12 +2,6 @@ import React, { Component } from 'react'
 
 export default class Button extends Component {
   render() {
-    
-
-    
-
-
-
     let button = null;
     switch (this.props.type){
       case 'button':
@@ -28,6 +22,15 @@ export default class Button extends Component {
         button = <a {...linkprops}>{this.props.value}</a>
       break;
 
+      case 'submit':
+        const submitrops = {
+          className:'' + ' ' + this.props.className,
+          value: this.props.value,
+        }
+
+        button = <input type="submit" {...submitrops}/>
+      break;
+
       default:
         break;
     }
@@ -37,7 +40,7 @@ export default class Button extends Component {
 
 
     return (
-      <div>
+      <div className=''>
         {button}
       </div>
       
