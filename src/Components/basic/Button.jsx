@@ -1,49 +1,53 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
+import "./basic.css";
 
 export default class Button extends Component {
   render() {
     let button = null;
-    switch (this.props.type){
-      case 'button':
+    let className =
+      "button center color-" + (this.props.color != undefined
+        ? this.props.color : "basic");
+    
+        console.log(className);
+
+    switch (this.props.type) {
+      case "button":
         const buttonprops = {
-          className:'' + ' ' + this.props.className,
+          className: className,
           disabled: this.props.disabled,
           onClick: this.props.onClick,
-        }
+        };
 
         button = <button {...buttonprops}>{this.props.value}</button>;
-      break;
-      case 'link':
+        break;
+      case "link":
         const linkprops = {
           href: this.props.href,
-          className:'' + ' ' + this.props.className,
-        }
+        };
 
-        button = <a {...linkprops}>{this.props.value}</a>
-      break;
+        button = (
+          <div className={className}>
+            <div>
+              <a {...linkprops}>{this.props.value}</a>
+            </div>
+          </div>
+        );
+        break;
 
-      case 'submit':
+      case "submit":
         const submitrops = {
-          className:'' + ' ' + this.props.className,
+          className: className,
           value: this.props.value,
-        }
+        };
 
-        button = <input type="submit" {...submitrops}/>
-      break;
+        button = <input type="submit" {...submitrops} />;
+        break;
 
       default:
         break;
     }
 
-
-
-
-
-    return (
-      <div className=''>
-        {button}
-      </div>
-      
-    )
+    return <div className={"button-contener center " + (this.props.className != undefined
+      ? this.props.className : "")}>{button}</div>;
   }
 }

@@ -4,6 +4,13 @@ body {
     background-color: $background-color;
 }
 
+a:active, 
+a:hover,  
+a {
+  text-decoration: none;
+  color: black;
+}
+
 .tile {
     background-color: white;
     padding: 20px;
@@ -122,6 +129,10 @@ input {
     margin: 0 20px;
 }
 
+.mg-5-0 {
+    margin: 5px 0;
+}
+
 .mg-top-10 {
     margin-top: 10px;
 }
@@ -130,7 +141,7 @@ input {
     margin-bottom: 10px;
 }
 
-.mg-0{
+.mg-0 {
     margin: 0;
 }
 
@@ -157,16 +168,16 @@ input {
     }
 }
 
-.ionicon{
+.ionicon {
     width: 25px;
     height: 25px;
 }
 
-.icon{
+.icon {
 
     margin-right: 10px;
 
-    button{
+    button {
         padding: 0;
         border: none;
         font: inherit;
@@ -178,7 +189,7 @@ input {
         height: min-content;
     }
 
-    p{
+    p {
         margin: 0;
     }
 
@@ -189,7 +200,7 @@ button {
     width: auto;
 }
 
-.w-100{
+.w-100 {
     width: 100%;
 }
 
@@ -205,7 +216,7 @@ textarea {
     min-height: 3em;
 
 
-    
+
 }
 
 main {
@@ -220,3 +231,4 @@ main {
     flex-direction: column;
     align-content: space-between
 }
+

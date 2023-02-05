@@ -8,7 +8,7 @@ import News from './Pages/News'
 import Messenger from './Pages/Messenger'
 import Calendar from './Pages/Calendar'
 
-import Header from './Components/Header';
+import Header from './Components/Header/Header';
 import Menu from './Components/Menu/Menu';
 import Edit from './Pages/Edit';
 

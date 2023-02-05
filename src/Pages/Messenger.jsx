@@ -1,17 +1,14 @@
-import React, { Component } from 'react'
-import ChatList from '../Components/Messenger/ChatList'
+import React, { Component } from "react";
+import Chat from "../Components/Messenger/Chat";
+import ChatList from "../Components/Messenger/ChatList";
 
 export default class Messenger extends Component {
   render() {
     return (
-      <div>
-        <div>
-          <ChatList />
-        </div>
-        <main>
-          
-        </main>
+      <div className="tile scroll-fix">
+        <ChatList />
+        <Chat />
       </div>
-    )
+    );
   }
 }

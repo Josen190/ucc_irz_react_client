@@ -1,0 +1,46 @@
+$pantone-295-c: #002856;
+$pantone-289-c: #1f3a60;
+$color-gray-1: #ededed;
+$color-gray-3: #e0e0e0;
+$pantone-200-c: #c11727;
+$pantone-187-c: #ae1926;
+
+.scroll-fix {
+    height: calc(100vh - 60px);
+    position: relative;
+    text-align: left;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.chat-list{
+    width: 180px;
+    min-width: 100px;
+    border-radius: 3px;
+    height: 100%;
+    box-sizing: border-box;
+    
+
+    
+    &::after{
+        content: '';
+        border-style: solid;        
+        border-color:  $color-gray-3;
+        border-width:  0 0 2px 0;
+
+    }
+    
+    .button-contener{
+        margin: 0;
+        
+    }
+    .button {
+        border-radius: 0;
+        border-width: 2px;
+        border-bottom-width: 0;
+
+
+		
+	}
+}
