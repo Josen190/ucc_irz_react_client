@@ -1,21 +1,12 @@
 import React, { Component } from "react";
+import Textarea from "./Textarea";
 
-function fixTextareaSize(textarea) {
-  textarea.style.height = "auto";
-  textarea.style.height = textarea.scrollHeight + 2 + "px";
-}
 
-export default class InputField extends Component {
-  componentDidMount() {
-    let textarea = document.getElementsByTagName("textarea");
-    for (let i = 0; i < textarea.length; i++) {
-      fixTextareaSize(textarea.item(i));
-    }
-  }
 
+export class InputField extends Component {
   render() {
     const arrType = ["textarea", "text"];
-
+    
     const inputprops = {
       className: "",
       placeholder: this.props.placeholder,
@@ -38,16 +29,14 @@ export default class InputField extends Component {
 
     if (numderType == 0) {
       input = (
-        <textarea
+        <Textarea
           {...inputprops}
           rows="2"
-          onInput={(e) => {
-            fixTextareaSize(e.target);
-          }}
-        ></textarea>
+          isresize='true'
+        ></Textarea>
       );
     } else {
-      input = <input type={this.props.type} {...inputprops} />;
+      input = <input type={this.props.type} {...inputprops}  />;
     }
 
     return (

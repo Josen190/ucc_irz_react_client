@@ -2,13 +2,6 @@ body {
   background-color: #EDEDED;
 }
 
-a:active,
-a:hover,
-a {
-  text-decoration: none;
-  color: black;
-}
-
 .tile {
   background-color: white;
   padding: 20px;
@@ -17,7 +10,6 @@ a {
   height: -webkit-min-content;
   height: -moz-min-content;
   height: min-content;
-  width: 100%;
   box-sizing: border-box;
 }
 
@@ -86,8 +78,8 @@ input {
   height: 180px;
 }
 .logo.mini {
-  width: 25px;
-  height: 25px;
+  width: 35px;
+  height: 35px;
 }
 .logo img {
   width: 100%;
@@ -139,22 +131,11 @@ input {
   grid-column-gap: 20px;
 }
 
-.main-feed {
-  width: 100%;
-  max-width: 700px;
-  min-width: 500px;
-}
-
 .content {
   margin: 10px 0;
 }
 .content P {
   margin: 0;
-}
-
-.ionicon {
-  width: 25px;
-  height: 25px;
 }
 
 .icon {
@@ -178,10 +159,6 @@ input {
   margin: 0;
 }
 
-button {
-  width: auto;
-}
-
 .w-100 {
   width: 100%;
 }
@@ -190,23 +167,16 @@ button {
   width: 180px;
 }
 
-textarea {
-  display: block;
-  resize: none;
-  width: 100%;
-  box-sizing: border-box;
-  min-height: 3em;
-}
-
-main {
-  min-width: 400px;
-  max-width: 1200px;
-  width: 100%;
-  border: 1px solid black;
-}
-
 .col-space-between {
   display: flex;
   flex-direction: column;
   align-content: space-between;
+}
+
+a:active,
+a:hover,
+a {
+  display: block;
+  text-decoration: none;
+  color: black;
 }/*# sourceMappingURL=App.css.map */

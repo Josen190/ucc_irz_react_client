@@ -44,3 +44,35 @@ $pantone-187-c: #ae1926;
 		
 	}
 }
+
+
+.glue-bottom {
+    position: sticky;
+
+}
+.chat{
+    min-height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+
+    .message {
+      display: grid;
+      grid-template-columns: auto 1fr;
+
+      
+    }
+
+    p {
+        margin: 0;
+    }
+
+    .button-contener{
+        width: min-content;
+        
+        .button{
+            border-radius: 50%;
+            padding: 0;
+
+        }
+    }
+}

@@ -7,7 +7,7 @@ $pantone-187-c: #ae1926;
 $transition-time: 0.1s;
 
 
-.center{
+.center {
 	display: flex;
 	align-content: center;
 	justify-content: center;
@@ -20,15 +20,15 @@ $transition-time: 0.1s;
 	color: black;
 	transition: $transition-time;
 
-		&:hover {
-			background: $pantone-295-c;
-			color: white;
-			transition: $transition-time;
+	&:hover {
+		background: $pantone-295-c;
+		color: white;
+		transition: $transition-time;
 
-			* {
-				color: white;
-			}
+		* {
+			color: white;
 		}
+	}
 }
 
 .color-red {
@@ -37,15 +37,15 @@ $transition-time: 0.1s;
 	color: black;
 	transition: $transition-time;
 
-		&:hover {
-			background: $pantone-289-c;
-			color: white;
-			transition: $transition-time;
+	&:hover {
+		background: $pantone-289-c;
+		color: white;
+		transition: $transition-time;
 
-			* {
-				color: black;
-			}
+		* {
+			color: black;
 		}
+	}
 }
 
 .color-mini {
@@ -54,15 +54,15 @@ $transition-time: 0.1s;
 	color: black;
 	transition: $transition-time;
 
-		&:hover {
-			background: $color-gray-3;
-			color: black;
-			transition: $transition-time;
+	&:hover {
+		background: $color-gray-3;
+		color: black;
+		transition: $transition-time;
 
-			* {
-				color: black;
-			}
+		* {
+			color: black;
 		}
+	}
 }
 
 
@@ -87,7 +87,25 @@ $transition-time: 0.1s;
 		cursor: pointer;
 	}
 
-	a{
+
+
+	input[type=submit] {
+		background: none;
+		color: inherit;
+		border: none;
+		padding: 0;
+		margin: 0;
+		font: inherit;
+		cursor: pointer;
+		outline: inherit;
+	}
+
+	textarea {
 		display: block;
+		resize: none;
+		width: 100%;
+		box-sizing: border-box;
+		min-height: 3em;
+
 	}
 }

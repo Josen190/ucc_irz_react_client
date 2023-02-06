@@ -70,6 +70,20 @@
   text-align: center;
   cursor: pointer;
 }
-.button-contener a {
+.button-contener input[type=submit] {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+.button-contener textarea {
   display: block;
+  resize: none;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 3em;
 }/*# sourceMappingURL=basic.css.map */

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import AuthorNews from "./AuthorNews";
-import Content from "./Content";
+import Content from "../basic/Content";
 import Like from "./Like";
 import CommentsIcon from "./CommentsIcon";
 

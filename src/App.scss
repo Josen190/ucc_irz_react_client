@@ -2,13 +2,7 @@ $background-color: #EDEDED;
 
 body {
     background-color: $background-color;
-}
 
-a:active, 
-a:hover,  
-a {
-  text-decoration: none;
-  color: black;
 }
 
 .tile {
@@ -17,7 +11,7 @@ a {
     border-radius: 6px;
     margin-bottom: 20px;
     height: min-content;
-    width: 100%;
+    // width: 100%;
     box-sizing: border-box;
 }
 
@@ -95,8 +89,8 @@ input {
 
 
     &.mini {
-        width: 25px;
-        height: 25px;
+        width: 35px;
+        height: 35px;
     }
 
     img {
@@ -153,12 +147,6 @@ input {
     grid-column-gap: 20px;
 }
 
-.main-feed {
-    width: 100%;
-    max-width: 700px;
-    min-width: 500px;
-}
-
 .content {
     margin: 10px 0;
 
@@ -168,10 +156,10 @@ input {
     }
 }
 
-.ionicon {
-    width: 25px;
-    height: 25px;
-}
+// .ionicon {
+//     width: 25px;
+//     height: 25px;
+// }
 
 .icon {
 
@@ -196,10 +184,6 @@ input {
 
 }
 
-button {
-    width: auto;
-}
-
 .w-100 {
     width: 100%;
 }
@@ -208,23 +192,6 @@ button {
     width: 180px;
 }
 
-textarea {
-    display: block;
-    resize: none;
-    width: 100%;
-    box-sizing: border-box;
-    min-height: 3em;
-
-
-
-}
-
-main {
-    min-width: 400px;
-    max-width: 1200px;
-    width: 100%;
-    border: 1px solid black;
-}
 
 .col-space-between {
     display: flex;
@@ -232,3 +199,10 @@ main {
     align-content: space-between
 }
 
+a:active,
+a:hover,
+a {
+    display: block;
+    text-decoration: none;
+    color: black;
+}

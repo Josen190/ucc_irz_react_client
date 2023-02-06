@@ -5,10 +5,10 @@ import ChatList from "../Components/Messenger/ChatList";
 export default class Messenger extends Component {
   render() {
     return (
-      <div className="tile scroll-fix">
+      <main className="tile scroll-fix row">
         <ChatList />
         <Chat />
-      </div>
+      </main>
     );
   }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Button from "../Components/basic/Button";
-import InputField from "../Components/basic/InputField";
+import { InputField } from "../Components/basic/InputField";
 import InputImg from "../Components/basic/InputImg";
 
 function save() {}
@@ -8,7 +8,7 @@ function save() {}
 export default class Edit extends Component {
   render() {
     let myself =
-      "человек свободных взглядов любящий аниме, мангу и особенно раноюэ";
+      "человек свободных взглядов любящий аниме, мангу и особенно раноюэ раноюэ";
     let iDid = "чем нибудь";
     let achievements = "идеальная посещаемость, прогулка на 30 000 шагов";
     let skillsAndCompetencies =

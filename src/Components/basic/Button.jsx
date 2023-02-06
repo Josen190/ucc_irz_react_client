@@ -7,8 +7,6 @@ export default class Button extends Component {
     let className =
       "button center color-" + (this.props.color != undefined
         ? this.props.color : "basic");
-    
-        console.log(className);
 
     switch (this.props.type) {
       case "button":
@@ -36,11 +34,11 @@ export default class Button extends Component {
 
       case "submit":
         const submitrops = {
-          className: className,
-          value: this.props.value,
+          
+          value: this.props.title != undefined ? this.props.title : '',
         };
 
-        button = <input type="submit" {...submitrops} />;
+        button = <label className={className}>{this.props.value}<input type="submit" {...submitrops} /></label>;
         break;
 
       default:

@@ -4,11 +4,10 @@ import Textarea from "../basic/Textarea";
 import Button from "../basic/Button";
 import './news.css';
 
- const CreateTidings = ({active, setActive}) => {
+ const CreateTidings = ({setActive}) => {
 
-    let className = active ? 'modal' : 'modal disable'
     return (
-      <div className={className} onClick={() => {setActive(false)}}>
+      <div className='modal' onClick={() => {setActive(false)}}>
         <form className="column tile" onClick={e => e.stopPropagation()}>
           <h3>Создать новость</h3>
           <Textarea rows='15'/>

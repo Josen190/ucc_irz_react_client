@@ -27,4 +27,31 @@
   border-radius: 0;
   border-width: 2px;
   border-bottom-width: 0;
+}
+
+.glue-bottom {
+  position: -webkit-sticky;
+  position: sticky;
+}
+
+.chat {
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+.chat .message {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+.chat p {
+  margin: 0;
+}
+.chat .button-contener {
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
+}
+.chat .button-contener .button {
+  border-radius: 50%;
+  padding: 0;
 }/*# sourceMappingURL=messenger.css.map */
