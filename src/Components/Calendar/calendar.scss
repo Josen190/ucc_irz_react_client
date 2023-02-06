@@ -1,0 +1,43 @@
+.month {
+    // display: grid;
+    // box-sizing: border-box;
+    // grid-template-columns: repeat(7, 1fr);
+    // grid-template-rows: repeat(4, 1fr);
+    // grid-gap: 0;
+    // grid-auto-flow: column;
+    // align-self: center;
+    // justify-self: center;
+    // border: 1px solid black;
+    // margin: 0;
+    // height: 100%;
+    // width: 100%;
+
+    
+    .month-row{
+        display: grid;
+        box-sizing: border-box;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, 1fr);
+    }
+
+    .month-column{
+        display: grid;
+        box-sizing: border-box;
+        grid-template-columns: repeat(7, 1fr);
+        grid-template-rows: 1fr;
+    }
+
+}
+
+.day{
+
+    &.today{
+        display: block;
+        border: 2px solid black;
+        background-color: aqua;
+    }
+
+    &.noThisMonth{
+
+    }
+}
