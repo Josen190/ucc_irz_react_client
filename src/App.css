@@ -176,7 +176,6 @@ input {
 a:active,
 a:hover,
 a {
-  display: block;
   text-decoration: none;
   color: black;
 }/*# sourceMappingURL=App.css.map */

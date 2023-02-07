@@ -1,10 +1,22 @@
 import React, { Component } from "react";
-import Tidings from "../Components/News/Tidings";
+
+import Header from "../Components/Header/Header";
+import Menu from "../Components/Menu/Menu";
+import FeedNews from "../Components/News/FeedNews";
 
 export default class News extends Component {
   render() {
-    let arrNews = [<Tidings />, <Tidings />, <Tidings />];
+    
 
-    return <main className="column">{arrNews}</main>;
+    return (
+      <>
+        <Header></Header>
+        <div className="mg-10-auto grid-col-2 ">
+          <Menu></Menu>
+
+          <FeedNews />
+        </div>
+      </>
+    );
   }
 }

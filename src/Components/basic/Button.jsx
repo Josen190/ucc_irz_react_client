@@ -5,8 +5,8 @@ export default class Button extends Component {
   render() {
     let button = null;
     let className =
-      "button center color-" + (this.props.color != undefined
-        ? this.props.color : "basic");
+      "button center color-" +
+      (this.props.color != undefined ? this.props.color : "basic");
 
     switch (this.props.type) {
       case "button":
@@ -25,27 +25,40 @@ export default class Button extends Component {
 
         button = (
           <div className={className}>
-            <div>
-              <a {...linkprops}>{this.props.value}</a>
-            </div>
+            <a {...linkprops}>
+              <div  className="center">{this.props.value}</div>
+              
+            </a>
           </div>
         );
         break;
 
       case "submit":
         const submitrops = {
-          
-          value: this.props.title != undefined ? this.props.title : '',
+          value: this.props.title != undefined ? this.props.title : "",
         };
 
-        button = <label className={className}>{this.props.value}<input type="submit" {...submitrops} /></label>;
+        button = (
+          <label className={className}>
+            {this.props.value}
+            <input type="submit" {...submitrops} />
+          </label>
+        );
         break;
 
       default:
         break;
     }
 
-    return <div className={"button-contener center " + (this.props.className != undefined
-      ? this.props.className : "")}>{button}</div>;
+    return (
+      <div
+        className={
+          "button-contener center " +
+          (this.props.className != undefined ? this.props.className : "")
+        }
+      >
+        {button}
+      </div>
+    );
   }
 }
