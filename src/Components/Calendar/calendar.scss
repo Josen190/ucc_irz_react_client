@@ -1,4 +1,13 @@
+$pantone-295-c: #002856;
+$pantone-289-c: #1f3a60;
+$color-gray-1: #ededed;
+$color-gray-3: #e0e0e0;
+$pantone-200-c: #c11727;
+$pantone-187-c: #ae1926;
+
 .calendar {
+    $margin-buttom: 25px;
+
     display: grid;
     box-sizing: border-box;
     grid-template-rows: min-content 1fr min-content;
@@ -7,16 +16,42 @@
     align-self: center;
     justify-self: center;
     border: 1px solid black;
-    margin: 0;
-    // height: 100%;
-    // width: 100%;
+    margin-bottom: $margin-buttom;
+    height: calc(100% - #{$margin-buttom});
+}
+
+
+
+.month {
+    height: 100%;
+    width: 100%;
+
+    table{
+        display: grid;
+        grid-template-rows: min-content 1fr;
+        height: 100%;
+        border-collapse: collapse;
+    }
 
     
+
+    th{
+        font-size: small;
+        font-weight: lighter;
+        text-align: center;
+    }
+
+    td{
+        padding: 0;
+    }
+
+
     .month-row{
         display: grid;
         box-sizing: border-box;
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(4, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+        
     }
 
     .month-column{
@@ -29,6 +64,15 @@
 }
 
 .day{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: medium;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    border: 1px solid $color-gray-1;
+
 
     &.today{
         display: block;

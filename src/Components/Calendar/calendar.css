@@ -8,21 +8,52 @@
   align-self: center;
   justify-self: center;
   border: 1px solid black;
-  margin: 0;
+  margin-bottom: 25px;
+  height: calc(100% - 25px);
 }
-.calendar .month-row {
+
+.month {
+  height: 100%;
+  width: 100%;
+}
+.month table {
+  display: grid;
+  grid-template-rows: -webkit-min-content 1fr;
+  grid-template-rows: min-content 1fr;
+  height: 100%;
+  border-collapse: collapse;
+}
+.month th {
+  font-size: small;
+  font-weight: lighter;
+  text-align: center;
+}
+.month td {
+  padding: 0;
+}
+.month .month-row {
   display: grid;
   box-sizing: border-box;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
 }
-.calendar .month-column {
+.month .month-column {
   display: grid;
   box-sizing: border-box;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: 1fr;
 }
 
+.day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: medium;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  border: 1px solid #ededed;
+}
 .day.today {
   display: block;
   border: 2px solid black;
