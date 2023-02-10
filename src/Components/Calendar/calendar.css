@@ -1,10 +1,22 @@
-.month .month-row {
+.calendar {
+  display: grid;
+  box-sizing: border-box;
+  grid-template-rows: -webkit-min-content 1fr -webkit-min-content;
+  grid-template-rows: min-content 1fr min-content;
+  grid-gap: 0;
+  grid-auto-flow: column;
+  align-self: center;
+  justify-self: center;
+  border: 1px solid black;
+  margin: 0;
+}
+.calendar .month-row {
   display: grid;
   box-sizing: border-box;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(4, 1fr);
 }
-.month .month-column {
+.calendar .month-column {
   display: grid;
   box-sizing: border-box;
   grid-template-columns: repeat(7, 1fr);
