@@ -4,6 +4,7 @@ import { InputField } from "../Components/basic/InputField";
 import InputImg from "../Components/basic/InputImg";
 import Header from "../Components/Header/Header";
 import Menu from "../Components/Menu/Menu";
+import User from "./User";
 
 function save() {}
 
@@ -16,46 +17,43 @@ export default class Edit extends Component {
     let skillsAndCompetencies =
       "рисование на уровне младшеклашки и игра на флейте";
     return (
-      <>
-        <Header></Header>
-        <div className="mg-10-auto grid-col-2 ">
-          <Menu></Menu>
-
-          <main className="tile col-space-between">
-            <div>
-              <InputImg />
-              <InputField
-                type="textarea"
-                title="О себе"
-                placeholder="Введите информацию о себе"
-                value={myself}
-              />
-              <InputField
-                type="textarea"
-                title="Чем занимался"
-                placeholder="Введите чем вы занимались"
-                value={iDid}
-              />
-              <InputField
-                type="textarea"
-                title="Достижения"
-                placeholder="Расскажите о ваших достижениях"
-                value={achievements}
-              />
-              <InputField
-                type="textarea"
-                title="Навыки и компетенции"
-                placeholder="Расскажите о ваших навыках "
-                value={skillsAndCompetencies}
-              />
-            </div>
-            <div>
-              <Button type="link" value="Отмена" href="/account" />
-              <Button type="button" value="Сохранить" />
-            </div>
-          </main>
-        </div>
-      </>
+      <User>
+        <main className="tile col-space-between">
+          <div>
+            <InputImg />
+            <InputField
+              type="textarea"
+              title="О себе"
+              placeholder="Введите информацию о себе"
+              value={myself}
+            />
+            <InputField
+              type="textarea"
+              title="Чем занимался"
+              placeholder="Введите чем вы занимались"
+              value={iDid}
+            />
+            <InputField
+              type="textarea"
+              title="Достижения"
+              placeholder="Расскажите о ваших достижениях"
+              value={achievements}
+            />
+            <InputField
+              type="textarea"
+              title="Навыки и компетенции"
+              placeholder="Расскажите о ваших навыках "
+              value={skillsAndCompetencies}
+            />
+          </div>
+          <div>
+            <Button type="link" href="/account">
+              Отмена
+            </Button>
+            <Button type="button">Сохранить</Button>
+          </div>
+        </main>
+      </User>
     );
   }
 }

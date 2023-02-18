@@ -8,39 +8,37 @@ import CreateTidings from "../Components/News/CreateTidings";
 import Header from "../Components/Header/Header";
 import Menu from "../Components/Menu/Menu";
 import "./pages.css";
+import User from "./User";
 
 const Account = () => {
   const [active, setActive] = useState(false);
 
   return (
-    <>
-      <Header></Header>
-      <div className="mg-10-auto grid-col-2 ">
-        <Menu></Menu>
-        <main className="account">
-          <div className="tile ProfileHeader">
-            <div className="margin-right">
-              <Profile_Picture type="norm"></Profile_Picture>
-              <Profile_Navigation></Profile_Navigation>
-            </div>
-            <Personal_Information></Personal_Information>
+    <User>
+      <main className="account">
+        <div className="tile ProfileHeader">
+          <div className="margin-right">
+            <Profile_Picture type="norm"></Profile_Picture>
+            <Profile_Navigation></Profile_Navigation>
           </div>
-          <div className="">
-            <div className="tile">
-              <Button
-                type="button"
-                value="Создать новость"
-                onClick={() => {
-                  setActive(true);
-                }}
-              />
-            </div>
-            <Tidings></Tidings>
+          <Personal_Information></Personal_Information>
+        </div>
+        <div className="">
+          <div className="tile">
+            <Button
+              type="button"
+              onClick={() => {
+                setActive(true);
+              }}
+            >
+              Создать новость
+            </Button>
           </div>
-          {active && <CreateTidings setActive={setActive} />}
-        </main>
-      </div>
-    </>
+          <Tidings></Tidings>
+        </div>
+        {active && <CreateTidings setActive={setActive} />}
+      </main>
+    </User>
   );
 };
 

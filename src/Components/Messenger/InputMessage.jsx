@@ -9,7 +9,7 @@ export default class InputMessage
     return (
       <div className='row glue-bottom'>
         <Textarea rows='1' isresize='true' />
-        <Button type='submit' value={<SvgPaperPlaneOutline />} color='mini' />
+        <Button type='submit' color='mini' ><SvgPaperPlaneOutline /></Button>
       </div>
     )
   }

@@ -3,6 +3,7 @@ import Month from "../Components/Calendar/Month";
 import Button from "../Components/basic/Button";
 import Header from "../Components/Header/Header";
 import Menu from "../Components/Menu/Menu";
+import User from "./User";
 
 const Calendar = () => {
   const [date, setDate] = useState(new Date());
@@ -15,22 +16,22 @@ const Calendar = () => {
   };
 
   return (
-    <div className="scroll-fix parts-2-page">
-      <Header></Header>
-      <div className="mg-10-auto grid-col-2 ">
-        <Menu></Menu>
-        <main className="tile calendar">
-          <div>
-            <h4></h4>
-          </div>
-          <Month year={date.getFullYear()} numberMonth={date.getMonth()} />
-          <div>
-            <Button type="button" onClick={prevMonth} value="Предыдущий" />
-            <Button type="button" onClick={nextMonth} value="Следующий" />
-          </div>
-        </main>
-      </div>
-    </div>
+    <User>
+      <main className="tile calendar">
+        <div>
+          <h4></h4>
+        </div>
+        <Month year={date.getFullYear()} numberMonth={date.getMonth()} />
+        <div>
+          <Button type="button" onClick={prevMonth}>
+            Предыдущий
+          </Button>
+          <Button type="button" onClick={nextMonth}>
+            Следующий
+          </Button>
+        </div>
+      </main>
+    </User>
   );
 };
 export default Calendar;

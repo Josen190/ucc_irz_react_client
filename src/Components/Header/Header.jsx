@@ -4,14 +4,14 @@ import Search from '../basic/Search'
 
 export default class Header extends Component {
   render() {
-    let isauth = this.props.isauth != undefined ? this.props.isauth : false;
+    let isLogin = this.props.islogin != undefined ? this.props.islogin : false;
     return (
         <header>
           <div className='content-centr'>
             <h1>IRZ</h1>
           </div>
-          <Search></Search>
-          {!isauth && <Button type='link' href='/auth' value='Войти'/>}
+          {isLogin && <Search></Search>}
+          {!isLogin && <Button type='link' href='/login'>Войти</Button>}
 
         </header>
     )

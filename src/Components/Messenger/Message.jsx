@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Content from "../basic/Content";
 import Profile_Picture from "../Profile/Profile_Picture";
+import { Link } from "react-router-dom";
 
 export default class Message extends Component {
   render() {
@@ -11,7 +12,7 @@ export default class Message extends Component {
         <Profile_Picture type='mini'/>
         <div className="column">
           <div className="row">
-            <a href="/account">{name}</a>
+            <Link to="/account">{name}</Link>
             <span>{time}</span>
           </div>
           <Content />

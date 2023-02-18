@@ -12,8 +12,8 @@ import './news.css';
           <h3>Создать новость</h3>
           <Textarea rows='15'/>
           <Checkbox title="Глобальная новость" />
-          <Button type="button" value="Отмена" onClick={() => {setActive(false)}}/>
-          <Button type="submit" value="Создать" />
+          <Button type="button"  onClick={() => {setActive(false)}}>Отмена</Button>
+          <Button type="submit">Создать</Button>
         </form>
       </div>
     );

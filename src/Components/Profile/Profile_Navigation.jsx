@@ -5,8 +5,8 @@ export default class Profile_Navigation extends Component {
   render() {
     return (
         <div className='content-centr column w-200px'>
-            <Button type='link' value='Редактировать профиль' href='/account/edit' color='mini'/>
-            <Button type='button' value='Подписаться' color='red' />
+            <Button type='link' href='/account/edit' color='mini'>Редактировать профиль</Button>
+            <Button type='button' color='red' >Подписаться</Button>
         </div>
     )
   }

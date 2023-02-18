@@ -7,7 +7,7 @@ export default class Start extends Component {
   render() {
     return (
       <>
-        <Header isauth={false}/>
+        <Header islogin={false}/>
         <FeedNews />
       </>
     );

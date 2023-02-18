@@ -7,7 +7,7 @@ export default class CreateComment extends Component {
     return (
       <div className='tile colume'>
         <Textarea />
-        <Button type='submit' value='Добавть' />
+        <Button type='submit' >Добавть</Button>
       </div>
     )
   }

@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import "./basic.css";
+import { Link } from "react-router-dom";
 
 export default class Button extends Component {
   render() {
     let button = null;
     let className =
       "button center color-" +
-      (this.props.color != undefined ? this.props.color : "basic");
+      (this.props.color !== undefined ? this.props.color : "basic");
 
     switch (this.props.type) {
       case "button":
@@ -16,31 +17,28 @@ export default class Button extends Component {
           onClick: this.props.onClick,
         };
 
-        button = <button {...buttonprops}>{this.props.value}</button>;
+        button = <button {...buttonprops}>{this.props.children}</button>;
         break;
       case "link":
-        const linkprops = {
-          href: this.props.href,
-        };
 
         button = (
           <div className={className}>
-            <a {...linkprops}>
-              <div  className="center">{this.props.value}</div>
+            <Link to={this.props.href}>
+              <div className="center">{this.props.children}</div>
               
-            </a>
+            </Link>
           </div>
         );
         break;
 
       case "submit":
         const submitrops = {
-          value: this.props.title != undefined ? this.props.title : "",
+          value: this.props.title !== undefined ? this.props.title : "",
         };
 
         button = (
           <label className={className}>
-            {this.props.value}
+            {this.props.children}
             <input type="submit" {...submitrops} />
           </label>
         );
@@ -54,7 +52,7 @@ export default class Button extends Component {
       <div
         className={
           "button-contener center " +
-          (this.props.className != undefined ? this.props.className : "")
+          (this.props.className !== undefined ? this.props.className : "")
         }
       >
         {button}

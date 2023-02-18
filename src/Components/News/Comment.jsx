@@ -8,7 +8,7 @@ export default class Comment extends Component {
       <div className='tile'>
         <div className='row'>
           <h5>{fio}</h5>
-          <Button value="Удалить"/>
+          <Button >Удалить</Button>
         </div>
         <Content></Content>
       </div>

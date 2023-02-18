@@ -9,7 +9,7 @@ export default class Auth extends Component {
         <form>
           <InputField type="text" />
           <InputField type="password" />
-          <Button type="submit" value="войти" />
+          <Button type="submit">Войти</Button>
         </form>
       </div>
     );
