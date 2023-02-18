@@ -5,7 +5,7 @@ import Textarea from "./Textarea";
 
 export class InputField extends Component {
   render() {
-    const arrType = ["textarea", "text", 'password'];
+    const arrType = ["textarea", "text", 'password', 'email'];
     
     const inputprops = {
       className: "",
@@ -40,10 +40,10 @@ export class InputField extends Component {
     }
 
     return (
-      <div className="input w-100 mg-buttom-10">
+      <label className="input w-100 mg-buttom-10 column ">
         <h4>{this.props.title}</h4>
         {input}
-      </div>
+      </label>
     );
   }
 }
