@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Button from "../Components/basic/Button";
 import { InputField } from "../Components/basic/InputField";
-import login from '../api/authentication/authController';
+import {login} from '../api/authentication/authController';
 
 export default class Auth extends Component {
   render() {

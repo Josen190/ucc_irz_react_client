@@ -37,6 +37,7 @@ export default class Button extends Component {
           onClick: this.props.onClick,
           id: this.props.id, 
           required: this.props.required,
+          disabled: this.props.disabled,
         };
 
         button = (

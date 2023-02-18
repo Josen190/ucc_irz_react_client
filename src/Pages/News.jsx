@@ -8,9 +8,7 @@ import User from "./User";
 export default class News extends Component {
   render() {
     return (
-      <User>
         <FeedNews />
-      </User>
     );
   }
 }

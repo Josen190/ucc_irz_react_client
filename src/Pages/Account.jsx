@@ -14,7 +14,6 @@ const Account = () => {
   const [active, setActive] = useState(false);
 
   return (
-    <User>
       <main className="account">
         <div className="tile ProfileHeader">
           <div className="margin-right">
@@ -38,7 +37,7 @@ const Account = () => {
         </div>
         {active && <CreateTidings setActive={setActive} />}
       </main>
-    </User>
+
   );
 };
 
