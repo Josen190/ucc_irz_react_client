@@ -16,55 +16,75 @@ import Admin from "./Pages/Admin";
 import Auth from "./Pages/Auth";
 import AuthController from "./api/authentication/authController";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <AuthController />,
-    //   loader: appLoader,
-    children: [
-      {
-        path: "account",
-        element: <Account />,
-        children: [
-          {
-            path: "edit",
-            element: <Edit />,
-          },
-        ],
-      },
-      {
-        path: "news",
-        element: <News />,
-      },
-      {
-        path: "messenger",
-        element: <Messenger />,
-      },
-      {
-        path: "calendar",
-        element: <Calendar />,
-      },
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<AuthController />}>
+      <Route path="account" element={<Account />} />
+      <Route path="account/edit" element={<Edit />} />
+      <Route path="news" element={<News />} />
+      <Route path="messenger" element={<Messenger />} />
+      <Route path="calendar" element={<Calendar />} />
+      <Route path="admin" element={<Admin />}>
+        <Route path="staff" element={<div />} />
+        <Route path="role" element={<div />} />
+      </Route>
+      <Route path="login" element={<Auth />} />
+    </Route>
+  ),
+  { basename: "/" }
+);
 
-      {
-        path: "admin",
-        element: <Admin />,
-        children: [
-          {
-            path: "staff",
-            element: <div />,
-          },
-          {
-            path: "role",
-            element: <div />,
-          },
-        ],
-      },
-    ],
-  },
-
-  {
-    path: "/login",
-    element: <Auth />,
-  },
-]);
 export default router;
+
+
+// старая версия
+// [
+//   {
+//     path: "/",
+//     element: <AuthController />,
+//     //   loader: appLoader,
+//     children: [
+//       {
+//         path: "account",
+//         element: <Account />,
+//         children: [
+//           {
+//             path: "edit",
+//             element: <Edit />,
+//           },
+//         ],
+//       },
+//       {
+//         path: "news",
+//         element: <News />,
+//       },
+//       {
+//         path: "messenger",
+//         element: <Messenger />,
+//       },
+//       {
+//         path: "calendar",
+//         element: <Calendar />,
+//       },
+
+//       {
+//         path: "admin",
+//         element: <Admin />,
+//         children: [
+//           {
+//             path: "staff",
+//             element: <div />,
+//           },
+//           {
+//             path: "role",
+//             element: <div />,
+//           },
+//         ],
+//       },
+//       {
+//         path: "login",
+//         element: <Auth />,
+//       },
+//     ],
+//   },
+// ];
