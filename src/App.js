@@ -1,23 +1,29 @@
 import "./App.css";
 
-import { redirect } from "react-router-dom";
-
+import { Navigate, redirect } from "react-router-dom";
+import React, {useContext} from "react";
 import Start from "./Pages/Visitor";
 import { checLogin } from "./api/authentication/authController";
-import router from "./AppRouter";
+import User from "./Pages/User";
+import Visitor from "./Pages/Visitor";
+import { authContext } from "./api/authentication/authController";
+import { Outlet } from "react-router-dom";
 
-export async function loader() {
-  if (checLogin()) {
-    return redirect("/news");
-  }
-  return;
-}
 
 function App() {
-  return (
-    <React.StrictMode>
-      <RouterProvider router={router} />
-    </React.StrictMode>
+  const {authData} = useContext(authContext);
+  console.log(authData);
+
+  if (window.location.pathname != '/' && authData.jwt == null){
+    return <Navigate to='/'/>
+  }
+
+  return authData.jwt != null ? (
+    <User>
+      <Outlet />
+    </User>
+  ) : (
+    <Visitor />
   );
 }
 
