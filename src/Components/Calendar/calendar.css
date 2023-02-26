@@ -1,7 +1,6 @@
 .calendar {
   display: grid;
   box-sizing: border-box;
-  grid-template-rows: -webkit-min-content 1fr -webkit-min-content;
   grid-template-rows: min-content 1fr min-content;
   grid-gap: 0;
   grid-auto-flow: column;
@@ -18,7 +17,6 @@
 }
 .month table {
   display: grid;
-  grid-template-rows: -webkit-min-content 1fr;
   grid-template-rows: min-content 1fr;
   height: 100%;
   border-collapse: collapse;

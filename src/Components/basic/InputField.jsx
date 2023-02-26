@@ -5,7 +5,7 @@ import Textarea from "./Textarea";
 
 export class InputField extends Component {
   render() {
-    const arrType = ["textarea", "text", 'password'];
+    const arrType = ["textarea", "text", 'password', 'email'];
     
     const inputprops = {
       className: "",
@@ -15,15 +15,10 @@ export class InputField extends Component {
       maxLength: this.props.maxlength,
       minLength: this.props.minlength,
       name: this.props.name,
+      onChange: this.props.onChange,
     };
 
-    let numderType = -1;
-    arrType.forEach((t, index) => {
-      if (t == this.props.type) {
-        numderType = index;
-      }
-    });
-
+    let numderType = arrType.indexOf(this.props.type);
     numderType = numderType == -1 ? 0 : numderType;
     let input = null;
 
@@ -40,10 +35,10 @@ export class InputField extends Component {
     }
 
     return (
-      <div className="input w-100 mg-buttom-10">
-        <h4>{this.props.title}</h4>
+      <label className="input w-100 mg-buttom-10 column ">
+        {this.props.title && <h4>{this.props.title}</h4>}
         {input}
-      </div>
+      </label>
     );
   }
 }

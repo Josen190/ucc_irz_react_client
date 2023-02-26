@@ -34,6 +34,10 @@ export default class Button extends Component {
       case "submit":
         const submitrops = {
           value: this.props.title !== undefined ? this.props.title : "",
+          onClick: this.props.onClick,
+          id: this.props.id, 
+          required: this.props.required,
+          disabled: this.props.disabled,
         };
 
         button = (

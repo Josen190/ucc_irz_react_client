@@ -3,31 +3,46 @@ import SvgHeart from "../icons/Heart";
 import SvgHeartOutline from "../icons/HeartOutline";
 
 const size = "25px";
-let isLike = false;
 
-const Like = () => {
+const Like = ({ isLiked, likesCount }) => {
   const llke_off = <SvgHeart size={size}></SvgHeart>;
   const like_on = <SvgHeartOutline size={size}></SvgHeartOutline>;
 
-  const [like_use, setLikeUse] = useState(isLike ? llke_off : like_on);
+  const [like, setLikeUse] = useState({
+    isLiked: isLiked,
+    likesCount: likesCount,
+    like_use: isLiked ? llke_off : like_on,
+  });
   const disableBtnProps = {};
 
   const switchLike = () => {
     disableBtnProps.disabled = false;
-    isLike = !isLike;
-
-    if (isLike) {
-      setLikeUse(llke_off);
+    let thisIsLiked = !like.isLiked;
+    let thisLikesCount = like.likesCount;
+    
+    if (thisIsLiked) {
+      thisLikesCount++;
+      setLikeUse({
+        isLiked: thisIsLiked,
+        likesCount: thisLikesCount,
+        like_use: llke_off,
+      });
     } else {
-      setLikeUse(like_on);
+      thisLikesCount--;
+      setLikeUse({
+        isLiked: thisIsLiked,
+        likesCount: thisLikesCount,
+        like_use: like_on,
+      });
     }
 
     disableBtnProps.disabled = true;
   };
 
   let button = (
-    <button {...disableBtnProps} onClick={switchLike}>
-      {like_use}
+    <button {...disableBtnProps} onClick={switchLike} className="row">
+      {like.like_use}
+      {like.likesCount}
     </button>
   );
 

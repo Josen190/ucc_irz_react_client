@@ -1,24 +1,38 @@
 import React, { useState } from "react";
+import { useContext } from "react";
+import API, { url_user_id } from "../../api/Api";
+import { authContext } from "../../api/authentication/authController";
 import Part_Pers_Info from "./Part_Pers_Info";
 
-const Personal_Information = () => {
+function DatetoStr(date){
+  var dd = String(date.getDate()).padStart(2, '0');
+  var mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var yyyy = date.getFullYear();
+
+  return mm + ' ' + dd + ' ' + yyyy;
+}
+
+const Personal_Information = ({userInfo}) => {
   const [active, setActive] = useState(false);
 
-  let fio = "Захаров Вячеслав Сергеевич";
-  let date = "05.06.2001";
-  let dateReceptPosition = "15.01.2023";
-  let position = "веб-разработчик";
-  let myself =
-    "человек свободных взглядов любящий аниме, мангу и особенно раноюэ";
-  let iDid = "чем нибудь";
-  let achievements = "идеальная посещаемость, прогулка на 30 000 шагов";
-  let skillsAndCompetencies =
-    "рисование на уровне младшеклашки и игра на флейте";
+  console.log(userInfo);
+
+  let fio = `${userInfo.firstName} ${userInfo.surname} ${userInfo.patronymic == null ? '' : userInfo.patronymic}`;
+  let birthday = DatetoStr(new Date(userInfo.birthday));
+  let dateReceptPosition =  DatetoStr(new Date(userInfo.birthday)); //?????????????
+  let position = userInfo.position;
+  let myself = userInfo.aboutMyself;
+  let iDid = userInfo.myDoings;
+  let achievements = userInfo.skills; //??????????????????????
+  let skillsAndCompetencies =userInfo.skills;
+
+  console.log(birthday);
+
 
   return (
     <div className="column">
       <h2>{fio}</h2>
-      <Part_Pers_Info title="дата рождения" value={date} />
+      <Part_Pers_Info title="дата рождения" value={birthday} />
       <Part_Pers_Info title="должность" value={position} />
       <Part_Pers_Info
         title="дата вступления в должность"
@@ -26,8 +40,6 @@ const Personal_Information = () => {
       />
       {!active && <a role='button' onClick={()=>{setActive(true)}}> Показать подробную инфромацию</a>}
       {active && <div>
-        
-        
       <Part_Pers_Info title="о себе" value={myself} />
       <Part_Pers_Info title="чем занимался" value={iDid} />
       <Part_Pers_Info title="достижения" value={achievements} />

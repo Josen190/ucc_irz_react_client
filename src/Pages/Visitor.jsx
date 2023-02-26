@@ -3,7 +3,7 @@ import Header from "../Components/Header/Header";
 import FeedNews from "../Components/News/FeedNews";
 
 
-export default class Start extends Component {
+export default class Visitor extends Component {
   render() {
     return (
       <>

@@ -37,7 +37,6 @@
   margin: 0;
 }
 .chat .button-contener {
-  width: -webkit-min-content;
   width: -moz-min-content;
   width: min-content;
 }

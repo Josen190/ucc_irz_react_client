@@ -9,11 +9,11 @@ export default class Tidings extends Component {
   render() {
     return (
       <div className="tile">
-        <AuthorNews></AuthorNews>
-        <Content></Content>
+        <AuthorNews author={this.props.author}></AuthorNews>
+        <Content title={this.props.title} content={this.props.text}></Content>
         <div className="row">
-          <Like></Like>
-          <CommentsIcon></CommentsIcon>
+          <Like likesCount={this.props.likesCount} isLiked={this.props.isLiked}></Like>
+          <CommentsIcon commentCount={this.props.commentCount}></CommentsIcon>
         </div>
       </div>
     );
