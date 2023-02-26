@@ -16,18 +16,20 @@ const Auth = () => {
     let password = e.target[1].value;
     e.target[2].disabled = true;
 
+
+    let data = {}
     API.post(url_authenticate, {
       email: email,
       password: password,
     })
       .then(function (response) {
         console.log(response);
-        setAuthData(response.data.jwt, response.data.refreshToken);
-        
-
+        data = {jwt: response.data.jwt, refreshToken: response.data.refreshToken, myId: null, role: null};
+        setAuthData(data.jwt, data.refreshToken, data.myId,  data.role);
         API.get(url_me)
           .then((response) => {
-            //Navigate()
+            data = {jwt: data.jwt, refreshToken: data.refreshToken, myId: response.data.id, role: response.data.roles}
+            setAuthData(data.jwt, data.refreshToken, data.myId, data.role);
             setNext(response.data.id);
           })
           .catch((error) => {

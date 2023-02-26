@@ -1,7 +1,6 @@
 main {
   min-width: 20vw;
   max-width: 50vw;
-  width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
   border: 1px solid black;
@@ -39,7 +38,6 @@ main {
 
 .parts-2-page {
   display: grid;
-  grid-template-rows: -webkit-max-content 1fr;
   grid-template-rows: max-content 1fr;
   align-items: start;
 }/*# sourceMappingURL=pages.css.map */

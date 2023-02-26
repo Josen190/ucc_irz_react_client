@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 export default class CommentsIcon extends Component {
   render() {
-    let numberComments = 12;
+    let numberComments = this.props.commentCount;
     const disableBtnProps = {};
     const switchComments = () => {
       disableBtnProps.disabled = false;

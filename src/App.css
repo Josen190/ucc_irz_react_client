@@ -7,7 +7,6 @@ body {
   padding: 20px;
   border-radius: 6px;
   margin-bottom: 20px;
-  height: -webkit-min-content;
   height: -moz-min-content;
   height: min-content;
   box-sizing: border-box;
@@ -53,10 +52,8 @@ input {
   border-radius: 5px;
   max-width: 200px;
   min-width: 100px;
-  height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
-  width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
   padding: 8px;
@@ -66,7 +63,7 @@ input {
   padding: 4px;
   display: flex;
   align-content: center;
-  /* justify-content: start; */
+  justify-content: start;
 }
 
 .logo {
@@ -89,7 +86,6 @@ input {
 .column {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
 }
 .column * {
   margin: 4px 0;
@@ -126,7 +122,6 @@ input {
 
 .grid-col-2 {
   display: grid;
-  grid-template-columns: -webkit-max-content -webkit-max-content;
   grid-template-columns: max-content max-content;
   justify-content: center;
   grid-column-gap: 20px;
@@ -150,10 +145,8 @@ input {
   color: inherit;
   background-color: transparent;
   cursor: pointer;
-  width: -webkit-min-content;
   width: -moz-min-content;
   width: min-content;
-  height: -webkit-min-content;
   height: -moz-min-content;
   height: min-content;
 }
@@ -180,4 +173,12 @@ a:hover,
 a {
   text-decoration: none;
   color: black;
+}
+
+.image {
+  display: block;
+  max-width: 100px;
+  max-height: 60px;
+  width: auto;
+  height: auto;
 }/*# sourceMappingURL=App.css.map */

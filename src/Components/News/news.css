@@ -30,14 +30,11 @@ label {
   cursor: pointer;
   -webkit-user-select: none;
      -moz-user-select: none;
-      -ms-user-select: none;
           user-select: none;
 }
 label input {
-  width: -webkit-min-content;
   width: -moz-min-content;
   width: min-content;
-  height: -webkit-min-content;
   height: -moz-min-content;
   height: min-content;
   margin-right: 5px;

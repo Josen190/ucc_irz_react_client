@@ -15,15 +15,10 @@ export class InputField extends Component {
       maxLength: this.props.maxlength,
       minLength: this.props.minlength,
       name: this.props.name,
+      onChange: this.props.onChange,
     };
 
-    let numderType = -1;
-    arrType.forEach((t, index) => {
-      if (t == this.props.type) {
-        numderType = index;
-      }
-    });
-
+    let numderType = arrType.indexOf(this.props.type);
     numderType = numderType == -1 ? 0 : numderType;
     let input = null;
 
@@ -41,7 +36,7 @@ export class InputField extends Component {
 
     return (
       <label className="input w-100 mg-buttom-10 column ">
-        <h4>{this.props.title}</h4>
+        {this.props.title && <h4>{this.props.title}</h4>}
         {input}
       </label>
     );

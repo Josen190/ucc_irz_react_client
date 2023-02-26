@@ -11,12 +11,13 @@ import "./pages.css";
 import User from "./User";
 import { authContext } from "../api/authentication/authController";
 import { Navigate, useLoaderData } from "react-router";
-import API, { url_user_id } from "../api/Api";
+import API, { catchApi, url_user_id } from "../api/Api";
 import axios from "axios";
+import FeedNews from "../Components/News/FeedNews";
 
 export async function accountLoader ({params}) {
-  console.log(params);
-  const res = await API.get(url_user_id(params.id)).catch((error) => console.log(error));
+
+  const res = await API.get(url_user_id(params.id)).catch((error) => catchApi(error));
   console.log(res);
 
   return res ? res.data : null ;
@@ -26,15 +27,7 @@ export async function accountLoader ({params}) {
 const Account = () => {
   const [active, setActive] = useState(false);
   const result = useLoaderData();
-
-
-
-  // const {authData} = useContext(authContext);
- 
-  // if (authData.jwt == null){
-  //   return (<Navigate to='/' />)
-  // }
-
+  console.log(result);
 
   return (
       <main className="account">
@@ -56,7 +49,7 @@ const Account = () => {
               Создать новость
             </Button>
           </div>
-          <Tidings></Tidings>
+          <FeedNews userID={result.id}/>
         </div>
         {active && <CreateTidings setActive={setActive} />}
       </main>
