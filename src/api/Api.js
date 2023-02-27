@@ -63,22 +63,26 @@ export async function refreshToken() {
   return response;
 }
 
-API.interceptors.response.use(response => response, error => {
+API.interceptors.response.use(response => response, async error => {
   const status = error.response ? error.response.status : null
 
   if (status === 401) {
     let jwt = window.localStorage.getItem("jwt");
     let token = window.localStorage.getItem("token");
+    console.log(error.response);
 
-      return API.post(url_refresh, {
-        jwt: jwt,
-        refreshToken: token,
-      }).then(response => {
-          console.log(response);
-            error.config.headers['Authorization'] = 'Bearer ' + response.data.jwt;
-            error.config.baseURL = host;
-            return API.request(error.config);
-        }).catch(e => console.log(e));
+    let r = await API.post(url_refresh, {
+      jwt: jwt,
+      refreshToken: token,
+    }).then(response => {
+        console.log(response);
+          error.config.headers['Authorization'] = 'Bearer ' + response.data.jwt;
+          error.config.baseURL = host;
+          return API.request(error.config);
+      }).catch(e => console.log(e));
+
+      console.log(r);
+      return r;
   }
 
   return Promise.reject(error);
