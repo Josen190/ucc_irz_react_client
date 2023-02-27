@@ -1,6 +1,6 @@
 import React, { Component, useContext, useState } from "react";
 import Button from "../Components/basic/Button";
-import { InputField } from "../Components/basic/InputField";
+import InputField from "../Components/basic/InputField";
 import API, { setJwt, url_authenticate, url_me } from "../api/Api";
 
 import { Navigate } from "react-router-dom";

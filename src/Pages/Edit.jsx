@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Button from "../Components/basic/Button";
-import { InputField } from "../Components/basic/InputField";
+import InputField from "../Components/basic/InputField";
 import InputImg from "../Components/basic/InputImg";
 import Header from "../Components/Header/Header";
 import Menu from "../Components/Menu/Menu";
