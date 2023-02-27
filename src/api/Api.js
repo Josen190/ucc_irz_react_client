@@ -63,16 +63,6 @@ export async function refreshToken() {
   return response;
 }
 
-export async function catchApi(error){
-  // console.log(error);
-  // if (error.response.status == 401){
-  //   let date = refreshToken();
-  //   if (date != null) setAuthDataApi(date.jwt, date.refreshToken);
-    
-  // }
-}
-
-
 API.interceptors.response.use(response => response, error => {
   const status = error.response ? error.response.status : null
 
@@ -80,20 +70,15 @@ API.interceptors.response.use(response => response, error => {
     let jwt = window.localStorage.getItem("jwt");
     let token = window.localStorage.getItem("token");
 
-      // return refreshToken().then(_ => {
-      //     error.config.headers['Authorization'] = 'Bearer ';
-      //     error.config.baseURL = undefined;
-      //     return API.request(error.config);
-      // });
-
       return API.post(url_refresh, {
         jwt: jwt,
         refreshToken: token,
       }).then(response => {
+          console.log(response);
             error.config.headers['Authorization'] = 'Bearer ' + response.data.jwt;
-            // error.config.baseURL = undefined;
+            error.config.baseURL = host;
             return API.request(error.config);
-        });
+        }).catch(e => console.log(e));
   }
 
   return Promise.reject(error);

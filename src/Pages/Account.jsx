@@ -17,7 +17,7 @@ import FeedNews from "../Components/News/FeedNews";
 
 export async function accountLoader ({params}) {
 
-  const res = await API.get(url_user_id(params.id)).catch((error) => catchApi(error));
+  const res = await API.get(url_user_id(params.id)).catch((error) => console.log(error));
   console.log(res);
 
   return res ? res.data : null ;
