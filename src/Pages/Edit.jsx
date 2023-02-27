@@ -63,4 +63,3 @@ export default class Edit extends Component {
     );
   }
 }
-export default Edit;
