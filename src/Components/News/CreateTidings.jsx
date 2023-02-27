@@ -23,8 +23,14 @@ const CreateTidings = ({ setActive }) => {
   const createNews = (event) => {
     event.stopPropagation();
     event.preventDefault();
+    
+    const data = {
+      title: title,
+      text: content, 
+      isPublic: isGlobal,
+    } 
 
-    API.post(url_postNews).then(response => {
+    API.post(url_postNews, data).then(response => {
       notifySuccess("Новость создана");
       setActive(false);
       setTitle("");
