@@ -25,8 +25,8 @@ function App() {
       <Outlet />
     </User>
   );
-  let Visitor = <Visitor />;
-  let content = authData.jwt != null ? user : Visitor;
+  let visitor = (<Visitor />);
+  let content = authData.jwt != null ? user : visitor;
 
   return (
     <div>
