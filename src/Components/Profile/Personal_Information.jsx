@@ -4,10 +4,11 @@ import API, { url_user_id } from "../../api/Api";
 import { authContext } from "../../api/authentication/authController";
 import Part_Pers_Info from "./Part_Pers_Info";
 
+
 function DatetoStr(date) {
-  var dd = String(date.getDate()).padStart(2, "0");
-  var mm = String(date.getMonth() + 1).padStart(2, "0"); //January is 0!
-  var yyyy = date.getFullYear();
+  let dd = String(date.getDate()).padStart(2, "0");
+  let mm = String(date.getMonth() + 1).padStart(2, "0"); //January is 0!
+  let yyyy = date.getFullYear();
 
   return dd + "." + mm + "." + yyyy;
 }
