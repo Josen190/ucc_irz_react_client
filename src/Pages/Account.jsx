@@ -1,19 +1,13 @@
-import React, { Component, useState, useContext } from "react";
+import React, { useState } from "react";
+import { useLoaderData } from "react-router";
+import API, { url_user_id } from "../api/Api";
+import Button from "../Components/basic/Button";
+import CreateTidings from "../Components/News/CreateTidings";
+import FeedNews from "../Components/News/FeedNews";
 import Personal_Information from "../Components/Profile/Personal_Information";
 import Profile_Navigation from "../Components/Profile/Profile_Navigation";
 import Profile_Picture from "../Components/Profile/Profile_Picture";
-import Tidings from "../Components/News/Tidings";
-import Button from "../Components/basic/Button";
-import CreateTidings from "../Components/News/CreateTidings";
-import Header from "../Components/Header/Header";
-import Menu from "../Components/Menu/Menu";
 import "./pages.css";
-import User from "./User";
-import { authContext } from "../api/authentication/authController";
-import { Navigate, useLoaderData } from "react-router";
-import API, { catchApi, url_user_id } from "../api/Api";
-import axios from "axios";
-import FeedNews from "../Components/News/FeedNews";
 
 export async function accountLoader ({params}) {
 
