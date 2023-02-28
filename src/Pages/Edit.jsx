@@ -96,9 +96,6 @@ export default class Edit extends Component {
             }}
           />
           <div>
-            <Button type="link" href="/account">
-              Отмена
-            </Button>
             <Button type="submit">Сохранить</Button>
           </div>
         </form>
