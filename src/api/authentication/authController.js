@@ -1,9 +1,5 @@
-import API, { authenticate } from "../Api";
-import react, { createContext, useState } from "react";
-import { Outlet } from "react-router";
-import { redirect } from "react-router";
-
-import axios from "axios";
+import API from "../Api";
+import { createContext, useState } from "react";
 
 function setJwt(jwt){
   if (typeof jwt === "string") {
@@ -12,6 +8,8 @@ function setJwt(jwt){
     API.defaults.headers['authorization'] = '';
   }
 }
+
+
 
 export function setAuthDataApi(jwt, token){
   setJwt(jwt);

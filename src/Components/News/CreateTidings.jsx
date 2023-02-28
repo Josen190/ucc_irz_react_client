@@ -6,7 +6,7 @@ import "./news.css";
 import Form from "./Form";
 import API, { url_postNews } from "../../api/Api";
 import InputField from "../basic/InputField";
-import { notify } from "./Notifications/Notifications";
+import { notifyError, notifySuccess } from "../Notifications/Notifications";
 
 const CreateTidings = ({ setActive }) => {
   const [title, setTitle] = useState("");
@@ -23,14 +23,21 @@ const CreateTidings = ({ setActive }) => {
   const createNews = (event) => {
     event.stopPropagation();
     event.preventDefault();
+    
+    const data = {
+      title: title,
+      text: content, 
+      isPublic: isGlobal,
+    } 
 
-    API.post(url_postNews).then(response => {
+    API.post(url_postNews, data).then(response => {
       notifySuccess("Новость создана");
       setActive(false);
       setTitle("");
       setContent("");
       setImages([]);
       setTitle(false);
+      notifySuccess("Новость создана")
     }).catch(error => {
       notifyError("Новость не создана, попробуйте снова");
     })

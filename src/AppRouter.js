@@ -29,12 +29,10 @@ const router = createBrowserRouter(
           path: "account/:id",
           element: <Account />,
           loader: accountLoader,
-          children: [
-            {
-              path: "edit",
-              element: <Edit />,
-            },
-          ],
+        },
+        {
+          path: "edit",
+          element: <Edit />,
         },
         {
           path: "news",

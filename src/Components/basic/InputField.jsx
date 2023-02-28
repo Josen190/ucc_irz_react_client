@@ -3,7 +3,7 @@ import Textarea from "./Textarea";
 
 
 
-export class InputField extends Component {
+export default class InputField extends Component {
   render() {
     const arrType = ["textarea", "text", 'password', 'email'];
     

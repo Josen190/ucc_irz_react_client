@@ -31,7 +31,7 @@ export default class FeedNews extends Component {
       params.LikedOnly = likedOnly;
     }
 
-    const response = await API.get(url_getNews, { params: params }).catch(error => catchApi(error));
+    const response = await API.get(url_getNews, { params: params }).catch(error =>  console.log(error));
 
     if (response.data == null) return null;
     let arrNews = [];
