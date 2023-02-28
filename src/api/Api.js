@@ -14,6 +14,7 @@ export const url_reset_password = `/api/authentication/reset_password`;
 
 //пользователь
 export const url_me = `/api/users/me`;
+export const url_update_info = '/api/users/me/update_info';
 export const url_user_id = (id) => {
   return `/api/users/${id}`;
 };
