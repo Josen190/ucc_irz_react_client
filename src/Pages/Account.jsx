@@ -6,21 +6,28 @@ import Button from "../Components/basic/Button";
 import CreateTidings from "../Components/News/CreateTidings";
 import "./pages.css";
 import { Navigate, useLoaderData } from "react-router";
-import API, { url_user_id } from "../api/Api";
+import API, { url_user_id, url_user_positions } from "../api/Api";
 import FeedNews from "../Components/News/FeedNews";
 import { authContext } from "../api/authentication/authController";
 
 export async function accountLoader({ params }) {
-  const res = await API.get(url_user_id(params.id)).catch((error) => {});
+  const info_user = await API.get(url_user_id(params.id)).catch((error) => {});
+  const position_user = await API.get(url_user_positions, {params: {userId: params.id}}).catch((error) => {});
+  const data = {
+    info_user: info_user ? info_user.data : null,
+    position_user: position_user ? position_user.data : null,
+  }
 
-  return res ? res.data : null;
+  return data;
 }
 
 const Account = () => {
   const [active, setActive] = useState(false);
   const { authData } = useContext(authContext);
-  const result = useLoaderData();
-  let isLogin = authData.myID === result.id ? authData.myID !== null : false;
+  const data = useLoaderData();
+  const info_user = data.info_user;
+  const position_user = data.position_user;
+  let isLogin = authData.myID === info_user.id ? authData.myID !== null : false;
   console.log(isLogin);
 
   return (
@@ -30,7 +37,7 @@ const Account = () => {
           <Profile_Picture type="norm"></Profile_Picture>
           <Profile_Navigation isLogin={isLogin}></Profile_Navigation>
         </div>
-        <Personal_Information userInfo={result}></Personal_Information>
+        <Personal_Information userInfo={info_user} positionUser={position_user}></Personal_Information>
       </div>
       <div className="">
         {isLogin && (
@@ -45,7 +52,7 @@ const Account = () => {
             </Button>
           </div>
         )}
-        <FeedNews userID={result.id} />
+        <FeedNews userID={info_user.id} />
       </div>
       {active && <CreateTidings setActive={setActive} />}
     </main>
