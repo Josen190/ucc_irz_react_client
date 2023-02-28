@@ -1,8 +1,12 @@
 import React, { Component } from "react";
-import API, { url_me } from "../api/Api";
+import API, { url_me, url_update_info } from "../api/Api";
 import Button from "../Components/basic/Button";
 import InputField from "../Components/basic/InputField";
 import InputImg from "../Components/basic/InputImg";
+import {
+  notifySuccess,
+  notifyError,
+} from "../Components/Notifications/Notifications";
 
 export default class Edit extends Component {
   constructor(props) {
@@ -27,16 +31,21 @@ export default class Edit extends Component {
     });
   }
 
-
-
   render() {
-
     const save = (event) => {
       event.preventDefault();
-      console.log(this.state)
+      console.log(this.state);
 
-      
-    }
+      API.put(url_update_info, {
+        aboutMyself: this.state.myself,
+        myDoings: this.state.iDid,
+        skills: this.state.skills,
+      }).then(() => {
+          notifySuccess("изменения сохранены");
+        }).catch((error) => {
+          notifyError("изменения не сохранены");
+        });
+    };
 
     return (
       <main className="tile col-space-between">
