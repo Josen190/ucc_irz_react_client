@@ -4,13 +4,27 @@ import API, { url_user_id } from "../../api/Api";
 import { authContext } from "../../api/authentication/authController";
 import Part_Pers_Info from "./Part_Pers_Info";
 
+const months = [
+  "Январь",
+  "Февраль",
+  "Март",
+  "Апрель",
+  "Май",
+  "Июнь",
+  "Июль",
+  "Август",
+  "Сентябрь",
+  "октябрь",
+  "Ноябрь",
+  "Декабрь",
+];
 
 function DatetoStr(date) {
   let dd = String(date.getDate()).padStart(2, "0");
   let mm = String(date.getMonth() + 1).padStart(2, "0"); //January is 0!
-  let yyyy = date.getFullYear();
+  let yyyy = String(date.getFullYear()).padStart(4, "0");
 
-  return dd + "." + mm + "." + yyyy;
+  return dd + " " + months[date.getMonth()] + " " + yyyy;
 }
 
 const Personal_Information = ({ userInfo, positionUser }) => {
@@ -43,12 +57,16 @@ const Personal_Information = ({ userInfo, positionUser }) => {
       <Part_Pers_Info title="дата рождения" value={birthday} />
       <span>
         <h5>должности</h5>
-        {positions.map((element, index) => {
-          return (<div key={index} className='column'>
-            <p>{element.name}</p>
-            <small>{element.start}</small>
-          </div>);
-        })}
+        <div className="row">
+          {positions.map((element, index) => {
+            return (
+              <div key={index} className="column">
+                <p>{element.name}</p>
+                <small>{element.start}</small>
+              </div>
+            );
+          })}
+        </div>
       </span>
       {!active && (
         <a
