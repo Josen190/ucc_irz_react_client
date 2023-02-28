@@ -15,8 +15,6 @@ function DatetoStr(date){
 const Personal_Information = ({userInfo}) => {
   const [active, setActive] = useState(false);
 
-  console.log(userInfo);
-
   let fio = `${userInfo.firstName} ${userInfo.surname} ${userInfo.patronymic == null ? '' : userInfo.patronymic}`;
   let birthday = DatetoStr(new Date(userInfo.birthday));
   let dateReceptPosition =  DatetoStr(new Date(userInfo.birthday)); //?????????????
@@ -25,9 +23,6 @@ const Personal_Information = ({userInfo}) => {
   let iDid = userInfo.myDoings;
   let achievements = userInfo.skills; //??????????????????????
   let skillsAndCompetencies =userInfo.skills;
-
-  console.log(birthday);
-
 
   return (
     <div className="column">
