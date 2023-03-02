@@ -1,19 +1,16 @@
-import React, { Component, useContext, useState } from "react";
+import React, { useContext, useState } from "react";
+import API, {
+  url_authenticate,
+  url_me
+} from "../api/Api";
 import Button from "../Components/basic/Button";
 import InputField from "../Components/basic/InputField";
-import API, {
-  host,
-  setJwt,
-  url_authenticate,
-  url_me,
-  url_refresh,
-} from "../api/Api";
 
 import { Navigate } from "react-router-dom";
 import { authContext } from "../api/authentication/authController";
 
 const Auth = () => {
-  const { authData, setAuthData } = useContext(authContext);
+  const { setAuthData } = useContext(authContext);
   const [next, setNext] = useState(null);
 
   const login = (e) => {

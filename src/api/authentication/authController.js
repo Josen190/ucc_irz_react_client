@@ -1,5 +1,5 @@
-import API, { url_me } from "../Api";
 import { createContext, useState } from "react";
+import API from "../Api";
 
 function setJwt(jwt) {
   if (typeof jwt === "string") {
@@ -50,7 +50,6 @@ const AuthController = ({ children }) => {
     }
   };
 
-  console.log(authData);
   return (
     <authContext.Provider value={{ authData, setAuthData }}>
       {children}

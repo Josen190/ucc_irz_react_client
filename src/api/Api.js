@@ -1,10 +1,8 @@
 import axios from "axios";
-import { useContext } from "react";
 import { notifyError } from "../Components/Notifications/Notifications";
 import {
-  authContext,
   getAuthData,
-  setAuthDataApi,
+  setAuthDataApi
 } from "./authentication/authController";
 
 export const host = "https://localhost:7116";
