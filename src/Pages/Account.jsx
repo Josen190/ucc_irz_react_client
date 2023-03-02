@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useLoaderData } from "react-router";
-import API, { url_user_id } from "../api/Api";
+import API, { url_user_id, url_user_positions } from "../api/Api";
 import Button from "../Components/basic/Button";
 import CreateTidings from "../Components/News/CreateTidings";
 import FeedNews from "../Components/News/FeedNews";
 import Personal_Information from "../Components/Profile/Personal_Information";
 import Profile_Navigation from "../Components/Profile/Profile_Navigation";
-import Profile_Picture from "../Components/Profile/Profile_Picture";
+import Profile_Picture from "../Components/Profile/Profile_Picture;
 import "./pages.css";
 
 export async function accountLoader({ params }) {
