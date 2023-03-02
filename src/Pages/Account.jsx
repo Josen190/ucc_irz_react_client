@@ -1,14 +1,13 @@
-import React, { Component, useState, useContext } from "react";
-import Personal_Information from "../Components/Profile/Personal_Information";
-import Profile_Navigation from "../Components/Profile/Profile_Navigation";
-import Profile_Picture from "../Components/Profile/Profile_Picture";
+import React, { useState } from "react";
+import { useLoaderData } from "react-router";
+import API, { url_user_id, url_user_positions } from "../api/Api";
 import Button from "../Components/basic/Button";
 import CreateTidings from "../Components/News/CreateTidings";
-import "./pages.css";
-import { Navigate, useLoaderData } from "react-router";
-import API, { url_user_id, url_user_positions } from "../api/Api";
 import FeedNews from "../Components/News/FeedNews";
-import { authContext } from "../api/authentication/authController";
+import Personal_Information from "../Components/Profile/Personal_Information";
+import Profile_Navigation from "../Components/Profile/Profile_Navigation";
+import Profile_Picture from "../Components/Profile/Profile_Picture;
+import "./pages.css";
 
 export async function accountLoader({ params }) {
   const info_user = await API.get(url_user_id(params.id)).catch((error) => {});
