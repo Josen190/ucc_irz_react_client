@@ -22,36 +22,6 @@ const Auth = () => {
     let password = e.target[1].value;
     e.target[2].disabled = true;
 
-    const refreshToken = async (jwt, refreshToken, time) => {
-      setTimeout(() => {
-        API.post(
-          url_refresh,
-          {
-            jwt: jwt,
-            refreshToken: refreshToken,
-          },
-          {
-            baseURL: host,
-            headers: {
-              authorization: null,
-            },
-          }
-        )
-          .then((response) => {
-            console.log(response);
-            let data = {
-              jwt: response.data.jwt,
-              refreshToken: response.data.refreshToken,
-              myId: authData.myId,
-              role: authData.role,
-            };
-            setAuthData(data.jwt, data.refreshToken, data.myId, data.role);
-            refreshToken(data.jwt, data.refreshToken, time);
-          })
-          .catch((e) => console.log(e));
-      }, time * 60 * 1000);
-    };
-
     let data = {};
     API.post(url_authenticate, {
       email: email,
@@ -75,7 +45,6 @@ const Auth = () => {
               role: response.data.roles,
             };
             setAuthData(data.jwt, data.refreshToken, data.myId, data.role);
-            refreshToken(data.jwt, data.refreshToken, 19);
             setNext(response.data.id);
           })
           .catch((error) => {
@@ -100,6 +69,7 @@ const Auth = () => {
           required
           type="email"
           title="Почта"
+          value="user@example.com"
         />
         <InputField
           id="password"
@@ -107,6 +77,7 @@ const Auth = () => {
           required
           type="password"
           title="Пароль"
+          value="string"
         />
         <Button type="submit">Войти</Button>
       </form>
