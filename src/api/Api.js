@@ -1,6 +1,9 @@
 import axios from "axios";
-import { useContext } from "react";
-import { authContext, setAuthDataApi } from "./authentication/authController";
+import { notifyError } from "../Components/Notifications/Notifications";
+import {
+  getAuthData,
+  setAuthDataApi
+} from "./authentication/authController";
 
 export const host = "https://localhost:7116";
 
@@ -14,7 +17,7 @@ export const url_reset_password = `/api/authentication/reset_password`;
 
 //пользователь
 export const url_me = `/api/users/me`;
-export const url_update_info = '/api/users/me/update_info';
+export const url_update_info = "/api/users/me/update_info";
 export const url_user_id = (id) => {
   return `/api/users/${id}`;
 };
@@ -52,43 +55,40 @@ export const setJwt = (data) => {
 
 export default API;
 
-//не удаляьб
+API.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const status = error.response ? error.response.status : null;
 
-// API.interceptors.response.use(
-//   (response) => response,
-//   async (error) => {
-//     const status = error.response ? error.response.status : null;
+    if (status === 401) {
+      const { jwt, refreshToken, myID, role} = getAuthData();
+      return API.post(
+        url_refresh,
+        {
+          jwt: jwt,
+          refreshToken: refreshToken,
+        },
+        {
+          baseURL: host,
+          headers: {
+            authorization: null,
+            accept: "*/*",
+          },
+        }
+      )
+        .then((response) => {
+          setAuthDataApi(response.data.jwt, response.data.refreshToken, myID, role)
+          error.config.headers["Authorization"] = "Bearer " + response.data.jwt;
+          error.config.baseURL = host;
+          return API.request(error.config);
+        })
+        .catch(() => {
+          setAuthDataApi(null, null, null, null);
+          notifyError("авторизация не удалась, поробуйте снова");
+          
+        });
+    }
 
-//     if (status === 401) {
-//       let jwt = window.localStorage.getItem("jwt");
-//       let token = window.localStorage.getItem("token");
-//       console.log(error.response);
-
-//       let r = await API.post(
-//         url_refresh,
-//         {
-//           jwt: jwt,
-//           refreshToken: token,
-//         },
-//         {
-//           baseURL: host,
-//           headers: {
-//             authorization: null,
-//           },
-//         }
-//       )
-//         .then((response) => {
-//           console.log(response);
-//           error.config.headers["Authorization"] = "Bearer " + response.data.jwt;
-//           error.config.baseURL = host;
-//           return API.request(error.config);
-//         })
-//         .catch((e) => console.log(e));
-
-//       console.log(r);
-//       return r;
-//     }
-
-//     return Promise.reject(error);
-//   }
-// );
+    return Promise.reject(error);
+  }
+);
