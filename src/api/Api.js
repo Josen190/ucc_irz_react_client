@@ -15,6 +15,9 @@ export const url_change_password = `/api/authentication/change_password`;
 export const url_send_reset_password_url = `/api/authentication/send_reset_password_url`;
 export const url_reset_password = `/api/authentication/reset_password`;
 
+//должности
+export const url_user_positions = '/api/user_positions';
+
 //пользователь
 export const url_me = `/api/users/me`;
 export const url_update_info = "/api/users/me/update_info";

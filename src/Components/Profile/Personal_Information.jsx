@@ -4,52 +4,101 @@ import API, { url_user_id } from "../../api/Api";
 import { authContext } from "../../api/authentication/authController";
 import Part_Pers_Info from "./Part_Pers_Info";
 
-function DatetoStr(date){
-  var dd = String(date.getDate()).padStart(2, '0');
-  var mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
-  var yyyy = date.getFullYear();
+const months = [
+  "Январь",
+  "Февраль",
+  "Март",
+  "Апрель",
+  "Май",
+  "Июнь",
+  "Июль",
+  "Август",
+  "Сентябрь",
+  "октябрь",
+  "Ноябрь",
+  "Декабрь",
+];
 
-  return mm + ' ' + dd + ' ' + yyyy;
+function DatetoStr(date) {
+  let dd = String(date.getDate()).padStart(2, "0");
+  let mm = String(date.getMonth() + 1).padStart(2, "0"); //January is 0!
+  let yyyy = String(date.getFullYear()).padStart(4, "0");
+
+  return dd + " " + months[date.getMonth()] + " " + yyyy;
 }
 
-const Personal_Information = ({userInfo}) => {
+const Personal_Information = ({ userInfo, positionUser }) => {
   const [active, setActive] = useState(false);
 
-  console.log(userInfo);
-
-  let fio = `${userInfo.firstName} ${userInfo.surname} ${userInfo.patronymic == null ? '' : userInfo.patronymic}`;
+  let fio = `${userInfo.firstName} ${userInfo.surname} ${
+    userInfo.patronymic == null ? "" : userInfo.patronymic
+  }`;
   let birthday = DatetoStr(new Date(userInfo.birthday));
-  let dateReceptPosition =  DatetoStr(new Date(userInfo.birthday)); //?????????????
-  let position = userInfo.position;
+
   let myself = userInfo.aboutMyself;
   let iDid = userInfo.myDoings;
   let achievements = userInfo.skills; //??????????????????????
-  let skillsAndCompetencies =userInfo.skills;
+  let skillsAndCompetencies = userInfo.skills;
 
-  console.log(birthday);
-
+  let positions = [];
+  console.log(positionUser);
+  positionUser.forEach((element) => {
+    if (element.end == null) {
+      positions.push({
+        name: element.position.name,
+        start: DatetoStr(new Date(element.start)),
+      });
+    }
+  });
 
   return (
     <div className="column">
       <h2>{fio}</h2>
       <Part_Pers_Info title="дата рождения" value={birthday} />
-      <Part_Pers_Info title="должность" value={position} />
-      <Part_Pers_Info
-        title="дата вступления в должность"
-        value={dateReceptPosition}
-      />
-      {!active && <a role='button' onClick={()=>{setActive(true)}}> Показать подробную инфромацию</a>}
-      {active && <div>
-      <Part_Pers_Info title="о себе" value={myself} />
-      <Part_Pers_Info title="чем занимался" value={iDid} />
-      <Part_Pers_Info title="достижения" value={achievements} />
-      <Part_Pers_Info
-        title="навыки и компетенции"
-        value={skillsAndCompetencies}
-      />
-      <a role='button' onClick={()=>{setActive(false)}}> Скрыть подробную инфромацию</a>
-        </div>}
-      
+      <span>
+        <h5>должности</h5>
+        <div className="row">
+          {positions.map((element, index) => {
+            return (
+              <div key={index} className="column">
+                <p>{element.name}</p>
+                <small>{element.start}</small>
+              </div>
+            );
+          })}
+        </div>
+      </span>
+      {!active && (
+        <a
+          role="button"
+          onClick={() => {
+            setActive(true);
+          }}
+        >
+          {" "}
+          Показать подробную инфромацию
+        </a>
+      )}
+      {active && (
+        <div>
+          <Part_Pers_Info title="о себе" value={myself} />
+          <Part_Pers_Info title="чем занимался" value={iDid} />
+          <Part_Pers_Info title="достижения" value={achievements} />
+          <Part_Pers_Info
+            title="навыки и компетенции"
+            value={skillsAndCompetencies}
+          />
+          <a
+            role="button"
+            onClick={() => {
+              setActive(false);
+            }}
+          >
+            {" "}
+            Скрыть подробную инфромацию
+          </a>
+        </div>
+      )}
     </div>
   );
 };

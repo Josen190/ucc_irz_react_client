@@ -26,4 +26,5 @@ yarn-error.log*
 .map
 /.vs/ucc_irz_react_client/FileContentIndex
 /.vs/ucc_irz_react_client/v17
+/.vs/slnx.sqlite
 *.sqlite
