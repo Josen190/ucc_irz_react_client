@@ -1,3 +1,15 @@
+# Инструкция по установке
+
+### 1. Установите [Node.js](https://nodejs.org/en/)
+### 2. Установите зависимости
+перейдите в пакпку проекта и откройте командную строку.
+Запустите команду `npm install` для установки всех зависимостей, указанных в файле `package.json`.
+Если при установке зависимостей произошли ошибки, можно запустить команду `npm install -f` для принудительной установки зависимотсей.
+
+### 3. Запустите приложение
+Запустите команду `npm start`, чтобы запустить приложение.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
