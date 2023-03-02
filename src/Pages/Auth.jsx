@@ -69,7 +69,6 @@ const Auth = () => {
           required
           type="email"
           title="Почта"
-          value="user@example.com"
         />
         <InputField
           id="password"
@@ -77,7 +76,6 @@ const Auth = () => {
           required
           type="password"
           title="Пароль"
-          value="string"
         />
         <Button type="submit">Войти</Button>
       </form>
