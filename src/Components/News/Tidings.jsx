@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import AuthorNews from "./AuthorNews";
+import Author from "./AuthorNews";
 import Content from "../basic/Content";
 import Like from "./Like";
 import CommentsIcon from "./CommentsIcon";
@@ -11,7 +11,7 @@ export default class Tidings extends Component {
     return (
       <div>
         <div className="tile">
-          <AuthorNews author={this.props.author}></AuthorNews>
+          <Author author={this.props.author}></Author>
           <Content title={this.props.title} content={this.props.text}></Content>
           <div className="row">
             <Like

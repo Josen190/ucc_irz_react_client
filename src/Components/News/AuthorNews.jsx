@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Profile_Picture from "../Profile/Profile_Picture";
 import { Link } from "react-router-dom";
 
-export default class AuthorNews extends Component {
+export default class Author extends Component {
   render() {
     let firstName = this.props.author.firstName;
     let surname = this.props.author.surname;
