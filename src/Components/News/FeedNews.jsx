@@ -1,5 +1,5 @@
-import React, { Component, useState } from "react";
-import API, { catchApi, url_get_news } from "../../api/Api";
+import React, { Component } from "react";
+import API, { url_get_news } from "../../api/Api";
 import Tidings from "./Tidings";
 
 export default class FeedNews extends Component {

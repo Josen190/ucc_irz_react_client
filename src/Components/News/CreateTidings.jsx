@@ -1,9 +1,7 @@
-import React, { Component, useRef, useState } from "react";
+import React, { useState } from "react";
 import Checkbox from "../basic/Checkbox";
-import Textarea from "../basic/Textarea";
 import Button from "../basic/Button";
 import "./news.css";
-import Form from "./Form";
 import API, { url_post_news } from "../../api/Api";
 import InputField from "../basic/InputField";
 import { notifyError, notifySuccess } from "../Notifications/Notifications";

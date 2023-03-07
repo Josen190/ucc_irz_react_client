@@ -46,9 +46,9 @@ export const url_get_news_id = (id) => {return `/api/news/${id}`};
 export const url_delete_news_id = (id) => {return `/api/news/${id}`};
 
 // коментарии к новости
-export const url_get_commrnts = '/api/news_comments';
-export const url_post_commrnts = '/api/news_comments';
-export const url_delete_commrnts_id = (id) => {return `/api/news_comments/${id}`};
+export const url_get_comments = '/api/news_comments';
+export const url_post_comments = '/api/news_comments';
+export const url_delete_comments_id = (id) => {return `/api/news_comments/${id}`};
 
 // Лайки к новости
 export const url_post_likes_like_news_entry = '/api/likes/like_news_entry';
