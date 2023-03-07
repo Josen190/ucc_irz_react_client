@@ -25,4 +25,4 @@ const ChatBoxOutline = ({
     />
   </svg>
 );
-export default SvgTodayOutline;
+export default ChatBoxOutline;
