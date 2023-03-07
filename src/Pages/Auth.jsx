@@ -25,7 +25,6 @@ const Auth = () => {
       password: password,
     })
       .then(function (response) {
-        console.log(response);
         data = {
           jwt: response.data.jwt,
           refreshToken: response.data.refreshToken,
@@ -45,14 +44,12 @@ const Auth = () => {
             setNext(response.data.id);
           })
           .catch((error) => {
-            console.log(error);
             e.target[2].disabled = false;
           });
 
         e.target[2].disabled = false;
       })
       .catch(function (error) {
-        console.log(error);
         e.target[2].disabled = false;
       });
   };

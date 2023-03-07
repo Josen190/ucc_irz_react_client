@@ -56,8 +56,6 @@ export const setJwt = (data) => {
   } else if (data == null) {
     jwt = "";
   }
-
-  console.log(API.defaults.headers);
   API.defaults.headers["authorization"] = `Bearer ${jwt}`;
 };
 

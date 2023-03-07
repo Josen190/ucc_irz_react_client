@@ -34,7 +34,6 @@ export default class Edit extends Component {
   render() {
     const save = (event) => {
       event.preventDefault();
-      console.log(this.state);
 
       API.put(url_update_info, {
         aboutMyself: this.state.myself,

@@ -14,7 +14,6 @@ import API, { url_me } from "./api/Api";
 
 function App() {
   const { authData } = useContext(authContext);
-  console.log(authData);
 
   if (window.location.pathname != "/" && authData.jwt == null) {
     return <Navigate to="/" />;

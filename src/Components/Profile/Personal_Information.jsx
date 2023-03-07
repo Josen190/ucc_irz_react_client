@@ -41,7 +41,6 @@ const Personal_Information = ({ userInfo, positionUser }) => {
   let skillsAndCompetencies = userInfo.skills;
 
   let positions = [];
-  console.log(positionUser);
   positionUser.forEach((element) => {
     if (element.end == null) {
       positions.push({

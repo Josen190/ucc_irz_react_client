@@ -28,7 +28,6 @@ const Account = () => {
   const info_user = data.info_user;
   const position_user = data.position_user;
   let isLogin = typeof(authData.myID) === 'string'? authData.myID === info_user.id : false;
-  console.log(isLogin);
 
   return (
     <main className="account">
