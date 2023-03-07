@@ -46,8 +46,8 @@ export const url_get_news_id = (id) => {return `/api/news/${id}`};
 export const url_delete_news_id = (id) => {return `/api/news/${id}`};
 
 // коментарии к новости
-export const url_get_comments = '/api/news_comments';
-export const url_post_comments = '/api/news_comments';
+export const url_get_news_comments = '/api/news_comments';
+export const url_post_news_comments = '/api/news_comments';
 export const url_delete_comments_id = (id) => {return `/api/news_comments/${id}`};
 
 // Лайки к новости
