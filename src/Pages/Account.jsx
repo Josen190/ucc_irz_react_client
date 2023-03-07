@@ -27,7 +27,7 @@ const Account = () => {
   const data = useLoaderData();
   const info_user = data.info_user;
   const position_user = data.position_user;
-  let isLogin = authData.myID === info_user.id ? authData.myID !== null : false;
+  let isLogin = typeof(authData.myID) === 'string'? authData.myID === info_user.id : false;
   console.log(isLogin);
 
   return (
