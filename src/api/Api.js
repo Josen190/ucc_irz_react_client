@@ -105,6 +105,7 @@ const API = axios.create({
   baseURL: host,
   headers: {
     authorization: `Bearer ${datajwt}`,
+    accept: "*/*",
   },
 });
 
