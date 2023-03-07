@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-import { useRef } from "react";
-import { useState } from "react";
-import API from "../api/Api";
 import Header from "../Components/Header/Header";
 import Menu from "../Components/Menu/Menu";
 import MenuLink from "../Components/Menu/MenuLink";
