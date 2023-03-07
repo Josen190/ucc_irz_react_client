@@ -11,7 +11,6 @@ export default class Author extends Component {
     let authorID = this.props.author.id;
 
     let nameAuthorNews = `${firstName} ${surname} ${patronymic}`;
-    console.log(nameAuthorNews);
     return (
       <Link to={`/account/${authorID}`} className="row">
         <Profile_Picture type="mini"></Profile_Picture>
