@@ -1,15 +1,29 @@
-import React from 'react'
-import { useState } from 'react'
+import React, {Component} from "react";
+import { useState } from "react";
+import API, { url_get_commrnts } from "../../api/Api";
+import Comment from "./Comment";
 
-function CommentFeed() {
-    const [commentArr, setCommentArr] = useState([])
+export default class CommentFeed extends Component {
+  constructor(props) {
+    super(props);
 
+    this.state = { commentArr: [] };
+  }
 
-  return (
-    <div>
-        {commentArr}
-    </div>
-  )
+  componentDidMount() {
+    API.get(url_get_commrnts, { params: { newsEntryId: this.props.newsID } })
+      .then((response) => {
+        let commentArr = [];
+        response.data.forEach((element, index) => {
+          commentArr.push(<Comment key={index} data={element} />);
+        });
+        this.setState({ commentArr: commentArr });
+      })
+      .catch((error) => {});
+  }
+
+  render() {
+    return <div className="column">{this.state.commentArr}</div>;
+  }
 }
 
-export default CommentFeed

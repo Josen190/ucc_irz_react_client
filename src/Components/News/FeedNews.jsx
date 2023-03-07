@@ -39,6 +39,7 @@ export default class FeedNews extends Component {
       arrNews.push(
         <Tidings
           key={index}
+          id={tiding.id}
           title={tiding.title}
           text={tiding.text}
           likesCount={tiding.likesCount}
@@ -50,11 +51,9 @@ export default class FeedNews extends Component {
     });
 
     this.setState({arrNews: arrNews});
-    console.log(this.state.arrNews);
   }
 
   render() {
-    // const [arrNews, setArrNews] = useState(false);
     return <main className="column">{this.state.arrNews}</main>;
   }
 }

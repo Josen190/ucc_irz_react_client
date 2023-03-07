@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import Button from '../basic/Button'
 import Content from '../basic/Content'
 import Author from './AuthorNews'
-import { authContext } from "../api/authentication/authController";
+import { authContext } from "../../api/authentication/authController";
 
 export default function Comment ({data}) {
     const {authData} = useContext(authContext)

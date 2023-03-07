@@ -7,6 +7,7 @@ import CommentsIcon from "./CommentsIcon";
 import CommentFeed from "./CommentFeed";
 
 export default function Tidings({
+  id,
   title,
   text,
   likesCount,
@@ -15,7 +16,6 @@ export default function Tidings({
   isLiked,
 }) {
   const [isActiveCommentFeed, setIsActiveCommentFeed] = useState(false);
-  console.log(isActiveCommentFeed);
   return (
     <div>
       <div className="tile">
@@ -29,7 +29,7 @@ export default function Tidings({
           ></CommentsIcon>
         </div>
       </div>
-      {isActiveCommentFeed && <CommentFeed />}
+      {isActiveCommentFeed && <CommentFeed newsID={id}/>}
     </div>
   );
 }
