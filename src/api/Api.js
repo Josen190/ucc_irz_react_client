@@ -25,6 +25,11 @@ export const url_user_id = (id) => {
   return `/api/users/${id}`;
 };
 
+//коментарии
+export const url_get_commrnts = '/api/news_comments';
+export const url_post_commrnts = '/api/news_comments';
+export const url_delete_commrnts_id = (id) => {return `/api/news_comments ${id}`};
+
 //новости
 export const url_getNews = `/api/news`;
 export const url_postNews = `/api/news`;
