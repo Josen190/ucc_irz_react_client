@@ -2,29 +2,28 @@ import React, { Component } from "react";
 import "./basic.css";
 import { Link } from "react-router-dom";
 
-export default class Button extends Component {
-  render() {
+export default function Button ({type, title, color, disabled, onClick, children, href, id, required, className}) {
     let button = null;
-    let className =
+    let classNames =
       "button center color-" +
-      (this.props.color !== undefined ? this.props.color : "basic");
+      (color !== undefined ? color : "basic");
 
-    switch (this.props.type) {
+    switch (type) {
       case "button":
         const buttonprops = {
-          className: className,
-          disabled: this.props.disabled,
-          onClick: this.props.onClick,
+          className: classNames,
+          disabled: disabled,
+          onClick: onClick,
         };
 
-        button = <button {...buttonprops}>{this.props.children}</button>;
+        button = <button {...buttonprops}>{children}</button>;
         break;
       case "link":
 
         button = (
-          <div className={className}>
-            <Link to={this.props.href}>
-              <div className="center">{this.props.children}</div>
+          <div className={classNames}>
+            <Link to={href}>
+              <div className="center">{children}</div>
               
             </Link>
           </div>
@@ -33,16 +32,16 @@ export default class Button extends Component {
 
       case "submit":
         const submitrops = {
-          value: this.props.title !== undefined ? this.props.title : "",
-          onClick: this.props.onClick,
-          id: this.props.id, 
-          required: this.props.required,
-          disabled: this.props.disabled,
+          value: title !== undefined ? title : "",
+          onClick: onClick,
+          id: id, 
+          required: required,
+          disabled: disabled,
         };
 
         button = (
-          <label className={className}>
-            {this.props.children}
+          <label className={classNames}>
+            {children}
             <input type="submit" {...submitrops} />
           </label>
         );
@@ -56,11 +55,10 @@ export default class Button extends Component {
       <div
         className={
           "button-contener center " +
-          (this.props.className !== undefined ? this.props.className : "")
+          (className !== undefined ? className : "")
         }
       >
         {button}
       </div>
     );
   }
-}
