@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 
-export default class Content extends Component {
+export default function Content ({content, title}) {
   render() {
-    let content = typeof(this.props.content) === 'string' ? this.props.content : '';
+    content = typeof(content) === 'string' ? content : '';
+    title = typeof(title) === 'string' ? title : '';
+
     let arrStr = content.split("\n");
-    let title = typeof(this.props.title) === 'string' ? this.props.title : '';
-    
+
     let arrP = [];
     arrStr.forEach((element, index) => {
       if (element.length === 0) arrP.push(<br key={index} />);
