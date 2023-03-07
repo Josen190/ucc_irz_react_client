@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useLoaderData } from "react-router";
 import API, { url_user_id, url_user_positions } from "../api/Api";
+import { authContext } from "../api/authentication/authController";
 import Button from "../Components/basic/Button";
 import CreateTidings from "../Components/News/CreateTidings";
 import FeedNews from "../Components/News/FeedNews";
 import Personal_Information from "../Components/Profile/Personal_Information";
 import Profile_Navigation from "../Components/Profile/Profile_Navigation";
-import Profile_Picture from "../Components/Profile/Profile_Picture;
+import Profile_Picture from "../Components/Profile/Profile_Picture";
 import "./pages.css";
 
 export async function accountLoader({ params }) {
@@ -22,7 +23,7 @@ export async function accountLoader({ params }) {
 
 const Account = () => {
   const [active, setActive] = useState(false);
-  const { authData } = useContext(authContext);
+  const { authData } = useContext(authContext); 
   const data = useLoaderData();
   const info_user = data.info_user;
   const position_user = data.position_user;
