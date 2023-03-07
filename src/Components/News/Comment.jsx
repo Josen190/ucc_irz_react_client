@@ -1,17 +1,21 @@
-import React, { Component } from 'react'
+import React, { useContext } from 'react'
 import Button from '../basic/Button'
-import Content from './Content'
+import Content from '../basic/Content'
+import Author from './AuthorNews'
+import { authContext } from "../api/authentication/authController";
 
-export default class Comment extends Component {
-  render() {
+export default function Comment ({data}) {
+    const {authData} = useContext(authContext)
+    let isMyComment = authData.myID === data.user.id ? authData.myID !== null : false;
+
     return (
       <div className='tile'>
         <div className='row'>
-          <h5>{fio}</h5>
-          <Button >Удалить</Button>
+          <Author author={data.user}/>
+          {isMyComment && <Button >Удалить</Button>}
         </div>
-        <Content></Content>
+        <Content content={data.text}></Content>
       </div>
     )
   }
-}
+
