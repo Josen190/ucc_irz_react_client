@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 export default function Content ({content, title}) {
-  render() {
     content = typeof(content) === 'string' ? content : '';
     title = typeof(title) === 'string' ? title : '';
 
@@ -20,4 +19,4 @@ export default function Content ({content, title}) {
       </div>
     );
   }
-}
+
