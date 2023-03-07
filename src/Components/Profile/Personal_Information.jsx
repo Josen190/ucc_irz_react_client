@@ -67,37 +67,41 @@ const Personal_Information = ({ userInfo, positionUser }) => {
           })}
         </div>
       </span>
-      {!active && (
-        <a
-          role="button"
-          onClick={() => {
-            setActive(true);
-          }}
-        >
-          {" "}
-          Показать подробную инфромацию
-        </a>
-      )}
-      {active && (
-        <div>
-          <Part_Pers_Info title="о себе" value={myself} />
-          <Part_Pers_Info title="чем занимался" value={iDid} />
-          <Part_Pers_Info title="достижения" value={achievements} />
-          <Part_Pers_Info
-            title="навыки и компетенции"
-            value={skillsAndCompetencies}
-          />
-          <a
-            role="button"
-            onClick={() => {
-              setActive(false);
-            }}
-          >
-            {" "}
-            Скрыть подробную инфромацию
+      {!active &&
+        (typeof myself === "string" ||
+          typeof iDid === "string" ||
+          typeof achievements === "string" ||
+          typeof skillsAndCompetencies === "string") && (
+          <a role="button" onClick={() => {setActive(true);}}>
+            Показать подробную инфромацию
           </a>
-        </div>
-      )}
+        )}
+      {active &&
+        (typeof myself === "string" ||
+          typeof iDid === "string" ||
+          typeof achievements === "string" ||
+          typeof skillsAndCompetencies === "string") && (
+          <div>
+            {typeof myself == "string" && (
+              <Part_Pers_Info title="о себе" value={myself} />
+            )}
+            {typeof iDid == "string" && (
+              <Part_Pers_Info title="чем занимался" value={iDid} />
+            )}
+            {typeof achievements == "string" && (
+              <Part_Pers_Info title="достижения" value={achievements} />
+            )}
+            {typeof skillsAndCompetencies == "string" && (
+              <Part_Pers_Info
+                title="навыки и компетенции"
+                value={skillsAndCompetencies}
+              />
+            )}
+            <a role="button" onClick={() => {setActive(false);}}>
+              Скрыть подробную инфромацию
+            </a>
+          </div>
+        )}
     </div>
   );
 };
