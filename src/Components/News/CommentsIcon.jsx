@@ -6,7 +6,7 @@ export default class CommentsIcon extends Component {
     const disableBtnProps = {};
     const switchComments = () => {
       disableBtnProps.disabled = false;
-
+      this.props.setActive(true);
       disableBtnProps.disabled = true;
     };
     

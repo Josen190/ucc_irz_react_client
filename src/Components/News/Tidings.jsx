@@ -1,4 +1,4 @@
-import React, { setState } from "react";
+import React, { useState } from "react";
 
 import Author from "./AuthorNews";
 import Content from "../basic/Content";
@@ -6,16 +6,16 @@ import Like from "./Like";
 import CommentsIcon from "./CommentsIcon";
 import CommentFeed from "./CommentFeed";
 
-export default function Tidings(
-  author,
+export default function Tidings({
   title,
   text,
   likesCount,
+  commentCount,
+  author,
   isLiked,
-  commentCount
-) {
-
-  const [isActiveCommentFeed, setIsActiveCommentFeed] = setState(false);
+}) {
+  const [isActiveCommentFeed, setIsActiveCommentFeed] = useState(false);
+  console.log(isActiveCommentFeed);
   return (
     <div>
       <div className="tile">
@@ -23,10 +23,13 @@ export default function Tidings(
         <Content title={title} content={text}></Content>
         <div className="row">
           <Like likesCount={likesCount} isLiked={isLiked}></Like>
-          <CommentsIcon commentCount={commentCount} onClick={setIsActiveCommentFeed}></CommentsIcon>
+          <CommentsIcon
+            commentCount={commentCount}
+            setActive={setIsActiveCommentFeed}
+          ></CommentsIcon>
         </div>
       </div>
-      {isActiveCommentFeed && <CommentFeed/>}
+      {isActiveCommentFeed && <CommentFeed />}
     </div>
   );
 }
