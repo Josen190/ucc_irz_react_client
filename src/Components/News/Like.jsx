@@ -40,9 +40,9 @@ const Like = ({ isLiked, likesCount }) => {
   };
 
   let button = (
-    <button {...disableBtnProps} onClick={switchLike} className="row">
+    <button {...disableBtnProps} onClick={switchLike} className="icon row">
+      <span>{like.likesCount}</span>
       {like.like_use}
-      {like.likesCount}
     </button>
   );
 
