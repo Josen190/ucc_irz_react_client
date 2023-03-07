@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import API, { url_me, url_update_info } from "../api/Api";
+import API, { url_get_users_me, url_put_users_me_update_info } from "../api/Api";
 import Button from "../Components/basic/Button";
 import InputField from "../Components/basic/InputField";
 import InputImg from "../Components/basic/InputImg";
@@ -20,7 +20,7 @@ export default class Edit extends Component {
   }
 
   componentDidMount() {
-    API.get(url_me).then((response) => {
+    API.get(url_get_users_me).then((response) => {
       const data = {
         myself: response.data.aboutMyself,
         iDid: response.data.myDoings,
@@ -35,7 +35,7 @@ export default class Edit extends Component {
     const save = (event) => {
       event.preventDefault();
 
-      API.put(url_update_info, {
+      API.put(url_put_users_me_update_info, {
         aboutMyself: this.state.myself,
         myDoings: this.state.iDid,
         skills: this.state.skills,

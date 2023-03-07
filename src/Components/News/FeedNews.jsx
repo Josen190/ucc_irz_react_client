@@ -1,5 +1,5 @@
 import React, { Component, useState } from "react";
-import API, { catchApi, url_getNews } from "../../api/Api";
+import API, { catchApi, url_get_news } from "../../api/Api";
 import Tidings from "./Tidings";
 
 export default class FeedNews extends Component {
@@ -31,7 +31,7 @@ export default class FeedNews extends Component {
       params.LikedOnly = likedOnly;
     }
 
-    const response = await API.get(url_getNews, { params: params }).catch(error => {});
+    const response = await API.get(url_get_news, { params: params }).catch(error => {});
 
     if (response.data == null) return null;
     let arrNews = [];

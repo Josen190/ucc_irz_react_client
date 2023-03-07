@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useContext } from "react";
-import API, { url_user_id } from "../../api/Api";
+import API, { url_get_users_id } from "../../api/Api";
 import { authContext } from "../../api/authentication/authController";
 import Part_Pers_Info from "./Part_Pers_Info";
 

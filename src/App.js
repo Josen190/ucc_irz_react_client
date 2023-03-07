@@ -10,7 +10,7 @@ import User from "./Pages/User";
 import Visitor from "./Pages/Visitor";
 import { authContext } from "./api/authentication/authController";
 import { Outlet } from "react-router-dom";
-import API, { url_me } from "./api/Api";
+import API, { url_get_users_me } from "./api/Api";
 
 function App() {
   const { authData } = useContext(authContext);

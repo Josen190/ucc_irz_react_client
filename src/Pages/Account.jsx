@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useLoaderData } from "react-router";
-import API, { url_user_id, url_user_positions } from "../api/Api";
+import API, { url_get_users_id, url_get_user_positions } from "../api/Api";
 import { authContext } from "../api/authentication/authController";
 import Button from "../Components/basic/Button";
 import CreateTidings from "../Components/News/CreateTidings";
@@ -11,8 +11,8 @@ import Profile_Picture from "../Components/Profile/Profile_Picture";
 import "./pages.css";
 
 export async function accountLoader({ params }) {
-  const info_user = await API.get(url_user_id(params.id)).catch((error) => {});
-  const position_user = await API.get(url_user_positions, {params: {userId: params.id}}).catch((error) => {});
+  const info_user = await API.get(url_get_users_id(params.id)).catch((error) => {});
+  const position_user = await API.get(url_get_user_positions, {params: {userId: params.id}}).catch((error) => {});
   const data = {
     info_user: info_user ? info_user.data : null,
     position_user: position_user ? position_user.data : null,

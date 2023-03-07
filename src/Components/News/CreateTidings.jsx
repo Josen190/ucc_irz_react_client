@@ -4,7 +4,7 @@ import Textarea from "../basic/Textarea";
 import Button from "../basic/Button";
 import "./news.css";
 import Form from "./Form";
-import API, { url_postNews } from "../../api/Api";
+import API, { url_post_news } from "../../api/Api";
 import InputField from "../basic/InputField";
 import { notifyError, notifySuccess } from "../Notifications/Notifications";
 
@@ -30,7 +30,7 @@ const CreateTidings = ({ setActive }) => {
       isPublic: isGlobal,
     } 
 
-    API.post(url_postNews, data).then(response => {
+    API.post(url_post_news, data).then(response => {
       notifySuccess("Новость создана");
       setActive(false);
       setTitle("");
