@@ -1,10 +1,15 @@
 import React, { useState } from "react";
+import API, {
+  url_post_likes_like_news_entry,
+  url_post_likes_unlike_news_entry,
+} from "../../api/Api";
 import SvgHeart from "../icons/Heart";
 import SvgHeartOutline from "../icons/HeartOutline";
+import { notifyError } from "../Notifications/Notifications";
 
 const size = "25px";
 
-const Like = ({ isLiked, likesCount }) => {
+const Like = ({ isLiked, likesCount, newsID }) => {
   const llke_off = <SvgHeart size={size}></SvgHeart>;
   const like_on = <SvgHeartOutline size={size}></SvgHeartOutline>;
 
@@ -19,24 +24,44 @@ const Like = ({ isLiked, likesCount }) => {
     disableBtnProps.disabled = false;
     let thisIsLiked = !like.isLiked;
     let thisLikesCount = like.likesCount;
-    
+    const params = {};
+    if (typeof newsID === 'string'){
+      params.newsEntryId = newsID;
+    } 
+
     if (thisIsLiked) {
-      thisLikesCount++;
-      setLikeUse({
-        isLiked: thisIsLiked,
-        likesCount: thisLikesCount,
-        like_use: llke_off,
+      API.post(url_post_likes_like_news_entry, undefined,{
+        params: params,
+      }).then(() => {
+        thisLikesCount++;
+        setLikeUse({
+          isLiked: thisIsLiked,
+          likesCount: thisLikesCount,
+          like_use: llke_off,
+        });
+        disableBtnProps.disabled = true;
+      }).catch(() => {
+        notifyError("Ошибка, попробуйте снова")
+        disableBtnProps.disabled = true;
       });
     } else {
-      thisLikesCount--;
-      setLikeUse({
-        isLiked: thisIsLiked,
-        likesCount: thisLikesCount,
-        like_use: like_on,
+      API.post(url_post_likes_unlike_news_entry, {
+        params: params,
+      }).then(() => {
+        thisLikesCount--;
+        setLikeUse({
+          isLiked: thisIsLiked,
+          likesCount: thisLikesCount,
+          like_use: like_on,
+        });
+        disableBtnProps.disabled = true;
+      }).catch(() => {
+        notifyError("Ошибка, попробуйте снова")
+        disableBtnProps.disabled = true;
       });
     }
 
-    disableBtnProps.disabled = true;
+    
   };
 
   let button = (

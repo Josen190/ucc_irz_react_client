@@ -22,7 +22,7 @@ export default function Tidings({
         <Author author={author}></Author>
         <Content title={title} content={text}></Content>
         <div className="row">
-          <Like likesCount={likesCount} isLiked={isLiked}></Like>
+          <Like likesCount={likesCount} isLiked={isLiked} newsID={id}></Like>
           <CommentsIcon
             commentCount={commentCount}
             setActive={setIsActiveCommentFeed}
