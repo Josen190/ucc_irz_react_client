@@ -45,7 +45,7 @@ const Like = ({ isLiked, likesCount, newsID }) => {
         disableBtnProps.disabled = true;
       });
     } else {
-      API.post(url_post_likes_unlike_news_entry, {
+      API.post(url_post_likes_unlike_news_entry, undefined, {
         params: params,
       }).then(() => {
         thisLikesCount--;
