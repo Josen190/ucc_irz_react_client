@@ -38,7 +38,7 @@ const AuthController = ({ children }) => {
   //сохраняем токены в localStorage
   const setAuthData = (jwt, token, myID, role) => {
     if (!authData.loading) {
-      setAuthDataApi(jwt, token);
+      setAuthDataApi(jwt, token, myID, role);
       setAuth({
         jwt: jwt,
         token: token,
