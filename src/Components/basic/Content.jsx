@@ -11,7 +11,7 @@ export default function Content ({content, title}) {
       if (element.length === 0) arrP.push(<br key={index} />);
       else arrP.push(<p key={index}>{element}</p>);
     });
-
+    arrP = arrP.length > 0 ? arrP: '';
     return (
       <div className="content">
         <h5>{title}</h5>
