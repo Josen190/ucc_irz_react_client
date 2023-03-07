@@ -14,14 +14,14 @@ export function setAuthDataApi(jwt, token, myID, role) {
   window.localStorage.setItem("jwt", jwt);
   window.localStorage.setItem("token", token);
   window.localStorage.setItem("myID", myID);
-  window.localStorage.setItem("myID", role);
+  window.localStorage.setItem("role", role);
 }
 
 export function getAuthData() {
   const jwt = window.localStorage.getItem("jwt");
   const refreshToken = window.localStorage.getItem("token");
-  const myID = window.localStorage.getItem("token");
-  const role = window.localStorage.getItem("token");
+  const myID = window.localStorage.getItem("myID");
+  const role = window.localStorage.getItem("role");
   return { jwt, refreshToken, myID, role };
 }
 
@@ -29,11 +29,10 @@ export const authContext = createContext({});
 
 const AuthController = ({ children }) => {
   const [authData, setAuth] = useState({
-    loading: false,
     jwt: window.localStorage.getItem("jwt"),
     token: window.localStorage.getItem("token"),
-    myID: window.localStorage.getItem("myID").myID,
-    role: window.localStorage.getItem("myID").myID,
+    myID: window.localStorage.getItem("myID"),
+    role: window.localStorage.getItem("role"),
   });
 
   //сохраняем токены в localStorage
@@ -41,7 +40,6 @@ const AuthController = ({ children }) => {
     if (!authData.loading) {
       setAuthDataApi(jwt, token);
       setAuth({
-        loading: false,
         jwt: jwt,
         token: token,
         myID: myID,
