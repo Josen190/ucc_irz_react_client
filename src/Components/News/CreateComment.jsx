@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import API, { url_post_news_comments } from "../../api/Api";
 import Button from "../basic/Button";
 import InputField from "../basic/InputField";

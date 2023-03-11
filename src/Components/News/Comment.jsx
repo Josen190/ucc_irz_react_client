@@ -12,15 +12,13 @@ export default function Comment({ data }) {
     authData.myID === data.user.id ? authData.myID !== null : false;
 
   const deletComment = () => {
-    useEffect(
-      API.delete(url_delete_news_comments_id(data.id))
-        .then(() => {
-          notifySuccess("Коментарий удалён");
-        })
-        .catch(() => {
-          notifyError("Ошибка, коментарий не удален");
-        })
-    );
+    API.delete(url_delete_news_comments_id(data.id))
+      .then(() => {
+        notifySuccess("Коментарий удалён");
+      })
+      .catch(() => {
+        notifyError("Ошибка, коментарий не удален");
+      });
   };
 
   return (

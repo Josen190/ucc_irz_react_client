@@ -5,8 +5,9 @@ import "./news.css";
 import API, { url_post_news } from "../../api/Api";
 import InputField from "../basic/InputField";
 import { notifyError, notifySuccess } from "../Notifications/Notifications";
+import { useEffect } from "react";
 
-const CreateTidings = ({ setActive }) => {
+export default function CreateTidings({ setActive }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [images, setImages] = useState([]);
@@ -21,24 +22,25 @@ const CreateTidings = ({ setActive }) => {
   const createNews = (event) => {
     event.stopPropagation();
     event.preventDefault();
-    
+
     const data = {
       title: title,
-      text: content, 
+      text: content,
       isPublic: isGlobal,
-    } 
-
-    API.post(url_post_news, data).then(response => {
-      notifySuccess("Новость создана");
-      setActive(false);
-      setTitle("");
-      setContent("");
-      setImages([]);
-      setTitle(false);
-      notifySuccess("Новость создана")
-    }).catch(error => {
-      notifyError("Новость не создана, попробуйте снова");
-    })
+    };
+    API.post(url_post_news, data)
+      .then((response) => {
+        notifySuccess("Новость создана");
+        setActive(false);
+        setTitle("");
+        setContent("");
+        setImages([]);
+        setTitle(false);
+        notifySuccess("Новость создана");
+      })
+      .catch((error) => {
+        notifyError("Новость не создана, попробуйте снова");
+      });
   };
 
   return (
@@ -48,7 +50,7 @@ const CreateTidings = ({ setActive }) => {
         setActive(false);
       }}
     >
-      <form className="column tile" onClick={(e) => createNews(e)}>
+      <form className="column tile" onSubmit={(e) => createNews(e)}>
         <h3>Создать новость</h3>
         <InputField
           title="Заголовок"
@@ -86,6 +88,4 @@ const CreateTidings = ({ setActive }) => {
       </form>
     </div>
   );
-};
-
-export default CreateTidings;
+}

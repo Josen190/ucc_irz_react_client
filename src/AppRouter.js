@@ -16,7 +16,6 @@ import Admin from "./Pages/Admin";
 import Auth from "./Pages/Auth";
 import AuthController from "./api/authentication/authController";
 import App from "./App";
-import AppRoute from "./AppRoute";
 
 const router = createBrowserRouter(
   [

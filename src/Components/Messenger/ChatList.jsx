@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import Button from '../basic/Button'
 import './messenger.css';
 
-export default class ChatList extends Component {
-  render() {
+export default function ChatList () {
+  
     return (
       <div className='chat-list column'>
         <Button type='link' color='mini'>чат 1</Button>    
@@ -14,4 +14,4 @@ export default class ChatList extends Component {
       </div>
     )
   }
-}
+

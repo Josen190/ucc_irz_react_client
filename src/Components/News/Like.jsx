@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import API, {
   url_post_likes_like_news_entry,
   url_post_likes_unlike_news_entry,
@@ -25,43 +26,45 @@ const Like = ({ isLiked, likesCount, newsID }) => {
     let thisIsLiked = !like.isLiked;
     let thisLikesCount = like.likesCount;
     const params = {};
-    if (typeof newsID === 'string'){
+    if (typeof newsID === "string") {
       params.newsEntryId = newsID;
-    } 
-
-    if (thisIsLiked) {
-      API.post(url_post_likes_like_news_entry, undefined,{
-        params: params,
-      }).then(() => {
-        thisLikesCount++;
-        setLikeUse({
-          isLiked: thisIsLiked,
-          likesCount: thisLikesCount,
-          like_use: llke_off,
-        });
-        disableBtnProps.disabled = true;
-      }).catch(() => {
-        notifyError("Ошибка, попробуйте снова")
-        disableBtnProps.disabled = true;
-      });
-    } else {
-      API.post(url_post_likes_unlike_news_entry, undefined, {
-        params: params,
-      }).then(() => {
-        thisLikesCount--;
-        setLikeUse({
-          isLiked: thisIsLiked,
-          likesCount: thisLikesCount,
-          like_use: like_on,
-        });
-        disableBtnProps.disabled = true;
-      }).catch(() => {
-        notifyError("Ошибка, попробуйте снова")
-        disableBtnProps.disabled = true;
-      });
     }
 
-    
+    if (thisIsLiked) {
+        API.post(url_post_likes_like_news_entry, undefined, {
+          params: params,
+        })
+          .then(() => {
+            thisLikesCount++;
+            setLikeUse({
+              isLiked: thisIsLiked,
+              likesCount: thisLikesCount,
+              like_use: llke_off,
+            });
+            disableBtnProps.disabled = true;
+          })
+          .catch(() => {
+            notifyError("Ошибка, попробуйте снова");
+            disableBtnProps.disabled = true;
+          })
+    } else {
+        API.post(url_post_likes_unlike_news_entry, undefined, {
+          params: params,
+        })
+          .then(() => {
+            thisLikesCount--;
+            setLikeUse({
+              isLiked: thisIsLiked,
+              likesCount: thisLikesCount,
+              like_use: like_on,
+            });
+            disableBtnProps.disabled = true;
+          })
+          .catch(() => {
+            notifyError("Ошибка, попробуйте снова");
+            disableBtnProps.disabled = true;
+          })
+    }
   };
 
   let button = (
