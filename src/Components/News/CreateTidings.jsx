@@ -20,7 +20,6 @@ export default function CreateTidings({ setActive }) {
   };
 
   const createNews = (event) => {
-    event.stopPropagation();
     event.preventDefault();
 
     const data = {
@@ -50,7 +49,13 @@ export default function CreateTidings({ setActive }) {
         setActive(false);
       }}
     >
-      <form className="column tile" onSubmit={(e) => createNews(e)}>
+      <form
+        className="column tile"
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+        onSubmit={(e) => createNews(e)}
+      >
         <h3>Создать новость</h3>
         <InputField
           title="Заголовок"
