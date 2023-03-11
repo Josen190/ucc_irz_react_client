@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import API, { url_get_news } from "../../api/Api";
 import Tidings from "./Tidings";
 
-export default function FeedNews({ userID, publicOnly, likedOnly }) {
+export default function FeedNews({ userID, publicOnly, likedOnly, setUpdate }) {
   const [arrNews, setArrNews] = useState([]);
   const [pageIndex, setPageIndex] = useState(0);
 
-  useEffect(() => {
+  const getNews = () => {
     const _userID = userID === undefined ? null : userID;
     const _publicOnly = publicOnly === undefined ? null : publicOnly;
     const _likedOnly = likedOnly === undefined ? null : likedOnly;
@@ -41,7 +41,17 @@ export default function FeedNews({ userID, publicOnly, likedOnly }) {
         if (response.data.length === pageSize) setPageIndex(pageIndex + 1);
       })
       .catch((error) => {});
-  }, [pageIndex]);
+  };
+
+  const update = () => {
+    // setArrNews([]);
+    getNews();
+  };
+
+  useEffect(getNews, [pageIndex]);
+  useEffect(() => {
+    if (typeof setUpdate === "function") setUpdate({update: update});
+  }, [setUpdate]);
 
   return <main className="column">{arrNews}</main>;
 }

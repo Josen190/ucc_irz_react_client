@@ -22,8 +22,10 @@ export async function accountLoader({ params }) {
 }
 
 const Account = () => {
-  const [active, setActive] = useState(false);
   const { authData } = useContext(authContext); 
+  const [active, setActive] = useState(false);
+  const [updateNews, setUpdateNews] = useState({update: null});
+
   const data = useLoaderData();
   const info_user = data.info_user;
   const position_user = data.position_user;
@@ -51,9 +53,9 @@ const Account = () => {
             </Button>
           </div>
         )}
-        <FeedNews userID={info_user.id} />
+        <FeedNews userID={info_user.id} setUpdate={setUpdateNews}/>
       </div>
-      {active && <CreateTidings setActive={setActive} />}
+      {active && <CreateTidings setActive={setActive} updateNews={updateNews}/>}
     </main>
   );
 };

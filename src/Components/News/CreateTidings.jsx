@@ -7,7 +7,7 @@ import InputField from "../basic/InputField";
 import { notifyError, notifySuccess } from "../Notifications/Notifications";
 import { useEffect } from "react";
 
-export default function CreateTidings({ setActive }) {
+export default function CreateTidings({ setActive , updateNews}) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [images, setImages] = useState([]);
@@ -36,6 +36,7 @@ export default function CreateTidings({ setActive }) {
         setImages([]);
         setTitle(false);
         notifySuccess("Новость создана");
+        if (typeof updateNews.update === 'function') updateNews.update();
       })
       .catch((error) => {
         notifyError("Новость не создана, попробуйте снова");
