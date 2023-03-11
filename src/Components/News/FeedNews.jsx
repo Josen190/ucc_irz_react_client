@@ -5,6 +5,16 @@ import Tidings from "./Tidings";
 export default function FeedNews({ userID, publicOnly, likedOnly, setUpdate }) {
   const [arrNews, setArrNews] = useState([]);
   const [pageIndex, setPageIndex] = useState(0);
+  const [deleteKeyElement, setDeleteKeyElement] = useState(0);
+
+  useEffect(() => {
+      const arr = arrNews.filter((element) => {
+        return element.key !== deleteKeyElement;
+      })
+      setArrNews(arr);
+  }, [deleteKeyElement])
+
+  
 
   const getNews = () => {
     const _userID = userID === undefined ? null : userID;
@@ -27,15 +37,14 @@ export default function FeedNews({ userID, publicOnly, likedOnly, setUpdate }) {
     if (_likedOnly != null) {
       params.LikedOnly = _likedOnly;
     }
-    console.log("Новости");
+
     API.get(url_get_news, { params: params })
       .then((response) => {
         let _arrNews = [];
         _arrNews.push(...arrNews);
         response.data.forEach((tiding) => {
-          _arrNews.push(<Tidings key={_arrNews.length} tidings={tiding} />);
+          _arrNews.push(<Tidings key={tiding.id} tidings={tiding} deletElement={setDeleteKeyElement}/>);
         });
-        console.log(_arrNews);
 
         setArrNews(_arrNews);
         if (response.data.length === pageSize) setPageIndex(pageIndex + 1);
