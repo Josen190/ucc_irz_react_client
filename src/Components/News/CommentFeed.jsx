@@ -25,7 +25,7 @@ export default function CommentFeed({ newsID }) {
   return (
     <div className="column">
       <CreateComment newsID={newsID} />
-      {this.state.commentArr}
+      {commentArr}
     </div>
   );
 }

@@ -15,13 +15,14 @@ function App() {
     return <Navigate to="/" />;
   }
 
-  let user = (
+  const userPage = (
     <User UserID={authData.myID}>
       <Outlet />
     </User>
   );
-  let visitor = (<Visitor />);
-  let content = authData.jwt != null ? user : visitor;
+
+  const visitor = <Visitor />;
+  const content = authData.jwt != null ? userPage : visitor;
 
   return (
     <div>

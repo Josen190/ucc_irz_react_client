@@ -4,12 +4,18 @@ import Tidings from "./Tidings";
 
 export default function FeedNews({ userID, publicOnly, likedOnly }) {
   const [arrNews, setArrNews] = useState([]);
-  const _userID = userID === undefined ? null : userID;
-  const _publicOnly = publicOnly === undefined ? null : publicOnly;
-  const _likedOnly = likedOnly === undefined ? null : likedOnly;
+  const [pageIndex, setPageIndex] = useState(0);
 
   useEffect(() => {
-    const params = {};
+    const _userID = userID === undefined ? null : userID;
+    const _publicOnly = publicOnly === undefined ? null : publicOnly;
+    const _likedOnly = likedOnly === undefined ? null : likedOnly;
+    const pageSize = 10;
+
+    const params = {
+      PageIndex: pageIndex,
+      PageSize: pageSize,
+    };
     if (_userID != null) {
       params.AuthorId = _userID;
     }
@@ -21,29 +27,21 @@ export default function FeedNews({ userID, publicOnly, likedOnly }) {
     if (_likedOnly != null) {
       params.LikedOnly = _likedOnly;
     }
-
-    console.log("1");
+    console.log("Новости");
     API.get(url_get_news, { params: params })
       .then((response) => {
-        let arrNews = [];
-        response.data.forEach((tiding, index) => {
-          arrNews.push(
-            <Tidings
-              key={index}
-              id={tiding.id}
-              title={tiding.title}
-              text={tiding.text}
-              likesCount={tiding.likesCount}
-              commentCount={tiding.commentCount}
-              author={tiding.author}
-              isLiked={tiding.isLiked}
-            />
-          );
+        let _arrNews = [];
+        _arrNews.push(...arrNews);
+        response.data.forEach((tiding) => {
+          _arrNews.push(<Tidings key={_arrNews.length} tidings={tiding} />);
         });
-        setArrNews(arrNews);
+        console.log(_arrNews);
+
+        setArrNews(_arrNews);
+        if (response.data.length === pageSize) setPageIndex(pageIndex + 1);
       })
       .catch((error) => {});
-  }, [_userID, _publicOnly, _likedOnly]);
+  }, [pageIndex]);
 
   return <main className="column">{arrNews}</main>;
 }

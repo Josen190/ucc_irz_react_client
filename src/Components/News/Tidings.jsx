@@ -6,30 +6,22 @@ import Like from "./Like";
 import CommentsIcon from "./CommentsIcon";
 import CommentFeed from "./CommentFeed";
 
-export default function Tidings({
-  id,
-  title,
-  text,
-  likesCount,
-  commentCount,
-  author,
-  isLiked,
-}) {
+export default function Tidings({tidings}) {
   const [isActiveCommentFeed, setIsActiveCommentFeed] = useState(false);
   return (
     <div>
       <div className="tile">
-        <Author author={author}></Author>
-        <Content title={title} content={text}></Content>
+        <Author author={tidings.author}></Author>
+        <Content title={tidings.title} content={tidings.text}></Content>
         <div className="row">
-          <Like likesCount={likesCount} isLiked={isLiked} newsID={id}></Like>
+          <Like likesCount={tidings.likesCount} isLiked={tidings.isLiked} newsID={tidings.id}></Like>
           <CommentsIcon
-            commentCount={commentCount}
+            commentCount={tidings.commentCount}
             setActive={setIsActiveCommentFeed}
           ></CommentsIcon>
         </div>
       </div>
-      {isActiveCommentFeed && <CommentFeed newsID={id}/>}
+      {isActiveCommentFeed && <CommentFeed newsID={tidings.id}/>}
     </div>
   );
 }
