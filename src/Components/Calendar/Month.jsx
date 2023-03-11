@@ -41,7 +41,6 @@ export default function Month({ year, numberMonth }) {
 
  
   function onWidth(bounds) {
-    console.log(bounds);
     if (isFull && bounds.width < 1050){
       setNameDayWeekFull(nameDayWeekShort);
       isFull = false;

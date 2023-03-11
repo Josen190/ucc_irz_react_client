@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 
-export default class Part_Pers_Info extends Component {
-  render() {
-    return (
-      <span>
-        <h5>{this.props.title}: </h5>
-        <p>{this.props.value}</p>
-      </span>
-    );
-  }
+export default function Part_Pers_Info({ title, value }) {
+  return (
+    <span>
+      <h5>{title}: </h5>
+      <p>{value}</p>
+    </span>
+  );
 }

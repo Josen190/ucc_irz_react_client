@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import API, {
-  url_authenticate,
-  url_me
+  url_post_authenticate,
+  url_get_users_me
 } from "../api/Api";
 import Button from "../Components/basic/Button";
 import InputField from "../Components/basic/InputField";
@@ -20,12 +20,11 @@ const Auth = () => {
     e.target[2].disabled = true;
 
     let data = {};
-    API.post(url_authenticate, {
+    API.post(url_post_authenticate, {
       email: email,
       password: password,
     })
       .then(function (response) {
-        console.log(response);
         data = {
           jwt: response.data.jwt,
           refreshToken: response.data.refreshToken,
@@ -33,7 +32,7 @@ const Auth = () => {
           role: null,
         };
         setAuthData(data.jwt, data.refreshToken, data.myId, data.role);
-        API.get(url_me)
+        API.get(url_get_users_me)
           .then((response) => {
             data = {
               jwt: data.jwt,
@@ -45,14 +44,12 @@ const Auth = () => {
             setNext(response.data.id);
           })
           .catch((error) => {
-            console.log(error);
             e.target[2].disabled = false;
           });
 
         e.target[2].disabled = false;
       })
       .catch(function (error) {
-        console.log(error);
         e.target[2].disabled = false;
       });
   };

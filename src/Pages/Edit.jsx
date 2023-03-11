@@ -1,105 +1,90 @@
-import React, { Component } from "react";
-import API, { url_me, url_update_info } from "../api/Api";
+import React, { useEffect, useState } from "react";
+import API, {
+  url_get_users_me,
+  url_put_users_me_update_info
+} from "../api/Api";
 import Button from "../Components/basic/Button";
 import InputField from "../Components/basic/InputField";
 import InputImg from "../Components/basic/InputImg";
 import {
-  notifySuccess,
-  notifyError,
+  notifyError, notifySuccess
 } from "../Components/Notifications/Notifications";
 
-export default class Edit extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      myself: "",
-      iDid: "",
-      achievements: "",
-      skills: "",
-    };
-  }
+export default function Edit() {
+  const [myself, setMyself] = useState("");
+  const [iDid, setIDid] = useState("");
+  const [achievements, setAchievements] = useState("");
+  const [skills, setSkills] = useState("");
 
-  componentDidMount() {
-    API.get(url_me).then((response) => {
-      const data = {
-        myself: response.data.aboutMyself,
-        iDid: response.data.myDoings,
-        achievements: response.data.skills,
-        skills: response.data.skills,
-      };
-      this.setState(data);
+  useEffect(() => {
+    API.get(url_get_users_me).then((response) => {
+      setMyself(response.data.aboutMyself);
+      setIDid(response.data.myDoings);
+      setAchievements(response.data.skills);
+      setSkills(response.data.skills);
     });
-  }
+  }, []);
 
-  render() {
-    const save = (event) => {
-      event.preventDefault();
-      console.log(this.state);
+  const save = (event) => {
+    event.preventDefault();
 
-      API.put(url_update_info, {
-        aboutMyself: this.state.myself,
-        myDoings: this.state.iDid,
-        skills: this.state.skills,
-      }).then(() => {
-          notifySuccess("изменения сохранены");
-        }).catch((error) => {
-          notifyError("изменения не сохранены");
-        });
-    };
+    API.put(url_put_users_me_update_info, {
+      aboutMyself: myself,
+      myDoings: iDid,
+      skills: skills,
+    })
+      .then(() => {
+        notifySuccess("изменения сохранены");
+      })
+      .catch((error) => {
+        notifyError("изменения не сохранены");
+      });
+  };
 
-    return (
-      <main className="tile col-space-between">
-        <form onClick={(e) => save(e)}>
-          <InputImg />
-          <InputField
-            type="textarea"
-            title="О себе"
-            placeholder="Введите информацию о себе"
-            value={this.state.myself}
-            onChange={(event) => {
-              let data = this.state;
-              data.myself = event.target.value;
-              this.setState(data);
-            }}
-          />
-          <InputField
-            type="textarea"
-            title="Чем занимался"
-            placeholder="Введите чем вы занимались"
-            value={this.state.iDid}
-            onChange={(event) => {
-              let data = this.state;
-              data.iDid = event.target.value;
-              this.setState(data);
-            }}
-          />
-          <InputField
-            type="textarea"
-            title="Достижения"
-            placeholder="Расскажите о ваших достижениях"
-            value={this.state.achievements}
-            onChange={(event) => {
-              let data = this.state;
-              data.skills = event.target.value;
-              this.setState(data);
-            }}
-          />
-          <InputField
-            type="textarea"
-            title="Навыки и компетенции"
-            placeholder="Расскажите о ваших навыках "
-            value={this.state.skills}
-            onChange={(event) => {
-              let data = this.state;
-              data.skills = event.target.value;
-              this.setState(data);
-            }}
-          />
-          <div>
-            <Button type="submit">Сохранить</Button>
-          </div>
-        </form>
-      </main>
-    );
-  }
+  return (
+    <main className="tile col-space-between">
+      <form onSubmit={(e) => save(e)}>
+        <InputImg />
+        <InputField
+          type="textarea"
+          title="О себе"
+          placeholder="Введите информацию о себе"
+          value={myself}
+          onChange={(event) => {
+            setMyself(event.target.value);
+          }}
+        />
+        <InputField
+          type="textarea"
+          title="Чем занимался"
+          placeholder="Введите чем вы занимались"
+          value={iDid}
+          onChange={(event) => {
+            setIDid(event.target.value);
+          }}
+        />
+        <InputField
+          type="textarea"
+          title="Достижения"
+          placeholder="Расскажите о ваших достижениях"
+          value={achievements}
+          onChange={(event) => {
+            setAchievements(event.target.value);
+          }}
+        />
+        <InputField
+          type="textarea"
+          title="Навыки и компетенции"
+          placeholder="Расскажите о ваших навыках "
+          value={skills}
+          onChange={(event) => {
+            setSkills(event.target.value);
+          }}
+        />
+        <div>
+          <Button type="submit">Сохранить</Button>
+        </div>
+      </form>
+    </main>
+  );
 }

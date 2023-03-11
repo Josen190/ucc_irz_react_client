@@ -1,60 +1,66 @@
-import React, { Component, useState } from "react";
-import API, { catchApi, url_getNews } from "../../api/Api";
+import React, { useEffect, useState } from "react";
+import API, { url_get_news } from "../../api/Api";
 import Tidings from "./Tidings";
 
-export default class FeedNews extends Component {
-  constructor(props) {
-    
-    super(props);
-    this.state = {
-      arrNews: [],
+export default function FeedNews({ userID, publicOnly, likedOnly, setUpdate }) {
+  const [arrNews, setArrNews] = useState([]);
+  const [pageIndex, setPageIndex] = useState(0);
+  const [deleteKeyElement, setDeleteKeyElement] = useState(0);
+
+  useEffect(() => {
+      const arr = arrNews.filter((element) => {
+        return element.key !== deleteKeyElement;
+      })
+      setArrNews(arr);
+  }, [deleteKeyElement])
+
+  
+
+  const getNews = () => {
+    const _userID = userID === undefined ? null : userID;
+    const _publicOnly = publicOnly === undefined ? null : publicOnly;
+    const _likedOnly = likedOnly === undefined ? null : likedOnly;
+    const pageSize = 10;
+
+    const params = {
+      PageIndex: pageIndex,
+      PageSize: pageSize,
     };
-  }
-
-  async componentDidMount() {
-    let userID = this.props.userID === undefined ? null : this.props.userID;
-    let publicOnly =
-      this.props.publicOnly === undefined ? null : this.props.publicOnly;
-    let likedOnly =
-      this.props.likedOnly === undefined ? null : this.props.likedOnly;
-
-    let params = {};
-    if (userID != null) {
-      params.AuthorId = userID;
+    if (_userID != null) {
+      params.AuthorId = _userID;
     }
 
-    if (publicOnly != null) {
-      params.PublicOnly = publicOnly;
+    if (_publicOnly != null) {
+      params.PublicOnly = _publicOnly;
     }
 
-    if (likedOnly != null) {
-      params.LikedOnly = likedOnly;
+    if (_likedOnly != null) {
+      params.LikedOnly = _likedOnly;
     }
 
-    const response = await API.get(url_getNews, { params: params }).catch(error =>  console.log(error));
+    API.get(url_get_news, { params: params })
+      .then((response) => {
+        let _arrNews = [];
+        _arrNews.push(...arrNews);
+        response.data.forEach((tiding) => {
+          _arrNews.push(<Tidings key={tiding.id} tidings={tiding} deletElement={setDeleteKeyElement}/>);
+        });
 
-    if (response.data == null) return null;
-    let arrNews = [];
-    response.data.forEach((tiding, index) => {
-      arrNews.push(
-        <Tidings
-          key={index}
-          title={tiding.title}
-          text={tiding.text}
-          likesCount={tiding.likesCount}
-          commentCount={tiding.commentCount}
-          author={tiding.author}
-          isLiked={tiding.isLiked}
-        />
-      );
-    });
+        setArrNews(_arrNews);
+        if (response.data.length === pageSize) setPageIndex(pageIndex + 1);
+      })
+      .catch((error) => {});
+  };
 
-    this.setState({arrNews: arrNews});
-    console.log(this.state.arrNews);
-  }
+  const update = () => {
+    // setArrNews([]);
+    getNews();
+  };
 
-  render() {
-    // const [arrNews, setArrNews] = useState(false);
-    return <main className="column">{this.state.arrNews}</main>;
-  }
+  useEffect(getNews, [pageIndex]);
+  useEffect(() => {
+    if (typeof setUpdate === "function") setUpdate({update: update});
+  }, [setUpdate]);
+
+  return <main className="column">{arrNews}</main>;
 }

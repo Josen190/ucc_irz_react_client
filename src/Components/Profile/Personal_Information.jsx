@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import { useContext } from "react";
-import API, { url_user_id } from "../../api/Api";
-import { authContext } from "../../api/authentication/authController";
 import Part_Pers_Info from "./Part_Pers_Info";
 
 const months = [
@@ -41,7 +38,6 @@ const Personal_Information = ({ userInfo, positionUser }) => {
   let skillsAndCompetencies = userInfo.skills;
 
   let positions = [];
-  console.log(positionUser);
   positionUser.forEach((element) => {
     if (element.end == null) {
       positions.push({
@@ -68,37 +64,41 @@ const Personal_Information = ({ userInfo, positionUser }) => {
           })}
         </div>
       </span>
-      {!active && (
-        <a
-          role="button"
-          onClick={() => {
-            setActive(true);
-          }}
-        >
-          {" "}
-          Показать подробную инфромацию
-        </a>
-      )}
-      {active && (
-        <div>
-          <Part_Pers_Info title="о себе" value={myself} />
-          <Part_Pers_Info title="чем занимался" value={iDid} />
-          <Part_Pers_Info title="достижения" value={achievements} />
-          <Part_Pers_Info
-            title="навыки и компетенции"
-            value={skillsAndCompetencies}
-          />
-          <a
-            role="button"
-            onClick={() => {
-              setActive(false);
-            }}
-          >
-            {" "}
-            Скрыть подробную инфромацию
+      {!active &&
+        (typeof myself === "string" ||
+          typeof iDid === "string" ||
+          typeof achievements === "string" ||
+          typeof skillsAndCompetencies === "string") && (
+          <a role="button" onClick={() => {setActive(true);}}>
+            Показать подробную инфромацию
           </a>
-        </div>
-      )}
+        )}
+      {active &&
+        (typeof myself === "string" ||
+          typeof iDid === "string" ||
+          typeof achievements === "string" ||
+          typeof skillsAndCompetencies === "string") && (
+          <div>
+            {typeof myself == "string" && (
+              <Part_Pers_Info title="о себе" value={myself} />
+            )}
+            {typeof iDid == "string" && (
+              <Part_Pers_Info title="чем занимался" value={iDid} />
+            )}
+            {typeof achievements == "string" && (
+              <Part_Pers_Info title="достижения" value={achievements} />
+            )}
+            {typeof skillsAndCompetencies == "string" && (
+              <Part_Pers_Info
+                title="навыки и компетенции"
+                value={skillsAndCompetencies}
+              />
+            )}
+            <a role="button" onClick={() => {setActive(false);}}>
+              Скрыть подробную инфромацию
+            </a>
+          </div>
+        )}
     </div>
   );
 };
