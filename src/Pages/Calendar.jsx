@@ -11,7 +11,7 @@ const Calendar = () => {
   const prevMonth = () => {
     setDate(new Date(date.setMonth(date.getMonth() - 1)));
   };
-
+ 
   return (
     <main className="tile calendar">
       <div>

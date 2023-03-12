@@ -1,6 +1,8 @@
 import React, { Component, useState } from "react";
+import { useEffect } from "react";
 import useMeasure from "react-use-measure";
 import Day from "../Day/Day";
+import API, { url_get_events_listenning } from "../../../api/Api"
 
 //numberMonth - нумерация месецев начинается с 0 - январь ...
 function showMonth(year, numberMonth) {
@@ -20,8 +22,8 @@ function showMonth(year, numberMonth) {
       indexDay.setDate(indexDay.getDate() + 1);
     }
   }
-
-  return arrDayOfCalendar;
+  const lastDayOfCalendar = new Date(indexDay - 1);
+  return { firstDayOfCalendar, lastDayOfCalendar, arrDayOfCalendar };
 }
 
 export default function Month({ year, numberMonth }) {
@@ -36,11 +38,12 @@ export default function Month({ year, numberMonth }) {
   ];
   let nameDayWeekShort = ["Пн.", "Вт.", "Ср.", "Чт.", "Пт.", "Сб.", "Вс."];
   const [nameDayWeekUse, setNameDayWeekFull] = useState(nameDayWeekShort);
+  const [listEvents, setListEvents] = useState([]);
   const [ref, bounds] = useMeasure();
   let isFull = false;
 
-  let arrDayOfCalendar = showMonth(year, numberMonth);
-
+  let { firstDayOfCalendar, lastDayOfCalendar, arrDayOfCalendar } = showMonth(year, numberMonth);
+  console.log(numberMonth);
   function onWidth(bounds) {
     if (isFull && bounds.width < 1050) {
       setNameDayWeekFull(nameDayWeekShort);
@@ -50,6 +53,16 @@ export default function Month({ year, numberMonth }) {
       isFull = false;
     }
   }
+
+  useEffect(() => {
+    
+    API.get(url_get_events_listenning, {
+      Start: firstDayOfCalendar, 
+      End: lastDayOfCalendar
+    }).then(response => {
+      console.log(response.data);
+    })
+  }, [numberMonth]);
 
   onWidth(bounds);
 
