@@ -11,7 +11,7 @@ import { Outlet } from "react-router-dom";
 function App() {
   const { authData } = useContext(authContext);
 
-  if (window.location.pathname != "/" && authData.jwt == null) {
+  if (window.location.pathname !== "/" && authData.jwt == null) {
     return <Navigate to="/" />;
   }
 
