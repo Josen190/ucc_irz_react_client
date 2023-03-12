@@ -5,8 +5,8 @@ import MenuLink from "../Components/Menu/MenuLink";
 
 export default function Edit() {
   return (
-    <div className="row">
-      <main className="tile col-space-between">
+    <div className="row tile">
+      <main className="col-space-between">
         <Outlet />
       </main>
       <Menu>
