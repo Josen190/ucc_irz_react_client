@@ -1,9 +1,6 @@
 import React, { Component, useState } from "react";
-import Month from "../Components/Calendar/Month";
+import Month from "../Components/Calendar/Month/Month";
 import Button from "../Components/basic/Button";
-import Header from "../Components/Header/Header";
-import Menu from "../Components/Menu/Menu";
-import User from "./User";
 
 const Calendar = () => {
   const [date, setDate] = useState(new Date());
@@ -16,22 +13,19 @@ const Calendar = () => {
   };
 
   return (
-    <User>
-      <main className="tile calendar">
-        <div>
-          <h4></h4>
-        </div>
-        <Month year={date.getFullYear()} numberMonth={date.getMonth()} />
-        <div>
+    <main className="tile calendar">
+      <div>
+        <div className="row">
           <Button type="button" onClick={prevMonth}>
-            Предыдущий
+            {"<"}
           </Button>
           <Button type="button" onClick={nextMonth}>
-            Следующий
+            {">"}
           </Button>
         </div>
-      </main>
-    </User>
+      </div>
+      <Month year={date.getFullYear()} numberMonth={date.getMonth()} />
+    </main>
   );
 };
 export default Calendar;

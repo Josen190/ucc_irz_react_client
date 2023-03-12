@@ -1,6 +1,6 @@
 import React, { Component, useState } from "react";
 import useMeasure from "react-use-measure";
-import Day from "./Day";
+import Day from "../Day/Day";
 
 //numberMonth - нумерация месецев начинается с 0 - январь ...
 function showMonth(year, numberMonth) {
@@ -38,13 +38,11 @@ export default function Month({ year, numberMonth }) {
 
   let arrDayOfCalendar = showMonth(year, numberMonth);
 
-
- 
   function onWidth(bounds) {
-    if (isFull && bounds.width < 1050){
+    if (isFull && bounds.width < 1050) {
       setNameDayWeekFull(nameDayWeekShort);
       isFull = false;
-    } else if (!isFull && bounds.width >= 1050){
+    } else if (!isFull && bounds.width >= 1050) {
       setNameDayWeekFull(nameDayWeekFull);
       isFull = false;
     }
@@ -55,20 +53,20 @@ export default function Month({ year, numberMonth }) {
   return (
     <div className="month">
       <table>
-      <thead>
-      <tr ref={ref} className="month-column">
-        {/* {console.log(nameDayWeekUse.forEach((value) => {
-          <th>{value}</th>;
-        }))} */}
-        <th>{nameDayWeekUse[0]}</th>
+        <thead>
+          <tr ref={ref} className="month-column">
+            {nameDayWeekUse.map((e, i) => (
+              <th key={i}>{e}</th>
+            ))}
+            {/* <th>{nameDayWeekUse[0]}</th>
         <th>{nameDayWeekUse[1]}</th>
         <th>{nameDayWeekUse[2]}</th>
         <th>{nameDayWeekUse[3]}</th>
         <th>{nameDayWeekUse[4]}</th>
         <th>{nameDayWeekUse[5]}</th>
-        <th>{nameDayWeekUse[6]}</th>
-      </tr>
-    </thead>
+        <th>{nameDayWeekUse[6]}</th> */}
+          </tr>
+        </thead>
         <tbody className="month-row">
           <tr className="month-column">
             <td>

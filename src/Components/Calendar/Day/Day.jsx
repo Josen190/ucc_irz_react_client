@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import "./calendar.css";
+import "../calendar.css";
 
-export default function Day({ day }) {
+export default function Day({ day, month }) {
   let today = new Date();
   today.setHours(0, 0, 0, 0);
 
@@ -11,7 +11,7 @@ export default function Day({ day }) {
     className += " today";
   }
 
-  if (day.getMonth() != this.props.month) {
+  if (day.getMonth() != month) {
     className += " noThisMonth";
   }
 
