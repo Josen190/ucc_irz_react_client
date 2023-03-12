@@ -16,6 +16,8 @@ import Admin from "./Pages/Admin";
 import Auth from "./Pages/Auth";
 import AuthController from "./api/authentication/authController";
 import App from "./App";
+import EditInfo from "./Components/Edit/EditInfo/EditInfo";
+import Settin from "./Components/Edit/Setting/Setting";
 
 const router = createBrowserRouter(
   [
@@ -32,6 +34,16 @@ const router = createBrowserRouter(
         {
           path: "edit",
           element: <Edit />,
+          children: [
+            {
+              path:"info", 
+              element: <EditInfo />
+            },
+            {
+              path: "setting",
+              element: <Settin />
+            }
+          ]
         },
         {
           path: "news",
