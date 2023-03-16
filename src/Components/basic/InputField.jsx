@@ -11,7 +11,7 @@ export default function InputField({
   name,
   onChange,
 }) {
-  const arrType = ["textarea", "text", "password", "email", "date", "time"];
+  const arrType = ["textarea", "text", "password", "email", "date", "time", "checkbox"];
 
   const inputprops = {
     className: "",
