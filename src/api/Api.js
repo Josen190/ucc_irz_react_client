@@ -121,12 +121,14 @@ export const setJwt = (data) => {
 
 export default API;
 
+let loading = true;
 API.interceptors.response.use(
   (response) => response,
   async (error) => {
     const status = error.response ? error.response.status : null;
 
-    if (status === 401) {
+    if (loading && status === 401) {
+      loading = false;
       const { jwt, refreshToken, myID, role} = getAuthData();
       return API.post(
         url_post_refresh,
@@ -146,15 +148,25 @@ API.interceptors.response.use(
           setAuthDataApi(response.data.jwt, response.data.refreshToken, myID, role)
           error.config.headers["Authorization"] = "Bearer " + response.data.jwt;
           error.config.baseURL = host;
+          loading = true;
           return API.request(error.config);
         })
         .catch(() => {
           setAuthDataApi(null, null, null, null);
           notifyError("авторизация не удалась, поробуйте снова");
-          
+          loading = true;
         });
     }
 
     return Promise.reject(error);
   }
 );
+
+
+export function getImg(id){
+  API.get(url_get_images_id(id)).then((response) => {
+
+  }).catch(()=>{
+    notifyError("Ошибка не удалось загрузить изображение")
+  })
+}
