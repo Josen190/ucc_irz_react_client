@@ -24,7 +24,7 @@ export default function Comment({ data }) {
   return (
     <div className="tile">
       <div className="row">
-        <Author author={data.user} />
+        <Author user={data.user} />
         {isMyComment && (
           <Button type="button" onClick={deletComment}>
             Удалить

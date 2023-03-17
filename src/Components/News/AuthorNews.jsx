@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import Profile_Picture from "../Profile/Profile_Picture";
 import { Link } from "react-router-dom";
 
-export default function Author({ author }) {
-  const _firstName = author.firstName;
-  const _surname = author.surname;
-  const _patronymic = author.patronymic == null ? "" : author.patronymic;
-  const _authorID = author.id;
+export default function Author({ user }) {
+  const _firstName = user.firstName;
+  const _surname = user.surname;
+  const _patronymic = user.patronymic == null ? "" : user.patronymic;
+  const _authorID = user.id;
 
   const nameAuthorNews = `${_firstName} ${_surname} ${_patronymic}`;
   return (

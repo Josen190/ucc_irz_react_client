@@ -33,7 +33,7 @@ export default function Tidings({ tidings, deletElement }) {
     <div>
       <div className="tile">
         <div className="row">
-          <Author author={tidings.author}></Author>
+          <Author user={tidings.author}></Author>
           {isMyTiding && (
             <div>
               <Button
