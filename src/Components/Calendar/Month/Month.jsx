@@ -2,7 +2,7 @@ import React, { Component, useState } from "react";
 import { useEffect } from "react";
 import useMeasure from "react-use-measure";
 import Day from "../Day/Day";
-import API, { url_get_events_listenning } from "../../../api/Api"
+import API, {url_get_events_my } from "../../../api/Api"
 
 //numberMonth - нумерация месецев начинается с 0 - январь ...
 function showMonth(year, numberMonth) {
@@ -56,7 +56,7 @@ export default function Month({ year, numberMonth }) {
 
   useEffect(() => {
     
-    API.get(url_get_events_listenning, {
+    API.get(url_get_events_my, {
       Start: firstDayOfCalendar, 
       End: lastDayOfCalendar
     }).then(response => {
