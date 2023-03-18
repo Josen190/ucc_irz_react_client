@@ -20,7 +20,7 @@ const nameMonth = [
 
 const Calendar = () => {
   const [date, setDate] = useState(new Date());
-  const [active, setActive] = useState(true);
+  const [active, setActive] = useState(false);
 
   const nextMonth = () => {
     setDate(new Date(date.setMonth(date.getMonth() + 1)));
