@@ -2,7 +2,7 @@ import React, { Component, useState } from "react";
 import { useEffect } from "react";
 import useMeasure from "react-use-measure";
 import Day from "../Day/Day";
-import API, {url_get_events_my } from "../../../api/Api"
+import API, { url_get_events_my } from "../../../api/Api";
 
 //numberMonth - нумерация месецев начинается с 0 - январь ...
 function showMonth(year, numberMonth) {
@@ -26,6 +26,14 @@ function showMonth(year, numberMonth) {
   return { firstDayOfCalendar, lastDayOfCalendar, arrDayOfCalendar };
 }
 
+function equateDate(date1, date2) {
+  return (
+    date1.getDate() === date2.getDate() &&
+    date1.getMonth() === date2.getMonth() &&
+    date1.getFullYear() === date2.getFullYear()
+  );
+}
+
 export default function Month({ year, numberMonth }) {
   let nameDayWeekFull = [
     "Понедельник",
@@ -42,7 +50,10 @@ export default function Month({ year, numberMonth }) {
   const [ref, bounds] = useMeasure();
   let isFull = false;
 
-  let { firstDayOfCalendar, lastDayOfCalendar, arrDayOfCalendar } = showMonth(year, numberMonth);
+  let { firstDayOfCalendar, lastDayOfCalendar, arrDayOfCalendar } = showMonth(
+    year,
+    numberMonth
+  );
 
   function onWidth(bounds) {
     if (isFull && bounds.width < 1050) {
@@ -55,13 +66,13 @@ export default function Month({ year, numberMonth }) {
   }
 
   useEffect(() => {
-    
     API.get(url_get_events_my, {
-      Start: firstDayOfCalendar, 
-      End: lastDayOfCalendar
-    }).then(response => {
+      Start: firstDayOfCalendar,
+      End: lastDayOfCalendar,
+    }).then((response) => {
       console.log(response.data);
-    })
+      setListEvents(response.data);
+    });
   }, [numberMonth]);
 
   onWidth(bounds);
@@ -79,11 +90,17 @@ export default function Month({ year, numberMonth }) {
         <tbody className="month-row">
           {arrDayOfCalendar.map((week, indexWeek) => (
             <tr key={indexWeek} className="month-column">
-              {week.map((day, indexDay) => (
-                <td key={indexDay}>
-                  <Day day={day} month={numberMonth} />
-                </td>
-              ))}
+              {week.map((day, indexDay) => {
+                let listEventsDay = listEvents.filter((event) => {
+                  return equateDate(new Date(event.start), day);
+                });
+
+                return (
+                  <td key={indexDay}>
+                    <Day day={day} month={numberMonth} listEvents={listEventsDay}/>
+                  </td>
+                );
+              })}
             </tr>
           ))}
         </tbody>
