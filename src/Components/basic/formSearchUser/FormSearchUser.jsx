@@ -1,17 +1,16 @@
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import API, { url_get_users } from "../../../api/Api";
 import Author from "../../News/AuthorNews";
 import PushUser from "../../Profile/PushUser/PushUser";
 import InputField from "../InputField";
 
-function FormSearchUser() {
+const FormSearchUser = () => {
   const [searchString, setSearchString] = useState(null);
   const [isActive, setIsActive] = useState(null);
   const [role, setRole] = useState(null);
   const [positionId, setPositionId] = useState(null);
   const [pageIndex, setPageIndex] = useState(0);
+
   const [users, setUsers] = useState(new Map());
   const [selctUsers, setSelectUsers] = useState(new Map());
   const [userIdTmp, setUserIdTmp] = useState(null);
@@ -44,7 +43,7 @@ function FormSearchUser() {
     });
   };
 
-  useEffect(getUsers(), [pageIndex, searchString, isActive, role, positionId]);
+  useEffect(getUsers, [pageIndex, searchString, isActive, role, positionId]);
 
   useEffect(() => {
     if (userIdTmp !== null) {
@@ -65,13 +64,15 @@ function FormSearchUser() {
       <div>
         <InputField
           type="text"
-          onChange={(e) => setSearchString(e.target.value)}
+          onChange={(e) => {
+            setSearchString(e.target.value);
+          }}
         ></InputField>
       </div>
       <div>{Array.from(selctUsers.values())}</div>
       <div>{Array.from(users.values())}</div>
     </div>
   );
-}
+};
 
 export default FormSearchUser;

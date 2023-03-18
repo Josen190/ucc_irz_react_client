@@ -43,7 +43,7 @@ export default function Month({ year, numberMonth }) {
   let isFull = false;
 
   let { firstDayOfCalendar, lastDayOfCalendar, arrDayOfCalendar } = showMonth(year, numberMonth);
-  console.log(numberMonth);
+
   function onWidth(bounds) {
     if (isFull && bounds.width < 1050) {
       setNameDayWeekFull(nameDayWeekShort);

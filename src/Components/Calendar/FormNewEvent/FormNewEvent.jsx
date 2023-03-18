@@ -1,16 +1,15 @@
 import React, { useContext, useState } from "react";
 import InputField from "../../basic/InputField";
 import Button from "../../basic/Button";
-import authContext from '../../../api/authentication/authController'
+import { authContext } from "../../../api/authentication/authController";
+import FormSeachUser from '../../basic/formSearchUser/FormSearchUser'
 
-function FormNewEvent({ day }) {
+const FormNewEvent = ({ day, setActive }) => {
   const _day =
     Object.prototype.toString.call(day) === "[object Date]" ? day : null;
 
-  const {authData} = useContext(authContext)
-
+  const { authData } = useContext(authContext);
   const role = authData.role;
-  
 
   const [date, setDate] = useState(_day);
   const [startTime, setStartTime] = useState(null);
@@ -20,51 +19,66 @@ function FormNewEvent({ day }) {
   const [isPublic, setIsPublic] = useState("");
   const [cabinetId, setCabinetId] = useState("");
 
+  const newEvent = (event) => {
+    event.preventDefault();
+  }
+
   return (
-    <form>
-      <div>
-        <InputField
-          type="date"
-          value={_day}
-          onChange={(event) => {
-            setDate(event.target.value);
-          }}
-        ></InputField>
-        <div className="row">
-          <span>С</span>
+    <div className="modal"
+    onClick={() => {
+      setActive(false);
+    }}>
+      <form className="column tile"
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+        onSubmit={(e) => newEvent(e)}
+        >
+        <div>
           <InputField
-            type="time"
+            type="date"
+            value={_day}
             onChange={(event) => {
-              setStartTime(event.target.value);
+              setDate(event.target.value);
             }}
           ></InputField>
-          <span>По</span>
+          <div className="row">
+            <span>С</span>
+            <InputField
+              type="time"
+              onChange={(event) => {
+                setStartTime(event.target.value);
+              }}
+            ></InputField>
+            <span>По</span>
+            <InputField
+              type="time"
+              onChange={(event) => {
+                setEndTime(event.target.value);
+              }}
+            ></InputField>
+          </div>
           <InputField
-            type="time"
+            type="text"
+            placeholder="Заголовок"
             onChange={(event) => {
-              setEndTime(event.target.value);
+              setTitle(event.target.value);
             }}
           ></InputField>
+          <InputField
+            type="textarea"
+            placeholder="Опписание"
+            onChange={(event) => {
+              setDescription(event.target.value);
+            }}
+          ></InputField>
+          <FormSeachUser></FormSeachUser>
         </div>
-        <InputField
-          type="text"
-          placeholder="Заголовок"
-          onChange={(event) => {
-            setTitle(event.target.value);
-          }}
-        ></InputField>
-        <InputField
-          type="textarea"
-          placeholder="Опписание"
-          onChange={(event) => {
-            setDescription(event.target.value);
-          }}
-        ></InputField>
-      </div>
-      <div>
-        <Button type="submit">Сохранить</Button>
-      </div>
-    </form>
+        <div>
+          <Button type="submit">Сохранить</Button>
+        </div>
+      </form>
+    </div>
   );
 }
 
