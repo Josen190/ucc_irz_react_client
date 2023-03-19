@@ -4,10 +4,10 @@ import Button from "../../basic/Button";
 import { authContext } from "../../../api/authentication/authController";
 import FormSeachUser from '../../basic/formSearchUser/FormSearchUser'
 
+
 const FormNewEvent = ({ day, setActive }) => {
   const _day =
     Object.prototype.toString.call(day) === "[object Date]" ? day : null;
-
   const { authData } = useContext(authContext);
   const role = authData.role;
 
@@ -37,7 +37,7 @@ const FormNewEvent = ({ day, setActive }) => {
         <div>
           <InputField
             type="date"
-            value={_day}
+            value={_day.toCustomString()}
             onChange={(event) => {
               setDate(event.target.value);
             }}

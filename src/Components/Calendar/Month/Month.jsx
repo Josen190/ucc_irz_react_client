@@ -5,26 +5,27 @@ import Day from "../Day/Day";
 import API, { url_get_events_my } from "../../../api/Api";
 import ContextMenu from "../../basic/ContextMenu/ContextMenu";
 import ContextButton from "../../basic/ContextMenu/ContextButton/ContextButton";
+import MyDate from "../../../class/MyDate";
 import "./month.css"
 //numberMonth - нумерация месецев начинается с 0 - январь ...
 function showMonth(year, numberMonth) {
   //получение дня недели для первого дня месеца
-  let firstDayOfMonth = new Date(year, numberMonth, 1).getDay();
+  let firstDayOfMonth = new MyDate(year, numberMonth, 1).getDay();
   //0 - восрресенье в 6 - восткресенье
   firstDayOfMonth = firstDayOfMonth == 0 ? 6 : firstDayOfMonth - 1;
-  let firstDayOfCalendar = new Date(year, numberMonth, 1);
+  let firstDayOfCalendar = new MyDate(year, numberMonth, 1);
   firstDayOfCalendar.setDate(firstDayOfCalendar.getDate() - firstDayOfMonth);
 
-  let indexDay = new Date(firstDayOfCalendar);
+  let indexDay = new MyDate(firstDayOfCalendar);
   let arrDayOfCalendar = [];
   for (let i = 0; i < 5; i++) {
     arrDayOfCalendar.push([]);
     for (let j = 0; j < 7; j++) {
-      arrDayOfCalendar[i].push(new Date(indexDay));
+      arrDayOfCalendar[i].push(new MyDate(indexDay));
       indexDay.setDate(indexDay.getDate() + 1);
     }
   }
-  const lastDayOfCalendar = new Date(indexDay - 1);
+  const lastDayOfCalendar = new MyDate(indexDay - 1);
   return { firstDayOfCalendar, lastDayOfCalendar, arrDayOfCalendar };
 }
 
@@ -117,7 +118,7 @@ export default function Month({ year, numberMonth, setSelectedDay }) {
             <tr key={indexWeek} className="month-column">
               {week.map((day, indexDay) => {
                 let listEventsDay = listEvents.filter((event) => {
-                  return equateDate(new Date(event.start), day);
+                  return equateDate(new MyDate(event.start), day);
                 });
 
                 return (

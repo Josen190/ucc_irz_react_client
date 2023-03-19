@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Part_Pers_Info from "./Part_Pers_Info";
+import MyDate from "../../class/MyDate";
 
 const months = [
   "Январь",
@@ -30,7 +31,7 @@ const Personal_Information = ({ userInfo, positionUser }) => {
   let fio = `${userInfo.firstName} ${userInfo.surname} ${
     userInfo.patronymic == null ? "" : userInfo.patronymic
   }`;
-  let birthday = DatetoStr(new Date(userInfo.birthday));
+  let birthday = DatetoStr(new MyDate(userInfo.birthday));
 
   let myself = userInfo.aboutMyself;
   let iDid = userInfo.myDoings;
@@ -42,7 +43,7 @@ const Personal_Information = ({ userInfo, positionUser }) => {
     if (element.end == null) {
       positions.push({
         name: element.position.name,
-        start: DatetoStr(new Date(element.start)),
+        start: DatetoStr(new MyDate(element.start)),
       });
     }
   });

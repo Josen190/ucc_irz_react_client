@@ -2,6 +2,7 @@ import React, { Component, useState } from "react";
 import Month from "../Components/Calendar/Month/Month";
 import Button from "../Components/basic/Button";
 import FormNewEvent from "../Components/Calendar/FormNewEvent/FormNewEvent";
+import MyDate from "../class/MyDate";
 
 const nameMonth = [
   "Январь",
@@ -19,15 +20,15 @@ const nameMonth = [
 ];
 
 const Calendar = () => {
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(new MyDate());
   const [active, setActive] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
 
   const nextMonth = () => {
-    setDate(new Date(date.setMonth(date.getMonth() + 1)));
+    setDate(new MyDate(date.setMonth(date.getMonth() + 1)));
   };
   const prevMonth = () => {
-    setDate(new Date(date.setMonth(date.getMonth() - 1)));
+    setDate(new MyDate(date.setMonth(date.getMonth() - 1)));
   };
 
   const setEventSelectedDay = (day) => {
