@@ -79,7 +79,6 @@ export default function Month({ year, numberMonth, setSelectedDay }) {
       Start: firstDayOfCalendar,
       End: lastDayOfCalendar,
     }).then((response) => {
-      console.log(response.data);
       setListEvents(response.data);
     });
   }, [numberMonth]);
