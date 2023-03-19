@@ -18,6 +18,7 @@ export default function CreateComment({ newsID }) {
       .then(() => {
         setText("");
         setValue("");
+        notifyError("Комментарий создан");
       })
       .catch(() => {
         notifyError("Ощибка, попробуйте снова");
