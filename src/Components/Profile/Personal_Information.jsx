@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import Part_Pers_Info from "./Part_Pers_Info";
-import MyDate from "../../class/MyDate";
+import MyDate from "../../class/MyDate"
 
 const Personal_Information = ({ userInfo, positionUser }) => {
   const [active, setActive] = useState(false);
 
-  let fio = `${userInfo.firstName} ${userInfo.surname} ${
+  const fio = `${userInfo.firstName} ${userInfo.surname} ${
     userInfo.patronymic == null ? "" : userInfo.patronymic
   }`;
-  let birthday = new MyDate(userInfo.birthday).DatetoStr();
+  const birthday = new MyDate(userInfo.birthday).DatetoStr();
 
-  let myself = userInfo.aboutMyself;
-  let iDid = userInfo.myDoings;
-  let achievements = userInfo.skills; //??????????????????????
-  let skillsAndCompetencies = userInfo.skills;
+  const myself = userInfo.aboutMyself;
+  const iDid = userInfo.myDoings;
+  const achievements = userInfo.skills; //??????????????????????
+  const skillsAndCompetencies = userInfo.skills;
 
   let positions = [];
   positionUser.forEach((element) => {
