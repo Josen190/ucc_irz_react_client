@@ -32,7 +32,7 @@ const FormNewEvent = ({ day, setActive }) => {
         onClick={(e) => {
           e.stopPropagation();
         }}
-        onSubmit={(e) => newEvent(e)}
+        onSubmit={newEvent}
         >
         <div>
           <InputField
