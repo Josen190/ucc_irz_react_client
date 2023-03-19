@@ -2,36 +2,13 @@ import React, { useState } from "react";
 import Part_Pers_Info from "./Part_Pers_Info";
 import MyDate from "../../class/MyDate";
 
-const months = [
-  "Январь",
-  "Февраль",
-  "Март",
-  "Апрель",
-  "Май",
-  "Июнь",
-  "Июль",
-  "Август",
-  "Сентябрь",
-  "октябрь",
-  "Ноябрь",
-  "Декабрь",
-];
-
-function DatetoStr(date) {
-  let dd = String(date.getDate()).padStart(2, "0");
-  let mm = String(date.getMonth() + 1).padStart(2, "0"); //January is 0!
-  let yyyy = String(date.getFullYear()).padStart(4, "0");
-
-  return dd + " " + months[date.getMonth()] + " " + yyyy;
-}
-
 const Personal_Information = ({ userInfo, positionUser }) => {
   const [active, setActive] = useState(false);
 
   let fio = `${userInfo.firstName} ${userInfo.surname} ${
     userInfo.patronymic == null ? "" : userInfo.patronymic
   }`;
-  let birthday = DatetoStr(new MyDate(userInfo.birthday));
+  let birthday = new MyDate(userInfo.birthday).DatetoStr();
 
   let myself = userInfo.aboutMyself;
   let iDid = userInfo.myDoings;
