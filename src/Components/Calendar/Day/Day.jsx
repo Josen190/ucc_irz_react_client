@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../calendar.css";
 import EventInDay from "./EventInDay/EventInDay";
 
-export default function Day({ day, month, listEvents }) {
+export default function Day({ day, month, listEvents, activeContextMenu }) {
   let today = new Date();
   today.setHours(0, 0, 0, 0);
 
@@ -16,8 +16,10 @@ export default function Day({ day, month, listEvents }) {
     className += " noThisMonth";
   }
 
+  
+
   return (
-    <div className={className}>
+    <div className={className} onContextMenu={(e) => activeContextMenu(e, today)} onContextMenuCapture={null}>
       <span> {day.getDate()}</span>
       <div className="column"> 
         {listEvents.map((event) => {

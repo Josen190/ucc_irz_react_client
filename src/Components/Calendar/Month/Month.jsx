@@ -3,7 +3,9 @@ import { useEffect } from "react";
 import useMeasure from "react-use-measure";
 import Day from "../Day/Day";
 import API, { url_get_events_my } from "../../../api/Api";
-
+import ContextMenu from "../../basic/ContextMenu/ContextMenu";
+import ContextButton from "../../basic/ContextMenu/ContextButton/ContextButton";
+import "./month.css"
 //numberMonth - нумерация месецев начинается с 0 - январь ...
 function showMonth(year, numberMonth) {
   //получение дня недели для первого дня месеца
@@ -34,7 +36,7 @@ function equateDate(date1, date2) {
   );
 }
 
-export default function Month({ year, numberMonth }) {
+export default function Month({ year, numberMonth, setSelectedDay }) {
   let nameDayWeekFull = [
     "Понедельник",
     "Вторник",
@@ -47,6 +49,13 @@ export default function Month({ year, numberMonth }) {
   let nameDayWeekShort = ["Пн.", "Вт.", "Ср.", "Чт.", "Пт.", "Сб.", "Вс."];
   const [nameDayWeekUse, setNameDayWeekFull] = useState(nameDayWeekShort);
   const [listEvents, setListEvents] = useState([]);
+  const [activeContextMenu, setActiveContextMenu] = useState(false);
+  const [screenPosition, setScreenPosition] = useState({
+    screenX: 0,
+    screenY: 0,
+    day: null,
+  });
+
   const [ref, bounds] = useMeasure();
   let isFull = false;
 
@@ -75,10 +84,27 @@ export default function Month({ year, numberMonth }) {
     });
   }, [numberMonth]);
 
-  onWidth(bounds);
+  useEffect(() => {
+    onWidth(bounds);
+  }, [bounds]);
+
+  const contextMenu = (event, day) => {
+    event.preventDefault();
+    setActiveContextMenu(true);
+    setScreenPosition({
+      screenX: event.clientX,
+      screenY: event.clientY,
+      day: day,
+    });
+  };
 
   return (
-    <div className="month">
+    <div
+      className="month"
+      onClick={() => {
+        setActiveContextMenu(false);
+      }}
+    >
       <table>
         <thead>
           <tr ref={ref} className="month-column">
@@ -97,7 +123,12 @@ export default function Month({ year, numberMonth }) {
 
                 return (
                   <td key={indexDay}>
-                    <Day day={day} month={numberMonth} listEvents={listEventsDay}/>
+                    <Day
+                      day={day}
+                      month={numberMonth}
+                      listEvents={listEventsDay}
+                      activeContextMenu={contextMenu}
+                    />
                   </td>
                 );
               })}
@@ -105,6 +136,21 @@ export default function Month({ year, numberMonth }) {
           ))}
         </tbody>
       </table>
+      {activeContextMenu && (
+        <ContextMenu
+          screenX={screenPosition.screenX}
+          screenY={screenPosition.screenY}
+        >
+          <ContextButton
+            onClick={() => {
+              setSelectedDay(screenPosition.day);
+              setActiveContextMenu(false);
+            }}
+          >
+            Добавить событие
+          </ContextButton>
+        </ContextMenu>
+      )}
     </div>
   );
 }

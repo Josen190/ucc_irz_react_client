@@ -21,6 +21,7 @@ const nameMonth = [
 const Calendar = () => {
   const [date, setDate] = useState(new Date());
   const [active, setActive] = useState(false);
+  const [selectedDay, setSelectedDay] = useState(null);
 
   const nextMonth = () => {
     setDate(new Date(date.setMonth(date.getMonth() + 1)));
@@ -28,6 +29,11 @@ const Calendar = () => {
   const prevMonth = () => {
     setDate(new Date(date.setMonth(date.getMonth() - 1)));
   };
+
+  const setEventSelectedDay = (day) => {
+    setSelectedDay(day);
+    setActive(true);
+  }
 
   return (
     <main className="tile calendar">
@@ -50,8 +56,8 @@ const Calendar = () => {
           </Button>
         </div>
       </div>
-      <Month year={date.getFullYear()} numberMonth={date.getMonth()} />
-      {active && <FormNewEvent setActive={setActive} />}
+      <Month year={date.getFullYear()} numberMonth={date.getMonth()} setSelectedDay={setEventSelectedDay}/>
+      {active && <FormNewEvent day={selectedDay} setActive={setActive} />}
     </main>
   );
 };
