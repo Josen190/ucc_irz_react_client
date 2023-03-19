@@ -7,7 +7,7 @@ export default function Day({ day, month, listEvents, activeContextMenu }) {
   let today = new MyDate();
   today.setHours(0, 0, 0, 0);
 
-  let className = "day";
+  let className = "day column";
 
   if (today.getTime() === day.getTime()) {
     className += " today";
