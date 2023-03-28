@@ -20,7 +20,7 @@ const Personal_Information = ({ userInfo, positionUser }) => {
     if (element.end == null) {
       positions.push({
         name: element.position.name,
-        start: DatetoStr(new MyDate(element.start)),
+        start: new MyDate(element.start).DatetoStr(),
       });
     }
   });
