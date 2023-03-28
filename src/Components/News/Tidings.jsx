@@ -31,9 +31,8 @@ export default function Tidings({ tidings, deletElement }) {
   };
 
   useEffect(() => {
-    getImg(tidings.imageId, setImage)
-  }, [])
-  
+    getImg(tidings.imageId, setImage);
+  }, []);
 
   return (
     <div>
@@ -60,7 +59,13 @@ export default function Tidings({ tidings, deletElement }) {
             </div>
           )}
         </div>
-        <Content title={tidings.title} content={tidings.text} image={image}></Content>
+        <Content
+          title={tidings.title}
+          content={tidings.text}
+          image={image}
+          isClipped={tidings.isClipped}
+          newsID={tidings.id}
+        ></Content>
         <div className="row">
           <Like
             likesCount={tidings.likesCount}

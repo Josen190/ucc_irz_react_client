@@ -59,6 +59,9 @@ export const url_get_news_id = (id) => {
 export const url_delete_news_id = (id) => {
   return `/api/news/${id}`;
 };
+export const url_get_news_id_full_text = (id) => {
+  return `/api/news/${id}/full_text`;
+};
 
 // коментарии к новости
 export const url_get_news_comments = "/api/news_comments";
