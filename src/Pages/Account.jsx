@@ -36,7 +36,7 @@ const Account = () => {
       <div className="tile ProfileHeader">
         <div className="margin-right">
           <Profile_Picture type="norm"></Profile_Picture>
-          <Profile_Navigation isLogin={isLogin}></Profile_Navigation>
+          <Profile_Navigation isLogin={isLogin} userID={info_user.id} isSubcribe={info_user.isSubscription}></Profile_Navigation>
         </div>
         <Personal_Information userInfo={info_user} positionUser={position_user}></Personal_Information>
       </div>

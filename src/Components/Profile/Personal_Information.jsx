@@ -1,48 +1,26 @@
 import React, { useState } from "react";
 import Part_Pers_Info from "./Part_Pers_Info";
-
-const months = [
-  "Январь",
-  "Февраль",
-  "Март",
-  "Апрель",
-  "Май",
-  "Июнь",
-  "Июль",
-  "Август",
-  "Сентябрь",
-  "октябрь",
-  "Ноябрь",
-  "Декабрь",
-];
-
-function DatetoStr(date) {
-  let dd = String(date.getDate()).padStart(2, "0");
-  let mm = String(date.getMonth() + 1).padStart(2, "0"); //January is 0!
-  let yyyy = String(date.getFullYear()).padStart(4, "0");
-
-  return dd + " " + months[date.getMonth()] + " " + yyyy;
-}
+import MyDate from "../../class/MyDate"
 
 const Personal_Information = ({ userInfo, positionUser }) => {
   const [active, setActive] = useState(false);
 
-  let fio = `${userInfo.firstName} ${userInfo.surname} ${
+  const fio = `${userInfo.firstName} ${userInfo.surname} ${
     userInfo.patronymic == null ? "" : userInfo.patronymic
   }`;
-  let birthday = DatetoStr(new Date(userInfo.birthday));
+  const birthday = new MyDate(userInfo.birthday).DatetoStr();
 
-  let myself = userInfo.aboutMyself;
-  let iDid = userInfo.myDoings;
-  let achievements = userInfo.skills; //??????????????????????
-  let skillsAndCompetencies = userInfo.skills;
+  const myself = userInfo.aboutMyself;
+  const iDid = userInfo.myDoings;
+  const achievements = userInfo.skills; //??????????????????????
+  const skillsAndCompetencies = userInfo.skills;
 
   let positions = [];
   positionUser.forEach((element) => {
     if (element.end == null) {
       positions.push({
         name: element.position.name,
-        start: DatetoStr(new Date(element.start)),
+        start: DatetoStr(new MyDate(element.start)),
       });
     }
   });

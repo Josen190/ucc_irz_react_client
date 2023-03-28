@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import Author from "./AuthorNews";
 import Content from "../basic/Content";
@@ -8,13 +8,14 @@ import CommentFeed from "./CommentFeed";
 import { authContext } from "../../api/authentication/authController";
 import Button from "../basic/Button";
 import { useRef } from "react";
-import API, { url_delete_news_id } from "../../api/Api";
+import API, { getImg, url_delete_news_id } from "../../api/Api";
 import { notifyError, notifySuccess } from "../Notifications/Notifications";
 import ReactDOM from "react-dom";
 
 export default function Tidings({ tidings, deletElement }) {
   const { authData } = useContext(authContext);
   const [isActiveCommentFeed, setIsActiveCommentFeed] = useState(false);
+  const [image, setImage] = useState(null);
   const subMenu = useRef(null);
   const isMyTiding = tidings.author.id === authData.myID;
 
@@ -29,11 +30,16 @@ export default function Tidings({ tidings, deletElement }) {
       .catch(() => notifyError("Ошибка, новотсь не удалена"));
   };
 
+  useEffect(() => {
+    getImg(tidings.imageId, setImage)
+  }, [])
+  
+
   return (
     <div>
       <div className="tile">
         <div className="row">
-          <Author author={tidings.author}></Author>
+          <Author user={tidings.author}></Author>
           {isMyTiding && (
             <div>
               <Button
@@ -54,7 +60,7 @@ export default function Tidings({ tidings, deletElement }) {
             </div>
           )}
         </div>
-        <Content title={tidings.title} content={tidings.text}></Content>
+        <Content title={tidings.title} content={tidings.text} image={image}></Content>
         <div className="row">
           <Like
             likesCount={tidings.likesCount}

@@ -1,37 +1,65 @@
 import React, { Component, useState } from "react";
-import Month from "../Components/Calendar/Month";
+import Month from "../Components/Calendar/Month/Month";
 import Button from "../Components/basic/Button";
-import Header from "../Components/Header/Header";
-import Menu from "../Components/Menu/Menu";
-import User from "./User";
+import FormNewEvent from "../Components/Calendar/FormNewEvent/FormNewEvent";
+import MyDate from "../class/MyDate";
+
+const nameMonth = [
+  "Январь",
+  "Февраль",
+  "Март",
+  "Апрель",
+  "Май",
+  "Июнь",
+  "Июль",
+  "Август",
+  "Сентябрь",
+  "Октябрь",
+  "Ноябрь",
+  "Декабрь",
+];
 
 const Calendar = () => {
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(new MyDate());
+  const [active, setActive] = useState(false);
+  const [selectedDay, setSelectedDay] = useState(null);
 
   const nextMonth = () => {
-    setDate(new Date(date.setMonth(date.getMonth() + 1)));
+    setDate(new MyDate(date.setMonth(date.getMonth() + 1)));
   };
   const prevMonth = () => {
-    setDate(new Date(date.setMonth(date.getMonth() - 1)));
+    setDate(new MyDate(date.setMonth(date.getMonth() - 1)));
   };
 
+  const setEventSelectedDay = (day) => {
+    setSelectedDay(day);
+    setActive(true);
+  }
+
   return (
-    <User>
-      <main className="tile calendar">
-        <div>
-          <h4></h4>
-        </div>
-        <Month year={date.getFullYear()} numberMonth={date.getMonth()} />
-        <div>
-          <Button type="button" onClick={prevMonth}>
-            Предыдущий
+    <main className="tile calendar">
+      <div>
+        <div className="row">
+          <div className="row">
+            <Button type="button" onClick={prevMonth}>
+              {"<"}
+            </Button>
+            <div className="row">
+              <span>{nameMonth[date.getMonth()]}</span>
+              <span>{date.getFullYear()}</span>
+            </div>
+            <Button type="button" onClick={nextMonth}>
+              {">"}
+            </Button>
+          </div>
+          <Button type="button" onClick={() => setActive(true)}>
+            Добавить событие
           </Button>
-          <Button type="button" onClick={nextMonth}>
-            Следующий
-          </Button>
         </div>
-      </main>
-    </User>
+      </div>
+      <Month year={date.getFullYear()} numberMonth={date.getMonth()} setSelectedDay={setEventSelectedDay}/>
+      {active && <FormNewEvent day={selectedDay} setActive={setActive} />}
+    </main>
   );
 };
 export default Calendar;

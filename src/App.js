@@ -1,19 +1,24 @@
 import "./App.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Navigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import React, { useContext } from "react";
 import User from "./Pages/User";
 import Visitor from "./Pages/Visitor";
 import { authContext } from "./api/authentication/authController";
 import { Outlet } from "react-router-dom";
+import { useEffect } from "react";
 
 function App() {
   const { authData } = useContext(authContext);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  if (window.location.pathname !== "/" && authData.jwt == null) {
-    return <Navigate to="/" />;
-  }
+  useEffect(() => {
+    if (authData.jwt == null || location.pathname === "/") {
+      navigate("/news");
+    }
+  }, [location]);
 
   const userPage = (
     <User UserID={authData.myID}>
