@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 
-export default function Checkbox({title}) {
+interface PropsCheckbox{
+  title: string
+}
+
+export default function Checkbox(props: PropsCheckbox) {
   return (
     <label>
       <input type="checkbox" />
-      <p>{title}</p>
+      <p>{props.title}</p>
     </label>
   );
 }
