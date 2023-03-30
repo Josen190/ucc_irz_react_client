@@ -1,12 +1,20 @@
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 import { useEffect } from "react";
 import API, {url_get_news_id_full_text} from "../../api/Api";
+import News from "../../class/News";
 
-export default function Content({ content, title, image, isClipped, newsID }) {
-  title = typeof title === "string" ? title : "";
-  const [_isClipped, setIsClipped] = useState(isClipped ? false : null);
-  const [text, setText] = useState(typeof content === "string" ? content : "");
+interface PropsContent{
+  news: News
+}
+
+
+export default function Content({news}: PropsContent): JSX.Element {
+  const {id, title, isClipped, clippedText, image} = news;
+
+  const [_isClipped, setIsClipped] = useState(isClipped);
+  const [text, setText] = useState(clippedText);
   const [formattedText, setFormattedText] = useState(null);
+
   useEffect(() => {
     let arrStr = text.split("\n");
     let arrP = [];
@@ -18,11 +26,9 @@ export default function Content({ content, title, image, isClipped, newsID }) {
     setFormattedText(arrP.length > 0 ? arrP : "");
   }, [text]);
 
-  console.log(formattedText);
-
   const getNews = (event) => {
     event.target.disabled = true;
-    API.get(url_get_news_id_full_text(newsID)).then((response) => {
+    API.get(url_get_news_id_full_text(id)).then((response) => {
       setText(response.data);
       setIsClipped(true);
       event.target.disabled = false;
@@ -40,7 +46,7 @@ export default function Content({ content, title, image, isClipped, newsID }) {
           </a>
         )}
       </div>
-      {image}
+      {image.getImgJSX()}
     </div>
   );
 }

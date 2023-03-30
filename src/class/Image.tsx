@@ -14,14 +14,17 @@ export default class Image {
   name: string;
   base64: string;
   extension: string;
-  img: JSX.Element;
 
   constructor(props: PropsImage) {
     if (!props.id && !props.name !&& props.extension && props.data)
     if (props.id && (!props.name || !props.extension || !props.data)) {
+      this.id = props.id;
       this.getImg(props.id);
     } else if (props.id && props.name && props.extension && props.data) {
-      this.img = this.toImgJSX(props.id, props.extension, props.data, props.name)
+      this.id = props.id;
+      this.name = props.name;
+      this.extension = props.extension;
+      this.base64 = props.data;
     } 
   }
 
@@ -32,22 +35,29 @@ export default class Image {
 
     API.get(url_get_images_id(id))
       .then((response) => {
-        this.img = this.toImgJSX(response.data.id, response.data.extension, response.data.data, response.data.name);
+        const data: PropsImage = response.data; 
+        if (data.id && data.name && data.extension && data.data) {
+          this.id = data.id;
+          this.name = data.name;
+          this.extension = data.extension;
+          this.base64 = data.data;
+        }
       })
       .catch(() => {
         notifyError("Ошибка не удалось загрузить изображение");
       });
   }
 
-  private toImgJSX(key: string, extension: string, base64: string, alt: string) {
+  public getImgJSX() : JSX.Element {
     return (
       <img
-        key={key}
-        src={`data:${extension};base64,${base64}`}
-        alt={alt}
+        key={this.id}
+        src={`data:${this.extension};base64,${this.base64}`}
+        alt={this.name}
       ></img>
     )
   }
+
 
   // public static async toBase64(): Image {
 

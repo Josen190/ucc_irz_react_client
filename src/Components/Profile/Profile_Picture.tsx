@@ -1,10 +1,15 @@
 import React, { Component } from "react";
-import logo from "../../logo.svg";
+import Image from "../../class/Image";
 
-export default function Profile_Picture({ type }) {
+interface PropsProfilePicture{
+  type: "base" | "mini";
+  image: Image;
+}
+
+export default function ProfilePicture({ type, image }: PropsProfilePicture) {
   return (
     <div className={"logo " + type}>
-      <img src={logo} alt="аватар" />
+      {image.getImgJSX()}
     </div>
   );
 }
