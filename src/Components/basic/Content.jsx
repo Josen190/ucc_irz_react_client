@@ -35,9 +35,9 @@ export default function Content({ content, title, image, isClipped, newsID }) {
       <div>
         {formattedText}
         {_isClipped !== null && !_isClipped && (
-          <button type="link" onClick={(event) => getNews(event)}>
+          <a role="button" onClick={(event) => getNews(event)}>
             Читать далее
-          </button>
+          </a>
         )}
       </div>
       {image}
