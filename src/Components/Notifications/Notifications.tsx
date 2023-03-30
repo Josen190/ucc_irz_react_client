@@ -1,6 +1,6 @@
-import { toast } from "react-toastify";
+import { toast, ToastOptions } from "react-toastify";
 
-const toastOptions = {
+const toastOptions: ToastOptions = {
   position: toast.POSITION.TOP_RIGHT,
   autoClose: 5000,
   hideProgressBar: false,
@@ -11,22 +11,22 @@ const toastOptions = {
   theme: "light",
 };
 
-export function notify(text) {
+export function notify(text: string) {
   toast(text, toastOptions);
 }
 
-export function notifyInfo(text) {
+export function notifyInfo(text: string) {
   toast.info(text, toastOptions);
 }
 
-export function notifySuccess(text) {
+export function notifySuccess(text: string) {
   toast.success(text, toastOptions);
 }
 
-export function notifyWarning(text) {
+export function notifyWarning(text: string) {
   toast.warning(text, toastOptions);
 }
 
-export function notifyError(text) {
+export function notifyError(text: string) {
   toast.error(text, toastOptions);
 }

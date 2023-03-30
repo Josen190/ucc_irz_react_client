@@ -207,26 +207,3 @@ API.interceptors.response.use(
   }
 );
 
-export function getImg(id, coolback) {
-  if (id === null || id === undefined) {
-    return null;
-  }
-
-  if (typeof coolback !== "function") {
-    return null;
-  }
-
-  API.get(url_get_images_id(id))
-    .then((response) => {
-      coolback(
-        <img
-          key={response.data.id}
-          src={`data:${response.data.extension};base64,${response.data.data}`}
-          alt={response.data.name}
-        ></img>
-      );
-    })
-    .catch(() => {
-      notifyError("Ошибка не удалось загрузить изображение");
-    });
-}

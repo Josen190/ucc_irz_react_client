@@ -11,7 +11,7 @@ import Profile_Picture from "../Components/Profile/Profile_Picture";
 import "./pages.css";
 
 export async function accountLoader({ params }) {
-  const info_user = await API.get(url_get_users_id(params.id)).catch((error) => {});
+  
   const position_user = await API.get(url_get_user_positions, {params: {userId: params.id}}).catch((error) => {});
   const data = {
     info_user: info_user ? info_user.data : null,
