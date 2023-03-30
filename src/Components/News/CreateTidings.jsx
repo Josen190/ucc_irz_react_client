@@ -63,16 +63,19 @@ export default function CreateTidings({ setActive, updateNews }) {
       title: title,
       text: content,
       isPublic: isGlobal,
-      image: { }
+      image: images.size > 0 ? { } : null,
     };
 
-    images.forEach((file) => {
-      data.image.name = file.name;
-      data.image.extension = file.extension;
-      data.image.data = file.data;
-    })
+    if (images.size > 0){
+      images.forEach((file) => {
+        data.image.name = file.name;
+        data.image.extension = file.extension;
+        data.image.data = file.data;
+      })
+    }
+    
 
-    console.log(images);
+
     API.post(url_post_news, data)
       .then((response) => {
         notifySuccess("Новость создана");
