@@ -1,29 +1,44 @@
-import React, { Component } from "react";
+import React, {MouseEventHandler } from "react";
 import "./basic.css";
 import { Link } from "react-router-dom";
 
-export default function Button ({type, title, color, disabled, onClick, children, href, id, required, className}) {
-    let button = null;
+
+interface PropsButton{
+  type: "button" | "link" | "submit", 
+  title?: string,
+  color?: string,
+  disabled?: boolean,
+  onClick?: MouseEventHandler<HTMLButtonElement>, 
+  children?: any, 
+  href?: string, 
+  id?: string, 
+  required?: boolean, 
+  className?: string
+}
+
+
+export default function Button (props: PropsButton) {
+    let button: JSX.Element;
     let classNames =
       "button center color-" +
-      (color !== undefined ? color : "basic");
+      (props.color !== undefined ? props.color : "basic");
 
-    switch (type) {
+    switch (props.type) {
       case "button":
         const buttonprops = {
           className: classNames,
-          disabled: disabled,
-          onClick: onClick,
+          disabled: props.disabled ?? false,
+          onClick: props.onClick,
         };
 
-        button = <button {...buttonprops}>{children}</button>;
+        button = (<button {...buttonprops}>{props.children}</button>);
         break;
       case "link":
 
         button = (
           <div className={classNames}>
-            <Link to={href}>
-              <div className="center">{children}</div>
+            <Link to={props.href ?? ""}>
+              <div className="center">{props.children}</div>
               
             </Link>
           </div>
@@ -32,16 +47,16 @@ export default function Button ({type, title, color, disabled, onClick, children
 
       case "submit":
         const submitrops = {
-          value: title !== undefined ? title : "",
-          onClick: onClick,
-          id: id, 
-          required: required,
-          disabled: disabled,
+          value: props.title !== undefined ? props.title : "",
+          onClick: props.onClick,
+          id: props.id ?? "", 
+          required: props.required ?? false,
+          disabled: props.disabled ?? false,
         };
 
         button = (
           <label className={classNames}>
-            {children}
+            {props.children}
             <input type="submit" {...submitrops} />
           </label>
         );
@@ -55,7 +70,7 @@ export default function Button ({type, title, color, disabled, onClick, children
       <div
         className={
           "button-contener center " +
-          (className !== undefined ? className : "")
+          (props.className !== undefined ? props.className : "")
         }
       >
         {button}
