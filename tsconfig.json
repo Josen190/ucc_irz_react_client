@@ -6,7 +6,8 @@
     "module": "esnext",
     "target": "es5",
     "lib": ["es6", "dom", "es2017.object"],
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "rootDir": "/src",
   },
   "exclude": ["node_modules"],
   "nodenext": "moduleResolution"
