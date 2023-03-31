@@ -1,14 +1,15 @@
-import React, { Component } from "react";
+import React, { ChangeEventHandler } from "react";
 
 interface PropsCheckbox{
-  title: string
+  title: string;
+  onChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 }
 
-export default function Checkbox(props: PropsCheckbox) {
+export default function Checkbox({title, onChange}: PropsCheckbox) {
   return (
     <label>
       <input type="checkbox" />
-      <p>{props.title}</p>
+      <p>{title}</p>
     </label>
   );
 }

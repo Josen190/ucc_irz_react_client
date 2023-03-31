@@ -1,27 +1,40 @@
 import React, { useEffect, useState } from "react";
 import API, { url_get_users } from "../../../api/Api";
+import { MinUser } from "../../../class/User";
 import Author from "../../News/AuthorNews";
-import PushUser from "../../Profile/PushUser/PushUser";
+// import PushUser from "../../Profile/PushUser/PushUser";
 import InputField from "../InputField";
+import Button from '../../basic/Button'
 
-const FormSearchUser = () => {
-  const [searchString, setSearchString] = useState(null);
-  const [isActive, setIsActive] = useState(null);
-  const [role, setRole] = useState(null);
-  const [positionId, setPositionId] = useState(null);
-  const [pageIndex, setPageIndex] = useState(0);
+function PushUser({ user, pushFun }) {
 
-  const [users, setUsers] = useState(new Map());
-  const [selctUsers, setSelectUsers] = useState(new Map());
-  const [userIdTmp, setUserIdTmp] = useState(null);
+  return (
+    <div className='row'>
+      <Author user={user}></Author>
+      <Button type='button' onClick={() => pushFun(user)}>Добавить</Button>
+    </div>
+  )
+}
+
+
+export default function FormSearchUser(): JSX.Element {
+  const [searchString, setSearchString] = useState<string | null>(null);
+  const [isActive, setIsActive] = useState<boolean | null>(null);
+  const [role, setRole] = useState<string | null>(null);
+  const [positionId, setPositionId] = useState<string | null>(null);
+  const [pageIndex, setPageIndex] = useState<number>(0);
+
+  const [users, setUsers] = useState<Map<string, JSX.Element>>(new Map());
+  const [selctUsers, setSelectUsers] = useState<Map<string, JSX.Element>>(new Map());
+  const [userIdTmp, setUserIdTmp] = useState<MinUser | null>(null);
   const pageSize = 10;
 
-  const pushUsers = (user) => {
+  const pushUsers = (user: MinUser) => {
     setUserIdTmp(user);
   };
 
   const getUsers = () => {
-    const params = {};
+    const params: { [key: string]: string | number | boolean } = {};
     if (typeof searchString === "string") params.SearchString = searchString;
     if (typeof isActive === "boolean") params.IsActive = isActive;
     if (typeof role === "string") params.Role = role;
@@ -30,9 +43,11 @@ const FormSearchUser = () => {
     params.PageIndex = pageIndex;
     params.PageSize = pageSize;
 
-    API.get(url_get_users, {}, params).then((response) => {
+    API.get(url_get_users, {
+      params: params
+    }).then((response) => {
       let _users = new Map(users);
-      response.data.forEach((user) => {
+      response.data.forEach((user: MinUser) => {
         _users.set(
           user.id,
           <PushUser key={user.id} user={user} pushFun={pushUsers} />
@@ -74,5 +89,3 @@ const FormSearchUser = () => {
     </div>
   );
 };
-
-export default FormSearchUser;

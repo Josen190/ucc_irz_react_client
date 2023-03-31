@@ -4,35 +4,29 @@ import Button from "../../basic/Button";
 import { authContext } from "../../../api/authentication/authController";
 import FormSeachUser from "../../basic/formSearchUser/FormSearchUser";
 import API, { url_post_events } from "../../../api/Api";
+import { getContext } from "../../../api/authentication/MyContexts";
+import MyDate from "../../../class/MyDate";
 
-const FormNewEvent = ({ day, setActive }) => {
-  const _day =
-    Object.prototype.toString.call(day) === "[object Date]" ? day : null;
-  const { authData } = useContext(authContext);
+interface Props {
+  day: MyDate | null;
+  setActive: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function FormNewEvent({ day, setActive }: Props): JSX.Element {
+  const { authData } = getContext();
   const role = authData.role;
 
-  const [date, setDate] = useState(_day);
-  const [startTime, setStartTime] = useState(null);
-  const [endTime, setEndTime] = useState(null);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [isPublic, setIsPublic] = useState("");
-  const [cabinetId, setCabinetId] = useState("");
+  const [date, setDate] = useState<MyDate | null>(day);
+  const [startTime, setStartTime] = useState<MyDate | null>(day);
+  const [endTime, setEndTime] = useState<MyDate | null>(day);
+  const [title, setTitle] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [isPublic, setIsPublic] = useState<boolean>(false);
+  const [cabinetId, setCabinetId] = useState<number | null>(null);
 
   useEffect(() => {
-    
-    let dateTimeStart = new Date(startTime);
-    dateTimeStart.setFullYear(date.getFullYear);
-    dateTimeStart.setMonth(date.getMonth);
-    dateTimeStart.setDate(date.getDate);
-    setStartTime(dateTimeStart);
-
-    let dateTimeEnd = new Date(endTime);
-    dateTimeEnd.setFullYear(date.getFullYear);
-    dateTimeEnd.setMonth(date.getMonth);
-    dateTimeEnd.setDate(date.getDate);
-    setEndTime(dateTimeEnd);
-
+    setStartTime(startTime.parseDate(date));
+    setEndTime(endTime.parseDate(date));
   }, [date]);
 
   const newEvent = (event) => {
@@ -68,9 +62,9 @@ const FormNewEvent = ({ day, setActive }) => {
         <div>
           <InputField
             type="date"
-            value={_day.toCustomString()}
+            value={day.DatetoStr("yyyy-mm-dd")}
             onChange={(event) => {
-              setDate(event.target.value);
+              setDate(new MyDate(event.target.value));
             }}
           ></InputField>
           <div className="row">
@@ -78,20 +72,14 @@ const FormNewEvent = ({ day, setActive }) => {
             <InputField
               type="time"
               onChange={(event) => {
-                const time = event.target.value.split(":");
-                let dateTime = new Date(date);
-                dateTime.setHours(time[0], time[1], 0, 0);
-                setStartTime(dateTime);
+                setStartTime(date.parseTime(event.target.value));
               }}
             ></InputField>
             <span>По</span>
             <InputField
               type="time"
               onChange={(event) => {
-                const time = event.target.value.split(":");
-                let dateTime = new Date(date);
-                dateTime.setHours(time[0], time[1], 0, 0);
-                setEndTime(dateTime);
+                setEndTime(date.parseTime(event.target.value));
               }}
             ></InputField>
           </div>
@@ -119,4 +107,3 @@ const FormNewEvent = ({ day, setActive }) => {
   );
 };
 
-export default FormNewEvent;

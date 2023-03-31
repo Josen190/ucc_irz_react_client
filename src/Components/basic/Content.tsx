@@ -1,19 +1,23 @@
 import React, { ReactNode, useState } from "react";
 import { useEffect } from "react";
 import API, {url_get_news_id_full_text} from "../../api/Api";
+import Image from "../../class/Image";
 import News from "../../class/News";
 
 interface PropsContent{
-  news: News
+  id: string;
+  title: string;
+  isClipped?: boolean;
+  text?: string;
+  image: Image;
 }
 
 
-export default function Content({news}: PropsContent): JSX.Element {
-  const {id, title, isClipped, clippedText, image} = news;
+export default function Content({id, title, isClipped, text, image}: PropsContent): JSX.Element {
 
-  const [_isClipped, setIsClipped] = useState(isClipped);
-  const [text, setText] = useState(clippedText);
-  const [formattedText, setFormattedText] = useState(null);
+  const [_isClipped, setIsClipped] = useState<boolean | null>(isClipped ?? null);
+  const [_text, setText] = useState<string>(text);
+  const [formattedText, setFormattedText] = useState<JSX.Element[] | null>(null);
 
   useEffect(() => {
     let arrStr = text.split("\n");
@@ -23,7 +27,7 @@ export default function Content({news}: PropsContent): JSX.Element {
       if (element.length === 0 || element === '\r') arrP.push(<br key={index} />);
       else arrP.push(<p key={index}>{element}</p>);
     });
-    setFormattedText(arrP.length > 0 ? arrP : "");
+    setFormattedText(arrP.length > 0 ? arrP : null);
   }, [text]);
 
   const getNews = (event) => {

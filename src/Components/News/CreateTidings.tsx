@@ -9,13 +9,18 @@ import { useEffect } from "react";
 
 function mergeMaps(map1, map2) {
   const mergedMap = new Map();
-  
+
   map1.forEach((value, key) => mergedMap.set(key, value));
   map2.forEach((value, key) => mergedMap.set(key, value));
-  
+
   return mergedMap;
 }
 
+
+interface Props {
+  setActive: React.Dispatch<React.SetStateAction<boolean>>;
+  updateNews: any;
+}
 
 
 export default function CreateTidings({ setActive, updateNews }) {
@@ -25,35 +30,35 @@ export default function CreateTidings({ setActive, updateNews }) {
   const [isGlobal, setIsGlobal] = useState(false);
 
   const handleImageChange = (event) => {
-    const files = Array.from(event.target.files);
-    const processFiles =  new  Promise((resolve) => {
-      const _images = new Map();
-  
-      let processedCount = 0;
-      files.forEach((file) => {
-        const sendFile = {}
-        sendFile.name = file.name.replace(/\.[^/.]+$/, "")
-        sendFile.extension = file.name.split('.').pop();
-        
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          sendFile.data = reader.result.replace("data:", "").replace(/^.+,/, "");
-          _images.set(URL.createObjectURL(file), sendFile);
-          processedCount++;
-          if (processedCount === files.length) {
-            resolve(_images);
-          }
-        };
-        reader.readAsDataURL(file);
-      });
-    });
+    // const files = Array.from(event.target.files);
+    // const processFiles =  new  Promise((resolve) => {
+    //   const _images = new Map();
+
+    //   let processedCount = 0;
+    //   files.forEach((file) => {
+    //     const sendFile = {}
+    //     sendFile.name = file.name.replace(/\.[^/.]+$/, "")
+    //     sendFile.extension = file.name.split('.').pop();
+
+    //     const reader = new FileReader();
+    //     reader.onloadend = () => {
+    //       sendFile.data = reader.result.replace("data:", "").replace(/^.+,/, "");
+    //       _images.set(URL.createObjectURL(file), sendFile);
+    //       processedCount++;
+    //       if (processedCount === files.length) {
+    //         resolve(_images);
+    //       }
+    //     };
+    //     reader.readAsDataURL(file);
+    //   });
+    // });
 
 
-    processFiles.then((result) => {
-      setImages((prevImages) => {
-        return mergeMaps(prevImages, result);
-      })
-    })
+    // processFiles.then((result) => {
+    //   setImages((prevImages) => {
+    //     return mergeMaps(prevImages, result);
+    //   })
+    // })
   };
 
   const createNews = (event) => {
@@ -63,27 +68,27 @@ export default function CreateTidings({ setActive, updateNews }) {
       title: title,
       text: content,
       isPublic: isGlobal,
-      image: images.size > 0 ? { } : null,
+      image: images.size > 0 ? {} : null,
     };
 
-    if (images.size > 0){
-      images.forEach((file) => {
-        data.image.name = file.name;
-        data.image.extension = file.extension;
-        data.image.data = file.data;
-      })
-    }
-    
+    // if (images.size > 0){
+    //   images.forEach((file) => {
+    //     data.image.name = file.name;
+    //     data.image.extension = file.extension;
+    //     data.image.data = file.data;
+    //   })
+    // }
+
 
 
     API.post(url_post_news, data)
       .then((response) => {
         notifySuccess("Новость создана");
         setActive(false);
-        setTitle("");
-        setContent("");
-        setImages(new Map());
-        setTitle(false);
+        // setTitle("");
+        // setContent("");
+        // setImages(new Map());
+        // setIsGlobal(false);
         if (typeof updateNews.update === "function") updateNews.update();
       })
       .catch((error) => {
@@ -109,11 +114,13 @@ export default function CreateTidings({ setActive, updateNews }) {
       >
         <h3>Создать новость</h3>
         <InputField
+          type="text"
           title="Заголовок"
           onChange={(event) => setTitle(event.target.value)}
         />
         <InputField
-          rows="15"
+          type="textarea"
+          rows={15}
           onChange={(event) => setContent(event.target.value)}
         />
         <label>
@@ -132,7 +139,7 @@ export default function CreateTidings({ setActive, updateNews }) {
 
         <Checkbox
           title="Глобальная новость"
-          onChange={(event) => setIsGlobal(event.target.value)}
+          onChange={(event) => setIsGlobal(event.target.value === "true")}
         />
         <Button
           type="button"

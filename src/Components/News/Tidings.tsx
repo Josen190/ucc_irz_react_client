@@ -8,12 +8,20 @@ import CommentFeed from "./CommentFeed";
 import { authContext } from "../../api/authentication/authController";
 import Button from "../basic/Button";
 import { useRef } from "react";
-import API, { getImg, url_delete_news_id } from "../../api/Api";
+import API, { url_delete_news_id } from "../../api/Api";
 import { notifyError, notifySuccess } from "../Notifications/Notifications";
 import ReactDOM from "react-dom";
+import News from "../../class/News";
+import { getContext } from "../../api/authentication/MyContexts";
 
-export default function Tidings({ tidings, deletElement }) {
-  const { authData } = useContext(authContext);
+interface Props{
+  tidings: News, 
+  deletElement: any
+}
+
+
+export default function Tidings({ tidings, deletElement }: Props) {
+  const { authData } = getContext();
   const [isActiveCommentFeed, setIsActiveCommentFeed] = useState(false);
   const [image, setImage] = useState(null);
   const subMenu = useRef(null);
@@ -31,7 +39,7 @@ export default function Tidings({ tidings, deletElement }) {
   };
 
   useEffect(() => {
-    getImg(tidings.imageId, setImage);
+    tidings.image.getImg(setImage);
   }, []);
 
   return (
@@ -61,10 +69,10 @@ export default function Tidings({ tidings, deletElement }) {
         </div>
         <Content
           title={tidings.title}
-          content={tidings.text}
+          text={tidings.clippedText}
           image={image}
           isClipped={tidings.isClipped}
-          newsID={tidings.id}
+          id={tidings.id}
         ></Content>
         <div className="row">
           <Like

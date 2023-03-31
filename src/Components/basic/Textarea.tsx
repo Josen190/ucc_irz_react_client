@@ -1,46 +1,65 @@
-import React, { Component, createRef } from "react";
+import React, { Component, createRef, FunctionComponent } from "react";
 
-function fixTextareaSize(textarea) {
+interface TextareaProps {
+  className?: string;
+  name?: string;
+  cols?: number;
+  rows?: number;
+  placeholder?: string;
+  value?: string;
+  autoComplete?: string;
+  maxlength?: number;
+  minlength?: number;
+  isresize?: boolean | string;
+  onInput?: (event: React.FormEvent<HTMLTextAreaElement>) => void;
+}
+
+function fixTextareaSize(textarea: HTMLTextAreaElement): void {
   textarea.style.height = "auto";
   textarea.style.height = textarea.scrollHeight + 2 + "px";
 }
 
-export default class Textarea extends Component {
-  textareaRef = createRef(null);
+const Textarea: FunctionComponent<TextareaProps> = ({
+  className,
+  name,
+  cols,
+  rows,
+  placeholder,
+  value,
+  autoComplete,
+  maxlength,
+  minlength,
+  isresize,
+  onInput,
+}) => {
+  const textareaRef = createRef<HTMLTextAreaElement>();
 
-  componentDidMount() {
-    const textarea = this.textareaRef.current;
+  React.useEffect(() => {
+    if (textareaRef.current && isresize === true) {
+      fixTextareaSize(textareaRef.current);
+    }
+  }, [value, isresize]);
 
-    fixTextareaSize(textarea);
-  }
+  return (
+    <textarea
+      className={className}
+      name={name}
+      cols={cols}
+      rows={rows}
+      placeholder={placeholder}
+      defaultValue={value}
+      autoComplete={autoComplete}
+      maxLength={maxlength}
+      minLength={minlength}
+      ref={textareaRef}
+      onInput={(e) => {
+        if (isresize === true) {
+          fixTextareaSize(e.currentTarget);
+        }
+        onInput && onInput(e);
+      }}
+    />
+  );
+};
 
-
-  render() {
-
-    const funOnInput = (this.props.isresize == 'true'
-    ? (e) => {
-        fixTextareaSize(e.target);
-      }
-    : undefined);
-
-    const textarea = (
-      <textarea
-        {...this.props}
-        ref = {this.textareaRef}
-        // className={this.props.className}
-        // name={this.props.name}
-        // cols={this.props.cols}
-        // rows={this.props.rows}
-        // placeholder = {this.props.placeholder}
-        // defaultValue = {this.props.value}
-        // autoComplete = {this.props.autoComplete}
-        // maxLength = {this.props.maxlength}
-        // minLength = {this.props.minlength}
-        onInput={funOnInput}
-      ></textarea>
-    );
-
-
-    return textarea;
-  }
-}
+export default Textarea;

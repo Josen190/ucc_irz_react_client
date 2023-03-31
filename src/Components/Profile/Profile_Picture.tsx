@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Image from "../../class/Image";
 
 interface PropsProfilePicture{
-  type: "base" | "mini";
+  type: "base" | "mini" | "norm";
   image: Image;
 }
 

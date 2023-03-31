@@ -19,13 +19,15 @@ const Like = ({ isLiked, likesCount, newsID }) => {
     likesCount: likesCount,
     like_use: isLiked ? llke_off : like_on,
   });
-  const disableBtnProps = {};
+  const disableBtnProps = {
+    disabled: true
+  };
 
   const switchLike = () => {
     disableBtnProps.disabled = false;
     let thisIsLiked = !like.isLiked;
     let thisLikesCount = like.likesCount;
-    const params = {};
+    const params: {[key: string]: string} = {};
     if (typeof newsID === "string") {
       params.newsEntryId = newsID;
     }

@@ -1,5 +1,17 @@
-import React, { Component } from "react";
+import React, { ChangeEventHandler } from "react";
 import Textarea from "./Textarea";
+
+interface Props {
+  type: "textarea" | "text" | "password" | "email" | "date" | "time" | "checkbox";
+  title?: string;
+  placeholder?: string;
+  value?: string;
+  maxlength?: number;
+  minlength?: number;
+  name?: string;
+  rows?: number;
+  onChange?: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+}
 
 export default function InputField({
   type,
@@ -9,10 +21,9 @@ export default function InputField({
   maxlength,
   minlength,
   name,
+  rows,
   onChange,
-}) {
-  const arrType = ["textarea", "text", "password", "email", "date", "time", "checkbox"];
-
+}: Props): JSX.Element {
   const inputprops = {
     className: "",
     placeholder: placeholder,
@@ -24,12 +35,11 @@ export default function InputField({
     onChange: onChange,
   };
 
-  let numderType = arrType.indexOf(type);
-  numderType = numderType == -1 ? 0 : numderType;
+
   let input = null;
 
-  if (numderType == 0) {
-    input = <Textarea {...inputprops} rows="2" isresize="true"></Textarea>;
+  if (type === "textarea") {
+    input = <Textarea {...inputprops} rows={rows ?? 2} isresize />;
   } else {
     input = <input type={type} {...inputprops} />;
   }

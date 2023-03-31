@@ -6,7 +6,7 @@ import SvgPaperPlaneOutline from "../icons/PaperPlaneOutline";
 export default function InputMessage() {
   return (
     <div className="row glue-bottom">
-      <Textarea rows="1" isresize="true" />
+      <Textarea rows={1} isresize="true" />
       <Button type="submit" color="mini">
         <SvgPaperPlaneOutline />
       </Button>

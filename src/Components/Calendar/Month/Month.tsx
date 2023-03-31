@@ -7,17 +7,31 @@ import ContextMenu from "../../basic/ContextMenu/ContextMenu";
 import ContextButton from "../../basic/ContextMenu/ContextButton/ContextButton";
 import MyDate from "../../../class/MyDate";
 import "./month.css"
-//numberMonth - нумерация месецев начинается с 0 - январь ...
-function showMonth(year, numberMonth) {
-  //получение дня недели для первого дня месеца
+import Event from "../../../class/Event";
+
+interface Props {
+  year: number;
+  numberMonth: number;
+  setSelectedDay: React.Dispatch<React.SetStateAction<Date | null>>;
+}
+
+interface PropsScreenPosition{
+    screenX: number,
+    screenY: number,
+    day: MyDate | null,
+}
+
+// numberMonth - нумерация месяцев начинается с 0 - январь ...
+function showMonth(year: number, numberMonth: number) {
+  // получение дня недели для первого дня месяца
   let firstDayOfMonth = new MyDate(year, numberMonth, 1).getDay();
-  //0 - восрресенье в 6 - восткресенье
-  firstDayOfMonth = firstDayOfMonth == 0 ? 6 : firstDayOfMonth - 1;
+  // 0 - воскресенье, 6 - воскресенье
+  firstDayOfMonth = firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1;
   let firstDayOfCalendar = new MyDate(year, numberMonth, 1);
   firstDayOfCalendar.setDate(firstDayOfCalendar.getDate() - firstDayOfMonth);
 
   let indexDay = new MyDate(firstDayOfCalendar);
-  let arrDayOfCalendar = [];
+  let arrDayOfCalendar: MyDate[][] = [];
   for (let i = 0; i < 5; i++) {
     arrDayOfCalendar.push([]);
     for (let j = 0; j < 7; j++) {
@@ -25,33 +39,19 @@ function showMonth(year, numberMonth) {
       indexDay.setDate(indexDay.getDate() + 1);
     }
   }
-  const lastDayOfCalendar = new MyDate(indexDay - 1);
+  const lastDayOfCalendar = new MyDate(indexDay);
+  lastDayOfCalendar.setDate(lastDayOfCalendar.getDate() - 1);
   return { firstDayOfCalendar, lastDayOfCalendar, arrDayOfCalendar };
 }
 
-function equateDate(date1, date2) {
-  return (
-    date1.getDate() === date2.getDate() &&
-    date1.getMonth() === date2.getMonth() &&
-    date1.getFullYear() === date2.getFullYear()
-  );
-}
+
 
 export default function Month({ year, numberMonth, setSelectedDay }) {
-  let nameDayWeekFull = [
-    "Понедельник",
-    "Вторник",
-    "Среда",
-    "Четверг",
-    "Пятьница",
-    "Субота",
-    "Воскресенье",
-  ];
-  let nameDayWeekShort = ["Пн.", "Вт.", "Ср.", "Чт.", "Пт.", "Сб.", "Вс."];
-  const [nameDayWeekUse, setNameDayWeekFull] = useState(nameDayWeekShort);
-  const [listEvents, setListEvents] = useState([]);
-  const [activeContextMenu, setActiveContextMenu] = useState(false);
-  const [screenPosition, setScreenPosition] = useState({
+  
+  const [nameDayWeekUse, setNameDayWeekFull] = useState<string[]>(MyDate.nameDayWeekShort);
+  const [listEvents, setListEvents] = useState<Event[]>([]);
+  const [activeContextMenu, setActiveContextMenu] = useState<boolean>(false);
+  const [screenPosition, setScreenPosition] = useState<PropsScreenPosition>({
     screenX: 0,
     screenY: 0,
     day: null,
@@ -67,18 +67,21 @@ export default function Month({ year, numberMonth, setSelectedDay }) {
 
   function onWidth(bounds) {
     if (isFull && bounds.width < 1050) {
-      setNameDayWeekFull(nameDayWeekShort);
+      setNameDayWeekFull(MyDate.nameDayWeekShort);
       isFull = false;
     } else if (!isFull && bounds.width >= 1050) {
-      setNameDayWeekFull(nameDayWeekFull);
+      setNameDayWeekFull(MyDate.nameDayWeekFull);
       isFull = false;
     }
   }
 
   useEffect(() => {
     API.get(url_get_events_my, {
-      Start: firstDayOfCalendar,
-      End: lastDayOfCalendar,
+      params: {
+        Start: firstDayOfCalendar.toString(),
+        End: lastDayOfCalendar.toString(),
+      }
+      
     }).then((response) => {
       setListEvents(response.data);
     });
@@ -118,7 +121,7 @@ export default function Month({ year, numberMonth, setSelectedDay }) {
             <tr key={indexWeek} className="month-column">
               {week.map((day, indexDay) => {
                 let listEventsDay = listEvents.filter((event) => {
-                  return equateDate(new MyDate(event.start), day);
+                  return day.equate(event.start);
                 });
 
                 return (
