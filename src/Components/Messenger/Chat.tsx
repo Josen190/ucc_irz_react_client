@@ -11,9 +11,7 @@ export default function Chat() {
         <h4>{name}</h4>
         <p>{statusUser}</p>
       </div>
-      <div className="">
-        {/* <Message /> */}
-      </div>
+      <div className="">{/* <Message /> */}</div>
       {/* <InputMessage /> */}
     </main>
   );

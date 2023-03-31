@@ -23,8 +23,10 @@ var MyDate = /** @class */ (function (_super) {
         var month = String(this.getMonth() + 1).padStart(2, "0");
         var year = String(this.getFullYear()).padStart(4, "0");
         switch (type) {
-            case "yyyy-mm-dd": return "".concat(year, "-").concat(month, "-").concat(day);
-            case "dd-months-yyyy": return day + " " + MyDate.months[this.getMonth()] + " " + year;
+            case "yyyy-mm-dd":
+                return "".concat(year, "-").concat(month, "-").concat(day);
+            case "dd-months-yyyy":
+                return day + " " + MyDate.months[this.getMonth()] + " " + year;
         }
     };
     MyDate.prototype.parseDate = function (date) {
@@ -70,7 +72,15 @@ var MyDate = /** @class */ (function (_super) {
         "Субота",
         "Воскресенье",
     ];
-    MyDate.nameDayWeekShort = ["Пн.", "Вт.", "Ср.", "Чт.", "Пт.", "Сб.", "Вс."];
+    MyDate.nameDayWeekShort = [
+        "Пн.",
+        "Вт.",
+        "Ср.",
+        "Чт.",
+        "Пт.",
+        "Сб.",
+        "Вс.",
+    ];
     return MyDate;
 }(Date));
 export default MyDate;

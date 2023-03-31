@@ -17,12 +17,14 @@ export default function Day({ day, month, listEvents, activeContextMenu }) {
     className += " noThisMonth";
   }
 
-  
-
   return (
-    <div className={className} onContextMenu={(e) => activeContextMenu(e, day)} onContextMenuCapture={null}>
+    <div
+      className={className}
+      onContextMenu={(e) => activeContextMenu(e, day)}
+      onContextMenuCapture={null}
+    >
       <span> {day.getDate()}</span>
-      <div className="column"> 
+      <div className="column">
         {listEvents.map((event) => {
           return <EventInDay key={event.id} event={event} />;
         })}

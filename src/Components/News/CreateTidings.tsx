@@ -16,12 +16,10 @@ function mergeMaps(map1, map2) {
   return mergedMap;
 }
 
-
 interface Props {
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
   updateNews: any;
 }
-
 
 export default function CreateTidings({ setActive, updateNews }) {
   const [title, setTitle] = useState("");
@@ -33,13 +31,11 @@ export default function CreateTidings({ setActive, updateNews }) {
     // const files = Array.from(event.target.files);
     // const processFiles =  new  Promise((resolve) => {
     //   const _images = new Map();
-
     //   let processedCount = 0;
     //   files.forEach((file) => {
     //     const sendFile = {}
     //     sendFile.name = file.name.replace(/\.[^/.]+$/, "")
     //     sendFile.extension = file.name.split('.').pop();
-
     //     const reader = new FileReader();
     //     reader.onloadend = () => {
     //       sendFile.data = reader.result.replace("data:", "").replace(/^.+,/, "");
@@ -52,8 +48,6 @@ export default function CreateTidings({ setActive, updateNews }) {
     //     reader.readAsDataURL(file);
     //   });
     // });
-
-
     // processFiles.then((result) => {
     //   setImages((prevImages) => {
     //     return mergeMaps(prevImages, result);
@@ -78,8 +72,6 @@ export default function CreateTidings({ setActive, updateNews }) {
     //     data.image.data = file.data;
     //   })
     // }
-
-
 
     API.post(url_post_news, data)
       .then((response) => {

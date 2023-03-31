@@ -1,11 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import API, { url_post_authenticate } from "../api/Api";
 import Button from "../Components/basic/Button";
 import InputField from "../Components/basic/InputField";
 import { Navigate } from "react-router-dom";
-import { authContext } from "../api/authentication/authController";
+import { getContext } from "../api/authentication/MyContexts";
 var Auth = function () {
-    var context = useContext(authContext);
+    var context = getContext();
     //потом доделать
     console.log(typeof context);
     var _a = useState(null), next = _a[0], setNext = _a[1];

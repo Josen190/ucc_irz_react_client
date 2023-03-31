@@ -61,4 +61,3 @@ export default function FormNewEvent(_a) {
             React.createElement("div", null,
                 React.createElement(Button, { type: "submit" }, "\u0421\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C")))));
 }
-;

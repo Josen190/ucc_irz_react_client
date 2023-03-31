@@ -6,7 +6,7 @@ import API, { url_get_events_my } from "../../../api/Api";
 import ContextMenu from "../../basic/ContextMenu/ContextMenu";
 import ContextButton from "../../basic/ContextMenu/ContextButton/ContextButton";
 import MyDate from "../../../class/MyDate";
-import "./month.css"
+import "./month.css";
 import Event from "../../../class/Event";
 
 interface Props {
@@ -15,10 +15,10 @@ interface Props {
   setSelectedDay: React.Dispatch<React.SetStateAction<Date | null>>;
 }
 
-interface PropsScreenPosition{
-    screenX: number,
-    screenY: number,
-    day: MyDate | null,
+interface PropsScreenPosition {
+  screenX: number;
+  screenY: number;
+  day: MyDate | null;
 }
 
 // numberMonth - нумерация месяцев начинается с 0 - январь ...
@@ -44,11 +44,10 @@ function showMonth(year: number, numberMonth: number) {
   return { firstDayOfCalendar, lastDayOfCalendar, arrDayOfCalendar };
 }
 
-
-
 export default function Month({ year, numberMonth, setSelectedDay }) {
-  
-  const [nameDayWeekUse, setNameDayWeekFull] = useState<string[]>(MyDate.nameDayWeekShort);
+  const [nameDayWeekUse, setNameDayWeekFull] = useState<string[]>(
+    MyDate.nameDayWeekShort
+  );
   const [listEvents, setListEvents] = useState<Event[]>([]);
   const [activeContextMenu, setActiveContextMenu] = useState<boolean>(false);
   const [screenPosition, setScreenPosition] = useState<PropsScreenPosition>({
@@ -80,8 +79,7 @@ export default function Month({ year, numberMonth, setSelectedDay }) {
       params: {
         Start: firstDayOfCalendar.toString(),
         End: lastDayOfCalendar.toString(),
-      }
-      
+      },
     }).then((response) => {
       setListEvents(response.data);
     });

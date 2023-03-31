@@ -4,18 +4,18 @@ import { MinUser } from "../../../class/User";
 import Author from "../../News/AuthorNews";
 // import PushUser from "../../Profile/PushUser/PushUser";
 import InputField from "../InputField";
-import Button from '../../basic/Button'
+import Button from "../../basic/Button";
 
 function PushUser({ user, pushFun }) {
-
   return (
-    <div className='row'>
+    <div className="row">
       <Author user={user}></Author>
-      <Button type='button' onClick={() => pushFun(user)}>Добавить</Button>
+      <Button type="button" onClick={() => pushFun(user)}>
+        Добавить
+      </Button>
     </div>
-  )
+  );
 }
-
 
 export default function FormSearchUser(): JSX.Element {
   const [searchString, setSearchString] = useState<string | null>(null);
@@ -25,7 +25,9 @@ export default function FormSearchUser(): JSX.Element {
   const [pageIndex, setPageIndex] = useState<number>(0);
 
   const [users, setUsers] = useState<Map<string, JSX.Element>>(new Map());
-  const [selctUsers, setSelectUsers] = useState<Map<string, JSX.Element>>(new Map());
+  const [selctUsers, setSelectUsers] = useState<Map<string, JSX.Element>>(
+    new Map()
+  );
   const [userIdTmp, setUserIdTmp] = useState<MinUser | null>(null);
   const pageSize = 10;
 
@@ -44,7 +46,7 @@ export default function FormSearchUser(): JSX.Element {
     params.PageSize = pageSize;
 
     API.get(url_get_users, {
-      params: params
+      params: params,
     }).then((response) => {
       let _users = new Map(users);
       response.data.forEach((user: MinUser) => {
@@ -88,4 +90,4 @@ export default function FormSearchUser(): JSX.Element {
       <div>{Array.from(users.values())}</div>
     </div>
   );
-};
+}

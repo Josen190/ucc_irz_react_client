@@ -40,7 +40,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "js in ts": "tsc",
+    "js in ts": "tsc \nnpx prettier --write .",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -48,6 +48,7 @@
   },
   "devDependencies": {
     "@svgr/cli": "^6.5.1",
+    "prettier": "^2.8.7",
     "rimraf": "^4.1.2",
     "vite-plugin-react-svg": "^0.2.0"
   }

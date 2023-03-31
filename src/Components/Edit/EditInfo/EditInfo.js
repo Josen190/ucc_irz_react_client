@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import Button from '../../basic/Button';
-import InputField from '../../basic/InputField';
-import InputImg from '../../basic/InputImg';
-import API, { url_get_users_me, url_put_users_me_update_info } from "../../../api/Api";
+import React, { useEffect, useState } from "react";
+import Button from "../../basic/Button";
+import InputField from "../../basic/InputField";
+import InputImg from "../../basic/InputImg";
+import API, { url_get_users_me, url_put_users_me_update_info, } from "../../../api/Api";
 import { notifyError, notifySuccess } from "../../Notifications/Notifications";
 function EditInfo() {
     var _a = useState(""), myself = _a[0], setMyself = _a[1];

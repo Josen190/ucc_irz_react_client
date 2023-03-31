@@ -24,7 +24,7 @@ function Setting() {
         })
         .catch((error) => {
           notifyError("изменения не сохранены");
-          setErrorPassword(error.response.data)
+          setErrorPassword(error.response.data);
         });
     }
   };
@@ -47,7 +47,9 @@ function Setting() {
           placeholder={"Повторить пароль"}
           onChange={(e) => setRePassword(e.target.value)}
         />
-        {errorPassword.map(e => (<p key={e.code}>{e.description}</p>))}
+        {errorPassword.map((e) => (
+          <p key={e.code}>{e.description}</p>
+        ))}
       </div>
       <div>
         <Button type="submit">Сохранить</Button>

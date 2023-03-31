@@ -3,12 +3,12 @@ import API, { url_get_users } from "../../../api/Api";
 import Author from "../../News/AuthorNews";
 // import PushUser from "../../Profile/PushUser/PushUser";
 import InputField from "../InputField";
-import Button from '../../basic/Button';
+import Button from "../../basic/Button";
 function PushUser(_a) {
     var user = _a.user, pushFun = _a.pushFun;
-    return (React.createElement("div", { className: 'row' },
+    return (React.createElement("div", { className: "row" },
         React.createElement(Author, { user: user }),
-        React.createElement(Button, { type: 'button', onClick: function () { return pushFun(user); } }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C")));
+        React.createElement(Button, { type: "button", onClick: function () { return pushFun(user); } }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C")));
 }
 export default function FormSearchUser() {
     var _a = useState(null), searchString = _a[0], setSearchString = _a[1];
@@ -36,7 +36,7 @@ export default function FormSearchUser() {
         params.PageIndex = pageIndex;
         params.PageSize = pageSize;
         API.get(url_get_users, {
-            params: params
+            params: params,
         }).then(function (response) {
             var _users = new Map(users);
             response.data.forEach(function (user) {
@@ -62,4 +62,3 @@ export default function FormSearchUser() {
         React.createElement("div", null, Array.from(selctUsers.values())),
         React.createElement("div", null, Array.from(users.values()))));
 }
-;

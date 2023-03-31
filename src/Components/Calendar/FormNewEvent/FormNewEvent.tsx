@@ -105,5 +105,4 @@ export default function FormNewEvent({ day, setActive }: Props): JSX.Element {
       </form>
     </div>
   );
-};
-
+}

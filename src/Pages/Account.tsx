@@ -12,47 +12,49 @@ import Profile_Navigation from "../Components/Profile/Profile_Navigation";
 import Profile_Picture from "../Components/Profile/Profile_Picture";
 import "./pages.css";
 
-
-
 export function accountLoader({ params }) {
   return params.id;
 }
 
-
 const Account = () => {
-  const { authData } = getContext(); 
+  const { authData } = getContext();
   const [active, setActive] = useState(false);
-  const [updateNews, setUpdateNews] = useState({update: null});
+  const [updateNews, setUpdateNews] = useState({ update: null });
   const [user, setUser] = useState<User | null>(null);
   const [positionUser, setPositionUser] = useState<any | null>(null);
-  
-  const isLogin = typeof(authData.myID) === 'string'? authData.myID === user.id : false;
 
+  const isLogin =
+    typeof authData.myID === "string" ? authData.myID === user.id : false;
 
   useEffect(() => {
     const id = useLoaderData();
-    if (typeof id !== 'string') return;
+    if (typeof id !== "string") return;
 
-    User.getUser(id).then((user)=>{
+    User.getUser(id).then((user) => {
       setUser(user);
     });
-    API.get(url_get_user_positions, {params: {userId: id}}).then((response) => {
-      setPositionUser(response.data);
-    })
-  
-  }, [])
-
-
-  
+    API.get(url_get_user_positions, { params: { userId: id } }).then(
+      (response) => {
+        setPositionUser(response.data);
+      }
+    );
+  }, []);
 
   return (
     <main className="account">
       <div className="tile ProfileHeader">
         <div className="margin-right">
           <Profile_Picture type="norm" image={user.image}></Profile_Picture>
-          <Profile_Navigation isLogin={isLogin} userID={user.id} isSubcribe={user.isSubscription}></Profile_Navigation>
+          <Profile_Navigation
+            isLogin={isLogin}
+            userID={user.id}
+            isSubcribe={user.isSubscription}
+          ></Profile_Navigation>
         </div>
-        <Personal_Information userInfo={user} positionUser={positionUser}></Personal_Information>
+        <Personal_Information
+          userInfo={user}
+          positionUser={positionUser}
+        ></Personal_Information>
       </div>
       <div className="">
         {isLogin && (
@@ -67,9 +69,11 @@ const Account = () => {
             </Button>
           </div>
         )}
-        <FeedNews userID={user.id} setUpdate={setUpdateNews}/>
+        <FeedNews userID={user.id} setUpdate={setUpdateNews} />
       </div>
-      {active && <CreateTidings setActive={setActive} updateNews={updateNews}/>}
+      {active && (
+        <CreateTidings setActive={setActive} updateNews={updateNews} />
+      )}
     </main>
   );
 };

@@ -49,8 +49,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import Image from './Image';
-import MyDate from './MyDate';
+import Image from "./Image";
+import MyDate from "./MyDate";
 import API, { url_get_users_id } from "../api/Api";
 var MinUser = /** @class */ (function () {
     function MinUser(props) {
@@ -69,7 +69,9 @@ var MinUser = /** @class */ (function () {
             var info_user;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, API.get(url_get_users_id(this.id)).then(function (response) { return response.data; }).catch((function (error) { return undefined; }))];
+                    case 0: return [4 /*yield*/, API.get(url_get_users_id(this.id))
+                            .then(function (response) { return response.data; })
+                            .catch(function (error) { return undefined; })];
                     case 1:
                         info_user = _a.sent();
                         if (!info_user) {
@@ -118,7 +120,9 @@ var User = /** @class */ (function (_super) {
             var info_user;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, API.get(url_get_users_id(id)).then(function (response) { return response.data; }).catch((function (error) { return undefined; }))];
+                    case 0: return [4 /*yield*/, API.get(url_get_users_id(id))
+                            .then(function (response) { return response.data; })
+                            .catch(function (error) { return undefined; })];
                     case 1:
                         info_user = _a.sent();
                         if (!info_user) {

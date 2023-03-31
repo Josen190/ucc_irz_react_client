@@ -34,7 +34,7 @@ const Calendar = () => {
   const setEventSelectedDay = (day) => {
     setSelectedDay(day);
     setActive(true);
-  }
+  };
 
   return (
     <main className="tile calendar">
@@ -57,7 +57,11 @@ const Calendar = () => {
           </Button>
         </div>
       </div>
-      <Month year={date.getFullYear()} numberMonth={date.getMonth()} setSelectedDay={setEventSelectedDay}/>
+      <Month
+        year={date.getFullYear()}
+        numberMonth={date.getMonth()}
+        setSelectedDay={setEventSelectedDay}
+      />
       {active && <FormNewEvent day={selectedDay} setActive={setActive} />}
     </main>
   );

@@ -1,6 +1,4 @@
-import {
-  createBrowserRouter
-} from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 
 import App from "./App";
 import EditInfo from "./Components/Edit/EditInfo/EditInfo";
@@ -30,14 +28,14 @@ const router = createBrowserRouter(
           element: <Edit />,
           children: [
             {
-              path:"info", 
-              element: <EditInfo />
+              path: "info",
+              element: <EditInfo />,
             },
             {
               path: "setting",
-              element: <Settin />
-            }
-          ]
+              element: <Settin />,
+            },
+          ],
         },
         {
           path: "news",

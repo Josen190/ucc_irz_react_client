@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import ChatBoxOutline from "../icons/ChatBoxOutline";
 
-interface Props{
-  commentCount: number, 
+interface Props {
+  commentCount: number;
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 

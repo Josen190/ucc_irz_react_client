@@ -23,15 +23,25 @@ class MyDate extends Date {
     "Субота",
     "Воскресенье",
   ];
-  public static nameDayWeekShort = ["Пн.", "Вт.", "Ср.", "Чт.", "Пт.", "Сб.", "Вс."];
+  public static nameDayWeekShort = [
+    "Пн.",
+    "Вт.",
+    "Ср.",
+    "Чт.",
+    "Пт.",
+    "Сб.",
+    "Вс.",
+  ];
 
   public DatetoStr(type: "yyyy-mm-dd" | "dd-months-yyyy"): string {
     const day = String(this.getDate()).padStart(2, "0");
     const month = String(this.getMonth() + 1).padStart(2, "0");
     const year = String(this.getFullYear()).padStart(4, "0");
     switch (type) {
-      case "yyyy-mm-dd": return `${year}-${month}-${day}`;
-      case "dd-months-yyyy": return day + " " + MyDate.months[this.getMonth()] + " " + year;
+      case "yyyy-mm-dd":
+        return `${year}-${month}-${day}`;
+      case "dd-months-yyyy":
+        return day + " " + MyDate.months[this.getMonth()] + " " + year;
     }
   }
 

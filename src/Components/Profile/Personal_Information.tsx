@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Part_Pers_Info from "./Part_Pers_Info";
-import MyDate from "../../class/MyDate"
+import MyDate from "../../class/MyDate";
 
 const Personal_Information = ({ userInfo, positionUser }) => {
   const [active, setActive] = useState(false);
@@ -8,7 +8,7 @@ const Personal_Information = ({ userInfo, positionUser }) => {
   const fio = `${userInfo.firstName} ${userInfo.surname} ${
     userInfo.patronymic == null ? "" : userInfo.patronymic
   }`;
-  const birthday = new MyDate(userInfo.birthday).DatetoStr('dd-months-yyyy');
+  const birthday = new MyDate(userInfo.birthday).DatetoStr("dd-months-yyyy");
 
   const myself = userInfo.aboutMyself;
   const iDid = userInfo.myDoings;
@@ -20,7 +20,7 @@ const Personal_Information = ({ userInfo, positionUser }) => {
     if (element.end == null) {
       positions.push({
         name: element.position.name,
-        start: new MyDate(element.start).DatetoStr('dd-months-yyyy'),
+        start: new MyDate(element.start).DatetoStr("dd-months-yyyy"),
       });
     }
   });
@@ -47,7 +47,12 @@ const Personal_Information = ({ userInfo, positionUser }) => {
           typeof iDid === "string" ||
           typeof achievements === "string" ||
           typeof skillsAndCompetencies === "string") && (
-          <a role="button" onClick={() => {setActive(true);}}>
+          <a
+            role="button"
+            onClick={() => {
+              setActive(true);
+            }}
+          >
             Показать подробную инфромацию
           </a>
         )}
@@ -72,7 +77,12 @@ const Personal_Information = ({ userInfo, positionUser }) => {
                 value={skillsAndCompetencies}
               />
             )}
-            <a role="button" onClick={() => {setActive(false);}}>
+            <a
+              role="button"
+              onClick={() => {
+                setActive(false);
+              }}
+            >
               Скрыть подробную инфромацию
             </a>
           </div>

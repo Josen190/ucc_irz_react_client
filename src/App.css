@@ -1,5 +1,5 @@
 body {
-  background-color: #EDEDED;
+  background-color: #ededed;
 }
 
 .tile {
@@ -13,7 +13,7 @@ body {
 }
 
 .bgc-grey-1 {
-  background-color: #EDEDED;
+  background-color: #ededed;
 }
 
 .bgc-white {
@@ -190,4 +190,4 @@ a {
 .sub-menu-active {
   display: block;
   z-index: 10;
-}/*# sourceMappingURL=App.css.map */
+} /*# sourceMappingURL=App.css.map */

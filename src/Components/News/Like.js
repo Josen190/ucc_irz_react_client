@@ -25,7 +25,7 @@ var Like = function (_a) {
         like_use: isLiked ? llke_off : like_on,
     }), like = _b[0], setLikeUse = _b[1];
     var disableBtnProps = {
-        disabled: true
+        disabled: true,
     };
     var switchLike = function () {
         disableBtnProps.disabled = false;

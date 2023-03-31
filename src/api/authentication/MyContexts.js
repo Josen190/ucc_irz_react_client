@@ -1,8 +1,10 @@
-import { getAuthContext } from "./authController";
+import { useContext } from "react";
+import { authContext } from "./authController";
 export function getContext() {
-    var _a = getAuthContext(), authData = _a.authData, setAuthData = _a.setAuthData;
-    console.log(typeof authData);
-    console.log(typeof setAuthData);
+    var context = useContext(authContext);
     var returnContext = {};
+    if (typeof context === "object") {
+        returnContext = context;
+    }
     return returnContext;
 }

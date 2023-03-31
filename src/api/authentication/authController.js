@@ -9,9 +9,6 @@ function setJwt(jwt) {
   }
 }
 
-
-
-
 function setAuthDataApi(jwt, token, myID, role) {
   setJwt(jwt);
   window.localStorage.setItem("jwt", jwt);
@@ -28,24 +25,20 @@ function getAuthData() {
   return { jwt, refreshToken, myID, role };
 }
 
-const authContext = createContext();
-
-export function getAuthContext(){
-  return {authData, setAuthData} = useContext(authContext);
-}
+export const authContext = createContext();
 
 const AuthController = ({ children }) => {
   const [authData, setAuth] = useState(getAuthData());
 
   //сохраняем токены в localStorage
   const setAuthData = (jwt, refreshToken, myID, role) => {
-      setAuthDataApi(jwt, refreshToken, myID, role);
-      setAuth({
-        jwt: jwt,
-        refreshToken: refreshToken,
-        myID: myID,
-        role: role,
-      });
+    setAuthDataApi(jwt, refreshToken, myID, role);
+    setAuth({
+      jwt: jwt,
+      refreshToken: refreshToken,
+      myID: myID,
+      role: role,
+    });
   };
 
   let loading = true;
@@ -53,7 +46,7 @@ const AuthController = ({ children }) => {
     (response) => response,
     async (error) => {
       const status = error.response ? error.response.status : null;
-  
+
       if (loading && status === 401) {
         loading = false;
         const { jwt, refreshToken, myID, role } = authData;
@@ -78,7 +71,8 @@ const AuthController = ({ children }) => {
               myID,
               role
             );
-            error.config.headers["Authorization"] = "Bearer " + response.data.jwt;
+            error.config.headers["Authorization"] =
+              "Bearer " + response.data.jwt;
             error.config.baseURL = host;
             loading = true;
             return API.request(error.config);
@@ -89,11 +83,10 @@ const AuthController = ({ children }) => {
             loading = true;
           });
       }
-  
+
       return Promise.reject(error);
     }
   );
-
 
   return (
     <authContext.Provider value={{ authData, setAuthData }}>

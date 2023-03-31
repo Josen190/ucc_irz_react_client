@@ -56,7 +56,7 @@ export default function Month(_a) {
             params: {
                 Start: firstDayOfCalendar.toString(),
                 End: lastDayOfCalendar.toString(),
-            }
+            },
         }).then(function (response) {
             setListEvents(response.data);
         });

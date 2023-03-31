@@ -24,7 +24,7 @@ export default function Button(props) {
                 disabled: (_a = props.disabled) !== null && _a !== void 0 ? _a : false,
                 onClick: props.onClick,
             };
-            button = (React.createElement("button", __assign({}, buttonprops), props.children));
+            button = React.createElement("button", __assign({}, buttonprops), props.children);
             break;
         case "link":
             button = (React.createElement("div", { className: classNames },

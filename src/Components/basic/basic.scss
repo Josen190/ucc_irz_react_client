@@ -6,117 +6,112 @@ $pantone-200-c: #c11727;
 $pantone-187-c: #ae1926;
 $transition-time: 0.1s;
 
-
 .center {
-	display: flex;
-	align-content: center;
-	justify-content: center;
-	flex-wrap: wrap;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .color-basic {
-	background: $color-gray-3;
-	border-color: $pantone-289-c;
-	color: black;
-	transition: $transition-time;
+  background: $color-gray-3;
+  border-color: $pantone-289-c;
+  color: black;
+  transition: $transition-time;
 
-	&:hover {
-		background: $pantone-295-c;
-		color: white;
-		transition: $transition-time;
+  &:hover {
+    background: $pantone-295-c;
+    color: white;
+    transition: $transition-time;
 
-		* {
-			color: white;
-		}
-	}
+    * {
+      color: white;
+    }
+  }
 }
 
 .color-red {
-	background: $pantone-200-c;
-	border-color: $pantone-187-c;
-	color: black;
-	transition: $transition-time;
+  background: $pantone-200-c;
+  border-color: $pantone-187-c;
+  color: black;
+  transition: $transition-time;
 
-	&:hover {
-		background: $pantone-289-c;
-		color: white;
-		transition: $transition-time;
+  &:hover {
+    background: $pantone-289-c;
+    color: white;
+    transition: $transition-time;
 
-		* {
-			color: black;
-		}
-	}
+    * {
+      color: black;
+    }
+  }
 }
 
 .color-mini {
-	background: $color-gray-1;
-	border-color: $color-gray-3;
-	color: black;
-	transition: $transition-time;
+  background: $color-gray-1;
+  border-color: $color-gray-3;
+  color: black;
+  transition: $transition-time;
 
-	&:hover {
-		background: $color-gray-3;
-		color: black;
-		transition: $transition-time;
+  &:hover {
+    background: $color-gray-3;
+    color: black;
+    transition: $transition-time;
 
-		* {
-			color: black;
-		}
-	}
+    * {
+      color: black;
+    }
+  }
 }
 
-
 .button-contener {
-	width: 100%;
-	height: 30px;
-	padding: 0;
-	box-sizing: border-box;
+  width: 100%;
+  height: 30px;
+  padding: 0;
+  box-sizing: border-box;
 
-	a{
-		display: block;
-		width: 100%;
-		height: 100%;
-		
-		.center{
-			width: 100%;
-			height: 100%;
-		}
-	}
+  a {
+    display: block;
+    width: 100%;
+    height: 100%;
 
-	.button {
-		width: 100%;
-		height: 100%;
-		padding: 0px 5px;
-		box-sizing: border-box;
-		border-width: 1px;
-		border-style: solid;
-		border-radius: 3px;
-		font-family: "Helvetica";
-		font-weight: 300;
-		font-size: 14px;
-		text-align: center;
-		cursor: pointer;
-	}
+    .center {
+      width: 100%;
+      height: 100%;
+    }
+  }
 
+  .button {
+    width: 100%;
+    height: 100%;
+    padding: 0px 5px;
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 3px;
+    font-family: "Helvetica";
+    font-weight: 300;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+  }
 
+  input[type="submit"] {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+  }
 
-	input[type=submit] {
-		background: none;
-		color: inherit;
-		border: none;
-		padding: 0;
-		margin: 0;
-		font: inherit;
-		cursor: pointer;
-		outline: inherit;
-	}
-
-	textarea {
-		display: block;
-		resize: none;
-		width: 100%;
-		box-sizing: border-box;
-		min-height: 3em;
-
-	}
+  textarea {
+    display: block;
+    resize: none;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 3em;
+  }
 }

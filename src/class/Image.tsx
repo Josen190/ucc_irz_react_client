@@ -1,12 +1,12 @@
 import React from "react";
 import API, { url_get_images_id } from "../api/Api";
-import { notifyError } from "../Components/Notifications/Notifications"
+import { notifyError } from "../Components/Notifications/Notifications";
 
 interface PropsImage {
-  id?: string,
-  name?: string,
-  extension?: string,
-  data?: string
+  id?: string;
+  name?: string;
+  extension?: string;
+  data?: string;
 }
 
 export default class Image {
@@ -16,21 +16,23 @@ export default class Image {
   extension?: string;
 
   constructor(props: PropsImage) {
-    if (!props.id && !props.name !&& props.extension && props.data)
-    if (props.id && (!props.name || !props.extension || !props.data)) {
-      this.id = props.id;
-    } else if (props.id && props.name && props.extension && props.data) {
-      this.id = props.id;
-      this.name = props.name;
-      this.extension = props.extension;
-      this.base64 = props.data;
-    } 
+    if (!props.id && !props.name! && props.extension && props.data)
+      if (props.id && (!props.name || !props.extension || !props.data)) {
+        this.id = props.id;
+      } else if (props.id && props.name && props.extension && props.data) {
+        this.id = props.id;
+        this.name = props.name;
+        this.extension = props.extension;
+        this.base64 = props.data;
+      }
   }
 
-  public getImg(setImage: React.Dispatch<React.SetStateAction<JSX.Element>>): void {
+  public getImg(
+    setImage: React.Dispatch<React.SetStateAction<JSX.Element>>
+  ): void {
     API.get(url_get_images_id(this.id))
       .then((response) => {
-        const data: PropsImage = response.data; 
+        const data: PropsImage = response.data;
         if (data.id && data.name && data.extension && data.data) {
           this.id = data.id;
           this.name = data.name;
@@ -44,20 +46,18 @@ export default class Image {
       });
   }
 
-  public getImgJSX() : JSX.Element {
+  public getImgJSX(): JSX.Element {
     return (
       <img
         key={this.id}
         src={`data:${this.extension};base64,${this.base64}`}
         alt={this.name}
       ></img>
-    )
+    );
   }
-
 
   // public static async toBase64(): Image {
 
   //   return new Image()
   // }
-
 }

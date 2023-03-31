@@ -1,5 +1,12 @@
 import * as React from "react";
-const SvgOptionsOutline = ({ title, titleId, className='', size='25px', fill='none', ...props }) => (
+const SvgOptionsOutline = ({
+  title,
+  titleId,
+  className = "",
+  size = "25px",
+  fill = "none",
+  ...props
+}) => (
   <svg
     className={className}
     viewBox="0 0 512 512"

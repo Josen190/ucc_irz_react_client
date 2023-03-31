@@ -8,7 +8,7 @@ import { notifyError, notifySuccess } from "../Notifications/Notifications";
 import { getContext } from "../../api/authentication/MyContexts";
 import NewsComments from "../../class/NewsComments";
 
-interface Props{
+interface Props {
   comment: NewsComments;
 }
 

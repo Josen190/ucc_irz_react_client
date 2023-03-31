@@ -20,10 +20,10 @@ var Account = function () {
     var _b = useState({ update: null }), updateNews = _b[0], setUpdateNews = _b[1];
     var _c = useState(null), user = _c[0], setUser = _c[1];
     var _d = useState(null), positionUser = _d[0], setPositionUser = _d[1];
-    var isLogin = typeof (authData.myID) === 'string' ? authData.myID === user.id : false;
+    var isLogin = typeof authData.myID === "string" ? authData.myID === user.id : false;
     useEffect(function () {
         var id = useLoaderData();
-        if (typeof id !== 'string')
+        if (typeof id !== "string")
             return;
         User.getUser(id).then(function (user) {
             setUser(user);
@@ -44,6 +44,6 @@ var Account = function () {
                         setActive(true);
                     } }, "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043D\u043E\u0432\u043E\u0441\u0442\u044C"))),
             React.createElement(FeedNews, { userID: user.id, setUpdate: setUpdateNews })),
-        active && React.createElement(CreateTidings, { setActive: setActive, updateNews: updateNews })));
+        active && (React.createElement(CreateTidings, { setActive: setActive, updateNews: updateNews }))));
 };
 export default Account;

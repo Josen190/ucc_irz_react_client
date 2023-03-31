@@ -14,11 +14,10 @@ import ReactDOM from "react-dom";
 import News from "../../class/News";
 import { getContext } from "../../api/authentication/MyContexts";
 
-interface Props{
-  tidings: News, 
-  deletElement: any
+interface Props {
+  tidings: News;
+  deletElement: any;
 }
-
 
 export default function Tidings({ tidings, deletElement }: Props) {
   const { authData } = getContext();

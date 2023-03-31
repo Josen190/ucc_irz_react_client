@@ -79,7 +79,7 @@
   text-align: center;
   cursor: pointer;
 }
-.button-contener input[type=submit] {
+.button-contener input[type="submit"] {
   background: none;
   color: inherit;
   border: none;
@@ -95,4 +95,4 @@
   width: 100%;
   box-sizing: border-box;
   min-height: 3em;
-}/*# sourceMappingURL=basic.css.map */
+} /*# sourceMappingURL=basic.css.map */

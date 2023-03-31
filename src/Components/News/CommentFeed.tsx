@@ -20,11 +20,10 @@ export default function CommentFeed({ newsID }) {
             const _comment = new NewsComments(element);
             _commentArr.push(<Comment key={_comment.id} comment={_comment} />);
           }
-
         });
         setCommentArr(_commentArr);
       })
-      .catch((error) => { });
+      .catch((error) => {});
   }, [newsID]);
 
   return (

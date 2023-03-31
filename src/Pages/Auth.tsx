@@ -1,20 +1,17 @@
 import React, { useContext, useState } from "react";
-import API, {
-  url_post_authenticate,
-  url_get_users_me
-} from "../api/Api";
+import API, { url_post_authenticate, url_get_users_me } from "../api/Api";
 import Button from "../Components/basic/Button";
 import InputField from "../Components/basic/InputField";
 
 import { Navigate } from "react-router-dom";
 import { authContext } from "../api/authentication/authController";
+import { getContext } from "../api/authentication/MyContexts";
 
 const Auth = () => {
-  const context = useContext(authContext);
+  const context = getContext();
 
   //потом доделать
   console.log(typeof context);
-  
 
   const [next, setNext] = useState(null);
 

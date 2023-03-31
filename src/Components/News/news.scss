@@ -1,42 +1,39 @@
 .modal {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: rgba($color: #000000, $alpha: 0.4);
-    transform: 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba($color: #000000, $alpha: 0.4);
+  transform: 0.5s;
 
-
-    form{
-        width: auto;
-        max-width: 800px;
-        min-width: 400px;
-        height: auto;
-        min-height: 50%;
-        max-width: 80%;
-
-    }
+  form {
+    width: auto;
+    max-width: 800px;
+    min-width: 400px;
+    height: auto;
+    min-height: 50%;
+    max-width: 80%;
+  }
 }
 
 .disable {
-    display: none;
+  display: none;
 }
 
-label{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    cursor: pointer;
-    user-select:none;
+label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
 
-    input {
-        width: min-content;
-        height: min-content;
-        margin-right: 5px;
-    }
+  input {
+    width: min-content;
+    height: min-content;
+    margin-right: 5px;
+  }
 }
-

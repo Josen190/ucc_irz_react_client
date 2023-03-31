@@ -1,40 +1,35 @@
 .month {
+  height: 100%;
+  width: 100%;
+
+  table {
+    display: grid;
+    grid-template-rows: min-content 1fr;
     height: 100%;
-    width: 100%;
+    border-collapse: collapse;
+  }
 
-    table{
-        display: grid;
-        grid-template-rows: min-content 1fr;
-        height: 100%;
-        border-collapse: collapse;
-    }
+  th {
+    font-size: small;
+    font-weight: lighter;
+    text-align: center;
+  }
 
-    
+  td {
+    padding: 0;
+  }
 
-    th{
-        font-size: small;
-        font-weight: lighter;
-        text-align: center;
-    }
+  .month-row {
+    display: grid;
+    box-sizing: border-box;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(5, 1fr);
+  }
 
-    td{
-        padding: 0;
-    }
-
-
-    .month-row{
-        display: grid;
-        box-sizing: border-box;
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(5, 1fr);
-        
-    }
-
-    .month-column{
-        display: grid;
-        box-sizing: border-box;
-        grid-template-columns: repeat(7, 1fr);
-        grid-template-rows: 1fr;
-    }
-
+  .month-column {
+    display: grid;
+    box-sizing: border-box;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 1fr;
+  }
 }

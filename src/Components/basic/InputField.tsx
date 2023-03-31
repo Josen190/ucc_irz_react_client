@@ -2,7 +2,14 @@ import React, { ChangeEventHandler } from "react";
 import Textarea from "./Textarea";
 
 interface Props {
-  type: "textarea" | "text" | "password" | "email" | "date" | "time" | "checkbox";
+  type:
+    | "textarea"
+    | "text"
+    | "password"
+    | "email"
+    | "date"
+    | "time"
+    | "checkbox";
   title?: string;
   id?: string;
   placeholder?: string;
@@ -28,11 +35,10 @@ export default function InputField({
   required,
   onChange,
 }: Props): JSX.Element {
-
   const inputprops = {
     className: "",
     id: id ?? null,
-    placeholder: placeholder?? null,
+    placeholder: placeholder ?? null,
     defaultValue: value ?? null,
     autoComplete: "off",
     maxLength: maxlength ?? null,

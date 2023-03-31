@@ -11,7 +11,7 @@ export default function Content(_a) {
         var arrP = [];
         console.log(arrStr);
         arrStr.forEach(function (element, index) {
-            if (element.length === 0 || element === '\r')
+            if (element.length === 0 || element === "\r")
                 arrP.push(React.createElement("br", { key: index }));
             else
                 arrP.push(React.createElement("p", { key: index }, element));
@@ -20,11 +20,15 @@ export default function Content(_a) {
     }, [text]);
     var getNews = function (event) {
         event.target.disabled = true;
-        API.get(url_get_news_id_full_text(id)).then(function (response) {
+        API.get(url_get_news_id_full_text(id))
+            .then(function (response) {
             setText(response.data);
             setIsClipped(true);
             event.target.disabled = false;
-        }).catch(function () { event.target.disabled = false; });
+        })
+            .catch(function () {
+            event.target.disabled = false;
+        });
     };
     return (React.createElement("div", { className: "content" },
         title && React.createElement("h5", null, title),

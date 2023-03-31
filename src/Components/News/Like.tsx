@@ -20,52 +20,52 @@ const Like = ({ isLiked, likesCount, newsID }) => {
     like_use: isLiked ? llke_off : like_on,
   });
   const disableBtnProps = {
-    disabled: true
+    disabled: true,
   };
 
   const switchLike = () => {
     disableBtnProps.disabled = false;
     let thisIsLiked = !like.isLiked;
     let thisLikesCount = like.likesCount;
-    const params: {[key: string]: string} = {};
+    const params: { [key: string]: string } = {};
     if (typeof newsID === "string") {
       params.newsEntryId = newsID;
     }
 
     if (thisIsLiked) {
-        API.post(url_post_likes_like_news_entry, undefined, {
-          params: params,
+      API.post(url_post_likes_like_news_entry, undefined, {
+        params: params,
+      })
+        .then(() => {
+          thisLikesCount++;
+          setLikeUse({
+            isLiked: thisIsLiked,
+            likesCount: thisLikesCount,
+            like_use: llke_off,
+          });
+          disableBtnProps.disabled = true;
         })
-          .then(() => {
-            thisLikesCount++;
-            setLikeUse({
-              isLiked: thisIsLiked,
-              likesCount: thisLikesCount,
-              like_use: llke_off,
-            });
-            disableBtnProps.disabled = true;
-          })
-          .catch(() => {
-            notifyError("Ошибка, попробуйте снова");
-            disableBtnProps.disabled = true;
-          })
+        .catch(() => {
+          notifyError("Ошибка, попробуйте снова");
+          disableBtnProps.disabled = true;
+        });
     } else {
-        API.post(url_post_likes_unlike_news_entry, undefined, {
-          params: params,
+      API.post(url_post_likes_unlike_news_entry, undefined, {
+        params: params,
+      })
+        .then(() => {
+          thisLikesCount--;
+          setLikeUse({
+            isLiked: thisIsLiked,
+            likesCount: thisLikesCount,
+            like_use: like_on,
+          });
+          disableBtnProps.disabled = true;
         })
-          .then(() => {
-            thisLikesCount--;
-            setLikeUse({
-              isLiked: thisIsLiked,
-              likesCount: thisLikesCount,
-              like_use: like_on,
-            });
-            disableBtnProps.disabled = true;
-          })
-          .catch(() => {
-            notifyError("Ошибка, попробуйте снова");
-            disableBtnProps.disabled = true;
-          })
+        .catch(() => {
+          notifyError("Ошибка, попробуйте снова");
+          disableBtnProps.disabled = true;
+        });
     }
   };
 
