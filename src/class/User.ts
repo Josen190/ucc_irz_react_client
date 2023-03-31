@@ -43,6 +43,20 @@ export class MinUser{
         this.image = new Image(props.imageId ? { id: props.imageId } : null);
     }
 
+    public async getUser(): Promise<User | null> {
+        const info_user: PropsUser | undefined = await API.get(url_get_users_id(this.id)).then((response) => response.data).catch((error => undefined));
+
+        if (!info_user) {
+            return Promise.reject(null);
+        }
+
+        return Promise.resolve(new User(info_user));
+    }
+
+    public getFullName(): string{
+        return `${this.firstName} ${this.surname} ${this.patronymic}`;
+    }
+
 
 }
 
@@ -85,18 +99,16 @@ export default class User extends MinUser{
         this.image = new Image(props.imageId ? { id: props.imageId } : null);
     }
 
-    public static async getUser(id: string): Promise<User> {
+    public static async getUser(id: string): Promise<User | null> {
         const info_user: PropsUser | undefined = await API.get(url_get_users_id(id)).then((response) => response.data).catch((error => undefined));
 
         if (!info_user) {
-            return Promise.resolve(new User());
+            return Promise.reject(null);
         }
 
         return Promise.resolve(new User(info_user));
     }
 
-    public getFullName(): string{
-        return `${this.firstName} ${this.surname} ${this.patronymic}`;
-    }
+    
 
 }
