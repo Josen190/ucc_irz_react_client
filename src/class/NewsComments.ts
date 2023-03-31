@@ -1,7 +1,7 @@
 import MyDate from "./MyDate";
 import { MinUser, PropsMinUser } from "./User";
 
-interface PropsNewsComments {
+export interface PropsNewsComments {
     id: string;
     text: string;
     dateTime: string;
