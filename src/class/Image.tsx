@@ -11,15 +11,14 @@ interface PropsImage {
 
 export default class Image {
   id: string;
-  name: string;
-  base64: string;
-  extension: string;
+  name?: string;
+  base64?: string;
+  extension?: string;
 
   constructor(props: PropsImage) {
     if (!props.id && !props.name !&& props.extension && props.data)
     if (props.id && (!props.name || !props.extension || !props.data)) {
       this.id = props.id;
-      this.getImg(props.id);
     } else if (props.id && props.name && props.extension && props.data) {
       this.id = props.id;
       this.name = props.name;
@@ -28,12 +27,8 @@ export default class Image {
     } 
   }
 
-  private getImg(id: string): void {
-    if (id === null || id === undefined) {
-      return null;
-    }
-
-    API.get(url_get_images_id(id))
+  public getImg(setImage: React.Dispatch<React.SetStateAction<JSX.Element>>): void {
+    API.get(url_get_images_id(this.id))
       .then((response) => {
         const data: PropsImage = response.data; 
         if (data.id && data.name && data.extension && data.data) {
@@ -41,6 +36,7 @@ export default class Image {
           this.name = data.name;
           this.extension = data.extension;
           this.base64 = data.data;
+          setImage(this.getImgJSX());
         }
       })
       .catch(() => {
