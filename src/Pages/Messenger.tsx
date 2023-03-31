@@ -6,12 +6,13 @@ import Menu from "../Components/Menu/Menu";
 import User from "./User";
 
 export default function Messenger() {
-  return (
-    <User>
-      <main className="tile scroll-fix row">
-        <ChatList />
-        <Chat />
-      </main>
-    </User>
-  );
+  // return (
+  //   <User>
+  //     <main className="tile scroll-fix row">
+  //       <ChatList />
+  //       <Chat />
+  //     </main>
+  //   </User>
+  // );
+  return;
 }

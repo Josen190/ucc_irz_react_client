@@ -36,21 +36,21 @@ const Auth = () => {
           myId: null,
           role: null,
         };
-        setAuthData(data.jwt, data.refreshToken, data.myId, data.role);
-        API.get(url_get_users_me)
-          .then((response) => {
-            data = {
-              jwt: data.jwt,
-              refreshToken: data.refreshToken,
-              myId: response.data.id,
-              role: response.data.roles,
-            };
-            setAuthData(data.jwt, data.refreshToken, data.myId, data.role);
-            setNext(response.data.id);
-          })
-          .catch((error) => {
-            e.target[2].disabled = false;
-          });
+        // setAuthData(data.jwt, data.refreshToken, data.myId, data.role);
+        // API.get(url_get_users_me)
+        //   .then((response) => {
+        //     data = {
+        //       jwt: data.jwt,
+        //       refreshToken: data.refreshToken,
+        //       myId: response.data.id,
+        //       role: response.data.roles,
+        //     };
+        //     setAuthData(data.jwt, data.refreshToken, data.myId, data.role);
+        //     setNext(response.data.id);
+        //   })
+        //   .catch((error) => {
+        //     e.target[2].disabled = false;
+        //   });
 
         e.target[2].disabled = false;
       })

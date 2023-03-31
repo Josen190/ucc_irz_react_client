@@ -4,17 +4,20 @@ import Textarea from "./Textarea";
 interface Props {
   type: "textarea" | "text" | "password" | "email" | "date" | "time" | "checkbox";
   title?: string;
+  id?: string;
   placeholder?: string;
   value?: string;
   maxlength?: number;
   minlength?: number;
   name?: string;
   rows?: number;
+  required?: boolean;
   onChange?: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 }
 
 export default function InputField({
   type,
+  id,
   title,
   placeholder,
   value,
@@ -22,26 +25,28 @@ export default function InputField({
   minlength,
   name,
   rows,
+  required,
   onChange,
 }: Props): JSX.Element {
+
   const inputprops = {
     className: "",
-    placeholder: placeholder,
-    defaultValue: value,
+    id: id ?? null,
+    placeholder: placeholder?? null,
+    defaultValue: value ?? null,
     autoComplete: "off",
-    maxLength: maxlength,
-    minLength: minlength,
-    name: name,
-    onChange: onChange,
+    maxLength: maxlength ?? null,
+    minLength: minlength ?? null,
+    name: name ?? null,
+    onChange: onChange ?? null,
   };
 
-
-  let input = null;
+  let input: JSX.Element;
 
   if (type === "textarea") {
     input = <Textarea {...inputprops} rows={rows ?? 2} isresize />;
   } else {
-    input = <input type={type} {...inputprops} />;
+    input = <input type={type} {...inputprops} required={required ?? false} />;
   }
 
   return (

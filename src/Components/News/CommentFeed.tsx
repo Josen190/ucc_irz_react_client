@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import API, { url_get_news_comments } from "../../api/Api";
+import NewsComments, { PropsNewsComments } from "../../class/NewsComments";
 import Comment from "./Comment";
 import CreateComment from "./CreateComment";
 
@@ -15,11 +16,15 @@ export default function CommentFeed({ newsID }) {
       .then((response) => {
         let _commentArr = [];
         response.data.forEach((element, index) => {
-          _commentArr.push(<Comment key={index} data={element} />);
+          if (element as PropsNewsComments) {
+            const _comment = new NewsComments(element);
+            _commentArr.push(<Comment key={_comment.id} comment={_comment} />);
+          }
+
         });
         setCommentArr(_commentArr);
       })
-      .catch((error) => {});
+      .catch((error) => { });
   }, [newsID]);
 
   return (

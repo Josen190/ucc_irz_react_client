@@ -28,7 +28,7 @@ function App() {
   );
 
   const visitor = <Visitor />;
-  const content = authData.jwt != null ? userPage : visitor;
+  const content: JSX.Element = authData.jwt != null ? userPage : visitor;
 
   return (
     <div>

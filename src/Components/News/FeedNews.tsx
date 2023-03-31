@@ -3,7 +3,7 @@ import API, { url_get_news } from "../../api/Api";
 import Tidings from "./Tidings";
 
 interface Props {
-  userID: string;
+  userID?: string;
   publicOnly?: boolean;
   likedOnly?: boolean;
   setUpdate?: React.Dispatch<React.SetStateAction<{
@@ -26,9 +26,9 @@ export default function FeedNews({ userID, publicOnly, likedOnly, setUpdate }: P
 
 
   const getNews = () => {
-    const _userID = userID === undefined ? null : userID;
-    const _publicOnly = publicOnly === undefined ? null : publicOnly;
-    const _likedOnly = likedOnly === undefined ? null : likedOnly;
+    const _userID = userID ?? null;
+    const _publicOnly = publicOnly ?? null;
+    const _likedOnly = likedOnly ?? null;
     const pageSize = 10;
 
     const params: { [key: string]: string | number | boolean } = {

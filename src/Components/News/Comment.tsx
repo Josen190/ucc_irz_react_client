@@ -37,7 +37,7 @@ export default function Comment({ comment }: Props) {
           </Button>
         )}
       </div>
-      <Content content={comment.text}></Content>
+      <Content id={comment.id} text={comment.text}></Content>
     </div>
   );
 }

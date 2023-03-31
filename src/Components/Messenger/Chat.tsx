@@ -12,9 +12,9 @@ export default function Chat() {
         <p>{statusUser}</p>
       </div>
       <div className="">
-        <Message />
+        {/* <Message /> */}
       </div>
-      <InputMessage />
+      {/* <InputMessage /> */}
     </main>
   );
 }

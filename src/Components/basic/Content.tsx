@@ -6,10 +6,10 @@ import News from "../../class/News";
 
 interface PropsContent{
   id: string;
-  title: string;
+  title?: string;
   isClipped?: boolean;
   text?: string;
-  image: Image;
+  image?: Image;
 }
 
 
@@ -41,7 +41,7 @@ export default function Content({id, title, isClipped, text, image}: PropsConten
 
   return (
     <div className="content">
-      <h5>{title}</h5>
+      {title && <h5>{title}</h5>}
       <div>
         {formattedText}
         {_isClipped !== null && !_isClipped && (
@@ -50,7 +50,7 @@ export default function Content({id, title, isClipped, text, image}: PropsConten
           </a>
         )}
       </div>
-      {image.getImgJSX()}
+      {image && image.getImgJSX()}
     </div>
   );
 }

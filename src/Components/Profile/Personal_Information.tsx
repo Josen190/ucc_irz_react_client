@@ -8,7 +8,7 @@ const Personal_Information = ({ userInfo, positionUser }) => {
   const fio = `${userInfo.firstName} ${userInfo.surname} ${
     userInfo.patronymic == null ? "" : userInfo.patronymic
   }`;
-  const birthday = new MyDate(userInfo.birthday).DatetoStr();
+  const birthday = new MyDate(userInfo.birthday).DatetoStr('dd-months-yyyy');
 
   const myself = userInfo.aboutMyself;
   const iDid = userInfo.myDoings;
@@ -20,7 +20,7 @@ const Personal_Information = ({ userInfo, positionUser }) => {
     if (element.end == null) {
       positions.push({
         name: element.position.name,
-        start: new MyDate(element.start).DatetoStr(),
+        start: new MyDate(element.start).DatetoStr('dd-months-yyyy'),
       });
     }
   });
