@@ -1,5 +1,6 @@
 import Image from "./Image";
 import MyDate from "./MyDate";
+import { MinUser, PropsMinUser } from "./User";
 
 interface PropsNews {
     id: string;
@@ -9,13 +10,7 @@ interface PropsNews {
     dateTime: string;
     isLiked: boolean;
     likesCount: number;
-    author: {
-        id: string;
-        firstName: string;
-        surname: string;
-        patronymic: string | null;
-        imageId: string | null;
-    };
+    author: PropsMinUser;
     isPublic: boolean;
     commentCount: number;
     isClipped: boolean;
@@ -30,13 +25,7 @@ export default class News {
     dateTime: MyDate;
     isLiked: boolean;
     likesCount: number;
-    author: {
-        id: string;
-        firstName: string;
-        surname: string;
-        patronymic: string | null;
-        image: Image;
-    };
+    author: MinUser;
     isPublic: boolean;
     commentCount: number;
     isClipped: boolean;
@@ -49,13 +38,7 @@ export default class News {
         this.dateTime = new MyDate(props.dateTime);
         this.isLiked = props.isLiked;
         this.likesCount = props.likesCount;
-        this.author = {
-            id: props.author.id,
-            firstName: props.author.firstName,
-            surname: props.author.surname,
-            patronymic: props.author.patronymic,
-            image: new Image(props.author.imageId ? {id: props.author.imageId }: null)
-        };
+        this.author = new MinUser(props.author);
         this.isPublic = props.isPublic;
         this.commentCount = props.commentCount;
         this.isClipped = props.isClipped;

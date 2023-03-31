@@ -2,7 +2,16 @@ import Image from './Image';
 import MyDate from './MyDate'
 import API, { url_get_users_id } from "../api/Api";
 
-interface PropsUser {
+export interface PropsMinUser{
+    id: string;
+    firstName: string;
+    surname: string;
+    patronymic: string | null;
+    imageId: string | null;
+}
+
+
+export interface PropsUser extends PropsMinUser{
     birthday: string,
     aboutMyself: string | null,
     myDoings: string | null,
@@ -14,14 +23,31 @@ interface PropsUser {
     isActiveAccount: boolean,
     roles: string[],
     positions: string[],
-    id: string,
-    firstName: string,
-    surname: string,
-    patronymic: string | null,
-    imageId: string | null
 }
 
-export default class User {
+export class MinUser{
+    id: string;
+    firstName: string;
+    surname: string;
+    patronymic: string;
+    image: Image;
+
+    constructor(props?: PropsMinUser) {
+        if (!props){
+            return;
+        }
+        this.id = props.id;
+        this.firstName = props.firstName;
+        this.surname = props.surname;
+        this.patronymic = props.patronymic ?? "";
+        this.image = new Image(props.imageId ? { id: props.imageId } : null);
+    }
+
+
+}
+
+
+export default class User extends MinUser{
     birthday: MyDate;
     aboutMyself: string;
     myDoings: string;
@@ -33,13 +59,10 @@ export default class User {
     isActiveAccount: boolean;
     roles: string[];
     positions: string[];
-    id: string;
-    firstName: string;
-    surname: string;
-    patronymic: string;
-    image: Image;
+
 
     constructor(props?: PropsUser) {
+        super();
         if (!props){
             return;
         }
@@ -54,6 +77,7 @@ export default class User {
         this.isActiveAccount = props.isActiveAccount;
         this.roles = props.roles;
         this.positions = props.positions;
+
         this.id = props.id;
         this.firstName = props.firstName;
         this.surname = props.surname;
