@@ -10,7 +10,12 @@ import { Navigate } from "react-router-dom";
 import { authContext } from "../api/authentication/authController";
 
 const Auth = () => {
-  const { setAuthData } = useContext(authContext);
+  const context = useContext(authContext);
+
+  //потом доделать
+  console.log(typeof context);
+  
+
   const [next, setNext] = useState(null);
 
   const login = (e) => {
@@ -60,14 +65,14 @@ const Auth = () => {
         <InputField
           id="email"
           name="email"
-          required
+          required={true}
           type="email"
           title="Почта"
         />
         <InputField
           id="password"
           name="password"
-          required
+          required={true}
           type="password"
           title="Пароль"
         />
