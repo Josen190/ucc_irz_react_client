@@ -1,6 +1,4 @@
 import axios from "axios";
-import { notifyError } from "../Components/Notifications/Notifications";
-import { getAuthData, setAuthDataApi } from "./authentication/authController";
 
 export const host = "https://localhost:7116";
 
