@@ -4,11 +4,10 @@ import Button from "../Components/basic/Button";
 import InputField from "../Components/basic/InputField";
 
 import { Navigate } from "react-router-dom";
-import { authContext } from "../api/authentication/authController";
-import { getContext } from "../api/authentication/MyContexts";
+import authContext from "../api/authentication/MyContexts";
 
 const Auth = () => {
-  const context = getContext();
+  const context = useContext(authContext);
 
   //потом доделать
   console.log(typeof context);

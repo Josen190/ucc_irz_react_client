@@ -5,13 +5,13 @@ import { useNavigate, useLocation } from "react-router-dom";
 import React, { useContext } from "react";
 import User from "./Pages/User";
 import Visitor from "./Pages/Visitor";
-import { authContext } from "./api/authentication/authController";
 import { Outlet } from "react-router-dom";
 import { useEffect } from "react";
-import { getContext } from "./api/authentication/MyContexts";
+import authContext from "./api/authentication/MyContexts";
+
 
 function App() {
-  const { authData } = getContext();
+  const { authData } = useContext(authContext);
   const navigate = useNavigate();
   const location = useLocation();
 

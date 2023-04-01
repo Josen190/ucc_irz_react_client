@@ -2,18 +2,17 @@ import React, { useContext, useEffect } from "react";
 import Button from "../basic/Button";
 import Content from "../basic/Content";
 import Author from "./AuthorNews";
-import { authContext } from "../../api/authentication/authController";
 import API, { url_delete_news_comments_id } from "../../api/Api";
 import { notifyError, notifySuccess } from "../Notifications/Notifications";
-import { getContext } from "../../api/authentication/MyContexts";
 import NewsComments from "../../class/NewsComments";
+import authContext from "../../api/authentication/MyContexts";
 
 interface Props {
   comment: NewsComments;
 }
 
 export default function Comment({ comment }: Props) {
-  const { authData } = getContext();
+  const { authData } = useContext(authContext);
   let isMyComment =
     authData.myID === comment.user.id ? authData.myID !== null : false;
 

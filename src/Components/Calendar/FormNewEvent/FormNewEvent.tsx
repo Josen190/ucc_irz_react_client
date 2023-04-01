@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import InputField from "../../basic/InputField";
 import Button from "../../basic/Button";
-import { authContext } from "../../../api/authentication/authController";
 import FormSeachUser from "../../basic/formSearchUser/FormSearchUser";
 import API, { url_post_events } from "../../../api/Api";
-import { getContext } from "../../../api/authentication/MyContexts";
 import MyDate from "../../../class/MyDate";
+import authContext from "../../../api/authentication/MyContexts";
 
 interface Props {
   day: MyDate | null;
@@ -13,7 +12,7 @@ interface Props {
 }
 
 export default function FormNewEvent({ day, setActive }: Props): JSX.Element {
-  const { authData } = getContext();
+  const { authData } = useContext(authContext);
   const role = authData.role;
 
   const [date, setDate] = useState<MyDate | null>(day);

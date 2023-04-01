@@ -14,5 +14,5 @@ export default function Messenger() {
   //     </main>
   //   </User>
   // );
-  return;
+  return <div></div>;
 }

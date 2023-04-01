@@ -5,14 +5,13 @@ import Content from "../basic/Content";
 import Like from "./Like";
 import CommentsIcon from "./CommentsIcon";
 import CommentFeed from "./CommentFeed";
-import { authContext } from "../../api/authentication/authController";
 import Button from "../basic/Button";
 import { useRef } from "react";
 import API, { url_delete_news_id } from "../../api/Api";
 import { notifyError, notifySuccess } from "../Notifications/Notifications";
 import ReactDOM from "react-dom";
 import News from "../../class/News";
-import { getContext } from "../../api/authentication/MyContexts";
+import authContext from "../../api/authentication/MyContexts";
 
 interface Props {
   tidings: News;
@@ -20,7 +19,7 @@ interface Props {
 }
 
 export default function Tidings({ tidings, deletElement }: Props) {
-  const { authData } = getContext();
+  const { authData } = useContext(authContext);
   const [isActiveCommentFeed, setIsActiveCommentFeed] = useState(false);
   const [image, setImage] = useState(null);
   const subMenu = useRef(null);
