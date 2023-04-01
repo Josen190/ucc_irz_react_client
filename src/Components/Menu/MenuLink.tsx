@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import Button from "../basic/Button";
+import React from "react";
+import Button from "../Button/Button";
 
 export default function MenuLink({ href, children }) {
   return (

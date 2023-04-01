@@ -1,17 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 
 import Author from "./AuthorNews";
-import Content from "../basic/Content";
-import Like from "./Like";
-import CommentsIcon from "./CommentsIcon";
-import CommentFeed from "./CommentFeed";
-import Button from "../basic/Button";
+import Content from "../Content/Content";
+import Like from "./Like/Like";
+import CommentsIcon from "./Comment/CommentsIcon";
+import CommentFeed from "./Comment/CommentFeed";
+import Button from "../Button/Button";
 import { useRef } from "react";
-import API, { url_delete_news_id } from "../../api/Api";
+import API, { url_delete_news_id } from "../../Fetch/Api";
 import { notifyError, notifySuccess } from "../Notifications/Notifications";
-import ReactDOM from "react-dom";
-import News from "../../class/News";
-import authContext from "../../api/authentication/MyContexts";
+import News from "../../Helpers/News";
+import authContext from "../../Constants/MyContext/MyContexts";
 
 interface Props {
   tidings: News;

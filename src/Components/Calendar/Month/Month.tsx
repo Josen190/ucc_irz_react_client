@@ -2,12 +2,12 @@ import React, { Component, useState } from "react";
 import { useEffect } from "react";
 import useMeasure from "react-use-measure";
 import Day from "../Day/Day";
-import API, { url_get_events_my } from "../../../api/Api";
-import ContextMenu from "../../basic/ContextMenu/ContextMenu";
-import ContextButton from "../../basic/ContextMenu/ContextButton/ContextButton";
-import MyDate from "../../../class/MyDate";
+import API, { url_get_events_my } from "../../../Fetch/Api";
+import ContextMenu from "../../ContextMenu/ContextMenu";
+import ContextButton from "../../ContextMenu/ContextButton/ContextButton";
+import MyDate from "../../../Helpers/MyDate";
 import "./month.css";
-import Event from "../../../class/Event";
+import Event from "../../../Helpers/Event";
 
 interface Props {
   year: number;

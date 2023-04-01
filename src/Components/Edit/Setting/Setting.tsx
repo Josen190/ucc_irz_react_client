@@ -1,8 +1,8 @@
 import React from "react";
 import { useState } from "react";
-import InputField from "../../basic/InputField";
-import API, { url_put_change_password } from "../../../api/Api";
-import Button from "../../basic/Button";
+import InputField from "../../InputField/InputField";
+import API, { url_put_change_password } from "../../../Fetch/Api";
+import Button from "../../Button/Button";
 import { notifyError, notifySuccess } from "../../Notifications/Notifications";
 
 function Setting() {

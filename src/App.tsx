@@ -3,11 +3,11 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import React, { useContext } from "react";
-import User from "./Pages/User";
-import Visitor from "./Pages/Visitor";
+import User from "./Pages/User/User";
+import Visitor from "./Pages/Visitor/Visitor";
 import { Outlet } from "react-router-dom";
 import { useEffect } from "react";
-import authContext from "./api/authentication/MyContexts";
+import authContext from "./Constants/MyContext/MyContexts";
 
 
 function App() {

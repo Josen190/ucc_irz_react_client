@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../calendar.css";
 import EventInDay from "./EventInDay/EventInDay";
-import MyDate from "../../../class/MyDate";
+import MyDate from "../../../Helpers/MyDate";
 
 export default function Day({ day, month, listEvents, activeContextMenu }) {
   let today = new MyDate();

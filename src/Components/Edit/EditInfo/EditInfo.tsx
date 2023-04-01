@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Button from "../../basic/Button";
-import InputField from "../../basic/InputField";
-import InputImg from "../../basic/InputImg";
+import Button from "../../Button/Button";
+import InputField from "../../InputField/InputField";
+import InputImg from "../../InputImg/InputImg";
 import API, {
   url_get_users_me,
   url_put_users_me_update_info,
-} from "../../../api/Api";
+} from "../../../Fetch/Api";
 import { notifyError, notifySuccess } from "../../Notifications/Notifications";
 
 function EditInfo() {

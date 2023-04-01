@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Button from "../basic/Button";
-import Search from "../basic/Search";
+import Button from "../Button/Button";
+import Search from "../Search/Search";
 
 export default function Header({ islogin }) {
   const _isLogin = typeof islogin === "boolean" ? islogin : false;

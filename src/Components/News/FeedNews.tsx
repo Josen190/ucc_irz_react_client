@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import API, { url_get_news } from "../../api/Api";
+import API, { url_get_news } from "../../Fetch/Api";
 import Tidings from "./Tidings";
 
 interface Props {

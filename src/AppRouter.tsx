@@ -4,13 +4,13 @@ import React from "react";
 import App from "./App";
 import EditInfo from "./Components/Edit/EditInfo/EditInfo";
 import Settin from "./Components/Edit/Setting/Setting";
-import Account, { accountLoader } from "./Pages/Account";
-import Admin from "./Pages/Admin";
-import Auth from "./Pages/Auth";
-import Calendar from "./Pages/Calendar";
-import Edit from "./Pages/Edit";
-import Messenger from "./Pages/Messenger";
-import News from "./Pages/News";
+import Account, { accountLoader } from "./Pages/Account/Account";
+import Admin from "./Pages/Admin/Admin";
+import Auth from "./Pages/Auth/Auth";
+import Calendar from "./Pages/Calendar/Calendar";
+import Edit from "./Pages/Edit/Edit";
+import Messenger from "./Pages/Messenger/Messenger";
+import News from "./Pages/News/News";
 
 const router = createBrowserRouter(
   [
