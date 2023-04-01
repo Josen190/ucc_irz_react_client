@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../../../Button/Button";
 import Textarea from "../../../InputField/Textarea/Textarea";
-import SvgPaperPlaneOutline from "../../../icons/PaperPlaneOutline";
+import SvgPaperPlaneOutline from "../../../../Constants/icons/PaperPlaneOutline";
 
 export default function InputMessage() {
   return (

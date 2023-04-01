@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ChatBoxOutline from "../../icons/ChatBoxOutline";
+import ChatBoxOutline from "../../../Constants/icons/ChatBoxOutline";
 
 interface Props {
   commentCount: number;

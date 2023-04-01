@@ -3,8 +3,8 @@ import API, {
   url_post_likes_like_news_entry,
   url_post_likes_unlike_news_entry,
 } from "../../../Fetch/Api";
-import SvgHeart from "../../icons/Heart";
-import SvgHeartOutline from "../../icons/HeartOutline";
+import SvgHeart from "../../../Constants/icons/Heart";
+import SvgHeartOutline from "../../../Constants/icons/HeartOutline";
 import { notifyError } from "../../Notifications/Notifications";
 
 const size = "25px";

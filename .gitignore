@@ -31,4 +31,5 @@ yarn-error.log*
 
 #js
 *.js
+!/src/Constants/icons/*js
 
