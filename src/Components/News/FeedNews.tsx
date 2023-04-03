@@ -8,7 +8,7 @@ interface Props {
   likedOnly?: boolean;
   setUpdate?: React.Dispatch<
     React.SetStateAction<{
-      update: any;
+      update: Function;
     }>
   >;
 }
@@ -31,32 +31,11 @@ export default function FeedNews({
   }, [deleteKeyElement]);
 
   const getNews = () => {
-    const _userID = userID ?? null;
-    const _publicOnly = publicOnly ?? null;
-    const _likedOnly = likedOnly ?? null;
-    const pageSize = 10;
-
-    const params: { [key: string]: string | number | boolean } = {
-      PageIndex: pageIndex,
-      PageSize: pageSize,
-    };
-    if (_userID != null) {
-      params.AuthorId = _userID;
-    }
-
-    if (_publicOnly != null) {
-      params.PublicOnly = _publicOnly;
-    }
-
-    if (_likedOnly != null) {
-      params.LikedOnly = _likedOnly;
-    }
-
-    API.get(url_get_news, { params: params })
-      .then((response) => {
+    API.getListingNews(pageIndex)
+      .then((tidings) => {
         let _arrNews = [];
         _arrNews.push(...arrNews);
-        response.data.forEach((tiding) => {
+        tidings.forEach((tiding) => {
           _arrNews.push(
             <Tidings
               key={tiding.id}
@@ -67,7 +46,7 @@ export default function FeedNews({
         });
 
         setArrNews(_arrNews);
-        if (response.data.length === pageSize) setPageIndex(pageIndex + 1);
+        if (tidings.length === 10) setPageIndex(pageIndex + 1);
       })
       .catch((error) => {});
   };

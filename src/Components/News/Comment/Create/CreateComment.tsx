@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import API, { url_post_news_comments } from "../../../../Fetch/Api";
+import API from "../../../../Fetch/Api";
 import Button from "../../../Button/Button";
 import InputField from "../../../InputField/InputField";
 import { notifyError } from "../../../Notifications/Notifications";
@@ -9,11 +9,7 @@ export default function CreateComment({ newsID }) {
   const [value, setValue] = useState("");
   const newNewsComments = (event) => {
     event.preventDefault();
-    const data = {
-      newsEntryId: newsID,
-      text: text,
-    };
-    API.post(url_post_news_comments, data)
+    API.postComment(newsID, text)
       .then(() => {
         setText("");
         setValue("");

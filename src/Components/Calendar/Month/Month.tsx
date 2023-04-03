@@ -45,9 +45,13 @@ function showMonth(year: number, numberMonth: number) {
 }
 
 export default function Month({ year, numberMonth, setSelectedDay }) {
-  const [nameDayWeekUse, setNameDayWeekFull] = useState<string[]>(
-    MyDate.nameDayWeekShort
-  );
+  const [nameDayWeekUse, setNameDayWeekFull] = useState<{
+    isFull: boolean;
+    nameDay: string[];
+  }>({
+    isFull: false,
+    nameDay: MyDate.nameDayWeekShort,
+  });
   const [listEvents, setListEvents] = useState<Event[]>([]);
   const [activeContextMenu, setActiveContextMenu] = useState<boolean>(false);
   const [screenPosition, setScreenPosition] = useState<PropsScreenPosition>({
@@ -57,31 +61,23 @@ export default function Month({ year, numberMonth, setSelectedDay }) {
   });
 
   const [ref, bounds] = useMeasure();
-  let isFull = false;
 
-  let { firstDayOfCalendar, lastDayOfCalendar, arrDayOfCalendar } = showMonth(
+  const { firstDayOfCalendar, lastDayOfCalendar, arrDayOfCalendar } = showMonth(
     year,
     numberMonth
   );
 
   function onWidth(bounds) {
-    if (isFull && bounds.width < 1050) {
-      setNameDayWeekFull(MyDate.nameDayWeekShort);
-      isFull = false;
-    } else if (!isFull && bounds.width >= 1050) {
-      setNameDayWeekFull(MyDate.nameDayWeekFull);
-      isFull = false;
+    if (nameDayWeekUse.isFull && bounds.width < 1050) {
+      setNameDayWeekFull({ isFull: false, nameDay: MyDate.nameDayWeekShort });
+    } else if (!nameDayWeekUse.isFull && bounds.width >= 1050) {
+      setNameDayWeekFull({ isFull: true, nameDay: MyDate.nameDayWeekFull });
     }
   }
 
   useEffect(() => {
-    API.get(url_get_events_my, {
-      params: {
-        Start: firstDayOfCalendar.toString(),
-        End: lastDayOfCalendar.toString(),
-      },
-    }).then((response) => {
-      setListEvents(response.data);
+    API.getMyEvents(firstDayOfCalendar, lastDayOfCalendar).then((events) => {
+      setListEvents(events);
     });
   }, [numberMonth]);
 
@@ -109,7 +105,7 @@ export default function Month({ year, numberMonth, setSelectedDay }) {
       <table>
         <thead>
           <tr ref={ref} className="month-column">
-            {nameDayWeekUse.map((e, i) => (
+            {nameDayWeekUse.nameDay.map((e, i) => (
               <th key={i}>{e}</th>
             ))}
           </tr>

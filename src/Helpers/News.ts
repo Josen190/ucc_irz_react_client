@@ -3,7 +3,6 @@ import Image from "./Image";
 import MinUser from "./MinUser";
 import MyDate from "./MyDate";
 
-
 export default class News {
   id: string;
   title: string;

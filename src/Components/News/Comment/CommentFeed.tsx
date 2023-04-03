@@ -7,24 +7,21 @@ import Comment from "./Comment";
 import CreateComment from "./Create/CreateComment";
 import PropsNewsComments from "../../../Fetch/Interface/INewsComments";
 
-export default function CommentFeed({ newsID }) {
+interface Props {
+  newsID: string;
+}
+
+export default function CommentFeed({ newsID }: Props) {
   const [commentArr, setCommentArr] = useState([]);
 
   useEffect(() => {
-    API.get(url_get_news_comments, {
-      params: { newsEntryId: newsID },
-    })
-      .then((response) => {
-        let _commentArr = [];
-        response.data.forEach((element, index) => {
-          if (element as PropsNewsComments) {
-            const _comment = new NewsComments(element);
-            _commentArr.push(<Comment key={_comment.id} comment={_comment} />);
-          }
-        });
-        setCommentArr(_commentArr);
-      })
-      .catch((error) => {});
+    API.getNewsComment().then((newsComments) => {
+      let _commentArr: JSX.Element[];
+      newsComments.forEach((comment) => {
+        _commentArr.push(<Comment key={comment.id} comment={comment} />);
+      });
+      setCommentArr(_commentArr);
+    });
   }, [newsID]);
 
   return (

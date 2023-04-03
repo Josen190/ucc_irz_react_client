@@ -1,19 +1,12 @@
 import React, { Component, useState } from "react";
 import Button from "../../Button/Button";
-import API, {
-  url_post_subscriptions_subcribe,
-  url_post_subscriptions_unsubscribe,
-} from "../../../Fetch/Api";
+import API from "../../../Fetch/Api";
 import { notifyError, notifySuccess } from "../../Notifications/Notifications";
 
 export default function Profile_Navigation({ isLogin, userID, isSubcribe }) {
   const [_isSubcribe, setIsSubcribe] = useState(isSubcribe ? true : false);
   const unsubscribe = () => {
-    API.post(url_post_subscriptions_unsubscribe, null, {
-      params: {
-        userId: userID,
-      },
-    })
+    API.unsubscribe(userID)
       .then(() => {
         notifySuccess("Вы отписались");
         setIsSubcribe(false);
@@ -24,11 +17,7 @@ export default function Profile_Navigation({ isLogin, userID, isSubcribe }) {
   };
 
   const subcribe = () => {
-    API.post(url_post_subscriptions_subcribe, null, {
-      params: {
-        userId: userID,
-      },
-    })
+    API.subcribe(userID)
       .then(() => {
         notifySuccess("Вы подписалиь");
         setIsSubcribe(true);

@@ -7,5 +7,9 @@ interface PropsProfilePicture {
 }
 
 export default function ProfilePicture({ type, image }: PropsProfilePicture) {
-  return <div className={"logo " + type}>{image.getImgJSX()}</div>;
+  return (
+    <div className={"logo " + type}>
+      <></>
+    </div>
+  );
 }

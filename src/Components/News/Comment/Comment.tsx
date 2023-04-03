@@ -13,11 +13,10 @@ interface Props {
 
 export default function Comment({ comment }: Props) {
   const { authData } = useContext(authContext);
-  let isMyComment =
-    authData.myID === comment.user.id ? authData.myID !== null : false;
+  let isMyComment = authData.user ? authData.user.id === comment.id : false;
 
   const deletComment = () => {
-    API.delete(url_delete_news_comments_id(comment.id))
+    API.deletComment(comment.id)
       .then(() => {
         notifySuccess("Коментарий удалён");
       })

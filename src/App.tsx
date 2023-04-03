@@ -9,7 +9,6 @@ import { Outlet } from "react-router-dom";
 import { useEffect } from "react";
 import authContext from "./Constants/MyContext/MyContexts";
 
-
 function App() {
   const { authData } = useContext(authContext);
   const navigate = useNavigate();
@@ -22,7 +21,7 @@ function App() {
   }, [location]);
 
   const userPage = (
-    <User UserID={authData.myID}>
+    <User UserID={authData.user.id}>
       <Outlet />
     </User>
   );

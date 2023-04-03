@@ -1,97 +1,55 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import API, { host, url_post_refresh } from "../../Fetch/Api";
 import authContext from "../../Constants/MyContext/MyContexts";
 import { notifyError } from "../Notifications/Notifications";
+import User from "../../Helpers/User";
 
-
-
-function setAuthDataApi(jwt, token, myID, role) {
+function setAuthDataApi(jwt, token) {
   API.setJwt(jwt);
   window.localStorage.setItem("jwt", jwt);
   window.localStorage.setItem("token", token);
-  window.localStorage.setItem("myID", myID);
-  window.localStorage.setItem("role", role);
 }
 
 function getAuthData() {
   const jwt = window.localStorage.getItem("jwt");
   const refreshToken = window.localStorage.getItem("refreshToken");
-  const myID = window.localStorage.getItem("myID");
-  const role = window.localStorage.getItem("role");
-  return { jwt, refreshToken, myID, role };
+  return { jwt, refreshToken, user: null };
 }
 
 export interface authData {
   jwt: string | null;
   refreshToken: string | null;
-  myID: string | null;
-  role: string | null;
+  user: User | null;
 }
 
-interface Props{
-  children: JSX.Element | JSX.Element[]
+interface Props {
+  children: JSX.Element | JSX.Element[];
 }
 
 const AuthController = ({ children }: Props) => {
   const [authData, setAuth] = useState<authData>(getAuthData());
 
   //сохраняем токены в localStorage
-  const setAuthData = (jwt, refreshToken, myID, role) => {
-    setAuthDataApi(jwt, refreshToken, myID, role);
+  const setAuthData = (
+    jwt: string,
+    refreshToken: string,
+    user: User | null = authData.user
+  ) => {
+    setAuthDataApi(jwt, refreshToken);
     setAuth({
       jwt: jwt,
       refreshToken: refreshToken,
-      myID: myID,
-      role: role,
+      user: user,
     });
   };
 
-  let loading = true;
-  API.interceptors.response.use(
-    (response) => response,
-    async (error) => {
-      const status = error.response ? error.response.status : null;
+  useEffect(() => {
+    API.getUserMe().then((user) =>
+      setAuthData(authData.jwt, authData.refreshToken, user)
+    );
+  }, []);
 
-      if (loading && status === 401) {
-        loading = false;
-        const { jwt, refreshToken, myID, role } = authData;
-        return API.post(
-          url_post_refresh,
-          {
-            jwt: jwt,
-            refreshToken: refreshToken,
-          },
-          {
-            baseURL: host,
-            headers: {
-              authorization: null,
-              accept: "*/*",
-            },
-          }
-        )
-          .then((response) => {
-            setAuthData(
-              response.data.jwt,
-              response.data.refreshToken,
-              myID,
-              role
-            );
-            error.config.headers["Authorization"] =
-              "Bearer " + response.data.jwt;
-            error.config.baseURL = host;
-            loading = true;
-            return API.request(error.config);
-          })
-          .catch(() => {
-            setAuthData(null, null, null, null);
-            notifyError("авторизация не удалась, поробуйте снова");
-            loading = true;
-          });
-      }
-
-      return Promise.reject(error);
-    }
-  );
+  API.refreshToken(authData.jwt, authData.refreshToken, setAuthData);
 
   return (
     <authContext.Provider value={{ authData, setAuthData }}>

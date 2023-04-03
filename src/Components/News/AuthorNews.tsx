@@ -1,7 +1,7 @@
 import React from "react";
 import Profile_Picture from "../Profile/Picture/Profile_Picture";
 import { Link } from "react-router-dom";
-import MinUser  from "../../Helpers/MinUser";
+import MinUser from "../../Helpers/MinUser";
 
 interface PropsAuthor {
   user: MinUser;

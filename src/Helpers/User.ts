@@ -1,8 +1,8 @@
 import Image from "./Image";
-import MyDate from "./MyDate";        
+import MyDate from "./MyDate";
 import PropsUser from "../Fetch/Interface/IUser";
 import MinUser from "./MinUser";
-
+import Position from "./Positions";
 
 export default class User extends MinUser {
   birthday: MyDate;
@@ -15,7 +15,7 @@ export default class User extends MinUser {
   email: string;
   isActiveAccount: boolean;
   roles: string[];
-  positions: string[];
+  positions: Position[];
 
   constructor(props?: PropsUser) {
     super();
@@ -32,7 +32,7 @@ export default class User extends MinUser {
     this.email = props.email;
     this.isActiveAccount = props.isActiveAccount;
     this.roles = props.roles;
-    this.positions = props.positions;
+    // this.positions = props.positions;
 
     this.id = props.id;
     this.firstName = props.firstName;
@@ -40,5 +40,4 @@ export default class User extends MinUser {
     this.patronymic = props.patronymic ?? "";
     this.image = new Image(props.imageId ? { id: props.imageId } : null);
   }
-
 }

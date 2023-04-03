@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 interface PropsButton {
   type: "button" | "link" | "submit";
   title?: string;
-  color?: string;
+  color?: "basic" | "red" | "mini";
   disabled?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   children?: any;
@@ -17,9 +17,7 @@ interface PropsButton {
 
 export default function Button(props: PropsButton) {
   let button: JSX.Element;
-  let classNames =
-    "button center color-" +
-    (props.color !== undefined ? props.color : "basic");
+  let classNames = `button center color-${props.color ?? "basic"}`;
 
   switch (props.type) {
     case "button":
@@ -63,12 +61,7 @@ export default function Button(props: PropsButton) {
   }
 
   return (
-    <div
-      className={
-        "button-contener center " +
-        (props.className !== undefined ? props.className : "")
-      }
-    >
+    <div className={`button-contener center ${props.className ?? ""}`}>
       {button}
     </div>
   );

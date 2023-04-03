@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import API, { url_get_news_id_full_text } from "../../Fetch/Api";
 import Image from "../../Helpers/Image";
 import News from "../../Helpers/News";
+import Img from "../Img/Img";
 
 interface PropsContent {
   id: string;
@@ -41,9 +42,9 @@ export default function Content({
 
   const getNews = (event) => {
     event.target.disabled = true;
-    API.get(url_get_news_id_full_text(id))
-      .then((response) => {
-        setText(response.data);
+    API.getFullTextOfNews(id)
+      .then((fullText) => {
+        setText(fullText);
         setIsClipped(true);
         event.target.disabled = false;
       })
@@ -63,7 +64,7 @@ export default function Content({
           </a>
         )}
       </div>
-      {image && image.getImgJSX()}
+      {image && <Img image={image} />}
     </div>
   );
 }

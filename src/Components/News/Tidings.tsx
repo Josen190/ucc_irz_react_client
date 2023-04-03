@@ -11,6 +11,7 @@ import API, { url_delete_news_id } from "../../Fetch/Api";
 import { notifyError, notifySuccess } from "../Notifications/Notifications";
 import News from "../../Helpers/News";
 import authContext from "../../Constants/MyContext/MyContexts";
+import Image from "../../Helpers/Image";
 
 interface Props {
   tidings: News;
@@ -20,14 +21,14 @@ interface Props {
 export default function Tidings({ tidings, deletElement }: Props) {
   const { authData } = useContext(authContext);
   const [isActiveCommentFeed, setIsActiveCommentFeed] = useState(false);
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState<Image | null>(null);
   const subMenu = useRef(null);
-  const isMyTiding = tidings.author.id === authData.myID;
+  const isMyTiding = tidings.author.id === authData.user.id;
 
   const deleteTidings = (event) => {
     event.preventDefault();
 
-    API.delete(url_delete_news_id(tidings.id))
+    API.deleteNews(tidings.id)
       .then(() => {
         deletElement(tidings.id);
         notifySuccess("Новость удалена");

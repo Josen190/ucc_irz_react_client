@@ -40,11 +40,12 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "js in ts": "tsc \nnpx prettier --write .",
+    "js in ts": "tsc \n npx prettier --write .",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "svgr": "svgr icon:'{size}' replaceAttrValues:{className:'{className}', fill:'{fill}'} --title-prop -d src/Components/icons src/icon"
+    "svgr": "svgr icon:'{size}' replaceAttrValues:{className:'{className}', fill:'{fill}'} --title-prop -d src/Components/icons src/icon",
+    "sort": "npx prettier --write ."
   },
   "devDependencies": {
     "@svgr/cli": "^6.5.1",

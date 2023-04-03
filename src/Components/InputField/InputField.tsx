@@ -3,13 +3,13 @@ import Textarea from "./Textarea/Textarea";
 
 interface Props {
   type:
-  | "textarea"
-  | "text"
-  | "password"
-  | "email"
-  | "date"
-  | "time"
-  | "checkbox";
+    | "textarea"
+    | "text"
+    | "password"
+    | "email"
+    | "date"
+    | "time"
+    | "checkbox";
   title?: string;
   id?: string;
   placeholder?: string;
@@ -51,7 +51,7 @@ export default function InputField({
 
   if (type === "textarea") {
     input = <Textarea {...inputprops} rows={rows ?? 2} isresize />;
-  } else if (type === 'checkbox') { 
+  } else if (type === "checkbox") {
     //.......
   } else {
     input = <input type={type} {...inputprops} required={required ?? false} />;

@@ -1,17 +1,13 @@
 import React, { useContext, useState } from "react";
-import API, { url_post_authenticate} from "../../Fetch/Api";
+import API, { url_post_authenticate } from "../../Fetch/Api";
 import Button from "../../Components/Button/Button";
 import InputField from "../../Components/InputField/InputField";
 
 import { Navigate } from "react-router-dom";
 import authContext from "../../Constants/MyContext/MyContexts";
 
-const Auth = () => {
-  const context = useContext(authContext);
-
-  //потом доделать
-  console.log(typeof context);
-
+function Auth() {
+  const { setAuthData } = useContext(authContext);
   const [next, setNext] = useState(null);
 
   const login = (e) => {
@@ -20,37 +16,12 @@ const Auth = () => {
     let password = e.target[1].value;
     e.target[2].disabled = true;
 
-    let data = {};
-    API.post(url_post_authenticate, {
-      email: email,
-      password: password,
-    })
-      .then(function (response) {
-        data = {
-          jwt: response.data.jwt,
-          refreshToken: response.data.refreshToken,
-          myId: null,
-          role: null,
-        };
-        // setAuthData(data.jwt, data.refreshToken, data.myId, data.role);
-        // API.get(url_get_users_me)
-        //   .then((response) => {
-        //     data = {
-        //       jwt: data.jwt,
-        //       refreshToken: data.refreshToken,
-        //       myId: response.data.id,
-        //       role: response.data.roles,
-        //     };
-        //     setAuthData(data.jwt, data.refreshToken, data.myId, data.role);
-        //     setNext(response.data.id);
-        //   })
-        //   .catch((error) => {
-        //     e.target[2].disabled = false;
-        //   });
-
-        e.target[2].disabled = false;
+    API.authentication(email, password)
+      .then((data) => {
+        setAuthData(data);
+        setNext(data.user.id);
       })
-      .catch(function (error) {
+      .catch((error) => {
         e.target[2].disabled = false;
       });
   };
@@ -77,5 +48,6 @@ const Auth = () => {
       {next != null && <Navigate to={`/account/${next}`} />}
     </div>
   );
-};
+}
+
 export default Auth;

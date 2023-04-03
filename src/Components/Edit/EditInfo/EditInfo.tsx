@@ -2,11 +2,9 @@ import React, { useEffect, useState } from "react";
 import Button from "../../Button/Button";
 import InputField from "../../InputField/InputField";
 import InputImg from "../../InputImg/InputImg";
-import API, {
-  url_get_users_me,
-  url_put_users_me_update_info,
-} from "../../../Fetch/Api";
+import API, { url_put_users_me_update_info } from "../../../Fetch/Api";
 import { notifyError, notifySuccess } from "../../Notifications/Notifications";
+import User from "../../../Helpers/User";
 
 function EditInfo() {
   const [myself, setMyself] = useState("");
@@ -15,22 +13,17 @@ function EditInfo() {
   const [skills, setSkills] = useState("");
 
   useEffect(() => {
-    API.get(url_get_users_me).then((response) => {
-      setMyself(response.data.aboutMyself);
-      setIDid(response.data.myDoings);
-      setAchievements(response.data.skills);
-      setSkills(response.data.skills);
+    API.getUserMe().then((user) => {
+      setMyself(user.aboutMyself);
+      setIDid(user.myDoings);
+      setAchievements(user.skills);
+      setSkills(user.skills);
     });
   }, []);
 
   const save = (event) => {
     event.preventDefault();
-
-    API.put(url_put_users_me_update_info, {
-      aboutMyself: myself,
-      myDoings: iDid,
-      skills: skills,
-    })
+    API.putUpdateInfo(myself, iDid, achievements, skills)
       .then(() => {
         notifySuccess("изменения сохранены");
       })

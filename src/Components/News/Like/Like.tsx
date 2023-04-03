@@ -1,15 +1,18 @@
 import React, { useState } from "react";
-import API, {
-  url_post_likes_like_news_entry,
-  url_post_likes_unlike_news_entry,
-} from "../../../Fetch/Api";
+import API from "../../../Fetch/Api";
 import SvgHeart from "../../../Constants/icons/Heart";
 import SvgHeartOutline from "../../../Constants/icons/HeartOutline";
 import { notifyError } from "../../Notifications/Notifications";
 
 const size = "25px";
 
-const Like = ({ isLiked, likesCount, newsID }) => {
+interface Props {
+  isLiked: boolean;
+  likesCount: number;
+  newsID: string;
+}
+
+const Like = ({ isLiked, likesCount, newsID }: Props) => {
   const llke_off = <SvgHeart size={size}></SvgHeart>;
   const like_on = <SvgHeartOutline size={size}></SvgHeartOutline>;
 
@@ -24,22 +27,15 @@ const Like = ({ isLiked, likesCount, newsID }) => {
 
   const switchLike = () => {
     disableBtnProps.disabled = false;
-    let thisIsLiked = !like.isLiked;
-    let thisLikesCount = like.likesCount;
-    const params: { [key: string]: string } = {};
-    if (typeof newsID === "string") {
-      params.newsEntryId = newsID;
-    }
-
-    if (thisIsLiked) {
-      API.post(url_post_likes_like_news_entry, undefined, {
-        params: params,
-      })
+    let _isLiked = !like.isLiked;
+    let _likesCount = like.likesCount;
+    if (_isLiked) {
+      API.postLike(newsID)
         .then(() => {
-          thisLikesCount++;
+          _likesCount++;
           setLikeUse({
-            isLiked: thisIsLiked,
-            likesCount: thisLikesCount,
+            isLiked: _isLiked,
+            likesCount: _likesCount,
             like_use: llke_off,
           });
           disableBtnProps.disabled = true;
@@ -49,14 +45,12 @@ const Like = ({ isLiked, likesCount, newsID }) => {
           disableBtnProps.disabled = true;
         });
     } else {
-      API.post(url_post_likes_unlike_news_entry, undefined, {
-        params: params,
-      })
+      API.postUnlike(newsID)
         .then(() => {
-          thisLikesCount--;
+          _likesCount--;
           setLikeUse({
-            isLiked: thisIsLiked,
-            likesCount: thisLikesCount,
+            isLiked: _isLiked,
+            likesCount: _likesCount,
             like_use: like_on,
           });
           disableBtnProps.disabled = true;

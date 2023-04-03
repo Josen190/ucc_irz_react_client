@@ -15,16 +15,13 @@ function Setting() {
     event.preventDefault();
 
     if (newPassword === rePassword) {
-      API.put(url_put_change_password, {
-        currentPassword: currentPassword,
-        newPassword: newPassword,
-      })
+      API.putChangePassword(currentPassword, newPassword)
         .then(() => {
           notifySuccess("изменения сохранены");
         })
         .catch((error) => {
           notifyError("изменения не сохранены");
-          setErrorPassword(error.response.data);
+          setErrorPassword(error);
         });
     }
   };

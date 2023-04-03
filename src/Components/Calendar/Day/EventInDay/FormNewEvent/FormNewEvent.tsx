@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import InputField from "../../../../../InputField/InputField";
+import InputField from "../../../../InputField/InputField";
 import Button from "../../../../Button/Button";
 import FormSeachUser from "../../../../formSearchUser/FormSearchUser";
 import MyDate from "../../../../../Helpers/MyDate";
@@ -12,7 +12,7 @@ interface Props {
 
 export default function FormNewEvent({ day, setActive }: Props): JSX.Element {
   const { authData } = useContext(authContext);
-  const role = authData.role;
+  const role = authData.user.roles;
 
   const [date, setDate] = useState<MyDate | null>(day);
   const [startTime, setStartTime] = useState<MyDate | null>(day);

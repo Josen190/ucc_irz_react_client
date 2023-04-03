@@ -1,6 +1,6 @@
 import PropsNewsComments from "../Fetch/Interface/INewsComments";
 import MyDate from "./MyDate";
-import  MinUser  from "./MinUser";
+import MinUser from "./MinUser";
 
 export default class NewsComments {
   id: string;

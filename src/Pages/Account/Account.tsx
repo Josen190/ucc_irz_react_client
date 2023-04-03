@@ -22,21 +22,17 @@ const Account = () => {
   const [user, setUser] = useState<User | null>(null);
   const [positionUser, setPositionUser] = useState<any | null>(null);
 
-  const isLogin =
-    typeof authData.myID === "string" ? authData.myID === user.id : false;
+  const isLogin = authData.user ? authData.user.id === user.id : false;
+  const id = useLoaderData();
 
   useEffect(() => {
-    const id = useLoaderData();
     if (typeof id !== "string") return;
-
-    User.getUser(id).then((user) => {
+    API.getUser(id).then((user) => {
       setUser(user);
+      API.getUserPositions(user.id).then((position) => {
+        setPositionUser(position);
+      });
     });
-    API.get(url_get_user_positions, { params: { userId: id } }).then(
-      (response) => {
-        setPositionUser(response.data);
-      }
-    );
   }, []);
 
   return (

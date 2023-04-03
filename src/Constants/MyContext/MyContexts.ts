@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { createContext } from "react";
-import { authData } from "../../Components/authController/authController";
+import { authData } from "../../Components/AuthController/authController";
 
 export interface ReturnContext {
   authData?: authData;

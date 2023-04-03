@@ -5,6 +5,7 @@ import Author from "../News/AuthorNews";
 // import PushUser from "../../Profile/PushUser/PushUser";
 import InputField from "../InputField/InputField";
 import Button from "../Button/Button";
+import User from "../../Helpers/User";
 
 function PushUser({ user, pushFun }) {
   return (
@@ -36,28 +37,19 @@ export default function FormSearchUser(): JSX.Element {
   };
 
   const getUsers = () => {
-    const params: { [key: string]: string | number | boolean } = {};
-    if (typeof searchString === "string") params.SearchString = searchString;
-    if (typeof isActive === "boolean") params.IsActive = isActive;
-    if (typeof role === "string") params.Role = role;
-    if (typeof positionId === "string") params.PositionId = positionId;
+    API.getUsers(pageIndex, searchString, isActive, role, positionId).then(
+      (users) => {
+        let _users = new Map();
+        users.forEach((user: User) => {
+          _users.set(
+            user.id,
+            <PushUser key={user.id} user={user} pushFun={pushUsers} />
+          );
+        });
 
-    params.PageIndex = pageIndex;
-    params.PageSize = pageSize;
-
-    API.get(url_get_users, {
-      params: params,
-    }).then((response) => {
-      let _users = new Map(users);
-      response.data.forEach((user: MinUser) => {
-        _users.set(
-          user.id,
-          <PushUser key={user.id} user={user} pushFun={pushUsers} />
-        );
-      });
-
-      setUsers(_users);
-    });
+        setUsers(_users);
+      }
+    );
   };
 
   useEffect(getUsers, [pageIndex, searchString, isActive, role, positionId]);
