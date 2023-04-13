@@ -2,7 +2,9 @@ import { createContext } from "react";
 import { authData } from "../../Components/AuthController/authController";
 import User from "../../../../Helpers/User";
 
-export interface IAuthContext {
+
+
+export interface IAuthContext{
   authData: authData;
   setAuthData: (
     jwt: string | null,

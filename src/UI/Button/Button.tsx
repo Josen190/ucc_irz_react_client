@@ -55,8 +55,8 @@ export default function Button({
           button = <a role="button" {...buttonprops}>{children}</a>;
           break;
       }
+    break;
      
-
     case "link":
       button = (
         <div className={classNames}>
@@ -74,6 +74,7 @@ export default function Button({
           <input type={"submit"} {...submitProps} />
         </label>
       );
+      console.log("b_submit");
       break;
 
     default:
