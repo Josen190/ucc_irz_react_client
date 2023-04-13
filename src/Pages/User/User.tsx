@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "../../Components/Header/Header";
-import Menu from "../../Components/Menu/Menu";
-import MenuLink from "../../Components/Menu/MenuLink";
+import Header from "../../Modules/Header/Components/Header/Header";
+import Menu from "../../Modules/Menu/Components/Menu/Menu";
+import MenuLink from "../../Modules/Menu/Components/MenuLink/MenuLink";
 
 interface Props {
   UserID: string;

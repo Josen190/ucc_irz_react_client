@@ -1,6 +1,6 @@
 import React from "react";
-import Menu from "../../Components/Menu/Menu";
-import MenuLink from "../../Components/Menu/MenuLink";
+import Menu from "../../Modules/Menu/Components/Menu/Menu";
+import MenuLink from "../../Modules/Menu/Components/MenuLink/MenuLink";
 import { Outlet } from "react-router";
 
 export default function Admin() {

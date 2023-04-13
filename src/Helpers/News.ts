@@ -1,3 +1,4 @@
+import PropsImage from "Fetch/IImage";
 import PropsNews from "../Fetch/Interface/INews";
 import Image from "./Image";
 import MinUser from "./MinUser";
@@ -7,8 +8,8 @@ export default class News {
   id: string;
   title: string;
   clippedText: string;
-  fullText: string;
-  image: Image;
+  fullText: string | undefined;
+  image: Image | null;
   dateTime: MyDate;
   isLiked: boolean;
   likesCount: number;
@@ -17,17 +18,39 @@ export default class News {
   commentCount: number;
   isClipped: boolean;
 
-  constructor(props: PropsNews) {
-    this.id = props.id;
-    this.title = props.title;
-    this.clippedText = props.text;
-    this.image = new Image(props.imageId ? { id: props.imageId } : null);
-    this.dateTime = new MyDate(props.dateTime);
-    this.isLiked = props.isLiked;
-    this.likesCount = props.likesCount;
-    this.author = new MinUser(props.author);
-    this.isPublic = props.isPublic;
-    this.commentCount = props.commentCount;
-    this.isClipped = props.isClipped;
+  constructor(id: string, title: string, fullText: string, isPublic: boolean, author: MinUser, image?: Image)
+  constructor(props: PropsNews) 
+  constructor(idOrProps: string | PropsNews, title?: string, fullText?: string, isPublic?: boolean, author?: MinUser, image?: Image)
+  {
+    const sizeClippedText: number = 256;
+    if (typeof idOrProps === 'string'){
+
+      this.id = idOrProps;
+      this.title = title ?? "";
+      this.clippedText = fullText ? fullText : "";
+      this.fullText = fullText ?? "";
+      this.image = image ?? null;
+      this.dateTime = new MyDate();
+      this.isLiked = false;
+      this.likesCount = 0;
+      this.author = author ?? new MinUser();
+      this.isPublic = isPublic ?? false;
+      this.commentCount = 0;
+      this.isClipped = fullText && fullText.length > sizeClippedText? true : false; 
+
+    } else{
+      this.id = idOrProps.id;
+      this.title = idOrProps.title;
+      this.clippedText = idOrProps.text;
+      this.image = idOrProps.imageId ? new Image({ id: idOrProps.imageId }) : null;
+      this.dateTime = new MyDate(idOrProps.dateTime);
+      this.isLiked = idOrProps.isLiked;
+      this.likesCount = idOrProps.likesCount;
+      this.author = new MinUser(idOrProps.author);
+      this.isPublic = idOrProps.isPublic;
+      this.commentCount = idOrProps.commentCount;
+      this.isClipped = idOrProps.isClipped;
+    }
+    
   }
 }

@@ -1,13 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import router from "./AppRouter";
 import { RouterProvider } from "react-router-dom";
 
-import AuthController from "./Components/AuthController/authController";
+import AuthController from "./Modules/AuthController/Components/AuthController/authController";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+);
 root.render(
   <React.StrictMode>
     <AuthController>

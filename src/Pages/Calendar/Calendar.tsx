@@ -1,7 +1,7 @@
 import React, { Component, useState } from "react";
-import Month from "../../Components/Calendar/Month/Month";
-import Button from "../../Components/Button/Button";
-import FormNewEvent from "../../Components/Calendar/Day/EventInDay/FormNewEvent/FormNewEvent";
+import Month from "../../Modules/Calendar/Components/Month/Month";
+import Button from "../../UI/Button/Button";
+import FormNewEvent from "../../Modules/FormNewEvent/Components/FormNewEvent/FormNewEvent";
 import MyDate from "../../Helpers/MyDate";
 
 const nameMonth = [
@@ -22,7 +22,7 @@ const nameMonth = [
 const Calendar = () => {
   const [date, setDate] = useState(new MyDate());
   const [active, setActive] = useState(false);
-  const [selectedDay, setSelectedDay] = useState(null);
+  const [selectedDay, setSelectedDay] = useState<MyDate | null>(null);
 
   const nextMonth = () => {
     setDate(new MyDate(date.setMonth(date.getMonth() + 1)));
@@ -31,7 +31,7 @@ const Calendar = () => {
     setDate(new MyDate(date.setMonth(date.getMonth() - 1)));
   };
 
-  const setEventSelectedDay = (day) => {
+  const setEventSelectedDay = (day: MyDate | null) => {
     setSelectedDay(day);
     setActive(true);
   };
@@ -62,7 +62,7 @@ const Calendar = () => {
         numberMonth={date.getMonth()}
         setSelectedDay={setEventSelectedDay}
       />
-      {active && <FormNewEvent day={selectedDay} setActive={setActive} />}
+      {active && <FormNewEvent day={selectedDay ?? null} setActive={setActive} />}
     </main>
   );
 };

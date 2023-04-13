@@ -8,13 +8,13 @@ export default class NewsComments {
   dateTime?: MyDate;
   user?: MinUser;
 
-  constructor(id: string, text?: string, dateTime?: MyDate, user?: MinUser);
+  constructor(id: string, text?: string, user?: MinUser, dateTime?: MyDate,);
   constructor(props: PropsNewsComments);
   constructor(
     idOrProps: string | PropsNewsComments,
-    text?: string,
+    text?: string, 
+    user?: MinUser,
     dateTime?: MyDate,
-    user?: MinUser
   ) {
     if (typeof idOrProps === "string") {
       this.id = idOrProps;

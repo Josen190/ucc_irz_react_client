@@ -10,24 +10,31 @@ export default class Image {
   extension?: string;
   url?: string;
 
-  constructor(props: PropsImage) {
-    if (!props.id && !props.name! && props.extension && props.data)
-      if (props.id && (!props.name || !props.extension || !props.data)) {
-        this.id = props.id;
-      } else if (props.id && props.name && props.extension && props.data) {
-        this.id = props.id;
-        this.name = props.name;
-        this.extension = props.extension;
-        this.base64 = props.data;
-      }
+  constructor()
+  constructor(name: String)
+  constructor(props: PropsImage)
+  constructor(nameOrprops?: String | PropsImage) {
+    if (!nameOrprops) {
+      this.id = Math.random().toString();
+    } else if (typeof nameOrprops === 'string') {
+      this.id = Math.random().toString();
+      this.name = nameOrprops;
+    } else {
+      const props = nameOrprops as PropsImage;
+      this.id = props.id ?? Math.random().toString();
+      this.name = props.name;
+      this.base64 = props.data;
+      this.extension = props.extension;
+    }
   }
 
-  private setUrl(file) {
+  private setUrl(file: any) {
     this.url = URL.createObjectURL(file);
   }
 
-  public getImg(setImage?: React.Dispatch<React.SetStateAction<Image>>): void {
-    API.getImage(this.id)
+  public getImg(setImage?: React.Dispatch<React.SetStateAction<Image | undefined>>): void {
+    const api = new API();
+    api.getImage(this.id)
       .then((image) => {
         this.id = image.id;
         this.extension = image.extension;
@@ -49,7 +56,7 @@ export default class Image {
     };
   }
 
-  public static async toBase64(file): Promise<Image> {
+  public static async toBase64(file: any): Promise<Image> {
     console.log(typeof file);
     console.log(file);
 

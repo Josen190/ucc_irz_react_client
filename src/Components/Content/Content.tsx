@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import API, { url_get_news_id_full_text } from "../../Fetch/Api";
 import Image from "../../Helpers/Image";
 import News from "../../Helpers/News";
-import Img from "../Img/Img";
+import Img from "../../UI/Img/Img";
 
 interface PropsContent {
   id: string;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router";
-import Menu from "../../Components/Menu/Menu";
-import MenuLink from "../../Components/Menu/MenuLink";
+import Menu from "../../Modules/Menu/Components/Menu/Menu";
+import MenuLink from "../../Modules/Menu/Components/MenuLink/MenuLink";
 
 export default function Edit() {
   return (

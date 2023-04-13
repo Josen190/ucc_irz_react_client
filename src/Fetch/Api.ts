@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosInstance } from "axios";
 import PropsUser from "./Interface/IUser";
 import User from "../Helpers/User";
 import PropsNewsComments from "./Interface/INewsComments";
@@ -12,7 +12,7 @@ import Image from "../Helpers/Image";
 import PropsImage from "./Interface/IImage";
 import Position from "../Helpers/Positions";
 import PropsPosition from "./Interface/IPositions";
-import { authData } from "../Components/AuthController/authController";
+import { authData } from "../Modules/AuthController/Components/AuthController/authController";
 
 export const host = "https://localhost:7116";
 
@@ -151,32 +151,37 @@ const _data = window.localStorage.getItem("jwt");
 const datajwt = _data !== "null" ? _data : "";
 
 class API {
-  public static loading = false;
-  public static jwt: string | null = window.localStorage.getItem("jwt");
-  public static host = "https://localhost:7116";
-  public static feth = axios.create({
-    baseURL: API.host,
-    headers: {
-      
-      authorization:
-        API.jwt === "null" || API.jwt === "undifined"
-          ? `Bearer ${datajwt}`
-          : null,
-      accept: "*/*",
-    },
-  });
+  private static host = "https://localhost:7116";
+  private static loading = false;
+
+  private jwt: string | null;
+  private feth: AxiosInstance;
 
 
+  constructor() {
+    this.jwt = window.localStorage.getItem("jwt");
+    this.feth = axios.create({
+      baseURL: API.host,
+      headers: {
+        authorization:
+          this.jwt || this.jwt === "null" || this.jwt === "undifined"
+            ? `Bearer ${datajwt}`
+            : null,
+        accept: "*/*",
+      },
+    });
+  }
 
-  public static setJwt(jwt: string | null): void {
+
+  public setJwt(jwt: string | null): void {
     if (jwt) {
-      API.feth.defaults.headers["authorization"] = `Bearer ${jwt}`;
+      this.feth.defaults.headers["authorization"] = `Bearer ${jwt}`;
     } else {
-      API.feth.defaults.headers["authorization"] = null;
+      this.feth.defaults.headers["authorization"] = null;
     }
   }
 
-  public static async authentication(email: string, password: string): Promise<authData> {
+  public async authentication(email: string, password: string): Promise<authData> {
     const result: authData | undefined = await this.feth
       .post(url_post_authenticate, {
         email: email,
@@ -200,7 +205,7 @@ class API {
           .then((user) => user)
           .catch(() => null);
 
-          return _data;
+        return _data;
       })
       .catch((error) => undefined);
 
@@ -210,7 +215,7 @@ class API {
     return Promise.resolve(result);
   }
 
-  public static async refresh(
+  public  async refresh(
     jwt: string,
     refreshToken: string,
   ) {
@@ -220,7 +225,7 @@ class API {
         refreshToken: refreshToken,
       },
       {
-        baseURL: this.host,
+        baseURL: API.host,
         headers: {
           authorization: null,
           accept: "*/*",
@@ -234,7 +239,7 @@ class API {
     return Promise.resolve(result);
   }
 
-  public static async refreshToken(
+  public  async refreshToken(
     jwt: string,
     refreshToken: string,
     setAuthData: (
@@ -247,20 +252,20 @@ class API {
       (response) => response,
       async (error) => {
         const status = error.response ? error.response.status : null;
-        
-        if (!this.loading && status === 401) {
-          this.loading = true;
+
+        if (!API.loading && status === 401) {
+          API.loading = true;
           return this.refresh(jwt, refreshToken).then((data) => {
-              setAuthData(data.jwt, data.refreshToken);
-              error.config.headers["Authorization"] =
-                "Bearer " + data.jwt;
-              error.config.baseURL = host;
-              this.loading = false;
-              return this.feth.request(error.config);
-            })
+            setAuthData(data.jwt, data.refreshToken);
+            error.config.headers["Authorization"] =
+              "Bearer " + data.jwt;
+            error.config.baseURL = host;
+            API.loading = false;
+            return this.feth.request(error.config);
+          })
             .catch(() => {
               setAuthData(null, null, null);
-              this.loading = true;
+              API.loading = true;
             });
         }
 
@@ -269,7 +274,7 @@ class API {
     );
   }
 
-  public static async getUser(id: string): Promise<User> {
+  public  async getUser(id: string): Promise<User> {
     const info_user: PropsUser | undefined = await this.feth
       .get(url_get_users_id(id))
       .then((response) => response.data)
@@ -282,7 +287,7 @@ class API {
     return Promise.resolve(new User(info_user));
   }
 
-  public static async getUsers(
+  public  async getUsers(
     pageIndex: number,
     searchString?: string,
     isActive?: boolean,
@@ -318,7 +323,7 @@ class API {
     return Promise.resolve(users);
   }
 
-  public static async getUserMe(): Promise<User | null> {
+  public  async getUserMe(): Promise<User> {
     const info_user: PropsUser | undefined = await this.feth
       .get(url_get_users_me)
       .then((response) => response.data)
@@ -331,7 +336,7 @@ class API {
     return Promise.resolve(new User(info_user));
   }
 
-  public static async putUpdateInfo(
+  public  async putUpdateInfo(
     myself: string,
     iDid: string,
     achievements: string,
@@ -351,7 +356,7 @@ class API {
       });
   }
 
-  public static async putChangePassword(
+  public  async putChangePassword(
     currentPassword: string,
     newPassword: string
   ): Promise<void | any> {
@@ -368,7 +373,7 @@ class API {
       });
   }
 
-  public static async getNewsComment(): Promise<NewsComments[] | null> {
+  public  async getNewsComment(): Promise<NewsComments[]> {
     const result: PropsNewsComments[] | undefined = await this.feth
       .get(url_get_news_comments)
       .then((response) => response.data)
@@ -386,10 +391,10 @@ class API {
     return Promise.resolve(newsComments);
   }
 
-  public static async getMyEvents(
+  public  async getMyEvents(
     start: MyDate,
     end: MyDate
-  ): Promise<Event[] | null> {
+  ): Promise<Event[]> {
     const result: PropsEvent[] | undefined = await this.feth
       .get(url_get_events_my, {
         params: {
@@ -412,7 +417,7 @@ class API {
     return Promise.resolve(events);
   }
 
-  public static async getFullTextOfNews(id: string): Promise<string | null> {
+  public  async getFullTextOfNews(id: string): Promise<string | null> {
     const result: string | undefined = await this.feth
       .get(url_get_news_id_full_text(id))
       .then((response) => response.data)
@@ -425,24 +430,26 @@ class API {
     return Promise.resolve(result);
   }
 
-  public static async deletComment(id: string) {
+  public  async deletComment(id: string) {
     this.feth
       .delete(url_delete_news_comments_id(id))
       .then(() => Promise.resolve())
       .catch(() => Promise.reject());
   }
 
-  public static async postComment(newsID: string, text: string) {
-    this.feth
+  public  async postComment(newsID: string, text: string) {
+    const result = await this.feth
       .post(url_post_news_comments, {
         newsEntryId: newsID,
         text: text,
       })
-      .then(() => Promise.resolve())
+      .then((data) => Promise.resolve(data))
       .catch(() => Promise.reject());
+
+      return result;
   }
 
-  public static async postNews(
+  public  async postNews(
     title: string,
     content: string,
     isPublic: boolean,
@@ -460,7 +467,7 @@ class API {
       .catch(() => Promise.reject());
   }
 
-  public static async getListingNews(
+  public  async getListingNews(
     pageIndex: number,
     userID?: string,
     publicOnly?: boolean,
@@ -490,7 +497,7 @@ class API {
     return Promise.resolve(_arrNews);
   }
 
-  public static async postLike(newsID: string) {
+  public  async postLike(newsID: string) {
     const params: { [key: string]: string } = {
       newsEntryId: newsID,
     };
@@ -503,7 +510,7 @@ class API {
       .catch(() => Promise.reject());
   }
 
-  public static async postUnlike(newsID: string) {
+  public  async postUnlike(newsID: string) {
     this.feth
       .post(url_post_likes_unlike_news_entry, undefined, {
         params: {
@@ -514,14 +521,14 @@ class API {
       .catch(() => Promise.reject());
   }
 
-  public static async deleteNews(id: string) {
+  public  async deleteNews(id: string) {
     this.feth
       .delete(url_delete_news_id(id))
       .then(() => Promise.resolve())
       .catch(() => Promise.reject());
   }
 
-  public static async unsubscribe(userID: string) {
+  public  async unsubscribe(userID: string) {
     this.feth
       .post(url_post_subscriptions_unsubscribe, undefined, {
         params: {
@@ -532,7 +539,7 @@ class API {
       .catch(() => Promise.reject());
   }
 
-  public static async subcribe(userID: string) {
+  public  async subcribe(userID: string) {
     this.feth
       .post(url_post_subscriptions_subcribe, undefined, {
         params: {
@@ -543,7 +550,7 @@ class API {
       .catch(() => Promise.reject());
   }
 
-  public static async getImage(id: string): Promise<Image> {
+  public  async getImage(id: string): Promise<Image> {
     const result: PropsImage | undefined = await this.feth
       .get(url_get_images_id(id))
       .then((response) => response.data)
@@ -556,7 +563,7 @@ class API {
     return Promise.resolve(new Image(result));
   }
 
-  public static async getUserPositions(
+  public  async getUserPositions(
     userId: string
   ): Promise<Position[] | null> {
     const result: PropsPosition[] | undefined = await this.feth

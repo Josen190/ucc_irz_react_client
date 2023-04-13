@@ -17,6 +17,7 @@
     "react-toastify": "^9.1.1",
     "react-ui-animate": "^2.0.0",
     "react-use-measure": "^2.1.1",
+    "sass": "^1.61.0",
     "typescript": "^5.0.2",
     "web-vitals": "^2.1.4"
   },
@@ -40,7 +41,6 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "js in ts": "tsc \n npx prettier --write .",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -49,6 +49,7 @@
   },
   "devDependencies": {
     "@svgr/cli": "^6.5.1",
+    "eslint-plugin-import": "^2.27.5",
     "prettier": "^2.8.7",
     "rimraf": "^4.1.2",
     "vite-plugin-react-svg": "^0.2.0"

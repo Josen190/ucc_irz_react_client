@@ -1,14 +1,52 @@
 {
   "compilerOptions": {
-    "jsx": "react",
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
     "module": "esnext",
-    "target": "es5",
-    "lib": ["es6", "dom", "es2017.object"],
     "moduleResolution": "node",
-    "rootDir": "./src"
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "baseUrl": "./src",
+    "paths": {
+      "@components/*": [
+        "Components/*/index.ts",
+        "Components/*/"
+      ],
+      "Modules/*": [
+        "Modules/*/index.ts",
+        "Modules/News/News-Modules/*/index.ts",
+      ],
+      "Fetch/*":[
+        "Fetch/*", 
+      ],
+      "Fetch/Interface/*":[
+        "Fetch/Interface/*",
+      ],
+      "Helpers/*":[
+        "Helpers/*", 
+      ], 
+      "UI/*":[
+        "UI/*", 
+      ],
+    }
   },
-  "exclude": ["node_modules"],
-  "nodenext": "moduleResolution"
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "index"
+  ]
 }
