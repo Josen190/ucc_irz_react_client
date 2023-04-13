@@ -1,5 +1,5 @@
 
-import API from "Fetch/*";
+import API from "Fetch/Api";
 import React, { useEffect } from "react";
 import Tidings from "../Components/Tidings/Tidings";
 import fetchGetNews from "../Fetch/fetchGetNews";

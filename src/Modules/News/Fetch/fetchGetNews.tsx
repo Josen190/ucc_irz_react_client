@@ -1,6 +1,6 @@
 import API from "Fetch/Api";
 import Tidings from "../Components/Tidings/Tidings";
-
+import React from "react";
 
 function fetchGetNews(
     pageIndex: number, 
@@ -25,7 +25,7 @@ function fetchGetNews(
                 });
 
                 setArrNews(_arrNews);
-                if (tidings.length === 10) setPageIndex(pageIndex + 1);
+                // if (tidings.length === 10) setPageIndex(pageIndex + 1);
             })
             .catch(() => undefined);
 }

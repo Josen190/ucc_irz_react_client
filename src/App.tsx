@@ -26,12 +26,16 @@ function App() {
     );
 
     setContent(authData && authData.jwt != null ? userPage : visitor);
-
-    if (!authData || authData.jwt == null || location.pathname === "/") {
+    console.log("+");
+    
+    if (((!authData || authData.jwt == null) || location.pathname === "/") && location.pathname !== "/news") {
       navigate("/news");
     }
-  }, [location, authData]);
 
+    console.log(authData);
+    
+  }, [location, authData]);
+  
 
 
   return (
