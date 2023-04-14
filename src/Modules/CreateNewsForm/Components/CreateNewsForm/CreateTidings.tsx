@@ -7,8 +7,8 @@ import { useState } from "react";
 import Image from "Helpers/Image";
 import "./CreateTidings.scss";
 import News from "Helpers/News";
-import { authContext, IAuthContext } from "Modules/AuthController";
 import MinUser from "Helpers/MinUser";
+import { useAppSelector } from "Hooks";
 
 interface Props {
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
@@ -16,7 +16,7 @@ interface Props {
 }
 
 export default function CreateTidings({ setActive, updateNews }: Props) {
-  const { authData } = useContext(authContext) as IAuthContext;
+  const user = useAppSelector((s) => s.user);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [images, setImages] = useState<Image | null>(null);
@@ -44,7 +44,7 @@ export default function CreateTidings({ setActive, updateNews }: Props) {
         }}
         onSubmit={(e) => {
           e.preventDefault();
-          createNews(authData.user ?? new MinUser(), title, content, isGlobal).then((news) => {
+          createNews(user ?? new MinUser(), title, content, isGlobal).then((news) => {
             if (updateNews)
             {
               console.log(news);

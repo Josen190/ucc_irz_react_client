@@ -41,8 +41,8 @@ export default function Content({
 
   const getNews = (event: any) => {
     event.target.disabled = true;
-    const api = new API();
-    api.getFullTextOfNews(id)
+    
+    API.getFullTextOfNews(id)
       .then((fullText) => {
         setText(fullText);
         setIsClipped(true);

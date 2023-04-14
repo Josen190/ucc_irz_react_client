@@ -6,7 +6,7 @@ import User from 'Helpers/User';
 import Image from 'Helpers/Image';
 
 interface Props{
-    user: User;
+    user: User | null;
     isLogin: boolean;
 }
 

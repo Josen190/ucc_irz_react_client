@@ -33,8 +33,8 @@ export default class Image {
   }
 
   public getImg(setImage?: React.Dispatch<React.SetStateAction<Image | undefined>>): void {
-    const api = new API();
-    api.getImage(this.id)
+    
+    API.getImage(this.id)
       .then((image) => {
         this.id = image.id;
         this.extension = image.extension;

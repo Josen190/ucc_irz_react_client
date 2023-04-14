@@ -1,7 +1,8 @@
 import AuthController from "./Components/AuthController/authController";
-import authContext, { IAuthContext } from "./Constants/MyContext/MyContexts";
+import authorizationReduser, { authorization } from "./Reducers/authorizationReduser";
 
 export default AuthController;
-export { authContext };
-export type { IAuthContext };
+export { authorizationReduser };
+export { authorization }
+
 

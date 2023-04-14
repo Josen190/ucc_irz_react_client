@@ -7,11 +7,11 @@ interface Props {
 }
 
 function PositionCard({ position }: Props) {
-    const date = position.getDate();
     const [start, setSatrt] = useState<MyDate>();
 
     useEffect(() => {
-        if (typeof date !== 'boolean')
+        const date = position?.getDate();
+        if (date && typeof date !== 'boolean')
             setSatrt(date.start);
     }, [])
 

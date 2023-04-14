@@ -4,14 +4,9 @@ import MinUser from "Helpers/MinUser";
 import News from "Helpers/News";
 import NewsComments from "Helpers/NewsComments";
 import { notifyError } from "Components/Notifications/Notifications";
-import { useContext } from "react";
-import { authContext, IAuthContext } from "Modules/AuthController";
 
-async function newNewsComments(newsID: string, text: string): Promise<NewsComments> {
-    const { authData } = useContext(authContext) as IAuthContext;
-    const author = authData.user;
-    const api = new API;
-    const result: string | false = await api.postComment(newsID, text)
+async function newNewsComments(newsID: string, text: string, author: MinUser = MinUser.getAuntificationuUser()): Promise<NewsComments> {
+    const result: string | false = await API.postComment(newsID, text)
     .then((commentId) => {
       
       notifyError("Комментарий создан");
@@ -27,6 +22,6 @@ async function newNewsComments(newsID: string, text: string): Promise<NewsCommen
     if (!result)
      return Promise.reject(false);
 
-    return Promise.resolve(new NewsComments(result, text, author ?? new MinUser()))
+    return Promise.resolve(new NewsComments(result, text, author))
   }
  export default newNewsComments;

@@ -13,8 +13,8 @@ function Setting() {
 
   const save = () => {
     if (newPassword === rePassword) {
-      const api = new API();
-      api.putChangePassword(currentPassword, newPassword)
+      
+      API.putChangePassword(currentPassword, newPassword)
         .then(() => {
           notifySuccess("изменения сохранены");
         })

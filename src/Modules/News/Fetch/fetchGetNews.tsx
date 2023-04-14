@@ -9,8 +9,8 @@ function fetchGetNews(
     setPageIndex: React.Dispatch<React.SetStateAction<number>>, 
     setDeleteKeyElement: React.Dispatch<React.SetStateAction<string | null>>
 ) {
-    const api = new API();
-        api.getListingNews(pageIndex)
+    
+        API.getListingNews(pageIndex)
             .then((tidings) => {
                 const _arrNews: JSX.Element[] = [];
                 _arrNews.push(...arrNews);

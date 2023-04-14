@@ -11,8 +11,8 @@ export default function CommentFeed({ newsID }: Props) {
   const [commentArr, setCommentArr] = useState<JSX.Element[]>([]);
 
   useEffect(() => {
-    const api = new API();
-    api.getNewsComment().then((newsComments) => {
+    
+    API.getNewsComment().then((newsComments) => {
       let _commentArr: JSX.Element[] = [];
       newsComments.forEach((comment) => {
         _commentArr.push(<Comment key={comment.id} comment={comment} />);

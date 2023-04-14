@@ -3,10 +3,13 @@ import InputField from '../../../../UI/InputField/InputField'
 import Button from '../../../../UI/Button/Button';
 import fetchAuthentication from '../../Fetch/fetchAuthentication';
 import { Navigate } from 'react-router-dom';
-import { IAuthContext, authContext } from 'Modules/AuthController';
+import { useAppDispatch, useAppSelector } from 'Hooks';
+import { authorization } from 'Modules/AuthController';
+
 
 function AuthorizationForm() {
-  const { setAuthData } = useContext(authContext) as IAuthContext;
+  const dispatch = useAppDispatch()
+  const user = useAppSelector((s) => s.user);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [next, setNext] = useState<string | boolean>(false);
@@ -14,10 +17,13 @@ function AuthorizationForm() {
 
   const login = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("f_login");
 
-    fetchAuthentication(email, password, setAuthData).then((userId) => {
-      console.log("f_fetch");
+    fetchAuthentication(email, password, (jwt, refreshToken, user) => {
+      console.log({ jwt, refreshToken, user});
+      
+      dispatch(authorization({ jwt, refreshToken, user}))
+    }).then((userId) => {
+  
       setNext(userId);
     })
   }

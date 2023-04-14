@@ -29,9 +29,9 @@ const Like = ({ isLiked, likesCount, newsID }: Props) => {
     disableBtnProps.disabled = false;
     let _isLiked = !like.isLiked;
     let _likesCount = like.likesCount;
-    const api = new API();
+    
     if (_isLiked) {
-      api.postLike(newsID)
+      API.postLike(newsID)
         .then(() => {
           _likesCount++;
           setLikeUse({
@@ -46,7 +46,7 @@ const Like = ({ isLiked, likesCount, newsID }: Props) => {
           disableBtnProps.disabled = true;
         });
     } else {
-      api.postUnlike(newsID)
+      API.postUnlike(newsID)
         .then(() => {
           _likesCount--;
           setLikeUse({

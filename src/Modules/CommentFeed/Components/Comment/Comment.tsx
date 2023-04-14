@@ -2,9 +2,8 @@ import React, { useContext } from "react";
 import Button from "../../../../UI/Button/Button";
 import UserVisitingCard from "../../../../Components/UserVisitingCard/UserVisitingCard";
 import NewsComments from "../../../../Helpers/NewsComments";
-import authContext, { IAuthContext } from "../../../AuthController/Constants/MyContext/MyContexts";
 import MinUser from "Helpers/MinUser";
-import deletComment from "Modules/CommentFeed/Fetch/deletComment";
+import deletComment from "../../Fetch/deletComment";
 import Content from "Components/Content/Content";
 
 interface Props {
@@ -12,9 +11,7 @@ interface Props {
 }
 
 export default function Comment({ comment }: Props) {
-  const { authData } = useContext(authContext) as IAuthContext;
-  const isMyComment = authData.user ? authData.user.id === comment.id : false;
-
+  const isMyComment = comment.user ? comment.user.isAuntification() : false;
 
   return (
     <div className="tile">
@@ -26,7 +23,7 @@ export default function Comment({ comment }: Props) {
           </Button>
         )}
       </div>
-      <Content id={comment.id} text={comment.text}></Content>
+      <Content id={comment.id} text={comment.text ?? ''}></Content>
     </div>
   );
 }
