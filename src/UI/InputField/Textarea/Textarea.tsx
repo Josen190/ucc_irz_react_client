@@ -1,4 +1,4 @@
-import React, { Component, createRef, FunctionComponent } from "react";
+import React, { ChangeEventHandler, Component, createRef, FunctionComponent } from "react";
 
 interface TextareaProps {
   className?: string;
@@ -11,6 +11,7 @@ interface TextareaProps {
   maxlength?: number;
   minlength?: number;
   isresize?: boolean | string;
+  onChange?: ChangeEventHandler<HTMLTextAreaElement>
   onInput?: (event: React.FormEvent<HTMLTextAreaElement>) => void;
 }
 
@@ -31,6 +32,7 @@ const Textarea: FunctionComponent<TextareaProps> = ({
   minlength,
   isresize,
   onInput,
+  onChange,
 }) => {
   const textareaRef = createRef<HTMLTextAreaElement>();
 
@@ -58,6 +60,11 @@ const Textarea: FunctionComponent<TextareaProps> = ({
         }
         onInput && onInput(e);
       }}
+      onChange={
+        (e) =>{
+          onChange && onChange(e);
+        }
+      }
     />
   );
 };

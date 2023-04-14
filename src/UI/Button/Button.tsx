@@ -74,7 +74,6 @@ export default function Button({
           <input type={"submit"} {...submitProps} />
         </label>
       );
-      console.log("b_submit");
       break;
 
     default:

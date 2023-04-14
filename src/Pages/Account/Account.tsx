@@ -1,4 +1,4 @@
-
+import React from "react";
 import API from "Fetch/Api";
 import User from "Helpers/User";
 import { authContext, IAuthContext } from "Modules/AuthController";
@@ -9,6 +9,7 @@ import Button from "UI/Button/Button";
 
 import { useContext, useState, useEffect } from "react";
 import { useLoaderData } from "react-router";
+import News from "Helpers/News";
 
 
 export async function accountLoader({ params }: any) {
@@ -22,7 +23,7 @@ export async function accountLoader({ params }: any) {
 export default function Account() {
   const { authData } = useContext(authContext) as IAuthContext;
   const [active, setActive] = useState(false);
-  const [updateNews, setUpdateNews] = useState<() => void>();
+  const [updateNews, setUpdateNews] = useState<(news: News) => void>();
   // const [user, setUser] = useState<User>();
   const [positionUser, setPositionUser] = useState<any | null>(null);
 
@@ -34,7 +35,8 @@ export default function Account() {
     api.getUserPositions(user.id).then((position) => positionUser(position));
   }, []);
 
-
+  console.log(active);
+  
   return (
     <main className="account">
       <UserCard user={user} isLogin={isLogin} />
@@ -43,9 +45,7 @@ export default function Account() {
           <div className="tile">
             <Button
               type="button"
-              onClick={() => {
-                setActive(true);
-              }}
+              onClick={() => setActive(true)}
             >
               Создать новость
             </Button>

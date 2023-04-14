@@ -1,4 +1,3 @@
-import PropsImage from "Fetch/IImage";
 import PropsNews from "../Fetch/Interface/INews";
 import Image from "./Image";
 import MinUser from "./MinUser";
@@ -22,7 +21,7 @@ export default class News {
   constructor(props: PropsNews) 
   constructor(idOrProps: string | PropsNews, title?: string, fullText?: string, isPublic?: boolean, author?: MinUser, image?: Image)
   {
-    const sizeClippedText: number = 256;
+    const sizeClippedText = 256;
     if (typeof idOrProps === 'string'){
 
       this.id = idOrProps;

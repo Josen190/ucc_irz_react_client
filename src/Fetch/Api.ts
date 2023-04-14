@@ -155,11 +155,14 @@ class API {
   private static loading = false;
 
   private jwt: string | null;
+  private refreshToken: string | null;
   private feth: AxiosInstance;
 
 
   constructor() {
     this.jwt = window.localStorage.getItem("jwt");
+    this.refreshToken = window.localStorage.getItem("refreshToken");
+    
     this.feth = axios.create({
       baseURL: API.host,
       headers: {
@@ -239,7 +242,7 @@ class API {
     return Promise.resolve(result);
   }
 
-  public  async refreshToken(
+  public  async getRefreshToken(
     jwt: string,
     refreshToken: string,
     setAuthData: (
@@ -417,7 +420,7 @@ class API {
     return Promise.resolve(events);
   }
 
-  public  async getFullTextOfNews(id: string): Promise<string | null> {
+  public  async getFullTextOfNews(id: string): Promise<string> {
     const result: string | undefined = await this.feth
       .get(url_get_news_id_full_text(id))
       .then((response) => response.data)
@@ -461,10 +464,12 @@ class API {
       isPublic: isPublic,
       image: image ? image.toFetch() : null,
     };
-    this.feth
+    const result = await this.feth
       .post(url_post_news, data)
-      .then(() => Promise.resolve())
+      .then((data) => Promise.resolve(data.data as string))
       .catch(() => Promise.reject());
+
+    return result;
   }
 
   public  async getListingNews(

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import API, { host, url_post_refresh } from "../../../../Fetch/Api";
+import API from "../../../../Fetch/Api";
 import authContext from "../../Constants/MyContext/MyContexts";
-import { notifyError } from "../../../../Components/Notifications/Notifications";
 import User from "../../../../Helpers/User";
 
 function setAuthDataApi(jwt: string | null, token: string | null) {
@@ -50,7 +49,7 @@ const AuthController = ({ children }: Props) => {
     );
   }, []);
 
-  api.refreshToken(authData.jwt ?? "", authData.refreshToken ?? "", setAuthData);
+  api.getRefreshToken(authData.jwt ?? "", authData.refreshToken ?? "", setAuthData);
 
   return (
     <authContext.Provider value={{ authData, setAuthData }}>

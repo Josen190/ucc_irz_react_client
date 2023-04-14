@@ -37,22 +37,20 @@ export default function InputField({
 }: Props): JSX.Element {
   const inputprops = {
     className: "",
-    id: id ?? null,
-    placeholder: placeholder ?? null,
-    defaultValue: value ?? null,
+    id: id,
+    placeholder: placeholder,
+    defaultValue: value,
     autoComplete: "off",
-    maxLength: maxlength ?? null,
-    minLength: minlength ?? null,
-    name: name ?? null,
-    onChange: onChange ?? null,
+    maxLength: maxlength,
+    minLength: minlength,
+    name: name,
+    onChange: onChange,
   };
 
-  let input: JSX.Element;
+  let input: JSX.Element = <></>;
 
   if (type === "textarea") {
-    input = <Textarea {...inputprops} rows={rows ?? 2} isresize />;
-  } else if (type === "checkbox") {
-    //.......
+    input = <Textarea {...inputprops} rows={rows ?? 2} isresize={true} />;
   } else {
     input = <input type={type} {...inputprops} required={required ?? false} />;
   }

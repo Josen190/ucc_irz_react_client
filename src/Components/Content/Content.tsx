@@ -9,7 +9,7 @@ interface PropsContent {
   id: string;
   title?: string;
   isClipped?: boolean;
-  text?: string;
+  text: string;
   image?: Image;
 }
 
@@ -29,9 +29,8 @@ export default function Content({
   );
 
   useEffect(() => {
-    let arrStr = text.split("\n");
-    let arrP = [];
-    console.log(arrStr);
+    const arrStr = text.split("\n");
+    const arrP: JSX.Element[] = [];
     arrStr.forEach((element, index) => {
       if (element.length === 0 || element === "\r")
         arrP.push(<br key={index} />);
@@ -40,9 +39,10 @@ export default function Content({
     setFormattedText(arrP.length > 0 ? arrP : null);
   }, [text]);
 
-  const getNews = (event) => {
+  const getNews = (event: any) => {
     event.target.disabled = true;
-    API.getFullTextOfNews(id)
+    const api = new API();
+    api.getFullTextOfNews(id)
       .then((fullText) => {
         setText(fullText);
         setIsClipped(true);

@@ -1,28 +1,35 @@
+import React, { useContext } from "react";
 import createNews from "../../Fetch/createNews";
 import Button from "UI/Button/Button";
 import Checkbox from "UI/InputField/Checkbox/Checkbox";
 import InputField from "UI/InputField/InputField";
 import { useState } from "react";
 import Image from "Helpers/Image";
-
+import "./CreateTidings.scss";
+import News from "Helpers/News";
+import { authContext, IAuthContext } from "Modules/AuthController";
+import MinUser from "Helpers/MinUser";
 
 interface Props {
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
-  updateNews: Function | undefined;
+  updateNews?: ((news: News) => void);
 }
 
 export default function CreateTidings({ setActive, updateNews }: Props) {
+  const { authData } = useContext(authContext) as IAuthContext;
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [images, setImages] = useState<Image | null>(null);
   const [isGlobal, setIsGlobal] = useState(false);
+
+  
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     Image.toBase64(event.target.files).then((result) => {
       setImages(result);
     });
   };
-
+  
   return (
     <div
       className="modal"
@@ -37,8 +44,15 @@ export default function CreateTidings({ setActive, updateNews }: Props) {
         }}
         onSubmit={(e) => {
           e.preventDefault();
-          setActive(false);
-          createNews(title, content, isGlobal)
+          createNews(authData.user ?? new MinUser(), title, content, isGlobal).then((news) => {
+            if (updateNews)
+            {
+              console.log(news);
+              updateNews(news);
+            }
+              
+            setActive(false);
+          })
         }}
       >
         <h3>Создать новость</h3>
@@ -50,7 +64,8 @@ export default function CreateTidings({ setActive, updateNews }: Props) {
         <InputField
           type="textarea"
           rows={15}
-          onChange={(event) => setContent(event.target.value)}
+          onChange={(event) => {
+           setContent(event.target.value)}}
         />
         <label>
           Добавить картинки:
