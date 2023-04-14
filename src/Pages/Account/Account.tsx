@@ -6,11 +6,12 @@ import FeedNews from "Modules/News";
 import UserCard from "Modules/UserCard";
 import Button from "UI/Button/Button";
 
-import { useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useLoaderData } from "react-router";
 import News from "Helpers/News";
 import { useAppSelector } from "Hooks";
 
+import "./Account.scss";
 
 export async function accountLoader({ params }: any) {
   if (typeof params.id !== "string") return;
@@ -25,18 +26,17 @@ export default function Account() {
   const [user, setUser] = useState<User | null>(null);
   const [positionUser, setPositionUser] = useState<any | null>(null);
 
-
+  const userId = useLoaderData() as string;
 
   useEffect(() => {
-    const userId = useLoaderData() as string;
     if (AuntificationuUser?.id !== userId){
       API.getUser(userId).then((_user) => setUser(_user))
       API.getUserPositions(userId).then((position) => setPositionUser(position));
+    }else if (AuntificationuUser.id === userId){
+      setUser(AuntificationuUser);
     }
     
   }, []);
-
-  console.log(active);
   
   return (
     <main className="account">

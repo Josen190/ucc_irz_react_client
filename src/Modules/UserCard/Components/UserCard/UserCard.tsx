@@ -13,8 +13,8 @@ interface Props{
 
 function UserCard({user, isLogin}: Props) {
   return (
-    <div className="tile ProfileHeader">
-        <div className="margin-right">
+    <div className="tile UserCard">
+        <div className="">
           <Profile_Picture type="norm" image={user ? user.image : new Image()}></Profile_Picture>
           <Profile_Navigation
             isLogin={isLogin}

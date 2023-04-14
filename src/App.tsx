@@ -8,6 +8,7 @@ import Visitor from "./Pages/Visitor/Visitor";
 import { Outlet } from "react-router-dom";
 import { useEffect } from "react";
 import { useAppSelector } from "Hooks";
+import Header from "Modules/Header";
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
   return (
     <div>
       <ToastContainer></ToastContainer>
+      <Header></Header>
       {content}
     </div>
   );
