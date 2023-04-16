@@ -1,7 +1,8 @@
 import React from "react";
+import MenuLink from "../MenuLink/MenuLink";
 
 interface Props{
-  children: JSX.Element | JSX.Element[];
+  children: React.ReactElement<typeof MenuLink> | React.ReactElement<typeof MenuLink>[];
 }
 
 export default function Menu({ children }: Props) {
