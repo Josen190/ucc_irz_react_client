@@ -1,6 +1,7 @@
 import React, { MouseEventHandler } from "react";
 import "./button.scss";
 import { Link } from "react-router-dom";
+import { OnClickHandler } from "Types/types";
 
 interface PropsButton {
   type: "button" | "link" | "submit";
@@ -8,7 +9,7 @@ interface PropsButton {
   title?: string;
   color?: "basic" | "red" | "mini";
   disabled?: boolean;
-  onClick?: MouseEventHandler<HTMLButtonElement | HTMLInputElement | HTMLAnchorElement>;
+  onClick?: OnClickHandler;
   children?: string | JSX.Element;
   href?: string;
   id?: string;
@@ -19,7 +20,7 @@ export default function Button({
   type,
   stale = "basic",
   title,
-  color,
+  color = "basic",
   disabled,
   onClick,
   children,
@@ -28,7 +29,7 @@ export default function Button({
   required,
 }: PropsButton) {
   let button: JSX.Element | null = null;
-  const classNames = `button color-${color ?? "basic"}`;
+  const classNames = `button color-${color}`;
 
   const buttonprops = {
     className: classNames,
