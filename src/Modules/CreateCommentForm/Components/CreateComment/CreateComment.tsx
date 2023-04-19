@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import newNewsComments from "Modules/CreateCommentForm/Fetch/newNewsComments";
+import newNewsComments from "../..//Fetch/newNewsComments";
 import Button from "UI/Button/Button";
 import InputField from "UI/InputField/InputField";
 

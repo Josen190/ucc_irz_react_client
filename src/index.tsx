@@ -9,17 +9,6 @@ import { Provider } from "react-redux";
 import store from "Store";
 
 
-import LogRocket from 'logrocket';
-LogRocket.init('v1wt1j/ucc_irz_frontend');
-LogRocket.identify('THE_USER_ID_IN_YOUR_APP', {
-  name: 'Slava',
-  email: 'ya.zaxaroff2013@gmail.com',
-
-  // Add your own custom user variables here, ie:
-  subscriptionType: 'pro'
-});
-
-
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );

@@ -6,7 +6,7 @@ const SvgHeart = ({
   titleId = undefined,
   className = undefined,
   size = "25px",
-  fill = "none",
+  fill = "red",
 }: PropsSvg) => (
   <svg
     className={className}

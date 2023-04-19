@@ -10,10 +10,11 @@ interface PropsButton {
   color?: "basic" | "red" | "mini";
   disabled?: boolean;
   onClick?: OnClickHandler;
-  children?: string | JSX.Element;
+  children?: string | JSX.Element| JSX.Element[];
   href?: string;
   id?: string;
   required?: boolean;
+  className?: string;
 }
 
 export default function Button({
@@ -27,9 +28,10 @@ export default function Button({
   href,
   id,
   required,
+  className = "",
 }: PropsButton) {
   let button: JSX.Element | null = null;
-  const classNames = `button color-${color}`;
+  const classNames = `button color-${color} ${className}`;
 
   const buttonprops = {
     className: classNames,

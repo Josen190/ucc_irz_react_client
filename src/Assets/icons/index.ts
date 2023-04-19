@@ -19,6 +19,6 @@ export interface PropsSvg {
     title?: string,
     titleId?: string,
     className?: string,
-    size: string,
-    fill: string,
+    size?: string,
+    fill?: string,
 }
