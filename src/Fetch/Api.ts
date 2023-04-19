@@ -410,17 +410,13 @@ class API {
     return Promise.resolve(events);
   }
 
-  public static async getFullTextOfNews(id: string): Promise<string | null> {
-    const result: string | undefined = await this.feth
+  public static async getFullTextOfNews(id: string): Promise<string> {
+    const result = await this.feth
       .get(url_get_news_id_full_text(id))
-      .then((response) => response.data)
-      .catch(() => undefined);
+      .then((response) => Promise.resolve(response.data))
+      .catch(() => Promise.reject(null));
 
-    if (!result) {
-      return Promise.reject(null);
-    }
-
-    return Promise.resolve(result);
+    return result;
   }
 
   public static async deletComment(id: string) {
