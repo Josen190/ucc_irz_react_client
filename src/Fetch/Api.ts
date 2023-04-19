@@ -441,16 +441,16 @@ class API {
     content: string,
     isPublic: boolean,
     image?: Image
-  ) {
+  ): Promise<string> {
     const data = {
       title: title,
       text: content,
       isPublic: isPublic,
       image: image ? image.toFetch() : null,
     };
-    const result = this.feth
+    const result = await this.feth
       .post(url_post_news, data)
-      .then((id) => Promise.resolve())
+      .then((response) => Promise.resolve(response.data as string))
       .catch(() => Promise.reject(null));
 
       return result;
