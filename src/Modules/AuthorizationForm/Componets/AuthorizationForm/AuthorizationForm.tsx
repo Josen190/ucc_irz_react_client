@@ -19,8 +19,6 @@ function AuthorizationForm() {
     e.preventDefault();
 
     fetchAuthentication(email, password, (jwt, refreshToken, user) => {
-      console.log({ jwt, refreshToken, user});
-      
       dispatch(authorization({ jwt, refreshToken, user}))
     }).then((userId) => {
   

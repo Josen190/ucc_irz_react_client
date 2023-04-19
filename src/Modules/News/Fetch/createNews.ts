@@ -16,12 +16,8 @@ async function createNews(author: MinUser, title: string, content: string, isGlo
         return false;
       });
 
-    console.log(result);
-
     if (!result)
      return Promise.reject(false);
-
-    console.log(result);
     
     return Promise.resolve(new News(result, title, content, isGlobal, author, image))
   }

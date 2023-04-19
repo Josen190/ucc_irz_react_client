@@ -207,7 +207,6 @@ class API {
 
     if (!result) return Promise.reject();
 
-    console.log(result);
     return Promise.resolve(result);
   }
 
