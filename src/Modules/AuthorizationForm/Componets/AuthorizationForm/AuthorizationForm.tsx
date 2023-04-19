@@ -9,7 +9,7 @@ import { authorization } from 'Modules/AuthController';
 
 function AuthorizationForm() {
   const dispatch = useAppDispatch()
-  const user = useAppSelector((s) => s.user);
+  const user = useAppSelector((s) => s.authorization.user);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [next, setNext] = useState<string | boolean>(false);
