@@ -76,6 +76,7 @@ export default function Tidings({ tidings, deletElement }: Props) {
           ></Like>
           <CommentsIcon
             commentCount={tidings.commentCount}
+            active={isActiveCommentFeed}
             setActive={setIsActiveCommentFeed}
           ></CommentsIcon>
         </div>

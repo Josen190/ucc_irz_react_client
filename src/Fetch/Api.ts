@@ -361,9 +361,14 @@ class API {
       });
   }
 
-  public static async getNewsComment(): Promise<NewsComments[]> {
+  public static async getNewsComment(newsId: string): Promise<NewsComments[]> {
     const result: PropsNewsComments[] | undefined = await this.feth
-      .get(url_get_news_comments)
+      .get(url_get_news_comments, {
+        params:{
+          newsEntryId: newsId
+        }
+        
+      })
       .then((response) => response.data)
       .catch(() => undefined);
 

@@ -1,5 +1,7 @@
 import API from "Fetch/Api";
 import ILikeStatus from "../Types/TypeLike";
+import React from 'react';
+
 
 export default async function switchLike(
     newsID: string,

@@ -1,7 +1,8 @@
 import API from "Fetch/Api";
 import Comment from "../Comment/Comment";
-import { useState, useEffect } from "react";
 import CreateComment from "Modules/CreateCommentForm";
+import { useState, useEffect } from "react";
+
 
 interface Props {
   newsID: string;
@@ -12,7 +13,7 @@ export default function CommentFeed({ newsID }: Props) {
 
   useEffect(() => {
     
-    API.getNewsComment().then((newsComments) => {
+    API.getNewsComment(newsID).then((newsComments) => {
       let _commentArr: JSX.Element[] = [];
       newsComments.forEach((comment) => {
         _commentArr.push(<Comment key={comment.id} comment={comment} />);

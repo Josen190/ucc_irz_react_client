@@ -3,13 +3,13 @@ import Textarea from "./Textarea/Textarea";
 
 interface Props {
   type:
-    | "textarea"
-    | "text"
-    | "password"
-    | "email"
-    | "date"
-    | "time"
-    | "checkbox";
+  | "textarea"
+  | "text"
+  | "password"
+  | "email"
+  | "date"
+  | "time"
+  | "checkbox";
   title?: string;
   id?: string;
   placeholder?: string;
@@ -20,6 +20,7 @@ interface Props {
   rows?: number;
   required?: boolean;
   onChange?: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+  onSetValueStr?: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default function InputField({
@@ -34,6 +35,7 @@ export default function InputField({
   rows,
   required,
   onChange,
+  onSetValueStr,
 }: Props): JSX.Element {
   const inputprops = {
     className: "",
@@ -44,15 +46,20 @@ export default function InputField({
     maxLength: maxlength,
     minLength: minlength,
     name: name,
-    onChange: onChange,
   };
 
   let input: JSX.Element = <></>;
 
+  const _onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    if (onSetValueStr) onSetValueStr(e.target.value);
+    if (onChange) onChange(e);
+  };
+
+
   if (type === "textarea") {
-    input = <Textarea {...inputprops} rows={rows ?? 2} isresize={true} />;
+    input = <Textarea {...inputprops} rows={rows ?? 2} isresize={true} onChange={_onChange} />;
   } else {
-    input = <input type={type} {...inputprops} required={required ?? false} />;
+    input = <input type={type} {...inputprops} required={required ?? false} onChange={_onChange} />;
   }
 
   return (

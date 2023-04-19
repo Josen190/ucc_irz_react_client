@@ -3,10 +3,11 @@ import ChatBoxOutline from "Assets/icons/ChatBoxOutline";
 
 interface Props {
   commentCount: number;
+  active: boolean;
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function CommentsIcon({ commentCount, setActive }: Props) {
+export default function CommentsIcon({ commentCount, active, setActive }: Props) {
   const switchComments = () => {
     setActive(true);
   };
