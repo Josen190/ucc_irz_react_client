@@ -12,11 +12,11 @@ import { useAppSelector } from "Hooks";
 
 interface Props {
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
-  updateNews?: ((news: News) => void);
+  updateNews: ((news: News) => void);
 }
 
 export default function CreateTidings({ setActive, updateNews }: Props) {
-  const user = useAppSelector((s) => s.user);
+  const user = useAppSelector((s) => s.authorization.user);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [images, setImages] = useState<Image | null>(null);
@@ -45,10 +45,7 @@ export default function CreateTidings({ setActive, updateNews }: Props) {
         onSubmit={(e) => {
           e.preventDefault();
           createNews(user ?? new MinUser(), title, content, isGlobal).then((news) => {
-            if (updateNews)
-            {
-              updateNews(news);
-            }
+            updateNews(news);
             console.log(news);
             setActive(false);
           })

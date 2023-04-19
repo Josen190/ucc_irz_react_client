@@ -7,7 +7,6 @@ function fetchGetNews(
     pageIndex: number,
     arrNews: JSX.Element[],
     setArrNews: React.Dispatch<React.SetStateAction<JSX.Element[]>>,
-    setPageIndex: React.Dispatch<React.SetStateAction<number>>,
     setDeleteKeyElement: React.Dispatch<React.SetStateAction<string | null>>,
     filter?: INewsFiler,
 ) {

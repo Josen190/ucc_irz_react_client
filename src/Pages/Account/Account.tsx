@@ -1,7 +1,6 @@
 import React from "react";
 import API from "Fetch/Api";
 import User from "Helpers/User";
-import CreateTidings from "Modules/CreateNewsForm";
 import FeedNews from "Modules/News";
 import UserCard from "Modules/UserCard";
 import Button from "UI/Button/Button";
@@ -14,8 +13,7 @@ import { useAppSelector } from "Hooks";
 import "./Account.scss";
 
 export async function accountLoader({ params }: any) {
-  if (typeof params.id !== "string") return;
-    // const user: User = await API.getUser(params.id).then((user) => user);
+     // const user: User = await API.getUser(params.id).then((user) => user);
   return params.id;
 }
 
@@ -39,7 +37,7 @@ export default function Account() {
   return (
     <main className="account">
       <UserCard user={user} isLogin={isLogin} />
-      {user && <FeedNews userID={user.id}/>}
+      <FeedNews inAccount={true}/>
     </main>
   );
 }

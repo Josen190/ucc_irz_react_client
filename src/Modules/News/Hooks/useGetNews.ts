@@ -10,12 +10,11 @@ function useGetNews(
     pageIndex: number,
     arrayNews: JSX.Element[],
     setArrayNews: React.Dispatch<React.SetStateAction<JSX.Element[]>>,
-    setPageIndex: React.Dispatch<React.SetStateAction<number>>,
     setDeleteKeyElement: React.Dispatch<React.SetStateAction<string | null>>,
     filter?: INewsFiler,
 ) {
     useEffect(() => {
-        fetchGetNews(pageIndex, arrayNews, setArrayNews, setPageIndex, setDeleteKeyElement, filter);
+        fetchGetNews(pageIndex, arrayNews, setArrayNews, setDeleteKeyElement, filter);
     }, [pageIndex]);
 }
 
