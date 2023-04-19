@@ -1,6 +1,7 @@
 import User from "Helpers/User";
 import { configureStore, createSlice } from '@reduxjs/toolkit'
 import API from "Fetch/Api";
+import MinUser from "Helpers/MinUser";
 
 export interface IAuthorizationState {
     isLogin: boolean;
@@ -36,6 +37,9 @@ const authorizationReducer = createSlice({
             const _user = payload.user;
             API.setJwt(_jwt);
             API.setRefreshToken(_refreshToken);
+
+            if (payload.user)
+                MinUser.setAuntificationuUser(payload.user);
 
             window.localStorage.setItem("jwt", _jwt ?? "null");
             window.localStorage.setItem("refreshToken", _refreshToken ?? "null");
