@@ -73,7 +73,6 @@ export default function Month({ year, numberMonth, setSelectedDay }: Props) {
   }
 
   useEffect(() => {
-    const api = new API()
     API.getMyEvents(firstDayOfCalendar, lastDayOfCalendar).then((events) => {
       setListEvents(events);
     });

@@ -447,10 +447,12 @@ class API {
       isPublic: isPublic,
       image: image ? image.toFetch() : null,
     };
-    this.feth
+    const result = this.feth
       .post(url_post_news, data)
-      .then(() => Promise.resolve())
-      .catch(() => Promise.reject());
+      .then((id) => Promise.resolve())
+      .catch(() => Promise.reject(null));
+
+      return result;
   }
 
   public static async getListingNews(

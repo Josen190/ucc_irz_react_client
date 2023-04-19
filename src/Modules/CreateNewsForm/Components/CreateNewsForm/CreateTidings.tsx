@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import createNews from "../../Fetch/createNews";
 import Button from "UI/Button/Button";
 import Checkbox from "UI/InputField/Checkbox/Checkbox";
