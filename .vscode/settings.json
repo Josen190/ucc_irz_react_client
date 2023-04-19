@@ -1,0 +1,13 @@
+{
+  "files.exclude": {
+    ".vs": true,
+    "**/*.js": false,
+    "/.sin": true,
+    "bin": true,
+    "node_modules/": false,
+    "obj": true,
+    "TestResults": true,
+    "**/*.css": false,
+    "**/*.css.map": false
+  }
+}

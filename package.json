@@ -3,12 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.3",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@types/react": "^18.0.31",
     "axios": "^1.3.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
     "react-router": "^6.8.0",
     "react-router-dom": "^6.8.0",
     "react-scripts": "5.0.1",
@@ -16,6 +19,11 @@
     "react-toastify": "^9.1.1",
     "react-ui-animate": "^2.0.0",
     "react-use-measure": "^2.1.1",
+    "redux": "^4.2.1",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.4.2",
+    "sass": "^1.61.0",
+    "typescript": "^5.0.2",
     "web-vitals": "^2.1.4"
   },
   "eslintConfig": {
@@ -41,10 +49,13 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "svgr": "svgr icon:'{size}' replaceAttrValues:{className:'{className}', fill:'{fill}'} --title-prop -d src/Components/icons src/icon"
+    "svgr": "svgr icon:'{size}' replaceAttrValues:{className:'{className}', fill:'{fill}'} --title-prop -d src/Components/icons src/icon",
+    "sort": "npx prettier --write ."
   },
   "devDependencies": {
     "@svgr/cli": "^6.5.1",
+    "eslint-plugin-import": "^2.27.5",
+    "prettier": "^2.8.7",
     "rimraf": "^4.1.2",
     "vite-plugin-react-svg": "^0.2.0"
   }

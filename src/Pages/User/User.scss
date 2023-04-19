@@ -1,0 +1,13 @@
+.box-user{
+    width: auto;
+    min-width: 700px;
+    max-width: 1000px;
+    height: max-content;
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    grid-column-gap: 20px;
+    justify-content: center;
+    justify-items: stretch;
+    align-items: start;
+}

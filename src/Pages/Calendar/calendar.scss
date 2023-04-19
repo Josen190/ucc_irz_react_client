@@ -1,0 +1,41 @@
+$pantone-295-c: #002856;
+$pantone-289-c: #1f3a60;
+$color-gray-1: #ededed;
+$color-gray-3: #e0e0e0;
+$pantone-200-c: #c11727;
+$pantone-187-c: #ae1926;
+
+.calendar {
+  $margin-buttom: 25px;
+
+  display: grid;
+  box-sizing: border-box;
+  grid-template-rows: min-content 1fr min-content;
+  grid-gap: 0;
+  grid-auto-flow: column;
+  align-self: center;
+  justify-self: center;
+  border: 1px solid black;
+  margin-bottom: $margin-buttom;
+  height: calc(100% - #{$margin-buttom});
+}
+
+.day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: medium;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  border: 1px solid $color-gray-1;
+
+  &.today {
+    display: block;
+    border: 2px solid black;
+    background-color: aqua;
+  }
+
+  &.noThisMonth {
+  }
+}
