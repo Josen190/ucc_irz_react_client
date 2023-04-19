@@ -46,7 +46,6 @@ export default function CreateTidings({ setActive, updateNews }: Props) {
           e.preventDefault();
           createNews(user ?? new MinUser(), title, content, isGlobal).then((news) => {
             updateNews(news);
-            console.log(news);
             setActive(false);
           })
         }}

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import fetchGetNews from "../..//Fetch/fetchGetNews";
 import useDeleteNewsFromFeed from "../..//Hooks/useDeleteNewsFromFeed";
 import useGetNews from "../..//Hooks/useGetNews";
 import News from "Helpers/News";
@@ -20,7 +19,7 @@ export default function FeedNews({
   const filter = useAppSelector((s) => s.newsFilter);
   const [active, setActive] = useState(false);
   const [arrNews, setArrNews] = useState<JSX.Element[]>([]);
-  const [pageIndex, setPageIndex] = useState(0);
+  const [pageIndex, setPageIndex] = useState(1);
   const [deleteKeyElement, setDeleteKeyElement] = useState<string | null>(null);
   const [isEndOfPage, setIsEndOfPage] = useState(false);
 
@@ -35,11 +34,7 @@ export default function FeedNews({
   }, [isEndOfPage])
 
   const update = (news: News) => {
-    console.log(news);
-    if (news) {
-      setArrNews([<Tidings key={news.id} tidings={news} deletElement={setDeleteKeyElement} />, ...arrNews]);
-    }
-
+    setArrNews([<Tidings key={news.id + Math.random()} tidings={news} deletElement={setDeleteKeyElement} />, ...arrNews]);
   };
 
 

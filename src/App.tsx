@@ -12,7 +12,7 @@ import Header from "Modules/Header";
 
 
 function App() {
-  const { isLogin, user } = useAppSelector((state) => state)
+  const { isLogin, user } = useAppSelector((state) => state.authorization)
   const [content, setContent] = useState<JSX.Element | null>(null);
   const navigate = useNavigate();
   const location = useLocation();

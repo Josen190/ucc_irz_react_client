@@ -24,9 +24,8 @@ function fetchGetNews(
                     />
                 );
             });
-
+            
             setArrNews(_arrNews);
-            // if (tidings.length === 10) setPageIndex(pageIndex + 1);
         })
         .catch(() => undefined);
 }
