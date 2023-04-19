@@ -5,8 +5,9 @@ import News from "Helpers/News";
 import Tidings from "../Tidings/Tidings";
 import HeaderFeedNews from "../HeaderFeedNews/HeaderFeedNews";
 import CreateTidings from "../CreateNewsForm/CreateTidings";
-import { useAppSelector } from "Hooks";
+import { useAppDispatch, useAppSelector } from "Hooks";
 import useEndOfPage from "../../Hooks/useEndOfPage"
+import { setFilter } from "../../Reducers/NewsFilterReduser";
 
 interface Props {
   inAccount?: boolean;
@@ -15,7 +16,7 @@ interface Props {
 export default function FeedNews({
   inAccount = false,
 }: Props): JSX.Element {
-  const isLogin = useAppSelector((s) => s.authorization.isLogin);
+  const {isLogin, user }= useAppSelector((s) => s.authorization);
   const filter = useAppSelector((s) => s.newsFilter);
   const [active, setActive] = useState(false);
   const [arrNews, setArrNews] = useState<JSX.Element[]>([]);
@@ -23,8 +24,10 @@ export default function FeedNews({
   const [deleteKeyElement, setDeleteKeyElement] = useState<string | null>(null);
   const [isEndOfPage, setIsEndOfPage] = useState(false);
 
+  const userId = user ? user.id : undefined;
+  const filterInAccount = {AuthorId: userId, PublicOnly: undefined, LikedOnly: undefined, SearchString: undefined};
   useDeleteNewsFromFeed(deleteKeyElement, arrNews, setArrNews);
-  useGetNews(pageIndex, arrNews, setArrNews, setDeleteKeyElement, filter);
+  useGetNews(pageIndex, arrNews, setArrNews, setDeleteKeyElement, inAccount? filterInAccount : filter);
   useEndOfPage(setIsEndOfPage);
 
   useEffect(() => {
