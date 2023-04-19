@@ -6,7 +6,7 @@ import News from "Helpers/News";
 
 
 async function createNews(author: MinUser, title: string, content: string, isGlobal: boolean, image?: Image): Promise<News> {  
-    const result: string | false = await API.pos/tNews(title, content, isGlobal)
+    const result: string | false = await API.postNews(title, content, isGlobal)
       .then((newsID) => {
         notifySuccess("Новость создана");
         return newsID;

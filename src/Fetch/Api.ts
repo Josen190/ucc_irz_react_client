@@ -12,6 +12,7 @@ import Image from "../Helpers/Image";
 import PropsImage from "./Interface/IImage";
 import Position from "../Helpers/Positions";
 import PropsPosition from "./Interface/IPositions";
+import { INewsFiler } from "Modules/News";
 
 const host = "https://localhost:7116";
 
@@ -458,20 +459,18 @@ class API {
 
   public static async getListingNews(
     pageIndex: number,
-    userID?: string,
-    publicOnly?: boolean,
-    likedOnly?: boolean,
+    filter?: INewsFiler,
     pageSize = 10
   ): Promise<News[]> {
     const params: { [key: string]: string | number | boolean } = {
       PageIndex: pageIndex,
       PageSize: pageSize,
     };
-    if (userID) params.AuthorId = userID;
-
-    if (publicOnly) params.PublicOnly = publicOnly;
-
-    if (likedOnly) params.LikedOnly = likedOnly;
+    
+    if (filter?.AuthorId) params.AuthorId = filter.AuthorId;
+    if (filter?.PublicOnly) params.PublicOnly = filter.PublicOnly;
+    if (filter?.LikedOnly) params.LikedOnly = filter.LikedOnly;
+    if (filter?.SearchString) params.SearchString = filter.SearchString;
 
     const result: PropsNews[] | undefined = await this.feth
       .get(url_get_news, { params: params })

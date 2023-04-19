@@ -6,7 +6,7 @@ import { useAppSelector } from "Hooks";
 
 
 export default function Header() {
-  const isLogin = useAppSelector((s)=> s.isLogin);
+  const isLogin = useAppSelector((s)=> s.authorization.authorization.authorization.isLogin);
 
   return (
     <header>

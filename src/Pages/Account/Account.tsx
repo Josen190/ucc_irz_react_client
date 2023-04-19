@@ -20,9 +20,7 @@ export async function accountLoader({ params }: any) {
 }
 
 export default function Account() {
-  const {isLogin, user: AuntificationuUser} = useAppSelector((s)=> s);
-  const [active, setActive] = useState(false);
-  const [updateNews, setUpdateNews] = useState<(news: News) => void>();
+  const {isLogin, user: AuntificationuUser} = useAppSelector((s)=> s.authorization);
   const [user, setUser] = useState<User | null>(null);
   const [positionUser, setPositionUser] = useState<any | null>(null);
 
@@ -41,22 +39,7 @@ export default function Account() {
   return (
     <main className="account">
       <UserCard user={user} isLogin={isLogin} />
-      <div className="">
-        {isLogin && (
-          <div className="tile">
-            <Button
-              type="button"
-              onClick={() => setActive(true)}
-            >
-              Создать новость
-            </Button>
-          </div>
-        )}
-        {user && <FeedNews userID={user.id} setUpdate={setUpdateNews} />}
-      </div>
-      {active && (
-        <CreateTidings setActive={setActive} updateNews={updateNews} />
-      )}
+      {user && <FeedNews userID={user.id}/>}
     </main>
   );
 }

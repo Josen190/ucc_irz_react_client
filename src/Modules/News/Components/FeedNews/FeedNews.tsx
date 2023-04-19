@@ -4,47 +4,40 @@ import useDeleteNewsFromFeed from "../..//Hooks/useDeleteNewsFromFeed";
 import useGetNews from "../..//Hooks/useGetNews";
 import News from "Helpers/News";
 import Tidings from "../Tidings/Tidings";
+import HeaderFeedNews from "../HeaderFeedNews/HeaderFeedNews";
+import CreateTidings from "../CreateNewsForm/CreateTidings";
+import { useAppSelector } from "Hooks";
 
 
 interface Props {
-  userID?: string;
-  publicOnly?: boolean;
-  likedOnly?: boolean;
-  setUpdate?: React.Dispatch<React.SetStateAction<((news: News) => void) | undefined>>;
+  inAccount?: boolean;
 }
 
 export default function FeedNews({
-  userID,
-  publicOnly,
-  likedOnly,
-  setUpdate,
+  inAccount = false,
 }: Props): JSX.Element {
+  const isLogin = useAppSelector((s)=> s.authorization.isLogin);
+  const filter = useAppSelector((s)=> s.newsFilter);
+  const [active, setActive] = useState(false);
   const [arrNews, setArrNews] = useState<JSX.Element[]>([]);
   const [pageIndex, setPageIndex] = useState(0);
   const [deleteKeyElement, setDeleteKeyElement] = useState<string | null>(null);
 
-  useDeleteNewsFromFeed(
-    deleteKeyElement,
-    arrNews,
-    setArrNews);
-
-
-  useGetNews(pageIndex, arrNews, setArrNews, setPageIndex, setDeleteKeyElement);
+  useDeleteNewsFromFeed(deleteKeyElement,arrNews,setArrNews);
+  useGetNews(pageIndex, arrNews, setArrNews, setPageIndex, setDeleteKeyElement, filter);
 
   const update = (news: News) => {
     console.log(news);
-    if (news){
-      setArrNews([<Tidings key={news.id} tidings={news} deletElement={setDeleteKeyElement}/>, ...arrNews]);
+    if (news) {
+      setArrNews([<Tidings key={news.id} tidings={news} deletElement={setDeleteKeyElement} />, ...arrNews]);
     }
-    
+
   };
 
-  if (setUpdate)
-    useEffect(() => {
-      console.log("1-iter");
-      
-      setUpdate(update);
-    }, [setUpdate]);
 
-  return <main className="column">{arrNews}</main>;
+  return <div className="column">
+    <HeaderFeedNews isLogin={isLogin}></HeaderFeedNews>
+    {arrNews}
+    {active && (<CreateTidings setActive={setActive} updateNews={update} />)}
+  </div>;
 }
