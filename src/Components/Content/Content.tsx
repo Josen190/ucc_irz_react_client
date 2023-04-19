@@ -1,6 +1,6 @@
 import React, { ReactNode, useState } from "react";
 import { useEffect } from "react";
-import API, { url_get_news_id_full_text } from "../../Fetch/Api";
+import API from "../../Fetch/Api";
 import Image from "../../Helpers/Image";
 import News from "../../Helpers/News";
 import Img from "../../UI/Img/Img";
@@ -29,7 +29,7 @@ export default function Content({
   );
 
   useEffect(() => {
-    const arrStr = text.split("\n");
+    const arrStr = _text.split("\n");
     const arrP: JSX.Element[] = [];
     arrStr.forEach((element, index) => {
       if (element.length === 0 || element === "\r")
@@ -37,15 +37,15 @@ export default function Content({
       else arrP.push(<p key={index}>{element}</p>);
     });
     setFormattedText(arrP.length > 0 ? arrP : null);
-  }, [text]);
-
+  }, [_text]);
+   
   const getNews = (event: any) => {
     event.target.disabled = true;
     
     API.getFullTextOfNews(id)
       .then((fullText) => {
         setText(fullText);
-        setIsClipped(true);
+        setIsClipped(false);
         event.target.disabled = false;
       })
       .catch(() => {
@@ -58,7 +58,7 @@ export default function Content({
       {title && <h5>{title}</h5>}
       <div>
         {formattedText}
-        {_isClipped !== null && !_isClipped && (
+        {_isClipped !== null && _isClipped && (
           <a role="button" onClick={(event) => getNews(event)}>
             Читать далее
           </a>
