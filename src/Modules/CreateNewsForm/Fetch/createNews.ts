@@ -5,15 +5,13 @@ import MinUser from "Helpers/MinUser";
 import News from "Helpers/News";
 
 
-async function createNews(author: MinUser, title: string, content: string, isGlobal: boolean, image?: Image): Promise<News> {
-    const api = new API;
-    
-    const result: string | boolean = await api.postNews(title, content, isGlobal)
+async function createNews(author: MinUser, title: string, content: string, isGlobal: boolean, image?: Image): Promise<News> {  
+    const result: string | false = await API.postNews(title, content, isGlobal)
       .then((newsID) => {
         notifySuccess("Новость создана");
         return typeof newsID === 'string' ? newsID : false;
       })
-      .catch((error) => {
+      .catch(() => {
         notifyError("Новость не создана, попробуйте снова");
         return false;
       });
@@ -21,6 +19,6 @@ async function createNews(author: MinUser, title: string, content: string, isGlo
     if (!result)
      return Promise.reject(false);
 
-    return Promise.resolve(new News(result, title, content, isGlobal, author ?? new MinUser(), image))
+    return Promise.resolve(new News(result, title, content, isGlobal, author, image))
   }
  export default createNews;

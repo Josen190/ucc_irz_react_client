@@ -4,13 +4,13 @@ import Img from "UI/Img/Img";
 
 interface PropsProfilePicture {
   type: "base" | "mini" | "norm";
-  image: Image;
+  image: Image | null;
 }
 
 export default function Avatar({ type, image }: PropsProfilePicture) {
   return (
     <div className={"logo " + type}>
-      <Img image={image}></Img>
+      {image && <Img image={image}></Img>}
     </div>
   );
 }

@@ -1,5 +1,6 @@
-import authContext, { IAuthContext } from "Modules/AuthController/Constants/MyContext/MyContexts";
+import React from "react";
 import MyDate from "Helpers/MyDate";
+import { useAppSelector } from "Hooks";
 import Button from "UI/Button/Button";
 import InputField from "UI/InputField/InputField";
 import { useContext, useState, useEffect } from "react";
@@ -11,8 +12,7 @@ interface Props {
 }
 
 export default function FormNewEvent({ day, setActive }: Props): JSX.Element {
-  const { authData } = useContext(authContext) as IAuthContext;
-  const role = authData.user?.roles;
+  const user = useAppSelector((s) => s.user)
 
   const [date, setDate] = useState<MyDate | null>(day);
   const [startTime, setStartTime] = useState<MyDate | null>(day);

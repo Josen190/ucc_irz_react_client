@@ -10,7 +10,7 @@ interface CustomCSSProperties extends CSSProperties {
 interface Props {
   screenX: number;
   screenY: number;
-  children: JSX.Element | JSX.Element[];
+  children: React.ReactElement<typeof ContextButton> | React.ReactElement<typeof ContextButton>[];
   style?: CustomCSSProperties;
 }
 

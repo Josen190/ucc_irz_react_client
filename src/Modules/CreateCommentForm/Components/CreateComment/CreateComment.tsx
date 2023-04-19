@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import newNewsComments from "Modules/CreateCommentForm/Fetch/newNewsComments";
+import newNewsComments from "../..//Fetch/newNewsComments";
 import Button from "UI/Button/Button";
 import InputField from "UI/InputField/InputField";
 
@@ -24,7 +24,7 @@ export default function CreateComment({ newsID }: Props) {
       <InputField
         type="textarea"
         value={value}
-        onChange={(e) => setText(e.target.value)}
+        onSetValueStr={setText}
       />
       <Button type="submit">Добавть</Button>
     </form>

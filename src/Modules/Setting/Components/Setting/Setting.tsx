@@ -1,3 +1,4 @@
+import React from "react";
 import API from "Fetch/Api";
 import Button from "UI/Button/Button";
 import InputField from "UI/InputField/InputField";
@@ -13,8 +14,8 @@ function Setting() {
 
   const save = () => {
     if (newPassword === rePassword) {
-      const api = new API();
-      api.putChangePassword(currentPassword, newPassword)
+      
+      API.putChangePassword(currentPassword, newPassword)
         .then(() => {
           notifySuccess("изменения сохранены");
         })

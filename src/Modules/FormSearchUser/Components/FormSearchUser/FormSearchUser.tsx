@@ -41,8 +41,8 @@ export default function FormSearchUser(): JSX.Element {
   };
 
   const getUsers = () => {
-    const api = new API();
-    api.getUsers(pageIndex, searchString, isActive, role, positionId).then(
+    
+    API.getUsers(pageIndex, searchString, isActive, role, positionId).then(
       (users) => {
         let _users = new Map();
         users.forEach((user: User) => {

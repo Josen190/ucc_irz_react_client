@@ -9,7 +9,6 @@ import Content from "Components/Content/Content";
 import Like from "../Like/Like";
 import CommentsIcon from "../CommentsIcon/CommentsIcon";
 import CommentFeed from "Modules/CommentFeed";
-import { authContext, IAuthContext } from "Modules/AuthController";
 
 interface Props {
   tidings: News;
@@ -17,16 +16,15 @@ interface Props {
 }
 
 export default function Tidings({ tidings, deletElement }: Props) {
-  const { authData } = useContext(authContext) as IAuthContext;
   const [isActiveCommentFeed, setIsActiveCommentFeed] = useState(false);
   const [image, setImage] = useState<Image>();
   const subMenu = useRef<HTMLUListElement>(null);
-  const isMyTiding = authData.user ? tidings.author.id === authData.user.id : false;
+  const isMyTiding = tidings.author.isAuntification();
 
   const deleteTidings = (event: any) => {
     event.preventDefault();
-    const api = new API();
-    api.deleteNews(tidings.id)
+    
+    API.deleteNews(tidings.id)
       .then(() => {
         deletElement(tidings.id);
         notifySuccess("Новость удалена");
@@ -78,6 +76,7 @@ export default function Tidings({ tidings, deletElement }: Props) {
           ></Like>
           <CommentsIcon
             commentCount={tidings.commentCount}
+            active={isActiveCommentFeed}
             setActive={setIsActiveCommentFeed}
           ></CommentsIcon>
         </div>

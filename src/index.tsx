@@ -5,15 +5,21 @@ import router from "./AppRouter";
 import { RouterProvider } from "react-router-dom";
 
 import AuthController from "./Modules/AuthController/Components/AuthController/authController";
+import { Provider } from "react-redux";
+import store from "Store";
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
-    <AuthController>
-      <RouterProvider router={router} />
-    </AuthController>
+    <Provider store={store}>
+      <AuthController>
+        <RouterProvider router={router} />
+      </AuthController>
+    </Provider>
   </React.StrictMode>
 );
 

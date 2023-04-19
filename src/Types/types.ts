@@ -1,0 +1,1 @@
+export type OnClickHandler = React.MouseEventHandler<HTMLButtonElement | HTMLInputElement | HTMLAnchorElement>

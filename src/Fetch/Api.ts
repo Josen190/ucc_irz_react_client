@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from "axios";
+import axios from "axios";
 import PropsUser from "./Interface/IUser";
 import User from "../Helpers/User";
 import PropsNewsComments from "./Interface/INewsComments";
@@ -12,180 +12,169 @@ import Image from "../Helpers/Image";
 import PropsImage from "./Interface/IImage";
 import Position from "../Helpers/Positions";
 import PropsPosition from "./Interface/IPositions";
-import { authData } from "../Modules/AuthController/Components/AuthController/authController";
 
-export const host = "https://localhost:7116";
+const host = "https://localhost:7116";
 
 // авторизация
-export const url_post_authenticate = `/api/authentication/authenticate`;
-export const url_post_refresh = `/api/authentication/refresh`;
-export const url_put_change_password = `/api/authentication/change_password`;
-export const url_post_send_reset_password_url = `/api/authentication/send_reset_password_url`;
-export const url_get_reset_password = `/api/authentication/reset_password`;
+const url_post_authenticate = `/api/authentication/authenticate`;
+const url_post_refresh = `/api/authentication/refresh`;
+const url_put_change_password = `/api/authentication/change_password`;
+const url_post_send_reset_password_url = `/api/authentication/send_reset_password_url`;
+const url_get_reset_password = `/api/authentication/reset_password`;
 
 // кабинеты
-export const url_get_cabinets = "/api/cabinets";
-export const url_post_cabinets = "/api/cabinets";
-export const url_get_cabinets_id_events = (id: string) => {
+const url_get_cabinets = "/api/cabinets";
+const url_post_cabinets = "/api/cabinets";
+const url_get_cabinets_id_events = (id: string) => {
   return `/api/cabinets/${id}/events`;
 };
-export const url_put_cabinets_id = (id: string) => {
+const url_put_cabinets_id = (id: string) => {
   return `/api/cabinets/${id}`;
 };
-export const url_delete_cabinets_id = (id: string) => {
+const url_delete_cabinets_id = (id: string) => {
   return `/api/cabinets/${id}`;
 };
 
 // чат
-export const url_get_chats = "/api/chats";
+const url_get_chats = "/api/chats";
 
 // События
-export const url_get_events_my = "/api/events/my";
-export const url_get_events_listenning = "/api/events/listenning";
-export const url_get_events_id = (id: string) => {
+const url_get_events_my = "/api/events/my";
+const url_get_events_listenning = "/api/events/listenning";
+const url_get_events_id = (id: string) => {
   return `/api/events/${id}`;
 };
-export const url_delete_events_id = (id: string) => {
+const url_delete_events_id = (id: string) => {
   return `/api/events/${id}`;
 };
-export const url_post_events = "/api/events";
+const url_post_events = "/api/events";
 
 // Изображения
-export const url_get_images_id = (id: string) => {
+const url_get_images_id = (id: string) => {
   return `/api/images/${id}`;
 };
 
 // Сообщения
-export const url_get_messages = "/api/messages";
-export const url_post_messages = "/api/messages";
-export const url_delete_messages_id = (id: string) => {
+const url_get_messages = "/api/messages";
+const url_post_messages = "/api/messages";
+const url_delete_messages_id = (id: string) => {
   return `/api/messages/${id}`;
 };
 
 // новости
-export const url_get_news = `/api/news`;
-export const url_post_news = `/api/news`;
-export const url_get_news_id = (id: string) => {
+const url_get_news = `/api/news`;
+const url_post_news = `/api/news`;
+const url_get_news_id = (id: string) => {
   return `/api/news/${id}`;
 };
-export const url_delete_news_id = (id: string) => {
+const url_delete_news_id = (id: string) => {
   return `/api/news/${id}`;
 };
-export const url_get_news_id_full_text = (id: string) => {
+const url_get_news_id_full_text = (id: string) => {
   return `/api/news/${id}/full_text`;
 };
 
 // коментарии к новости
-export const url_get_news_comments = "/api/news_comments";
-export const url_post_news_comments = "/api/news_comments";
-export const url_delete_news_comments_id = (id: string) => {
+const url_get_news_comments = "/api/news_comments";
+const url_post_news_comments = "/api/news_comments";
+const url_delete_news_comments_id = (id: string) => {
   return `/api/news_comments/${id}`;
 };
 
 // Лайки к новости
-export const url_post_likes_like_news_entry = "/api/likes/like_news_entry";
-export const url_post_likes_unlike_news_entry =
+const url_post_likes_like_news_entry = "/api/likes/like_news_entry";
+const url_post_likes_unlike_news_entry =
   "/api/likes/unlike_news_entry";
 
 // должности
-export const url_get_positions = "/api/positions";
-export const url_post_positions = "/api/positions";
-export const url_put_positions_id = (id: string) => {
+const url_get_positions = "/api/positions";
+const url_post_positions = "/api/positions";
+const url_put_positions_id = (id: string) => {
   return `/api/positions${id}`;
 };
-export const url_post_positions_add_pos_to_user =
+const url_post_positions_add_pos_to_user =
   "/api/positions/add_pos_to_user";
-export const url_post_positions_remove_user_position =
+const url_post_positions_remove_user_position =
   "/api/positions/remove_user_position";
 
 // Роли
-export const url_get_roles = "/api/roles";
-export const url_post_roles_add_to_user = "/api/roles/add_to_user";
-export const url_post_roles_remove_from_user = "/api/roles/remove_from_user";
+const url_get_roles = "/api/roles";
+const url_post_roles_add_to_user = "/api/roles/add_to_user";
+const url_post_roles_remove_from_user = "/api/roles/remove_from_user";
 
 // Подписки
-export const url_get_subscriptions_user_subscribers =
+const url_get_subscriptions_user_subscribers =
   "/api/subscriptions/user_subscribers";
-export const url_get_subscriptions_my_subscribers =
+const url_get_subscriptions_my_subscribers =
   "/api/subscriptions/my_subscribers";
-export const url_get_subscriptions_user_subscriptions =
+const url_get_subscriptions_user_subscriptions =
   "/api/subscriptions/user_subscriptions";
-export const url_get_subscriptions_my_subscriptions =
+const url_get_subscriptions_my_subscriptions =
   "/api/subscriptions/my_subscriptions";
-export const url_post_subscriptions_subcribe = "/api/subscriptions/subcribe";
-export const url_post_subscriptions_unsubscribe =
+const url_post_subscriptions_subcribe = "/api/subscriptions/subcribe";
+const url_post_subscriptions_unsubscribe =
   "/api/subscriptions/unsubscribe";
 
 // должности пользователя
-export const url_get_user_positions = "/api/user_positions";
-export const url_get_user_positions_my = "/api/user_positions/my";
+const url_get_user_positions = "/api/user_positions";
+const url_get_user_positions_my = "/api/user_positions/my";
 
 // пользователь
-export const url_get_users = `/api/users`;
-export const url_get_users_me = `/api/users/me`;
-export const url_get_users_id = (id: string) => {
+const url_get_users = `/api/users`;
+const url_get_users_me = `/api/users/me`;
+const url_get_users_id = (id: string) => {
   return `/api/users/${id}`;
 };
-export const url_put_users_me_update_photo = "/api/users/me/update_photo";
-export const url_put_users_me_delete_photo = "/api/users/me/delete_photo";
-export const url_put_users_me_update_info = "/api/users/me/update_info";
+const url_put_users_me_update_photo = "/api/users/me/update_photo";
+const url_put_users_me_delete_photo = "/api/users/me/delete_photo";
+const url_put_users_me_update_info = "/api/users/me/update_info";
 
 // Управление пользователями
-export const url_post_users_management_register =
+const url_post_users_management_register =
   "/api/users_management/register";
-export const url_put_users_management_id_update_reg_info = (id: string) => {
+const url_put_users_management_id_update_reg_info = (id: string) => {
   return `/api/users_management/${id}/update_reg_info`;
 };
-export const url_delete_users_management_id = (id: string) => {
+const url_delete_users_management_id = (id: string) => {
   return `/api/users_management/${id}`;
 };
-export const url_put_users_management_id_activate = (id: string) => {
+const url_put_users_management_id_activate = (id: string) => {
   return `/api/users_management/${id}/activate`;
 };
-export const url_put_users_management_id_deactivate = (id: string) => {
+const url_put_users_management_id_deactivate = (id: string) => {
   return `/api/users_management/${id}/deactivate`;
 };
 
 
-const _data = window.localStorage.getItem("jwt");
-const datajwt = _data !== "null" ? _data : "";
-
 class API {
-  private static host = "https://localhost:7116";
   private static loading = false;
+  private static jwt: string | null;
+  private static refreshToken: string | null;
 
-  private jwt: string | null;
-  private refreshToken: string | null;
-  private feth: AxiosInstance;
+  private static host = "https://localhost:7116";
+  private static feth = axios.create({
+    baseURL: API.host,
+    headers: {
+      accept: "*/*",
+    },
+  });
 
-
-  constructor() {
-    this.jwt = window.localStorage.getItem("jwt");
-    this.refreshToken = window.localStorage.getItem("refreshToken");
-    
-    this.feth = axios.create({
-      baseURL: API.host,
-      headers: {
-        authorization:
-          this.jwt || this.jwt === "null" || this.jwt === "undifined"
-            ? `Bearer ${datajwt}`
-            : null,
-        accept: "*/*",
-      },
-    });
-  }
-
-
-  public setJwt(jwt: string | null): void {
+  public static setJwt(jwt: string | null): void {
+    API.jwt = jwt;
     if (jwt) {
-      this.feth.defaults.headers["authorization"] = `Bearer ${jwt}`;
+      API.feth.defaults.headers["authorization"] = `Bearer ${jwt}`;
     } else {
-      this.feth.defaults.headers["authorization"] = null;
+      API.feth.defaults.headers["authorization"] = null;
     }
+    
   }
 
-  public async authentication(email: string, password: string): Promise<authData> {
-    const result: authData | undefined = await this.feth
+  public static setRefreshToken(refreshToken: string | null) {
+    this.refreshToken = refreshToken;
+  }
+
+  public static async authentication(email: string, password: string): Promise<{ jwt: string, refreshToken: string, user: User }> {
+    const result: { jwt: string, refreshToken: string, user: User } | undefined = await this.feth
       .post(url_post_authenticate, {
         email: email,
         password: password,
@@ -196,7 +185,7 @@ class API {
           typeof response.data.jwt !== "string"
         )
           return undefined;
-        const _data: authData = {
+        const _data: { jwt: string, refreshToken: string, user: User | null } = {
           jwt: response.data.jwt,
           refreshToken: response.data.refreshToken,
           user: null,
@@ -208,7 +197,10 @@ class API {
           .then((user) => user)
           .catch(() => null);
 
-        return _data;
+        if (_data.user === null)
+          return undefined;
+
+        return { ..._data, user: _data.user };
       })
       .catch((error) => undefined);
 
@@ -218,9 +210,9 @@ class API {
     return Promise.resolve(result);
   }
 
-  public  async refresh(
-    jwt: string,
-    refreshToken: string,
+  public static async refresh(
+    jwt: string | null,
+    refreshToken: string | null,
   ) {
     const result: { jwt: string, refreshToken: string } | undefined = await this.feth.post(url_post_refresh,
       {
@@ -228,7 +220,7 @@ class API {
         refreshToken: refreshToken,
       },
       {
-        baseURL: API.host,
+        baseURL: this.host,
         headers: {
           authorization: null,
           accept: "*/*",
@@ -242,33 +234,26 @@ class API {
     return Promise.resolve(result);
   }
 
-  public  async getRefreshToken(
-    jwt: string,
-    refreshToken: string,
-    setAuthData: (
-      jwt: string | null,
-      refreshToken: string | null,
-      user?: User | null
-    ) => void
-  ) {
+  public static async sendRefreshToken(collbac: (jwt: string | null, refreshToken: string | null) => void) {
+
     this.feth.interceptors.response.use(
       (response) => response,
       async (error) => {
         const status = error.response ? error.response.status : null;
 
-        if (!API.loading && status === 401) {
-          API.loading = true;
-          return this.refresh(jwt, refreshToken).then((data) => {
-            setAuthData(data.jwt, data.refreshToken);
+        if (!this.loading && status === 401) {
+          this.loading = true;
+          return this.refresh(API.jwt, API.refreshToken).then((data) => {
+            collbac(data.jwt, data.refreshToken)
             error.config.headers["Authorization"] =
               "Bearer " + data.jwt;
             error.config.baseURL = host;
-            API.loading = false;
+            this.loading = false;
             return this.feth.request(error.config);
           })
             .catch(() => {
-              setAuthData(null, null, null);
-              API.loading = true;
+              collbac(null, null);
+              this.loading = true;
             });
         }
 
@@ -277,7 +262,7 @@ class API {
     );
   }
 
-  public  async getUser(id: string): Promise<User> {
+  public static async getUser(id: string): Promise<User> {
     const info_user: PropsUser | undefined = await this.feth
       .get(url_get_users_id(id))
       .then((response) => response.data)
@@ -290,7 +275,7 @@ class API {
     return Promise.resolve(new User(info_user));
   }
 
-  public  async getUsers(
+  public static async getUsers(
     pageIndex: number,
     searchString?: string,
     isActive?: boolean,
@@ -326,7 +311,7 @@ class API {
     return Promise.resolve(users);
   }
 
-  public  async getUserMe(): Promise<User> {
+  public static async getUserMe(): Promise<User | null> {
     const info_user: PropsUser | undefined = await this.feth
       .get(url_get_users_me)
       .then((response) => response.data)
@@ -339,7 +324,7 @@ class API {
     return Promise.resolve(new User(info_user));
   }
 
-  public  async putUpdateInfo(
+  public static async putUpdateInfo(
     myself: string,
     iDid: string,
     achievements: string,
@@ -359,7 +344,7 @@ class API {
       });
   }
 
-  public  async putChangePassword(
+  public static async putChangePassword(
     currentPassword: string,
     newPassword: string
   ): Promise<void | any> {
@@ -376,9 +361,14 @@ class API {
       });
   }
 
-  public  async getNewsComment(): Promise<NewsComments[]> {
+  public static async getNewsComment(newsId: string): Promise<NewsComments[]> {
     const result: PropsNewsComments[] | undefined = await this.feth
-      .get(url_get_news_comments)
+      .get(url_get_news_comments, {
+        params:{
+          newsEntryId: newsId
+        }
+        
+      })
       .then((response) => response.data)
       .catch(() => undefined);
 
@@ -394,10 +384,10 @@ class API {
     return Promise.resolve(newsComments);
   }
 
-  public  async getMyEvents(
+  public static async getMyEvents(
     start: MyDate,
     end: MyDate
-  ): Promise<Event[]> {
+  ): Promise<Event[] | null> {
     const result: PropsEvent[] | undefined = await this.feth
       .get(url_get_events_my, {
         params: {
@@ -420,7 +410,7 @@ class API {
     return Promise.resolve(events);
   }
 
-  public  async getFullTextOfNews(id: string): Promise<string> {
+  public static async getFullTextOfNews(id: string): Promise<string | null> {
     const result: string | undefined = await this.feth
       .get(url_get_news_id_full_text(id))
       .then((response) => response.data)
@@ -433,26 +423,24 @@ class API {
     return Promise.resolve(result);
   }
 
-  public  async deletComment(id: string) {
+  public static async deletComment(id: string) {
     this.feth
       .delete(url_delete_news_comments_id(id))
       .then(() => Promise.resolve())
       .catch(() => Promise.reject());
   }
 
-  public  async postComment(newsID: string, text: string) {
-    const result = await this.feth
+  public static async postComment(newsID: string, text: string) {
+    this.feth
       .post(url_post_news_comments, {
         newsEntryId: newsID,
         text: text,
       })
-      .then((data) => Promise.resolve(data))
+      .then(() => Promise.resolve())
       .catch(() => Promise.reject());
-
-      return result;
   }
 
-  public  async postNews(
+  public static async postNews(
     title: string,
     content: string,
     isPublic: boolean,
@@ -464,15 +452,15 @@ class API {
       isPublic: isPublic,
       image: image ? image.toFetch() : null,
     };
-    const result = await this.feth
+    const result = this.feth
       .post(url_post_news, data)
-      .then((data) => Promise.resolve(data.data as string))
-      .catch(() => Promise.reject());
+      .then((id) => Promise.resolve())
+      .catch(() => Promise.reject(null));
 
-    return result;
+      return result;
   }
 
-  public  async getListingNews(
+  public static async getListingNews(
     pageIndex: number,
     userID?: string,
     publicOnly?: boolean,
@@ -502,7 +490,7 @@ class API {
     return Promise.resolve(_arrNews);
   }
 
-  public  async postLike(newsID: string) {
+  public static async postLike(newsID: string) {
     const params: { [key: string]: string } = {
       newsEntryId: newsID,
     };
@@ -515,7 +503,7 @@ class API {
       .catch(() => Promise.reject());
   }
 
-  public  async postUnlike(newsID: string) {
+  public static async postUnlike(newsID: string) {
     this.feth
       .post(url_post_likes_unlike_news_entry, undefined, {
         params: {
@@ -526,14 +514,14 @@ class API {
       .catch(() => Promise.reject());
   }
 
-  public  async deleteNews(id: string) {
+  public static async deleteNews(id: string) {
     this.feth
       .delete(url_delete_news_id(id))
       .then(() => Promise.resolve())
       .catch(() => Promise.reject());
   }
 
-  public  async unsubscribe(userID: string) {
+  public static async unsubscribe(userID: string) {
     this.feth
       .post(url_post_subscriptions_unsubscribe, undefined, {
         params: {
@@ -544,7 +532,7 @@ class API {
       .catch(() => Promise.reject());
   }
 
-  public  async subcribe(userID: string) {
+  public static async subcribe(userID: string) {
     this.feth
       .post(url_post_subscriptions_subcribe, undefined, {
         params: {
@@ -555,7 +543,7 @@ class API {
       .catch(() => Promise.reject());
   }
 
-  public  async getImage(id: string): Promise<Image> {
+  public static async getImage(id: string): Promise<Image> {
     const result: PropsImage | undefined = await this.feth
       .get(url_get_images_id(id))
       .then((response) => response.data)
@@ -568,7 +556,7 @@ class API {
     return Promise.resolve(new Image(result));
   }
 
-  public  async getUserPositions(
+  public static async getUserPositions(
     userId: string
   ): Promise<Position[] | null> {
     const result: PropsPosition[] | undefined = await this.feth

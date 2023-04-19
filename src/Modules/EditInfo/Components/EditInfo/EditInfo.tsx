@@ -10,10 +10,10 @@ function EditInfo() {
   const [iDid, setIDid] = useState("");
   const [achievements, setAchievements] = useState("");
   const [skills, setSkills] = useState("");
-  const api = new API();
+  
 
   useEffect(() => {
-    api.getUserMe().then((user) => {
+    API.getUserMe().then((user) => {
       setMyself(user.aboutMyself ?? "");
       setIDid(user.myDoings ?? "");
       setAchievements(user.skills ?? "");
@@ -22,7 +22,7 @@ function EditInfo() {
   }, []);
 
   const save = () => {
-    api.putUpdateInfo(myself, iDid, achievements, skills)
+    API.putUpdateInfo(myself, iDid, achievements, skills)
       .then(() => {
         notifySuccess("изменения сохранены");
       })

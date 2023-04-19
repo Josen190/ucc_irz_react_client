@@ -2,6 +2,7 @@ import PropsPosition from "../Fetch/Interface/IPositions";
 import MyDate from "./MyDate";
 
 export default class Position {
+  // public id: string = '';
   public name: string;
 
   private start: MyDate;
