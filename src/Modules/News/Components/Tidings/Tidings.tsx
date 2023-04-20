@@ -40,7 +40,10 @@ export default function Tidings({ tidings, deletElement }: Props) {
     <div>
       <div className="tile">
         <div className="row">
-          <UserVisitingCard user={tidings.author}></UserVisitingCard>
+          <div className="row">
+            <UserVisitingCard user={tidings.author}></UserVisitingCard> 
+            <span>{tidings.dateTime.DatetoStr('dd-months-yyyy')}</span>
+          </div>
           {isMyTiding && (
             <div>
               <Button
