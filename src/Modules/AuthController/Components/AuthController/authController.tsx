@@ -15,7 +15,7 @@ interface Props {
 
 const AuthController = ({ children }: Props) => {
   const dispatch = useAppDispatch()
-  const user = useAppSelector((s) => s.user);
+  const user = useAppSelector((s) => s.authorization.user);
 
   useEffect(() => {
     const { jwt: _jwt, refreshToken: _refreshToken } = getAuthData();

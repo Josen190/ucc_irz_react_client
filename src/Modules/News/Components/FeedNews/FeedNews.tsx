@@ -1,50 +1,49 @@
 import React, { useEffect, useState } from "react";
-import fetchGetNews from "../..//Fetch/fetchGetNews";
 import useDeleteNewsFromFeed from "../..//Hooks/useDeleteNewsFromFeed";
 import useGetNews from "../..//Hooks/useGetNews";
 import News from "Helpers/News";
 import Tidings from "../Tidings/Tidings";
-
+import HeaderFeedNews from "../HeaderFeedNews/HeaderFeedNews";
+import CreateTidings from "../CreateNewsForm/CreateTidings";
+import { useAppDispatch, useAppSelector } from "Hooks";
+import useEndOfPage from "../../Hooks/useEndOfPage"
+import { setFilter } from "../../Reducers/NewsFilterReduser";
 
 interface Props {
-  userID?: string;
-  publicOnly?: boolean;
-  likedOnly?: boolean;
-  setUpdate?: React.Dispatch<React.SetStateAction<((news: News) => void) | undefined>>;
+  inAccount?: boolean;
 }
 
 export default function FeedNews({
-  userID,
-  publicOnly,
-  likedOnly,
-  setUpdate,
+  inAccount = false,
 }: Props): JSX.Element {
+  const {isLogin, user }= useAppSelector((s) => s.authorization);
+  const filter = useAppSelector((s) => s.newsFilter);
+  const [active, setActive] = useState(false);
   const [arrNews, setArrNews] = useState<JSX.Element[]>([]);
-  const [pageIndex, setPageIndex] = useState(0);
+  const [pageIndex, setPageIndex] = useState(1);
   const [deleteKeyElement, setDeleteKeyElement] = useState<string | null>(null);
+  const [isEndOfPage, setIsEndOfPage] = useState(false);
 
-  useDeleteNewsFromFeed(
-    deleteKeyElement,
-    arrNews,
-    setArrNews);
+  const userId = user ? user.id : undefined;
+  const filterInAccount = {AuthorId: userId, PublicOnly: undefined, LikedOnly: undefined, SearchString: undefined};
+  useDeleteNewsFromFeed(deleteKeyElement, arrNews, setArrNews);
+  useGetNews(pageIndex, arrNews, setArrNews, setDeleteKeyElement, inAccount? filterInAccount : filter);
+  useEndOfPage(setIsEndOfPage);
 
-
-  useGetNews(pageIndex, arrNews, setArrNews, setPageIndex, setDeleteKeyElement);
+  useEffect(() => {
+    if (isEndOfPage) {
+      setPageIndex(pageIndex + 1);
+    }
+  }, [isEndOfPage])
 
   const update = (news: News) => {
-    console.log(news);
-    if (news){
-      setArrNews([<Tidings key={news.id} tidings={news} deletElement={setDeleteKeyElement}/>, ...arrNews]);
-    }
-    
+    setArrNews([<Tidings key={news.id + Math.random()} tidings={news} deletElement={setDeleteKeyElement} />, ...arrNews]);
   };
 
-  if (setUpdate)
-    useEffect(() => {
-      console.log("1-iter");
-      
-      setUpdate(update);
-    }, [setUpdate]);
 
-  return <main className="column">{arrNews}</main>;
+  return <div className="column">
+    <HeaderFeedNews isLogin={isLogin && inAccount} setActive={inAccount ? setActive : undefined}></HeaderFeedNews>
+    {arrNews}
+    {active && (<CreateTidings setActive={setActive} updateNews={update} />)}
+  </div>;
 }

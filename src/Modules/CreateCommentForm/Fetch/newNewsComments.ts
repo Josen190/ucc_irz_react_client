@@ -6,8 +6,7 @@ import NewsComments from "Helpers/NewsComments";
 import { notifyError, notifySuccess } from "Components/Notifications/Notifications";
 
 async function newNewsComments(newsID: string, text: string, author: MinUser = MinUser.getAuntificationuUser()): Promise<NewsComments> {
-    console.log(text);
-    
+
     const result: string | false = await API.postComment(newsID, text)
     .then((commentId) => {
       

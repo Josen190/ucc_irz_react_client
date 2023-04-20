@@ -1,7 +1,6 @@
 import React from "react";
 import API from "Fetch/Api";
 import User from "Helpers/User";
-import CreateTidings from "Modules/CreateNewsForm";
 import FeedNews from "Modules/News";
 import UserCard from "Modules/UserCard";
 import Button from "UI/Button/Button";
@@ -14,15 +13,12 @@ import { useAppSelector } from "Hooks";
 import "./Account.scss";
 
 export async function accountLoader({ params }: any) {
-  if (typeof params.id !== "string") return;
-    // const user: User = await API.getUser(params.id).then((user) => user);
+     // const user: User = await API.getUser(params.id).then((user) => user);
   return params.id;
 }
 
 export default function Account() {
-  const {isLogin, user: AuntificationuUser} = useAppSelector((s)=> s);
-  const [active, setActive] = useState(false);
-  const [updateNews, setUpdateNews] = useState<(news: News) => void>();
+  const {isLogin, user: AuntificationuUser} = useAppSelector((s)=> s.authorization);
   const [user, setUser] = useState<User | null>(null);
   const [positionUser, setPositionUser] = useState<any | null>(null);
 
@@ -41,22 +37,7 @@ export default function Account() {
   return (
     <main className="account">
       <UserCard user={user} isLogin={isLogin} />
-      <div className="">
-        {isLogin && (
-          <div className="tile">
-            <Button
-              type="button"
-              onClick={() => setActive(true)}
-            >
-              Создать новость
-            </Button>
-          </div>
-        )}
-        {user && <FeedNews userID={user.id} setUpdate={setUpdateNews} />}
-      </div>
-      {active && (
-        <CreateTidings setActive={setActive} updateNews={updateNews} />
-      )}
+      <FeedNews inAccount={true}/>
     </main>
   );
 }

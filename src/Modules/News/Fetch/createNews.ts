@@ -9,7 +9,7 @@ async function createNews(author: MinUser, title: string, content: string, isGlo
     const result: string | false = await API.postNews(title, content, isGlobal)
       .then((newsID) => {
         notifySuccess("Новость создана");
-        return typeof newsID === 'string' ? newsID : false;
+        return newsID;
       })
       .catch(() => {
         notifyError("Новость не создана, попробуйте снова");
@@ -18,7 +18,7 @@ async function createNews(author: MinUser, title: string, content: string, isGlo
 
     if (!result)
      return Promise.reject(false);
-
+    
     return Promise.resolve(new News(result, title, content, isGlobal, author, image))
   }
  export default createNews;
