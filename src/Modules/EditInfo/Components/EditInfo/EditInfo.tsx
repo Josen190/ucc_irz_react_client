@@ -5,6 +5,7 @@ import InputImg from "UI/InputImg/InputImg";
 import { notifySuccess, notifyError } from "Components/Notifications/Notifications";
 import React, { useState, useEffect } from "react";
 import Image from "Helpers/Image";
+import MinUser from "Helpers/MinUser";
 
 function EditInfo() {
   const [image, setImage] = useState<Image | null>(null)
@@ -12,7 +13,7 @@ function EditInfo() {
   const [iDid, setIDid] = useState("");
   const [achievements, setAchievements] = useState("");
   const [skills, setSkills] = useState("");
-  
+
 
   useEffect(() => {
     API.getUserMe().then((user) => {
@@ -23,7 +24,18 @@ function EditInfo() {
     });
   }, []);
 
+  console.log(image);
+  
+
   const save = () => {
+    if (image && image.name && image.extension && image.base64) {
+      API.putUpdetePhoto(image.name, image.extension, image.base64).then((id) => {
+        const newImage = new Image({ ...image, id: id })
+        console.log(newImage);
+        
+      })
+    }
+
     API.putUpdateInfo(myself, iDid, achievements, skills)
       .then(() => {
         notifySuccess("изменения сохранены");
@@ -34,7 +46,7 @@ function EditInfo() {
   };
 
   return (
-    <form onSubmit={(e) => {e.preventDefault(); save()}}>
+    <form onSubmit={(e) => { e.preventDefault(); save() }}>
       <InputImg view="avatar" setImageApi={setImage} />
       <InputField
         type="textarea"

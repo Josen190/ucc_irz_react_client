@@ -2,6 +2,7 @@ import User from "Helpers/User";
 import { configureStore, createSlice } from '@reduxjs/toolkit'
 import API from "Fetch/Api";
 import MinUser from "Helpers/MinUser";
+import Image from "Helpers/Image";
 
 export interface IAuthorizationState {
     isLogin: boolean;
@@ -45,15 +46,34 @@ const authorizationReducer = createSlice({
             window.localStorage.setItem("refreshToken", _refreshToken ?? "null");
 
             const isLogin = _jwt && _refreshToken && _user ? true : false;
-            
+
             return {
                 isLogin, jwt: _jwt, refreshToken: _refreshToken, user: _user
             }
         },
+
+        setUserImage(_state, { payload }: {
+            type: string;
+            payload: {
+                image: Image;
+            }
+        }) {
+
+            // const imageJson = JSON.stringify(payload.image);
+            // console.log(imageJson);
+            
+            if (_state.user)
+                MinUser.setAuntificationuUser(_state.user.setImage(payload.image));
+            console.log(payload.image);
+            
+            return {
+                ..._state, user: _state.user ? _state.user.setImage(payload.image) : null
+            }
+        }
     }
 })
 
 
 
-export const { authorization } = authorizationReducer.actions
+export const { authorization, setUserImage } = authorizationReducer.actions
 export default authorizationReducer.reducer

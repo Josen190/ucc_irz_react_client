@@ -36,7 +36,7 @@ export default function Account() {
   
   return (
     <main className="account">
-      <UserCard user={user} isLogin={isLogin} />
+      {user && <UserCard user={user} isLogin={isLogin} />}
       <FeedNews inAccount={true}/>
     </main>
   );

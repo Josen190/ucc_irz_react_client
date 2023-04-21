@@ -554,7 +554,7 @@ class API {
 
   public static async getUserPositions(
     userId: string
-  ): Promise<Position[] | null> {
+  ): Promise<Position[]> {
     const result: PropsPosition[] | undefined = await this.feth
       .get(url_get_user_positions, { params: { userId: userId } })
       .then((response) => response.data)
@@ -568,6 +568,21 @@ class API {
     });
 
     return Promise.resolve(positions);
+  }
+
+  public static async putUpdetePhoto(
+    name: string, extension: string, data: string
+  ){
+    const result = await this.feth
+      .put(url_put_users_me_update_photo, {
+        name: name,
+        extension: extension,
+        data: data
+      })
+      .then((response) => Promise.resolve(response.data as string))
+      .catch(() => Promise.reject(null));
+
+    return result;
   }
 }
 

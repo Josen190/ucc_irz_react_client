@@ -1,8 +1,8 @@
 import AuthController from "./Components/AuthController/authController";
-import authorizationReduser, { authorization } from "./Reducers/authorizationReduser";
+import authorizationReduser, { authorization, setUserImage } from "./Reducers/authorizationReduser";
 
 export default AuthController;
 export { authorizationReduser };
-export { authorization }
+export { authorization, setUserImage }
 
 

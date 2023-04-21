@@ -21,7 +21,7 @@ function AuthorizationForm() {
     fetchAuthentication(email, password, (jwt, refreshToken, user) => {
       dispatch(authorization({ jwt, refreshToken, user}))
     }).then((userId) => {
-  
+      
       setNext(userId);
     })
   }
