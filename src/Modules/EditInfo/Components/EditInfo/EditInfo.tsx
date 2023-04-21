@@ -3,9 +3,11 @@ import Button from "UI/Button/Button";
 import InputField from "UI/InputField/InputField";
 import InputImg from "UI/InputImg/InputImg";
 import { notifySuccess, notifyError } from "Components/Notifications/Notifications";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import Image from "Helpers/Image";
 
 function EditInfo() {
+  const [image, setImage] = useState<Image | null>(null)
   const [myself, setMyself] = useState("");
   const [iDid, setIDid] = useState("");
   const [achievements, setAchievements] = useState("");
@@ -33,7 +35,7 @@ function EditInfo() {
 
   return (
     <form onSubmit={(e) => {e.preventDefault(); save()}}>
-      <InputImg />
+      <InputImg view="avatar" setImageApi={setImage} />
       <InputField
         type="textarea"
         title="О себе"

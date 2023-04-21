@@ -311,7 +311,7 @@ class API {
     return Promise.resolve(users);
   }
 
-  public static async getUserMe(): Promise<User | null> {
+  public static async getUserMe(): Promise<User> {
     const info_user: PropsUser | undefined = await this.feth
       .get(url_get_users_me)
       .then((response) => response.data)

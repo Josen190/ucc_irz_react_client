@@ -11,9 +11,9 @@ export default class Image {
   url?: string;
 
   constructor()
-  constructor(name: String)
+  constructor(name: string)
   constructor(props: PropsImage)
-  constructor(nameOrprops?: String | PropsImage) {
+  constructor(nameOrprops?: string | PropsImage) {
     if (!nameOrprops) {
       this.id = Math.random().toString();
     } else if (typeof nameOrprops === 'string') {
@@ -56,10 +56,7 @@ export default class Image {
     };
   }
 
-  public static async toBase64(file: any): Promise<Image> {
-    console.log(typeof file);
-    console.log(file);
-
+  public static async toBase64(file: File): Promise<Image> {
     const sendFile: PropsImage = {
       id: "new Image",
       name: file.name.replace(/\.[^/.]+$/, ""),
@@ -67,17 +64,24 @@ export default class Image {
     };
 
     const reader = new FileReader();
-    reader.onloadend = () => {
-      const result = reader.result;
-      if (typeof result === "string")
-        sendFile.data = result.replace("data:", "").replace(/^.+,/, "");
-    };
+    const promise = new Promise<void>((resolve, reject) => {
+      reader.onloadend = () => {
+        const result = reader.result;
+        if (typeof result === "string"){
+          sendFile.data = result.replace("data:", "").replace(/^.+,/, "");
+          resolve();
+        } else {
+          reject(new Error("Invalid file type"));
+        }
+      };
+    });
     reader.readAsDataURL(file);
-
+    await promise;
+    
     if (!sendFile.data) return Promise.reject();
 
-    let image = new Image(sendFile);
+    const image = new Image(sendFile);
     image.setUrl(file);
-    return Promise.resolve(new Image(sendFile));
+    return Promise.resolve(image);
   }
 }
