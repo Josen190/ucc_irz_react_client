@@ -9,11 +9,8 @@ async function newNewsComments(newsID: string, text: string, author: MinUser = M
 
     const result: string | false = await API.postComment(newsID, text)
     .then((commentId) => {
-      
       notifySuccess("Комментарий создан");
-      console.log(commentId);
-      // return commentId;
-      return "dssad";
+      return commentId;
     })
     .catch(() => {
       notifyError("Ощибка, попробуйте снова");
