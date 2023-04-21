@@ -427,13 +427,15 @@ class API {
   }
 
   public static async postComment(newsID: string, text: string) {
-    this.feth
+    const result = await this.feth
       .post(url_post_news_comments, {
         newsEntryId: newsID,
         text: text,
       })
-      .then(() => Promise.resolve())
-      .catch(() => Promise.reject());
+      .then((response) => Promise.resolve(response.data as string))
+      .catch(() => Promise.reject(null));
+
+    return result;
   }
 
   public static async postNews(
