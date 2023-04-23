@@ -6,11 +6,10 @@ interface Props {
 }
 
 function Img({ image }: Props) {
-  console.log(image);
-  
+
   return (
     <img
-      src={`data:${image.extension};base64,${image.base64}`}
+      src={`data:${image.extension};base64,${image.data}`}
       alt={image.name}
     ></img>
   );

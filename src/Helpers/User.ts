@@ -47,13 +47,13 @@ export default class User extends MinUser {
     this.surname = props.surname;
     this.patronymic = props.patronymic ?? "";
 
-    this.image = props.image ?
-      typeof props.image === 'string' ?
-        new Image({ id: props.image }) : new Image(props.image)
+    this.image = props.imageId ?
+      typeof props.imageId === 'string' ?
+        new Image({ id: props.imageId }) : new Image(props.imageId)
       : null;
   }
 
-  public getType(): ParamsUser{
+  public getType(): ParamsUser {
     return {
       ...super.getType(),
       birthday: this.birthday.toString(),

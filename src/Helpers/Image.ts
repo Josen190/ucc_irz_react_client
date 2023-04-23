@@ -6,7 +6,7 @@ import PropsImage from "../Fetch/Interface/IImage";
 export default class Image {
   id: string;
   name?: string;
-  base64?: string;
+  data?: string;
   extension?: string;
   url?: string;
 
@@ -23,7 +23,7 @@ export default class Image {
       const props = nameOrprops as PropsImage;
       this.id = props.id ?? Math.random().toString();
       this.name = props.name;
-      this.base64 = props.data;
+      this.data = props.data;
       this.extension = props.extension;
     }
   }
@@ -38,7 +38,7 @@ export default class Image {
       .then((image) => {
         this.id = image.id;
         this.extension = image.extension;
-        this.base64 = image.base64;
+        this.data = image.data;
         this.name = image.name;
         if (setImage) setImage(this);
       })
@@ -48,11 +48,11 @@ export default class Image {
   }
 
   public toFetch(): { [keys: string]: string } | null {
-    if (!this.name || !this.extension || !this.base64) return null;
+    if (!this.name || !this.extension || !this.data) return null;
     return {
       name: this.name,
       extension: this.extension,
-      data: this.base64,
+      data: this.data,
     };
   }
 
@@ -89,7 +89,7 @@ export default class Image {
     return{
       id: this.id,
       name: this.name,
-      data: this.base64,
+      data: this.data,
       extension: this.extension,
     } 
   }

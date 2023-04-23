@@ -16,7 +16,7 @@ export default interface PropsUser extends PropsMinUser {
   positions: string[];
 }
 
-export interface ParamsUser extends  Omit<Omit<PropsUser, 'positions'>, 'image'>{
-    image: PropsImage | null;
+export interface ParamsUser extends  Omit<Omit<PropsUser, 'positions'>, 'imageId'>{
+    imageId: PropsImage | null;
     positions: PropsPosition[];
 }

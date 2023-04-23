@@ -3,5 +3,5 @@ export default interface PropsMinUser {
   firstName: string;
   surname: string;
   patronymic: string | null;
-  image: string | null;
+  imageId: string | null;
 }

@@ -24,13 +24,9 @@ function UserCard({user, isLogin}: Props) {
 
     API.getImage(user.image.id).then(image => {
       dispatch(setUserImage({image}));
-      console.log(image);
       
     })
   }, [])
-  
-console.log(user.image);
-
 
   return (
     <div className="tile UserCard">

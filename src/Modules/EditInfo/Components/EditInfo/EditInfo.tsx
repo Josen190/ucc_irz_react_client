@@ -6,8 +6,11 @@ import { notifySuccess, notifyError } from "Components/Notifications/Notificatio
 import React, { useState, useEffect } from "react";
 import Image from "Helpers/Image";
 import MinUser from "Helpers/MinUser";
+import { useAppDispatch } from "Hooks";
+import { setUserImage } from "Modules/AuthController";
 
 function EditInfo() {
+  const dispatch = useAppDispatch()
   const [image, setImage] = useState<Image | null>(null)
   const [myself, setMyself] = useState("");
   const [iDid, setIDid] = useState("");
@@ -28,11 +31,10 @@ function EditInfo() {
   
 
   const save = () => {
-    if (image && image.name && image.extension && image.base64) {
-      API.putUpdetePhoto(image.name, image.extension, image.base64).then((id) => {
+    if (image && image.name && image.extension && image.data) {
+      API.putUpdetePhoto(image.name, image.extension, image.data).then((id) => {
         const newImage = new Image({ ...image, id: id })
-        console.log(newImage);
-        
+        dispatch(setUserImage({image: newImage}))
       })
     }
 

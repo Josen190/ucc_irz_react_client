@@ -22,7 +22,7 @@ export default class MinUser {
     this.firstName = props.firstName;
     this.surname = props.surname;
     this.patronymic = props.patronymic ?? "";
-    this.image = props.image ? new Image({ id: props.image }) : null;
+    this.image = props.imageId ? new Image({ id: props.imageId }) : null;
   }
 
   public static setAuntificationuUser(user: MinUser) {
@@ -52,7 +52,7 @@ export default class MinUser {
       firstName: this.firstName,
       surname: this.surname,
       patronymic: this.patronymic.length !== 0? this.patronymic : null,
-      image: this.image ? this.image.getType() : null,
+      imageId: this.image ? this.image.getType() : null,
     }
   }
 }

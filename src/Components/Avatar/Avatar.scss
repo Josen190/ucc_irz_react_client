@@ -1,0 +1,25 @@
+$size-base: 100%;
+$size-mini: 30px;
+
+.logo {
+    display: flex;
+    flex-direction: row;
+
+    img {
+        display: block;
+        border-radius: 50%;
+        border: 1px solid black;
+    }
+
+    &.norm img {
+        width: $size-base;
+        height: $size-base;
+    }
+
+    &.mini img {
+        width: $size-mini;
+        height: $size-mini;
+
+    }
+
+}
