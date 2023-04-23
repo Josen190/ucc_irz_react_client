@@ -33,18 +33,24 @@ class MyDate extends Date {
     "Вс.",
   ];
 
-  public DatetoStr(type: "yyyy-mm-dd" | "dd-months-yyyy"): string {
+  public DatetoStr(type: "yyyy-mm-dd" | "dd-months-yyyy" | "dd-months-yyyy hh:mm" | "hh:mm"): string {
     const day = String(this.getDate()).padStart(2, "0");
     const month = String(this.getMonth() + 1).padStart(2, "0");
     const year = String(this.getFullYear()).padStart(4, "0");
+    const hours = String(this.getHours()).padStart(2, "0");
+    const minutes = String(this.getMinutes()).padStart(2, "0");
     switch (type) {
       case "yyyy-mm-dd":
         return `${year}-${month}-${day}`;
       case "dd-months-yyyy":
-        return day + " " + MyDate.months[this.getMonth()] + " " + year;
+        return `${day} ${MyDate.months[this.getMonth()]} ${year}`;
+      case "dd-months-yyyy hh:mm":
+        return `${day} ${MyDate.months[this.getMonth()]} ${year} ${hours}:${minutes}`;
+      case "hh:mm":
+        return `${hours}:${minutes}`;
     }
   }
-
+  
   public parseDate(date: MyDate): MyDate {
     this.setFullYear(date.getFullYear());
     this.setMonth(date.getMonth());

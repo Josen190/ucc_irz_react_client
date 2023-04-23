@@ -584,6 +584,19 @@ class API {
 
     return result;
   }
+
+  public static async getEventId(id: string){
+    const result = await this.feth
+      .get(url_get_events_id(id), {
+        params: {
+          id: id
+        }
+      })
+      .then((response) => Promise.resolve(new Event(response.data)))
+      .catch(() => Promise.reject(null));
+
+    return result;
+  }
 }
 
 export default API;

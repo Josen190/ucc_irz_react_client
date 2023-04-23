@@ -16,7 +16,7 @@ interface PropsContent {
 export default function Content({
   id,
   title,
-  isClipped,
+  isClipped = false,
   text,
   image,
 }: PropsContent): JSX.Element {
