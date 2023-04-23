@@ -8,6 +8,8 @@ import API from 'Fetch/Api';
 import { useAppDispatch } from 'Hooks';
 import { setUserImage } from 'Modules/AuthController';
 
+import "./UserCard.scss"
+
 interface Props{
     user: User;
     isLogin: boolean;
