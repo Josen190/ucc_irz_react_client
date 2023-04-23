@@ -387,7 +387,7 @@ class API {
   public static async getMyEvents(
     start: MyDate,
     end: MyDate
-  ): Promise<Event[] | null> {
+  ): Promise<Event[]> {
     const result: PropsEvent[] | undefined = await this.feth
       .get(url_get_events_my, {
         params: {

@@ -3,18 +3,20 @@ import EventInDay from "../EventInDay/EventInDay";
 import MyDate from "../../../../Helpers/MyDate";
 import Event from "Helpers/Event";
 
+import "./day.scss"
+
 interface Props{
   day: MyDate, 
-  month: Number, 
+  month: number, 
   listEvents: Event[], 
   activeContextMenu: (event: any, day: any) => void
 }
 
 export default function Day({ day, month, listEvents, activeContextMenu }: Props) {
-  let today = new MyDate();
+  const today = new MyDate();
   today.setHours(0, 0, 0, 0);
 
-  let className = "day column";
+  let className = "day";
 
   if (today.getTime() === day.getTime()) {
     className += " today";

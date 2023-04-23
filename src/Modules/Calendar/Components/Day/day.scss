@@ -1,0 +1,30 @@
+$pantone-295-c: #002856;
+$pantone-289-c: #1f3a60;
+$color-gray-1: #ededed;
+$color-gray-3: #e0e0e0;
+$pantone-200-c: #c11727;
+$pantone-187-c: #ae1926;
+
+
+.day {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    font-size: medium;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    border: 1px solid $color-gray-1;
+  
+    &.today {
+      display: block;
+      border: 2px solid black;
+      background-color: aqua;
+    }
+  
+    &.noThisMonth {
+        background-color: $color-gray-3;
+    }
+  }
+  

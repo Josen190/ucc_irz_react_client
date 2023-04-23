@@ -4,6 +4,8 @@ import Button from "../../UI/Button/Button";
 import FormNewEvent from "../../Modules/FormNewEvent/Components/FormNewEvent/FormNewEvent";
 import MyDate from "../../Helpers/MyDate";
 
+import "./calendar.scss";
+
 const nameMonth = [
   "Январь",
   "Февраль",

@@ -1,10 +1,12 @@
 import API from "Fetch/Api";
 import MyDate from "Helpers/MyDate";
 import ContextMenu, { ContextButton } from "Modules/ContextMenu";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import useMeasure, { RectReadOnly } from "react-use-measure";
 import Day from "../Day/Day";
 import Event from "Helpers/Event";
+
+import "./month.scss";
 
 interface Props {
   year: number;
@@ -24,11 +26,11 @@ function showMonth(year: number, numberMonth: number) {
   let firstDayOfMonth = new MyDate(year, numberMonth, 1).getDay();
   // 0 - воскресенье, 6 - воскресенье
   firstDayOfMonth = firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1;
-  let firstDayOfCalendar = new MyDate(year, numberMonth, 1);
+  const firstDayOfCalendar = new MyDate(year, numberMonth, 1);
   firstDayOfCalendar.setDate(firstDayOfCalendar.getDate() - firstDayOfMonth);
 
-  let indexDay = new MyDate(firstDayOfCalendar);
-  let arrDayOfCalendar: MyDate[][] = [];
+  const indexDay = new MyDate(firstDayOfCalendar);
+  const arrDayOfCalendar: MyDate[][] = [];
   for (let i = 0; i < 5; i++) {
     arrDayOfCalendar.push([]);
     for (let j = 0; j < 7; j++) {
@@ -111,7 +113,7 @@ export default function Month({ year, numberMonth, setSelectedDay }: Props) {
           {arrDayOfCalendar.map((week, indexWeek) => (
             <tr key={indexWeek} className="month-column">
               {week.map((day, indexDay) => {
-                let listEventsDay = listEvents.filter((event) => {
+                const listEventsDay = listEvents.filter((event) => {
                   return day.equate(event.start);
                 });
 
