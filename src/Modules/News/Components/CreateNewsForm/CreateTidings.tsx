@@ -68,7 +68,7 @@ export default function CreateTidings({ setActive, updateNews }: Props) {
         </label>
         <ul>
           {images && (
-            <img className="image" src={images.base64} alt="Новость" />
+            <img className="image" src={images.data} alt="Новость" />
           )}
         </ul>
 

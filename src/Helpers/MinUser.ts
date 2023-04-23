@@ -40,4 +40,19 @@ export default class MinUser {
   public isAuntification() {
     return this.id === MinUser.AuntificationuUser?.id;
   }
+
+  public setImage(image: Image){
+    this.image = new Image(image);
+    return this;
+  }
+
+  public getType(){
+    return{
+      id: this.id,
+      firstName: this.firstName,
+      surname: this.surname,
+      patronymic: this.patronymic.length !== 0? this.patronymic : null,
+      imageId: this.image ? this.image.getType() : null,
+    }
+  }
 }

@@ -6,14 +6,14 @@ import PropsImage from "../Fetch/Interface/IImage";
 export default class Image {
   id: string;
   name?: string;
-  base64?: string;
+  data?: string;
   extension?: string;
   url?: string;
 
   constructor()
-  constructor(name: String)
+  constructor(name: string)
   constructor(props: PropsImage)
-  constructor(nameOrprops?: String | PropsImage) {
+  constructor(nameOrprops?: string | PropsImage) {
     if (!nameOrprops) {
       this.id = Math.random().toString();
     } else if (typeof nameOrprops === 'string') {
@@ -23,7 +23,7 @@ export default class Image {
       const props = nameOrprops as PropsImage;
       this.id = props.id ?? Math.random().toString();
       this.name = props.name;
-      this.base64 = props.data;
+      this.data = props.data;
       this.extension = props.extension;
     }
   }
@@ -38,7 +38,7 @@ export default class Image {
       .then((image) => {
         this.id = image.id;
         this.extension = image.extension;
-        this.base64 = image.base64;
+        this.data = image.data;
         this.name = image.name;
         if (setImage) setImage(this);
       })
@@ -48,18 +48,15 @@ export default class Image {
   }
 
   public toFetch(): { [keys: string]: string } | null {
-    if (!this.name || !this.extension || !this.base64) return null;
+    if (!this.name || !this.extension || !this.data) return null;
     return {
       name: this.name,
       extension: this.extension,
-      data: this.base64,
+      data: this.data,
     };
   }
 
-  public static async toBase64(file: any): Promise<Image> {
-    console.log(typeof file);
-    console.log(file);
-
+  public static async toBase64(file: File): Promise<Image> {
     const sendFile: PropsImage = {
       id: "new Image",
       name: file.name.replace(/\.[^/.]+$/, ""),
@@ -67,17 +64,33 @@ export default class Image {
     };
 
     const reader = new FileReader();
-    reader.onloadend = () => {
-      const result = reader.result;
-      if (typeof result === "string")
-        sendFile.data = result.replace("data:", "").replace(/^.+,/, "");
-    };
+    const promise = new Promise<void>((resolve, reject) => {
+      reader.onloadend = () => {
+        const result = reader.result;
+        if (typeof result === "string"){
+          sendFile.data = result.replace("data:", "").replace(/^.+,/, "");
+          resolve();
+        } else {
+          reject(new Error("Invalid file type"));
+        }
+      };
+    });
     reader.readAsDataURL(file);
-
+    await promise;
+    
     if (!sendFile.data) return Promise.reject();
 
-    let image = new Image(sendFile);
+    const image = new Image(sendFile);
     image.setUrl(file);
-    return Promise.resolve(new Image(sendFile));
+    return Promise.resolve(image);
+  }
+
+  public getType(): PropsImage{
+    return{
+      id: this.id,
+      name: this.name,
+      data: this.data,
+      extension: this.extension,
+    } 
   }
 }

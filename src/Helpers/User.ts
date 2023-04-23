@@ -1,9 +1,9 @@
 import Image from "./Image";
 import MyDate from "./MyDate";
-import PropsUser from "../Fetch/Interface/IUser";
+import PropsUser, { ParamsUser } from "../Fetch/Interface/IUser";
 import MinUser from "./MinUser";
 import Position from "./Positions";
-import PropsImage from "../Fetch/Interface/IImage";
+import PropsImage from "Fetch/Interface/IImage";
 
 export default class User extends MinUser {
   birthday: MyDate;
@@ -18,7 +18,9 @@ export default class User extends MinUser {
   roles: string[];
   positions: Position[];
 
-  constructor(props: PropsUser) {
+  constructor(props: ParamsUser)
+  constructor(props: PropsUser)
+  constructor(props: ParamsUser | PropsUser) {
     super();
     this.birthday = new MyDate(props.birthday);
     this.aboutMyself = props.aboutMyself;
@@ -30,13 +32,41 @@ export default class User extends MinUser {
     this.email = props.email;
     this.isActiveAccount = props.isActiveAccount;
     this.roles = props.roles;
-    this.positions = Position.ArrayPosition(props.positions);
+
+    this.positions = props.positions.map(p => {
+      if (typeof p === "string") {
+        return new Position(p)
+      } else {
+        return new Position(p)
+      }
+
+    })
 
     this.id = props.id;
     this.firstName = props.firstName;
     this.surname = props.surname;
     this.patronymic = props.patronymic ?? "";
-    
-    this.image = props.imageId ? new Image({ id: props.imageId }) : new Image("нет картинки");
+
+    this.image = props.imageId ?
+      typeof props.imageId === 'string' ?
+        new Image({ id: props.imageId }) : new Image(props.imageId)
+      : null;
+  }
+
+  public getType(): ParamsUser {
+    return {
+      ...super.getType(),
+      birthday: this.birthday.toString(),
+      aboutMyself: this.aboutMyself,
+      myDoings: this.myDoings,
+      skills: this.skills,
+      subscribersCount: this.subscribersCount,
+      subscriptionsCount: this.subscriptionsCount,
+      isSubscription: this.isSubscription,
+      email: this.email,
+      isActiveAccount: this.isActiveAccount,
+      roles: this.roles,
+      positions: this.positions.map(x => x.getType()),
+    }
   }
 }

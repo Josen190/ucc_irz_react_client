@@ -2,7 +2,7 @@
     width: 100%;
     height: min-content;
     display: grid;
-    grid-template-columns: 150px 1fr;
+    grid-template-columns: min-content 1fr;
     grid-column-gap: 20px;
     justify-content: center;
     justify-items: stretch;

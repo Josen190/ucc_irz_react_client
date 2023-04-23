@@ -42,4 +42,12 @@ export default class Position {
     return positions;
   }
 
+  public getType(): PropsPosition{
+    return {
+      name: this.name,
+      start: this.start.toString(),
+      end: this.end.toString(),
+    }
+  }
+
 }

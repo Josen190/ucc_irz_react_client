@@ -2,12 +2,13 @@ import User from "Helpers/User";
 import { configureStore, createSlice } from '@reduxjs/toolkit'
 import API from "Fetch/Api";
 import MinUser from "Helpers/MinUser";
+import Image from "Helpers/Image";
 
 export interface IAuthorizationState {
     isLogin: boolean;
     jwt: string | null;
     refreshToken: string | null;
-    user: User | null;
+    user: ReturnType<User['getType']> | null;
 
 }
 
@@ -16,7 +17,7 @@ interface authorization_payload {
     payload: {
         jwt: string | null;
         refreshToken: string | null;
-        user: User | null;
+        user: ReturnType<User['getType']> | null;
     }
 }
 
@@ -39,21 +40,39 @@ const authorizationReducer = createSlice({
             API.setRefreshToken(_refreshToken);
 
             if (payload.user)
-                MinUser.setAuntificationuUser(payload.user);
+                MinUser.setAuntificationuUser(new User(payload.user));
 
             window.localStorage.setItem("jwt", _jwt ?? "null");
             window.localStorage.setItem("refreshToken", _refreshToken ?? "null");
 
             const isLogin = _jwt && _refreshToken && _user ? true : false;
-            
+
             return {
                 isLogin, jwt: _jwt, refreshToken: _refreshToken, user: _user
             }
         },
+
+        setUserImage(_state, { payload }: {
+            type: string;
+            payload: {
+                image: Image;
+            }
+        }) {
+            if (!_state.user)
+                return { ..._state, user: null }
+
+            const user = new User(_state.user)
+            user.setImage(payload.image);
+
+            MinUser.setAuntificationuUser(user);
+            return {
+                ..._state, user: user.getType()
+            }
+        }
     }
 })
 
 
 
-export const { authorization } = authorizationReducer.actions
+export const { authorization, setUserImage } = authorizationReducer.actions
 export default authorizationReducer.reducer

@@ -3,14 +3,20 @@ import Button from "UI/Button/Button";
 import InputField from "UI/InputField/InputField";
 import InputImg from "UI/InputImg/InputImg";
 import { notifySuccess, notifyError } from "Components/Notifications/Notifications";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import Image from "Helpers/Image";
+import MinUser from "Helpers/MinUser";
+import { useAppDispatch } from "Hooks";
+import { setUserImage } from "Modules/AuthController";
 
 function EditInfo() {
+  const dispatch = useAppDispatch()
+  const [image, setImage] = useState<Image | null>(null)
   const [myself, setMyself] = useState("");
   const [iDid, setIDid] = useState("");
   const [achievements, setAchievements] = useState("");
   const [skills, setSkills] = useState("");
-  
+
 
   useEffect(() => {
     API.getUserMe().then((user) => {
@@ -21,7 +27,17 @@ function EditInfo() {
     });
   }, []);
 
+  console.log(image);
+  
+
   const save = () => {
+    if (image && image.name && image.extension && image.data) {
+      API.putUpdetePhoto(image.name, image.extension, image.data).then((id) => {
+        const newImage = new Image({ ...image, id: id })
+        dispatch(setUserImage({image: newImage}))
+      })
+    }
+
     API.putUpdateInfo(myself, iDid, achievements, skills)
       .then(() => {
         notifySuccess("изменения сохранены");
@@ -32,8 +48,8 @@ function EditInfo() {
   };
 
   return (
-    <form onSubmit={(e) => {e.preventDefault(); save()}}>
-      <InputImg />
+    <form onSubmit={(e) => { e.preventDefault(); save() }}>
+      <InputImg view="avatar" setImageApi={setImage} />
       <InputField
         type="textarea"
         title="О себе"

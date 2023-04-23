@@ -1,0 +1,21 @@
+$size-preview: 150px;
+
+.input-img {
+  width: 100%;
+  height: min-content;
+  display: flex;
+  flex-direction: row;
+
+  .preview-avatar {
+    display: block;
+    margin-right: 10px;
+    img {
+        width: $size-preview;
+        height: $size-preview;
+        border-radius: 50%;
+        border: 1px solid black;
+    }
+}
+
+}
+

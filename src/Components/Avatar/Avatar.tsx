@@ -1,16 +1,30 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import Image from "../../Helpers/Image";
 import Img from "UI/Img/Img";
 
+import "./Avatar.scss"
+import API from "Fetch/Api";
+
 interface PropsProfilePicture {
-  type: "base" | "mini" | "norm";
+  type: "mini" | "norm";
   image: Image | null;
 }
 
 export default function Avatar({ type, image }: PropsProfilePicture) {
+  const [_image, setImage] = useState(image);
+
+  useEffect(() => {
+    if (image && !image.data){
+      API.getImage(image.id).then(image => {
+        setImage(image);
+      })
+    }
+  }, [])
+  
+
   return (
     <div className={"logo " + type}>
-      {image && <Img image={image}></Img>}
+      {_image && <Img image={_image}></Img>}
     </div>
   );
 }

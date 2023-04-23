@@ -18,7 +18,8 @@ export async function accountLoader({ params }: any) {
 }
 
 export default function Account() {
-  const {isLogin, user: AuntificationuUser} = useAppSelector((s)=> s.authorization);
+  const {isLogin, user: ParamsUser} = useAppSelector((s)=> s.authorization);
+  const AuntificationuUser = ParamsUser? new User(ParamsUser) : null;
   const [user, setUser] = useState<User | null>(null);
   const [positionUser, setPositionUser] = useState<any | null>(null);
 
@@ -36,7 +37,7 @@ export default function Account() {
   
   return (
     <main className="account">
-      <UserCard user={user} isLogin={isLogin} />
+      {user && <UserCard user={user} isLogin={isLogin} />}
       <FeedNews inAccount={true}/>
     </main>
   );

@@ -311,7 +311,7 @@ class API {
     return Promise.resolve(users);
   }
 
-  public static async getUserMe(): Promise<User | null> {
+  public static async getUserMe(): Promise<User> {
     const info_user: PropsUser | undefined = await this.feth
       .get(url_get_users_me)
       .then((response) => response.data)
@@ -387,7 +387,7 @@ class API {
   public static async getMyEvents(
     start: MyDate,
     end: MyDate
-  ): Promise<Event[] | null> {
+  ): Promise<Event[]> {
     const result: PropsEvent[] | undefined = await this.feth
       .get(url_get_events_my, {
         params: {
@@ -554,7 +554,7 @@ class API {
 
   public static async getUserPositions(
     userId: string
-  ): Promise<Position[] | null> {
+  ): Promise<Position[]> {
     const result: PropsPosition[] | undefined = await this.feth
       .get(url_get_user_positions, { params: { userId: userId } })
       .then((response) => response.data)
@@ -568,6 +568,21 @@ class API {
     });
 
     return Promise.resolve(positions);
+  }
+
+  public static async putUpdetePhoto(
+    name: string, extension: string, data: string
+  ){
+    const result = await this.feth
+      .put(url_put_users_me_update_photo, {
+        name: name,
+        extension: extension,
+        data: data
+      })
+      .then((response) => Promise.resolve(response.data as string))
+      .catch(() => Promise.reject(null));
+
+    return result;
   }
 }
 

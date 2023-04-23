@@ -6,7 +6,8 @@ import { RouterProvider } from "react-router-dom";
 
 import AuthController from "./Modules/AuthController/Components/AuthController/authController";
 import { Provider } from "react-redux";
-import store from "Store";
+import store, { persistor } from "Store";
+import { PersistGate } from "redux-persist/integration/react";
 
 
 const root = ReactDOM.createRoot(
@@ -16,9 +17,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <AuthController>
-        <RouterProvider router={router} />
-      </AuthController>
+      <PersistGate loading={null} persistor={persistor}>
+        <AuthController>
+          <RouterProvider router={router} />
+        </AuthController>
+      </PersistGate>
     </Provider>
   </React.StrictMode>
 );
