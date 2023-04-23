@@ -8,7 +8,7 @@ export interface IAuthorizationState {
     isLogin: boolean;
     jwt: string | null;
     refreshToken: string | null;
-    user: User | null;
+    user: ReturnType<User['getType']> | null;
 
 }
 
@@ -17,7 +17,7 @@ interface authorization_payload {
     payload: {
         jwt: string | null;
         refreshToken: string | null;
-        user: User | null;
+        user: ReturnType<User['getType']> | null;
     }
 }
 
@@ -40,7 +40,7 @@ const authorizationReducer = createSlice({
             API.setRefreshToken(_refreshToken);
 
             if (payload.user)
-                MinUser.setAuntificationuUser(payload.user);
+                MinUser.setAuntificationuUser(new User(payload.user));
 
             window.localStorage.setItem("jwt", _jwt ?? "null");
             window.localStorage.setItem("refreshToken", _refreshToken ?? "null");
@@ -58,16 +58,15 @@ const authorizationReducer = createSlice({
                 image: Image;
             }
         }) {
+            if (!_state.user)
+                return { ..._state, user: null }
 
-            // const imageJson = JSON.stringify(payload.image);
-            // console.log(imageJson);
-            
-            if (_state.user)
-                MinUser.setAuntificationuUser(_state.user.setImage(payload.image));
-            console.log(payload.image);
-            
+            const user = new User(_state.user)
+            user.setImage(payload.image);
+
+            MinUser.setAuntificationuUser(user);
             return {
-                ..._state, user: _state.user ? _state.user.setImage(payload.image) : null
+                ..._state, user: user.getType()
             }
         }
     }

@@ -1,4 +1,4 @@
-import React, { FormEvent, useContext, useState } from 'react'
+import React, { FormEvent, useState } from 'react'
 import InputField from '../../../../UI/InputField/InputField'
 import Button from '../../../../UI/Button/Button';
 import fetchAuthentication from '../../Fetch/fetchAuthentication';
@@ -19,7 +19,7 @@ function AuthorizationForm() {
     e.preventDefault();
 
     fetchAuthentication(email, password, (jwt, refreshToken, user) => {
-      dispatch(authorization({ jwt, refreshToken, user}))
+      dispatch(authorization({ jwt, refreshToken, user: user ? user.getType() : null}))
     }).then((userId) => {
       
       setNext(userId);
@@ -34,7 +34,7 @@ function AuthorizationForm() {
         required={true}
         type="email"
         title="Почта"
-        onChange={(e) => setEmail(e.target.value)}
+        onSetValueStr={setEmail}
       />
       <InputField
         id="password"
@@ -42,7 +42,7 @@ function AuthorizationForm() {
         required={true}
         type="password"
         title="Пароль"
-        onChange={(e) => setPassword(e.target.value)}
+        onSetValueStr={setPassword}
       />
       <Button type="submit" >Войти</Button>
       {next && <Navigate to={`/account/${next}`} />}

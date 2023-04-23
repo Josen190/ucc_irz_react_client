@@ -84,4 +84,13 @@ export default class Image {
     image.setUrl(file);
     return Promise.resolve(image);
   }
+
+  public getType(): PropsImage{
+    return{
+      id: this.id,
+      name: this.name,
+      data: this.base64,
+      extension: this.extension,
+    } 
+  }
 }
