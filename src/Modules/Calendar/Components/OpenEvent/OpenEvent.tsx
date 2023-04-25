@@ -30,6 +30,15 @@ function OpenEvent({ event, setActive }: Props) {
         })
     }, [])
 
+    const deleteEvent = () => {
+        API.deleteEventId(event.id).then(() => {
+            setActive({
+                isActive: false,
+                event: null
+            })
+        })
+    }
+
     return (
         <div className='modal' onClick={() => setActive({
             isActive: false,
@@ -51,7 +60,7 @@ function OpenEvent({ event, setActive }: Props) {
                     {_event.description && <Content id={_event.id} text={_event.description}></Content>}
                 </div>
                 <div>
-                    {isMyEvent && <Button type='button'>Удалить</Button>}
+                    {isMyEvent && <Button type='button' onClick={deleteEvent}>Удалить</Button>}
                 </div>
             </div>
         </div>

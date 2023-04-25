@@ -597,6 +597,19 @@ class API {
 
     return result;
   }
+
+  public static async deleteEventId(id: string){
+    const result = await this.feth
+      .get(url_delete_events_id(id), {
+        params: {
+          id: id
+        }
+      })
+      .then(() => Promise.resolve(null))
+      .catch(() => Promise.reject(null));
+
+    return result;
+  }
 }
 
 export default API;
