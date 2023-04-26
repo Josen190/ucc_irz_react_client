@@ -6,8 +6,10 @@ import Tidings from "../Tidings/Tidings";
 import HeaderFeedNews from "../HeaderFeedNews/HeaderFeedNews";
 import CreateTidings from "../CreateNewsForm/CreateTidings";
 import { useAppDispatch, useAppSelector } from "Hooks";
-import useEndOfPage from "../../Hooks/useEndOfPage"
+import useScrollEndOfPage, { useEndOfPage } from "../../../../Hooks/useEndOfPage"
 import { setFilter } from "../../Reducers/NewsFilterReduser";
+import { useScroll } from "react-ui-animate";
+import usePageIndex from "Hooks/usePageIndex";
 
 interface Props {
   inAccount?: boolean;
@@ -20,21 +22,13 @@ export default function FeedNews({
   const filter = useAppSelector((s) => s.newsFilter);
   const [active, setActive] = useState(false);
   const [arrNews, setArrNews] = useState<JSX.Element[]>([]);
-  const [pageIndex, setPageIndex] = useState(1);
   const [deleteKeyElement, setDeleteKeyElement] = useState<string | null>(null);
-  const [isEndOfPage, setIsEndOfPage] = useState(false);
 
   const userId = user ? user.id : undefined;
   const filterInAccount = {AuthorId: userId, PublicOnly: undefined, LikedOnly: undefined, SearchString: undefined};
   useDeleteNewsFromFeed(deleteKeyElement, arrNews, setArrNews);
-  useGetNews(pageIndex, arrNews, setArrNews, setDeleteKeyElement, inAccount? filterInAccount : filter);
-  useEndOfPage(setIsEndOfPage);
+  useGetNews(arrNews, setArrNews, setDeleteKeyElement, inAccount? filterInAccount : filter);
 
-  useEffect(() => {
-    if (isEndOfPage) {
-      setPageIndex(pageIndex + 1);
-    }
-  }, [isEndOfPage])
 
   const update = (news: News) => {
     setArrNews([<Tidings key={news.id + Math.random()} tidings={news} deletElement={setDeleteKeyElement} />, ...arrNews]);

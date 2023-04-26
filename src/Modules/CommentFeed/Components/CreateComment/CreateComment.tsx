@@ -27,7 +27,7 @@ export default function CreateComment({ newsID, update }: Props) {
       <InputField
         type="textarea"
         value={value}
-        onSetValueStr={setText}
+        onSetValue={setText}
       />
       <Button type="submit">Добавть</Button>
     </form>

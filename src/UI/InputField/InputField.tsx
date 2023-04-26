@@ -24,7 +24,7 @@ interface Props<T extends s> {
   required?: boolean;
   onChange?: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   onSetValue?: React.Dispatch<React.SetStateAction<T>>;
-  constructor?: { new (value: string): T }; 
+  MyConstructor?: { new (...args: any[]): T };
 }
 
 export default function InputField<T extends s>({
@@ -40,7 +40,7 @@ export default function InputField<T extends s>({
   required,
   onChange,
   onSetValue,
-  constructor: MyConstructor,
+  MyConstructor,
 }: Props<T>): JSX.Element {
   const inputprops = {
     className: "",
@@ -58,7 +58,8 @@ export default function InputField<T extends s>({
   const _onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (onSetValue) {
       if (MyConstructor && MyConstructor.name === 'MyDate') {
-        onSetValue(new MyConstructor(e.target.value) as T);
+        const myDateConstructor = MyConstructor as { new (...args: any[]): T };
+        onSetValue(new myDateConstructor(e.target.value) as T);
       } else {
         onSetValue(e.target.value as T);
       }

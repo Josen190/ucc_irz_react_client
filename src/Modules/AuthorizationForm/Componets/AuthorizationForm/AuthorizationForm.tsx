@@ -34,7 +34,7 @@ function AuthorizationForm() {
         required={true}
         type="email"
         title="Почта"
-        onSetValueStr={setEmail}
+        onSetValue={setEmail}
       />
       <InputField
         id="password"
@@ -42,7 +42,7 @@ function AuthorizationForm() {
         required={true}
         type="password"
         title="Пароль"
-        onSetValueStr={setPassword}
+        onSetValue={setPassword}
       />
       <Button type="submit" >Войти</Button>
       {next && <Navigate to={`/account/${next}`} />}
