@@ -6,7 +6,8 @@ import { useAppSelector } from "Hooks";
 
 
 export default function Header() {
-  const isLogin = useAppSelector((s)=> s.authorization.isLogin);
+  const {isLogin, user}= useAppSelector((s)=> s.authorization);
+  const isAdmin = user?.roles.indexOf("Admin") || user?.roles.indexOf("SuperAdmin")
 
   return (
     <header>
@@ -19,6 +20,7 @@ export default function Header() {
           Войти
         </Button>
       )}
+      {isAdmin && <Button type="link" href="/admin">Панель админестратора</Button>}
     </header>
   );
 }

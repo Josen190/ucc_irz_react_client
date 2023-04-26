@@ -11,6 +11,7 @@ import Calendar from "Pages/Calendar/Calendar";
 import Edit from "Pages/Edit/Edit";
 import Messenger from "Pages/Messenger/Messenger";
 import Setting from "Modules/Setting";
+import Staff from "Pages/Staff/Staff";
 
 
 const router = createBrowserRouter(
@@ -51,20 +52,19 @@ const router = createBrowserRouter(
           path: "calendar",
           element: <Calendar />,
         },
-
+      ],
+    },
+    {
+      path: "admin",
+      element: <Admin />,
+      children: [
         {
-          path: "admin",
-          element: <Admin />,
-          children: [
-            {
-              path: "staff",
-              element: <div />,
-            },
-            {
-              path: "role",
-              element: <div />,
-            },
-          ],
+          path: "staff",
+          element: <Staff />,
+        },
+        {
+          path: "role",
+          element: <div />,
         },
       ],
     },

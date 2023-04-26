@@ -325,22 +325,25 @@ class API {
   }
 
   public static async putUpdateInfo(
-    myself: string,
-    iDid: string,
-    achievements: string,
-    skills: string
+    myself?: string,
+    iDid?: string,
+    achievements?: string,
+    skills?: string, 
   ) {
+
+    const data: {[key: string]: string } = {}
+    if (myself) data.aboutMyself = myself;
+    if (iDid) data.myDoings = iDid;
+    if (skills) data.skills = skills;
+  
+
     this.feth
-      .put(url_put_users_me_update_info, {
-        aboutMyself: myself,
-        myDoings: iDid,
-        skills: skills,
-      })
+      .put(url_put_users_me_update_info, data)
       .then(() => {
         Promise.resolve();
       })
       .catch((error) => {
-        Promise.reject();
+        Promise.reject(error);
       });
   }
 

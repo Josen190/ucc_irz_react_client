@@ -4,7 +4,7 @@ import API from "Fetch/Api";
 import MinUser from "Helpers/MinUser";
 import Image from "Helpers/Image";
 
-export interface IAuthorizationState {
+interface IAuthorizationState {
     isLogin: boolean;
     jwt: string | null;
     refreshToken: string | null;
