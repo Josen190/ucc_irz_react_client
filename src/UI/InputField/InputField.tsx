@@ -1,7 +1,10 @@
 import React, { ChangeEventHandler } from "react";
 import Textarea from "./Textarea/Textarea";
+import MyDate from "Helpers/MyDate";
 
-interface Props {
+type s = string | boolean | MyDate;
+
+interface Props<T extends s> {
   type:
   | "textarea"
   | "text"
@@ -20,10 +23,11 @@ interface Props {
   rows?: number;
   required?: boolean;
   onChange?: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
-  onSetValueStr?: React.Dispatch<React.SetStateAction<string>>;
+  onSetValue?: React.Dispatch<React.SetStateAction<T>>;
+  constructor?: { new (value: string): T }; 
 }
 
-export default function InputField({
+export default function InputField<T extends s>({
   type,
   id,
   title,
@@ -35,8 +39,9 @@ export default function InputField({
   rows,
   required,
   onChange,
-  onSetValueStr,
-}: Props): JSX.Element {
+  onSetValue,
+  constructor: MyConstructor,
+}: Props<T>): JSX.Element {
   const inputprops = {
     className: "",
     id: id,
@@ -51,7 +56,13 @@ export default function InputField({
   let input: JSX.Element = <></>;
 
   const _onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    if (onSetValueStr) onSetValueStr(e.target.value);
+    if (onSetValue) {
+      if (MyConstructor && MyConstructor.name === 'MyDate') {
+        onSetValue(new MyConstructor(e.target.value) as T);
+      } else {
+        onSetValue(e.target.value as T);
+      }
+    }
     if (onChange) onChange(e);
   };
 
