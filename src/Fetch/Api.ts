@@ -17,7 +17,7 @@ import { INewsFiler } from "Modules/News";
 const host = "https://localhost:7116";
 
 // авторизация
-const url_post_authenticate = `/api/authentication/authenticate`;
+
 const url_post_refresh = `/api/authentication/refresh`;
 const url_put_change_password = `/api/authentication/change_password`;
 const url_post_send_reset_password_url = `/api/authentication/send_reset_password_url`;
@@ -191,42 +191,6 @@ class API {
 
   public static setRefreshToken(refreshToken: string | null) {
     this.refreshToken = refreshToken;
-  }
-
-  public static async authentication(email: string, password: string): Promise<{ jwt: string, refreshToken: string, user: User }> {
-    const result: { jwt: string, refreshToken: string, user: User } | undefined = await this.feth
-      .post(url_post_authenticate, {
-        email: email,
-        password: password,
-      })
-      .then(async (response) => {
-        if (
-          typeof response.data.jwt !== "string" ||
-          typeof response.data.jwt !== "string"
-        )
-          return undefined;
-        const _data: { jwt: string, refreshToken: string, user: User | null } = {
-          jwt: response.data.jwt,
-          refreshToken: response.data.refreshToken,
-          user: null,
-        };
-
-        this.setJwt(_data.jwt);
-
-        _data.user = await this.getUserMe()
-          .then((user) => user)
-          .catch(() => null);
-
-        if (_data.user === null)
-          return undefined;
-
-        return { ..._data, user: _data.user };
-      })
-      .catch((error) => undefined);
-
-    if (!result) return Promise.reject();
-
-    return Promise.resolve(result);
   }
 
   public static async refresh(
