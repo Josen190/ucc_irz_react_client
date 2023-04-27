@@ -19,9 +19,7 @@ function FormEditInfoUser({ setActive, user }: Props) {
 
     const [atviveEditRole, setActiveEditRole] = useState(false);
 
-    const isSuperAdmin = useAppSelector(s => {
-        return s.authorization.user ? s.authorization.user.roles.includes(ConstSuperAdmin.Id) : false;
-    })
+    const isSuperAdmin = user.roles.includes(ConstSuperAdmin.Id);
 
     const save = (event: MouseEvent<HTMLButtonElement>) => {
         // event.preventDefault()
