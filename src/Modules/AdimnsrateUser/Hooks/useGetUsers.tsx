@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import getUsers from "../Fetch/getUsers";
 import React from "react";
 import usePageIndex from "Hooks/usePageIndex";

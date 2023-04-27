@@ -1,4 +1,4 @@
-import { ConstAdmin, ConstCabinetsManager, ConstSuperAdmin, ConstSupport } from "../Constatnts/role";
+import { ConstAdmin, ConstCabinetsManager, ConstSuperAdmin, ConstSupport } from "../../../Constatnts/role";
 
 
 function parseMyRole(role: string[]) {

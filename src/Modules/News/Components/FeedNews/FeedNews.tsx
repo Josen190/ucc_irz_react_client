@@ -13,21 +13,21 @@ import usePageIndex from "Hooks/usePageIndex";
 
 interface Props {
   inAccount?: boolean;
+  userId?: string
 }
 
 export default function FeedNews({
   inAccount = false,
+  userId,
 }: Props): JSX.Element {
   const {isLogin, user }= useAppSelector((s) => s.authorization);
-  const filter = useAppSelector((s) => s.newsFilter);
   const [active, setActive] = useState(false);
   const [arrNews, setArrNews] = useState<JSX.Element[]>([]);
   const [deleteKeyElement, setDeleteKeyElement] = useState<string | null>(null);
 
-  const userId = user ? user.id : undefined;
-  const filterInAccount = {AuthorId: userId, PublicOnly: undefined, LikedOnly: undefined, SearchString: undefined};
+  const filter = {AuthorId: userId, PublicOnly: undefined, LikedOnly: undefined, SearchString: undefined};
   useDeleteNewsFromFeed(deleteKeyElement, arrNews, setArrNews);
-  useGetNews(arrNews, setArrNews, setDeleteKeyElement, inAccount? filterInAccount : filter);
+  useGetNews(arrNews, setArrNews, setDeleteKeyElement, filter);
 
 
   const update = (news: News) => {

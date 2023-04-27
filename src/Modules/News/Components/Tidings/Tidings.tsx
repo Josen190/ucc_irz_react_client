@@ -9,6 +9,9 @@ import Content from "Components/Content/Content";
 import Like from "../Like/Like";
 import CommentsIcon from "../CommentsIcon/CommentsIcon";
 import CommentFeed from "Modules/CommentFeed";
+import { useAppSelector } from "Hooks";
+import { ConstSupport } from "Constatnts/role";
+
 
 interface Props {
   tidings: News;
@@ -16,6 +19,8 @@ interface Props {
 }
 
 export default function Tidings({ tidings, deletElement }: Props) {
+  const isSuuprt = tidings.isPublic &&
+   useAppSelector(s => s.authorization.user ? s.authorization.user.roles.includes(ConstSupport.Id) : false);
   const [isActiveCommentFeed, setIsActiveCommentFeed] = useState(false);
   const [image, setImage] = useState<Image>();
   const subMenu = useRef<HTMLUListElement>(null);
@@ -23,7 +28,7 @@ export default function Tidings({ tidings, deletElement }: Props) {
 
   const deleteTidings = (event: any) => {
     event.preventDefault();
-    
+
     API.deleteNews(tidings.id)
       .then(() => {
         deletElement(tidings.id);
@@ -41,10 +46,10 @@ export default function Tidings({ tidings, deletElement }: Props) {
       <div className="tile">
         <div className="row">
           <div className="row">
-            <UserVisitingCard user={tidings.author}></UserVisitingCard> 
+            <UserVisitingCard user={tidings.author}></UserVisitingCard>
             <span>{tidings.dateTime.DatetoStr('dd-months-yyyy')}</span>
           </div>
-          {isMyTiding && (
+          {(isMyTiding || isSuuprt) && (
             <div>
               <Button
                 type="button"

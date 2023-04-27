@@ -3,7 +3,7 @@ import Button from 'UI/Button/Button'
 import InputField from 'UI/InputField/InputField'
 import React, { MouseEvent, SetStateAction, useState } from 'react'
 import EditRole from '../EditRole/EditRole';
-import { ConstSuperAdmin } from '../../Constatnts/role';
+import { ConstSuperAdmin } from '../../../../Constatnts/role';
 import updateInfo from '../../Fetch/updateInfo';
 
 interface Props {
