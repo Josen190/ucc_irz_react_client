@@ -7,6 +7,7 @@ import RowTableUser from "../Component/RowTableUser/RowTableUser";
 
 
 async function useGetUsers(
+    rowUser: JSX.Element[],
     setRowUser: React.Dispatch<React.SetStateAction<JSX.Element[] | null>>,
     searchString?: string, isActive?: boolean, role?: string, positionId?: string) {
 
@@ -15,9 +16,11 @@ async function useGetUsers(
 
     useEffect(() => {
         getUsers(pageIndex, searchString, isActive, role, positionId).then((users) => {
-            setRowUser(users.map(user => {
-                return (<RowTableUser key={user.id} user={user} />)
+            const _rowUser: JSX.Element[] = [...rowUser];
+            (users.forEach(user => {
+                _rowUser.push(<RowTableUser key={user.id} user={user} />);
             }))
+            setRowUser(_rowUser)
         })
     }, [pageIndex])
 }

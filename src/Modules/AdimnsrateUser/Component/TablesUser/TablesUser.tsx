@@ -8,7 +8,7 @@ import HeaderTablesUser from '../HeaderTablesUser/HeaderTablesUser';
 function TablesUser() {
     const [rowUser, setRowUser] = useState<JSX.Element[] | null>(null)
 
-    useGetUsers(setRowUser);
+    useGetUsers(rowUser ?? [], setRowUser);
 
     return (
         <div>

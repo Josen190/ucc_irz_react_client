@@ -8,6 +8,7 @@ import Button from 'UI/Button/Button';
 import UserInformation from '../UserInfomation/UserInformation';
 import FormEditInfoUser from '../FormEditInfoUser/FormEditInfoUser';
 import { useAppSelector } from 'Hooks';
+import useGetUser from '../../Hooks/useGetUser';
 
 
 function UserCard() {
@@ -16,6 +17,9 @@ function UserCard() {
         return ParamsUser ? new User(ParamsUser) : null;
     })
     const [isActive, setActive] = useState(false);
+
+    useGetUser(user ? user.id : null);
+
     return (
         <div className="tile">
             <div className='UserCard'>
