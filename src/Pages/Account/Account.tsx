@@ -11,6 +11,7 @@ import News from "Helpers/News";
 import { useAppSelector } from "Hooks";
 
 import "./Account.scss";
+import getUserFromId from "Fetch/getUserfromId";
 
 export async function accountLoader({ params }: any) {
      // const user: User = await API.getUser(params.id).then((user) => user);
@@ -27,7 +28,7 @@ export default function Account() {
 
   useEffect(() => {
     if (AuntificationuUser?.id !== userId){
-      API.getUser(userId).then((_user) => setUser(_user))
+      getUserFromId(userId).then((_user) => setUser(_user))
       API.getUserPositions(userId).then((position) => setPositionUser(position));
     }else if (AuntificationuUser.id === userId){
       setUser(AuntificationuUser);

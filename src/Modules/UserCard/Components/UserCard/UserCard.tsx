@@ -9,6 +9,7 @@ import { useAppDispatch } from 'Hooks';
 import { setUserImage } from 'Modules/AuthController';
 
 import "./UserCard.scss"
+import getImage from 'Fetch/getImage';
 
 interface Props{
     user: User;
@@ -22,9 +23,8 @@ function UserCard({user, isLogin}: Props) {
   useEffect(() => {
     if (!user.image) return;
 
-    API.getImage(user.image.id).then(image => {
+    getImage(user.image.id).then(image => {
       dispatch(setUserImage({image}));
-      
     })
   }, [])
 

@@ -50,10 +50,6 @@ const url_delete_events_id = (id: string) => {
 };
 const url_post_events = "/api/events";
 
-// Изображения
-const url_get_images_id = (id: string) => {
-  return `/api/images/${id}`;
-};
 
 // Сообщения
 const url_get_messages = "/api/messages";
@@ -243,19 +239,6 @@ class API {
     );
   }
 
-  public static async getUser(id: string): Promise<User> {
-    const info_user: PropsUser | undefined = await this.feth
-      .get(url_get_users_id(id))
-      .then((response) => response.data)
-      .catch(() => undefined);
-
-    if (!info_user) {
-      return Promise.reject(null);
-    }
-
-    return Promise.resolve(new User(info_user));
-  }
-
   public static async getUsers(
     pageIndex: number,
     searchString?: string,
@@ -290,19 +273,6 @@ class API {
     });
 
     return Promise.resolve(users);
-  }
-
-  public static async getUserMe(): Promise<User> {
-    const info_user: PropsUser | undefined = await this.feth
-      .get(url_get_users_me)
-      .then((response) => response.data)
-      .catch(() => undefined);
-
-    if (!info_user) {
-      return Promise.reject(null);
-    }
-
-    return Promise.resolve(new User(info_user));
   }
 
   public static async putUpdateInfo(
@@ -521,19 +491,6 @@ class API {
       })
       .then(() => Promise.resolve())
       .catch(() => Promise.reject());
-  }
-
-  public static async getImage(id: string): Promise<Image> {
-    const result: PropsImage | undefined = await this.feth
-      .get(url_get_images_id(id))
-      .then((response) => response.data)
-      .catch(() => undefined);
-
-    if (!result) {
-      return Promise.reject(null);
-    }
-
-    return Promise.resolve(new Image(result));
   }
 
   public static async getUserPositions(

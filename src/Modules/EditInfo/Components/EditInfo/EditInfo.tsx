@@ -8,6 +8,7 @@ import Image from "Helpers/Image";
 import MinUser from "Helpers/MinUser";
 import { useAppDispatch } from "Hooks";
 import { setUserImage } from "Modules/AuthController";
+import getUserMe from "Fetch/getUserMe";
 
 function EditInfo() {
   const dispatch = useAppDispatch()
@@ -19,7 +20,7 @@ function EditInfo() {
 
 
   useEffect(() => {
-    API.getUserMe().then((user) => {
+    getUserMe().then((user) => {
       setMyself(user.aboutMyself ?? "");
       setIDid(user.myDoings ?? "");
       setAchievements(user.skills ?? "");

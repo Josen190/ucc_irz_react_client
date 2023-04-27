@@ -2,6 +2,7 @@ import React from "react";
 import API from "../Fetch/Api";
 import { notifyError } from "../Components/Notifications/Notifications";
 import PropsImage from "../Fetch/Interface/IImage";
+import getImage from "Fetch/getImage";
 
 export default class Image {
   id: string;
@@ -34,7 +35,7 @@ export default class Image {
 
   public getImg(setImage?: React.Dispatch<React.SetStateAction<Image | undefined>>): void {
     
-    API.getImage(this.id)
+    getImage(this.id)
       .then((image) => {
         this.id = image.id;
         this.extension = image.extension;

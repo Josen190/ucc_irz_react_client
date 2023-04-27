@@ -4,6 +4,7 @@ import Img from "UI/Img/Img";
 
 import "./Avatar.scss"
 import API from "Fetch/Api";
+import getImage from "Fetch/getImage";
 
 interface PropsProfilePicture {
   type: "mini" | "norm";
@@ -15,7 +16,7 @@ export default function Avatar({ type, image }: PropsProfilePicture) {
 
   useEffect(() => {
     if (image && !image.data){
-      API.getImage(image.id).then(image => {
+      getImage(image.id).then(image => {
         setImage(image);
       })
     }
