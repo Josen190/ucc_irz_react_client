@@ -13,8 +13,7 @@ export default function useLoadingApp() {
     const dispatch = useAppDispatch()
     useEffect(() => {
         const { jwt: _jwt, refreshToken: _refreshToken } = getAuthData();
-        API.setJwt(_jwt);
-        API.setRefreshToken(_refreshToken);
+        dispatch(authorization({ jwt: _jwt, refreshToken: _refreshToken, user: null }))
         API.getUserMe().then((user) => {
             dispatch(authorization({ jwt: _jwt, refreshToken: _refreshToken, user: user.getType() }))
             if (user.image){

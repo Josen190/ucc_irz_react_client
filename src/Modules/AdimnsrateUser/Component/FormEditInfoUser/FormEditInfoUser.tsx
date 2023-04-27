@@ -3,7 +3,10 @@ import MyDate from 'Helpers/MyDate';
 import User from 'Helpers/User';
 import Button from 'UI/Button/Button'
 import InputField from 'UI/InputField/InputField'
-import React, { FormEvent, SetStateAction, useState } from 'react'
+import React, { MouseEvent, SetStateAction, useState } from 'react'
+import EditRole from '../EditRole/EditRole';
+import { useAppSelector } from 'Hooks';
+import { ConstSuperAdmin } from '../../Constatnts/role';
 
 interface Props {
     setActive: React.Dispatch<SetStateAction<boolean>>;
@@ -13,24 +16,33 @@ interface Props {
 function FormEditInfoUser({ setActive, user }: Props) {
     const [fullName, setFullName] = useState(user.getFullName());
     const [birthday, setBirthday] = useState(user.birthday);
-    const [role, setRole] = useState(user.roles);
 
+    const [atviveEditRole, setActiveEditRole] = useState(false);
 
-    const save = (event: FormEvent<HTMLFormElement>) => {
+    const isSuperAdmin = useAppSelector(s => {
+        return s.authorization.user ? s.authorization.user.roles.includes(ConstSuperAdmin.Id) : false;
+    })
+
+    const save = (event: MouseEvent<HTMLButtonElement>) => {
+        // event.preventDefault()
+
         const fio = fullName.split(" ");
         if (2 > fio.length && fio.length > 3) return;
 
-      
+
     }
+
+
     return (
         <div className='modal' onClick={() => setActive(false)}>
-            <form className='tile' onClick={(e) => e.stopPropagation()} onSubmit={save}>
+            <div className='tile' onClick={(e) => e.stopPropagation()}>
                 <InputField type='text' title='ФИО' onSetValue={setFullName}></InputField>
                 <InputField type='date' title='дата рождения' onSetValue={setBirthday}></InputField>
-                {/* <InputField type='text' ></InputField> */}
-                <Button type="submit">Сохранить</Button>
-            </form>
-        </div>
+                {!isSuperAdmin && <Button type="button" onClick={() => setActiveEditRole(true)}>Изменить роли</Button>}
+                {atviveEditRole && <EditRole id={user.id} role={user.roles} setActive={setActiveEditRole}></EditRole>}
+                <Button type="button" onClick={save}>Сохранить</Button>
+            </div>
+        </div >
     )
 }
 

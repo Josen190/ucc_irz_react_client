@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import PropsUser from "./Interface/IUser";
 import User from "../Helpers/User";
 import PropsNewsComments from "./Interface/INewsComments";
@@ -100,8 +100,7 @@ const url_post_positions_remove_user_position =
 
 // Роли
 const url_get_roles = "/api/roles";
-const url_post_roles_add_to_user = "/api/roles/add_to_user";
-const url_post_roles_remove_from_user = "/api/roles/remove_from_user";
+
 
 // Подписки
 const url_get_subscriptions_user_subscribers =
@@ -167,7 +166,27 @@ class API {
     } else {
       API.feth.defaults.headers["authorization"] = null;
     }
+    this.feth.post
+  }
 
+  public static get<T = any, R = AxiosResponse<T, any>, D = any>
+    (url: string, config?: AxiosRequestConfig<D> | undefined) {
+    return this.feth.get(url, config);
+  }
+
+  public static post<T = any, R = AxiosResponse<T, any>, D = any>
+    (url: string, data?: D | undefined, config?: AxiosRequestConfig<D> | undefined) {
+    return this.feth.post(url, data, config);
+  }
+
+  public static delete<T = any, R = AxiosResponse<T, any>, D = any>
+    (url: string, config?: AxiosRequestConfig<D> | undefined) {
+    return this.feth.delete(url, config);
+  }
+
+  public static put<T = any, R = AxiosResponse<T, any>, D = any>
+    (url: string, data?: D | undefined, config?: AxiosRequestConfig<D> | undefined) {
+    return this.feth.put(url, data, config);
   }
 
   public static setRefreshToken(refreshToken: string | null) {

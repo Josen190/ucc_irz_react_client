@@ -45,7 +45,7 @@ const authorizationReducer = createSlice({
             window.localStorage.setItem("jwt", _jwt ?? "null");
             window.localStorage.setItem("refreshToken", _refreshToken ?? "null");
 
-            const isLogin = _jwt && _refreshToken && _user ? true : false;
+            const isLogin = _jwt && _refreshToken ? true : false;
 
             return {
                 isLogin, jwt: _jwt, refreshToken: _refreshToken, user: _user

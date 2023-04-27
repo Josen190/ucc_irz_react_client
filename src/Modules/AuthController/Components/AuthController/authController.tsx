@@ -11,11 +11,10 @@ interface Props {
 }
 
 const AuthController = ({ children }: Props) => {
+  useLoadingApp();
+  
   const dispatch = useAppDispatch()
   const user = useAppSelector((s) => s.authorization.user);
-
-  useLoadingApp();
-
   API.sendRefreshToken((jwt, refreshToken) => {
     dispatch(authorization({ jwt, refreshToken, user: (jwt === null || refreshToken === null) ? null : user }))
   });
