@@ -167,7 +167,7 @@ class API {
     } else {
       API.feth.defaults.headers["authorization"] = null;
     }
-    
+
   }
 
   public static setRefreshToken(refreshToken: string | null) {
@@ -328,14 +328,14 @@ class API {
     myself?: string,
     iDid?: string,
     achievements?: string,
-    skills?: string, 
+    skills?: string,
   ) {
 
-    const data: {[key: string]: string } = {}
+    const data: { [key: string]: string } = {}
     if (myself) data.aboutMyself = myself;
     if (iDid) data.myDoings = iDid;
     if (skills) data.skills = skills;
-  
+
 
     this.feth
       .put(url_put_users_me_update_info, data)
@@ -367,10 +367,10 @@ class API {
   public static async getNewsComment(newsId: string): Promise<NewsComments[]> {
     const result: PropsNewsComments[] | undefined = await this.feth
       .get(url_get_news_comments, {
-        params:{
+        params: {
           newsEntryId: newsId
         }
-        
+
       })
       .then((response) => response.data)
       .catch(() => undefined);
@@ -458,7 +458,7 @@ class API {
       .then((response) => Promise.resolve(response.data as string))
       .catch(() => Promise.reject(null));
 
-      return result;
+    return result;
   }
 
   public static async getListingNews(
@@ -470,7 +470,7 @@ class API {
       PageIndex: pageIndex,
       PageSize: pageSize,
     };
-    
+
     if (filter?.AuthorId) params.AuthorId = filter.AuthorId;
     if (filter?.PublicOnly) params.PublicOnly = filter.PublicOnly;
     if (filter?.LikedOnly) params.LikedOnly = filter.LikedOnly;
@@ -575,7 +575,7 @@ class API {
 
   public static async putUpdetePhoto(
     name: string, extension: string, data: string
-  ){
+  ) {
     const result = await this.feth
       .put(url_put_users_me_update_photo, {
         name: name,
@@ -588,7 +588,7 @@ class API {
     return result;
   }
 
-  public static async getEventId(id: string){
+  public static async getEventId(id: string) {
     const result = await this.feth
       .get(url_get_events_id(id), {
         params: {
@@ -601,7 +601,7 @@ class API {
     return result;
   }
 
-  public static async deleteEventId(id: string){
+  public static async deleteEventId(id: string) {
     const result = await this.feth
       .get(url_delete_events_id(id), {
         params: {
@@ -609,6 +609,23 @@ class API {
         }
       })
       .then(() => Promise.resolve(null))
+      .catch(() => Promise.reject(null));
+
+    return result;
+  }
+
+  public static async postEvent(data: {
+    title: string;
+    description: string;
+    start: MyDate | null;
+    end: MyDate | null;
+    isPublic: boolean;
+    cabinetId: number | null;
+    listenersIds: null;
+  }) {
+    const result = await this.feth
+      .post(url_post_events, data)
+      .then((response) => Promise.resolve(response.data as string))
       .catch(() => Promise.reject(null));
 
     return result;

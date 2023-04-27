@@ -4,6 +4,8 @@ import { useAppSelector } from "Hooks";
 import Button from "UI/Button/Button";
 import InputField from "UI/InputField/InputField";
 import { useContext, useState, useEffect } from "react";
+import User from "Helpers/User";
+import API from "Fetch/Api";
 
 
 interface Props {
@@ -12,7 +14,10 @@ interface Props {
 }
 
 export default function FormNewEvent({ day, setActive }: Props): JSX.Element {
-  const user = useAppSelector((s) => s.user)
+  const user = useAppSelector((s) => {
+    const paramsUser = s.authorization.user;
+    return paramsUser ? new User(paramsUser) : null;
+  })
 
   const [date, setDate] = useState<MyDate | null>(day);
   const [startTime, setStartTime] = useState<MyDate | null>(day);
@@ -43,7 +48,7 @@ export default function FormNewEvent({ day, setActive }: Props): JSX.Element {
       listenersIds: null,
     };
 
-    // API.post(url_post_events, data);
+    API.postEvent(data).then()
   };
 
   return (
