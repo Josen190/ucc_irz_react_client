@@ -37,7 +37,6 @@ function HeaderFeedNews({ isLogin, setActive, setFilter }: Props) {
             <Select setValue={setLikedOnly}>
                 <Option value={undefined}>Все</Option>
                 <Option value={true}>Понравившиеся</Option>
-                <Option value={false}>Непонравившиеся</Option>
             </Select>
             <InputField type='text' onSetValue={(v: string) => setSearchString(v.length == 0 ? undefined : v)} placeholder='Искать' />
             {isLogin && (

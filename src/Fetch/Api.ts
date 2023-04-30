@@ -126,8 +126,7 @@ const url_put_users_me_delete_photo = "/api/users/me/delete_photo";
 const url_put_users_me_update_info = "/api/users/me/update_info";
 
 // Управление пользователями
-const url_post_users_management_register =
-  "/api/users_management/register";
+
 
 const url_delete_users_management_id = (id: string) => {
   return `/api/users_management/${id}`;
