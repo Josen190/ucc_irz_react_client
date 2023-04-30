@@ -6,6 +6,9 @@ import { ParamsOpenEvent } from '../Month/Month';
 import "./openEvent.scss"
 import Content from 'Components/Content/Content';
 import API from 'Fetch/Api';
+import router from 'AppRouter';
+import { useAppSelector } from 'Hooks';
+import { ConstSupport } from 'Constatnts/role';
 
 interface Props {
     event: Event;
@@ -15,8 +18,9 @@ interface Props {
 
 
 function OpenEvent({ event, setActive }: Props) {
+    const role = useAppSelector(s => s.authorization.user?.roles)
     const [_event, setEvent] = useState(event);
-    const isMyEvent = _event.creator.isAuntification();
+    const isMyEvent = _event.creator.isAuntification() || (role ? role.includes(ConstSupport.Id) && (event.isPublic?? false) : false);
 
 
     useEffect(() => {
