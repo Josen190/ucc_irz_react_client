@@ -5,11 +5,7 @@ import News from "Helpers/News";
 import Tidings from "../Tidings/Tidings";
 import HeaderFeedNews from "../HeaderFeedNews/HeaderFeedNews";
 import CreateTidings from "../CreateNewsForm/CreateTidings";
-import { useAppDispatch, useAppSelector } from "Hooks";
-import useScrollEndOfPage, { useEndOfPage } from "../../../../Hooks/useEndOfPage"
-import { setFilter } from "../../Reducers/NewsFilterReduser";
-import { useScroll } from "react-ui-animate";
-import usePageIndex from "Hooks/usePageIndex";
+import { useAppSelector } from "Hooks";
 
 interface Props {
   inAccount?: boolean;
@@ -20,12 +16,17 @@ export default function FeedNews({
   inAccount = false,
   userId,
 }: Props): JSX.Element {
-  const {isLogin, user }= useAppSelector((s) => s.authorization);
+  const { isLogin, user } = useAppSelector((s) => s.authorization);
   const [active, setActive] = useState(false);
   const [arrNews, setArrNews] = useState<JSX.Element[]>([]);
   const [deleteKeyElement, setDeleteKeyElement] = useState<string | null>(null);
+  const [filter, setFilter] = useState(
+    { AuthorId: userId, 
+      PublicOnly: undefined, 
+      LikedOnly: undefined, 
+      SearchString: undefined 
+    })
 
-  const filter = {AuthorId: userId, PublicOnly: undefined, LikedOnly: undefined, SearchString: undefined};
   useDeleteNewsFromFeed(deleteKeyElement, arrNews, setArrNews);
   useGetNews(arrNews, setArrNews, setDeleteKeyElement, filter);
 
@@ -36,7 +37,8 @@ export default function FeedNews({
 
 
   return <div className="column">
-    <HeaderFeedNews isLogin={isLogin && inAccount} setActive={inAccount ? setActive : undefined}></HeaderFeedNews>
+    <HeaderFeedNews isLogin={isLogin && inAccount} setActive={inAccount ? setActive : undefined}
+    setFilter={(v) => {setFilter({...v, AuthorId: userId})}}></HeaderFeedNews>
     {arrNews}
     {active && (<CreateTidings setActive={setActive} updateNews={update} />)}
   </div>;

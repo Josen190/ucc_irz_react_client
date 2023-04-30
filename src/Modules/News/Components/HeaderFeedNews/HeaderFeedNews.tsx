@@ -21,6 +21,7 @@ function HeaderFeedNews({ isLogin, setActive, setFilter }: Props) {
     const [PublicOnly, setPublicOnly] = useState<boolean>();
     const [LikedOnly, setLikedOnly] = useState<boolean>();
     const [SearchString, setSearchString] = useState<string>();
+    
 
     useEffect(() => {
         if (setFilter) setFilter({ PublicOnly, LikedOnly, SearchString })

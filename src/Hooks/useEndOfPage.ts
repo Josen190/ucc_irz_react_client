@@ -12,13 +12,12 @@ function useScrollEndOfPage(setIsEndOfPage: React.Dispatch<React.SetStateAction<
       setIsEndOfPage(scrolledToBottom);
   });
 }
-export default useScrollEndOfPage;
 
-export function useEndOfPage(collbac: () => void) {
+export default function useEndOfPage(collbac: () => void, isEnd = false) {
   const [IsEndOfPage, setIsEndOfPage] = useState(false);
   useScrollEndOfPage(setIsEndOfPage);
   useEffect(() => {
-    if (IsEndOfPage) collbac();
+    if (!isEnd && IsEndOfPage) collbac();
   }, [IsEndOfPage])
   console.log();
 

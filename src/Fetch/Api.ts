@@ -422,10 +422,10 @@ class API {
       PageSize: pageSize,
     };
 
-    if (filter?.AuthorId) params.AuthorId = filter.AuthorId;
-    if (filter?.PublicOnly) params.PublicOnly = filter.PublicOnly;
-    if (filter?.LikedOnly) params.LikedOnly = filter.LikedOnly;
-    if (filter?.SearchString) params.SearchString = filter.SearchString;
+    if (typeof filter?.AuthorId !== 'undefined') params.AuthorId = filter.AuthorId;
+    if (typeof filter?.PublicOnly !== 'undefined') params.PublicOnly = filter.PublicOnly;
+    if (typeof filter?.LikedOnly !== 'undefined') params.LikedOnly = filter.LikedOnly;
+    if (typeof filter?.SearchString !== 'undefined') params.SearchString = filter.SearchString;
 
     const result: PropsNews[] | undefined = await this.feth
       .get(url_get_news, { params: params })
