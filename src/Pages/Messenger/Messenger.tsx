@@ -1,13 +1,10 @@
+import { ChatList } from "Modules/Messenger";
 import React from "react";
 
 export default function Messenger() {
-  // return (
-  //   <User>
-  //     <main className="tile scroll-fix row">
-  //       <ChatList />
-  //       <Chat />
-  //     </main>
-  //   </User>
-  // );
-  return <div></div>;
+  return (
+      <main className="tile scroll-fix row">
+        <ChatList />
+      </main>
+  );
 }
