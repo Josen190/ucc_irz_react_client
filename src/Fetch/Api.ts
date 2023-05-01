@@ -557,7 +557,7 @@ class API {
     start: MyDate | null;
     end: MyDate | null;
     isPublic: boolean;
-    cabinetId: number | null;
+    cabinetId: string | null;
     listenersIds: null;
   }) {
     const result = await this.feth

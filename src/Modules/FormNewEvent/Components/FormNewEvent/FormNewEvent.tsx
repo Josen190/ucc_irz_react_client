@@ -25,7 +25,7 @@ export default function FormNewEvent({ day, setActive }: Props): JSX.Element {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [isPublic, setIsPublic] = useState<boolean>(false);
-  const [cabinetId, setCabinetId] = useState<number | null>(null);
+  const [cabinetId, setCabinetId] = useState<string | null>(null);
 
   useEffect(() => {
     if (date) {
@@ -105,6 +105,7 @@ export default function FormNewEvent({ day, setActive }: Props): JSX.Element {
               setDescription(event.target.value);
             }}
           ></InputField>
+          <InputField type='checkbox' title="Публичное" onSetValue={setIsPublic}></InputField>
           {/* <FormSeachUser></FormSeachUser> */}
         </div>
         <div>
