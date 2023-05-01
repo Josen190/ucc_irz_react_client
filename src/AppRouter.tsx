@@ -47,6 +47,13 @@ const router = createBrowserRouter(
         {
           path: "messenger",
           element: <Messenger />,
+          children:[
+            {
+              path: "chat/:id",
+              element: <div />,
+            }
+            
+          ]
         },
         {
           path: "calendar",

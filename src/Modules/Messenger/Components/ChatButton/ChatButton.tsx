@@ -10,7 +10,7 @@ interface Props {
 
 function ChatButton({ chat }: Props) {
     return (
-        <Button type="link" color="mini">
+        <Button type="link" color="mini" href={`chat/${chat.id}`}>
             <Img image={chat.recipient.image ?? new Image()}></Img>
             <div>
                 <span>{chat.recipient.getFullName()}</span>
