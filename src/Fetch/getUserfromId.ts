@@ -2,12 +2,9 @@ import User from "Helpers/User";
 import API from "./Api";
 import PropsUser from "./Interface/IUser";
 import Queue from "Helpers/Queue";
+import { url_get_users_id } from "Constatnts/url";
 
 const hashUsers = new Queue<string, User>(10);
-
-const url_get_users_id = (id: string) => {
-    return `/api/users/${id}`;
-};
 
 async function getUserFromId(id: string) {
     const user = hashUsers.getValueByKey(id)

@@ -1,7 +1,7 @@
 import React, { Component, useState } from "react";
 import Month from "../../Modules/Calendar/Components/Month/Month";
 import Button from "../../UI/Button/Button";
-import FormNewEvent from "../../Modules/FormNewEvent/Components/FormNewEvent/FormNewEvent";
+import FormNewEvent from "../../Modules/Calendar/Components/FormNewEvent/FormNewEvent";
 import MyDate from "../../Helpers/MyDate";
 
 import "./calendar.scss";

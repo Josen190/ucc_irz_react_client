@@ -6,6 +6,10 @@ import InputField from "UI/InputField/InputField";
 import { useContext, useState, useEffect } from "react";
 import User from "Helpers/User";
 import API from "Fetch/Api";
+import FormCabinet from "../FormCabinet/FormCabinet";
+import Cabinet from "Helpers/Cabinet";
+import { ConstCabinetsManager } from "Constatnts/role";
+import FormSearchUser from "Modules/FormSearchUser";
 
 
 interface Props {
@@ -25,27 +29,27 @@ export default function FormNewEvent({ day, setActive }: Props): JSX.Element {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [isPublic, setIsPublic] = useState<boolean>(false);
-  const [cabinetId, setCabinetId] = useState<string | null>(null);
+  const [cabinet, setCabinet] = useState<Cabinet | null>(null);
+  const [listeners, setListeners] = useState<string[]>([]);
+
+  const [activeFormCabinet, setActiveFormCabinet] = useState(false);
 
   useEffect(() => {
     if (date) {
       setStartTime(startTime ? startTime.parseDate(date) : null);
       setEndTime(endTime ? endTime.parseDate(date) : null);
     }
-
   }, [date]);
 
-  const newEvent = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
+  const newEvent = () => {
     const data = {
       title: title,
       description: description,
       start: startTime,
       end: endTime,
       isPublic: isPublic,
-      cabinetId: cabinetId,
-      listenersIds: null,
+      cabinetId: cabinet ? cabinet.id : null,
+      listenersIds: listeners.length > 0? listeners: null,
     };
 
     API.postEvent(data).then()
@@ -58,12 +62,11 @@ export default function FormNewEvent({ day, setActive }: Props): JSX.Element {
         setActive(false);
       }}
     >
-      <form
+      <div
         className="column tile"
         onClick={(e) => {
           e.stopPropagation();
         }}
-        onSubmit={newEvent}
       >
         <div>
           <InputField
@@ -106,12 +109,20 @@ export default function FormNewEvent({ day, setActive }: Props): JSX.Element {
             }}
           ></InputField>
           <InputField type='checkbox' title="Публичное" onSetValue={setIsPublic}></InputField>
-          {/* <FormSeachUser></FormSeachUser> */}
+          {user?.roles.includes(ConstCabinetsManager.Id) && startTime && endTime &&
+            <div>
+              <Button type="button" onClick={() => setActiveFormCabinet(true)}>выбрать кабинет</Button>
+              <span>кабинет: {cabinet?.name}</span>
+            </div>
+          }
+          {activeFormCabinet && startTime && endTime &&
+            <FormCabinet start={startTime} end={endTime} setActive={setActiveFormCabinet} setCabinet={setCabinet} />}
+          {!isPublic && <FormSearchUser setSelected={setListeners}></FormSearchUser>}
         </div>
         <div>
-          <Button type="submit">Сохранить</Button>
+          <Button type="button" onClick={() => newEvent()}>Сохранить</Button>
         </div>
-      </form>
+      </div>
     </div>
   );
 }

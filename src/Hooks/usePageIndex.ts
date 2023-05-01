@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function usePageIndex(): [number, () => void, () => void]{
+export default function usePageIndex() {
     const [pageIndex, setPageIndex] = useState(1);
     const nextPage = () => {
         setPageIndex(pageIndex + 1);
@@ -8,5 +8,5 @@ export default function usePageIndex(): [number, () => void, () => void]{
     const restart = () => {
         setPageIndex(1);
     }
-    return [pageIndex, nextPage, restart];
+    return { pageIndex, nextPage, restart };
 }

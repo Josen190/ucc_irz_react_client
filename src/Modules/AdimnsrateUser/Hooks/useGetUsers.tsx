@@ -11,7 +11,7 @@ async function useGetUsers(
     setRowUser: React.Dispatch<React.SetStateAction<JSX.Element[] | null>>,
     searchString?: string, isActive?: boolean, role?: string, positionId?: string) {
 
-    const [pageIndex, nextPage] = usePageIndex();
+    const {pageIndex, nextPage} = usePageIndex();
     useEndOfPage(nextPage);
 
     useEffect(() => {

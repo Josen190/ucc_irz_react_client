@@ -9,7 +9,7 @@ export default class Event {
   title: string;
   start: MyDate;
   end: MyDate;
-  cabinet: Cabinet | null;
+  cabinetName: string| null;
   description?: string;
   isPublic?: boolean;
   listenersIds?: string[];
@@ -22,7 +22,7 @@ export default class Event {
     this.title = props.title;
     this.start = new MyDate(props.start);
     this.end = new MyDate(props.end);
-    this.cabinet = props.cabinetName ? new Cabinet(props.cabinetName) : null;
+    this.cabinetName = props.cabinetName;
 
     this.description = props.description;
     this.isPublic = props.isPublic;

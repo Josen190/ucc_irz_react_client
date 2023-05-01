@@ -13,130 +13,32 @@ import PropsImage from "./Interface/IImage";
 import Position from "../Helpers/Positions";
 import PropsPosition from "./Interface/IPositions";
 import { INewsFiler } from "Modules/News";
+import { url_post_refresh, 
+  url_get_users, 
+  url_put_users_me_update_info, 
+  url_put_change_password, 
+  url_get_news_comments, 
+  url_get_events_my, 
+  url_get_news_id_full_text, 
+  url_delete_news_comments_id, 
+  url_post_news_comments, 
+  url_post_news, 
+  url_get_news, 
+  url_post_likes_like_news_entry, 
+  url_post_likes_unlike_news_entry, 
+  url_delete_news_id, 
+  url_post_subscriptions_unsubscribe, 
+  url_post_subscriptions_subcribe, 
+  url_get_user_positions, 
+  url_put_users_me_update_photo, 
+  url_get_events_id, 
+  url_delete_events_id, 
+  url_post_events } from "Constatnts/url";
 
 const host = "https://localhost:7116";
 
-// авторизация
-
-const url_post_refresh = `/api/authentication/refresh`;
-const url_put_change_password = `/api/authentication/change_password`;
-const url_post_send_reset_password_url = `/api/authentication/send_reset_password_url`;
-const url_get_reset_password = `/api/authentication/reset_password`;
-
-// кабинеты
-const url_get_cabinets = "/api/cabinets";
-const url_post_cabinets = "/api/cabinets";
-const url_get_cabinets_id_events = (id: string) => {
-  return `/api/cabinets/${id}/events`;
-};
-const url_put_cabinets_id = (id: string) => {
-  return `/api/cabinets/${id}`;
-};
-const url_delete_cabinets_id = (id: string) => {
-  return `/api/cabinets/${id}`;
-};
-
-// чат
-const url_get_chats = "/api/chats";
-
-// События
-const url_get_events_my = "/api/events/my";
-const url_get_events_listenning = "/api/events/listenning";
-const url_get_events_id = (id: string) => {
-  return `/api/events/${id}`;
-};
-const url_delete_events_id = (id: string) => {
-  return `/api/events/${id}`;
-};
-const url_post_events = "/api/events";
 
 
-// Сообщения
-const url_get_messages = "/api/messages";
-const url_post_messages = "/api/messages";
-const url_delete_messages_id = (id: string) => {
-  return `/api/messages/${id}`;
-};
-
-// новости
-const url_get_news = `/api/news`;
-const url_post_news = `/api/news`;
-const url_get_news_id = (id: string) => {
-  return `/api/news/${id}`;
-};
-const url_delete_news_id = (id: string) => {
-  return `/api/news/${id}`;
-};
-const url_get_news_id_full_text = (id: string) => {
-  return `/api/news/${id}/full_text`;
-};
-
-// коментарии к новости
-const url_get_news_comments = "/api/news_comments";
-const url_post_news_comments = "/api/news_comments";
-const url_delete_news_comments_id = (id: string) => {
-  return `/api/news_comments/${id}`;
-};
-
-// Лайки к новости
-const url_post_likes_like_news_entry = "/api/likes/like_news_entry";
-const url_post_likes_unlike_news_entry =
-  "/api/likes/unlike_news_entry";
-
-// должности
-const url_get_positions = "/api/positions";
-const url_post_positions = "/api/positions";
-const url_put_positions_id = (id: string) => {
-  return `/api/positions${id}`;
-};
-const url_post_positions_add_pos_to_user =
-  "/api/positions/add_pos_to_user";
-const url_post_positions_remove_user_position =
-  "/api/positions/remove_user_position";
-
-// Роли
-const url_get_roles = "/api/roles";
-
-
-// Подписки
-const url_get_subscriptions_user_subscribers =
-  "/api/subscriptions/user_subscribers";
-const url_get_subscriptions_my_subscribers =
-  "/api/subscriptions/my_subscribers";
-const url_get_subscriptions_user_subscriptions =
-  "/api/subscriptions/user_subscriptions";
-const url_get_subscriptions_my_subscriptions =
-  "/api/subscriptions/my_subscriptions";
-const url_post_subscriptions_subcribe = "/api/subscriptions/subcribe";
-const url_post_subscriptions_unsubscribe =
-  "/api/subscriptions/unsubscribe";
-
-// должности пользователя
-const url_get_user_positions = "/api/user_positions";
-const url_get_user_positions_my = "/api/user_positions/my";
-
-// пользователь
-const url_get_users = `/api/users`;
-const url_get_users_me = `/api/users/me`;
-const url_get_users_id = (id: string) => {
-  return `/api/users/${id}`;
-};
-const url_put_users_me_update_photo = "/api/users/me/update_photo";
-const url_put_users_me_delete_photo = "/api/users/me/delete_photo";
-const url_put_users_me_update_info = "/api/users/me/update_info";
-
-// Управление пользователями
-
-
-const url_delete_users_management_id = (id: string) => {
-  return `/api/users_management/${id}`;
-};
-const url_put_users_management_id_activate = (id: string) => {
-  return `/api/users_management/${id}/activate`;
-};
-const url_put_users_management_id_deactivate = (id: string) => {
-  return `/api/users_management/${id}/deactivate`;
-};
 
 
 class API {
@@ -540,7 +442,7 @@ class API {
 
   public static async deleteEventId(id: string) {
     const result = await this.feth
-      .get(url_delete_events_id(id), {
+      .delete(url_delete_events_id(id), {
         params: {
           id: id
         }
@@ -558,7 +460,7 @@ class API {
     end: MyDate | null;
     isPublic: boolean;
     cabinetId: string | null;
-    listenersIds: null;
+    listenersIds: string[] | null;
   }) {
     const result = await this.feth
       .post(url_post_events, data)

@@ -14,7 +14,7 @@ function useGetNews(
     setDeleteKeyElement: React.Dispatch<React.SetStateAction<string | null>>,
     filter?: INewsFiler,
 ) {
-    const [pageIndex, nextPage, restart] = usePageIndex();
+    const {pageIndex, nextPage, restart} = usePageIndex();
     const [isEnd, setIsEnd] = useState(false)
    
     const prevFilterRef = useRef<INewsFiler>();

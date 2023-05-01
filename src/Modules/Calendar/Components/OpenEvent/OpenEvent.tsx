@@ -6,7 +6,6 @@ import { ParamsOpenEvent } from '../Month/Month';
 import "./openEvent.scss"
 import Content from 'Components/Content/Content';
 import API from 'Fetch/Api';
-import router from 'AppRouter';
 import { useAppSelector } from 'Hooks';
 import { ConstSupport } from 'Constatnts/role';
 
@@ -60,7 +59,7 @@ function OpenEvent({ event, setActive }: Props) {
 
                 </div>
                 <div>
-                    {_event.cabinet && <p>Кабинет: {_event.cabinet.name}</p>}
+                    {_event.cabinetName && <p>Кабинет: {_event.cabinetName}</p>}
                     {_event.description && <Content id={_event.id} text={_event.description}></Content>}
                 </div>
                 <div>
