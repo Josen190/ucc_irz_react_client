@@ -94,4 +94,12 @@ export default class Image {
       extension: this.extension,
     } 
   }
+
+  public getParamsToSend(): PropsImage{
+    return{
+      name: this.name,
+      data: this.data,
+      extension: this.extension,
+    } 
+  }
 }

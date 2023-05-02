@@ -1,0 +1,23 @@
+.chat {
+    display: grid;
+    grid-template-rows: 30px 1fr min-content;
+    width: 100%;
+    height: 100%;
+
+    .list-messages {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: space-between;
+        .message.my {
+            margin-left: auto;
+        }
+    }
+
+
+    .input-message {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+
+    }
+}

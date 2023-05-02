@@ -34,10 +34,8 @@ export const url_post_events = "/api/events";
 
 // Сообщения
 export const url_get_messages = "/api/messages";
-export const url_post_messages = "/api/messages";
-export const url_delete_messages_id = (id: string) => {
-  return `/api/messages/${id}`;
-};
+export const url_post_messages = "/hubs/chat/SendMessageAsync";
+export const url_delete_messages_id = '/hubs/chat/DeleteMessageAsync';
 
 // новости
 export const url_get_news = `/api/news`;

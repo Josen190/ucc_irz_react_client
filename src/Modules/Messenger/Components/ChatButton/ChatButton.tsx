@@ -6,11 +6,12 @@ import React from 'react'
 
 interface Props {
     chat: Chat
+    select: React.Dispatch<React.SetStateAction<Chat | null>>
 }
 
-function ChatButton({ chat }: Props) {
+function ChatButton({ chat, select }: Props) {
     return (
-        <Button type="link" color="mini" href={`chat/${chat.id}`}>
+        <Button type="link" color="mini" href={`chat/${chat.id}`} onClick={() => select(chat)}>
             <Img image={chat.recipient.image ?? new Image()}></Img>
             <div>
                 <span>{chat.recipient.getFullName()}</span>

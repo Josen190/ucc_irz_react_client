@@ -23,7 +23,7 @@ interface Props<T extends s> {
   rows?: number;
   required?: boolean;
   onChange?: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
-  onSetValue?: React.Dispatch<React.SetStateAction<T>> | ((value: T) => void);
+  onSetValue?: React.Dispatch<React.SetStateAction<T | undefined>> | ((value: T) => void);
   MyConstructor?: { new(...args: any[]): T };
 }
 

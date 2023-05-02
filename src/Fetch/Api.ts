@@ -38,9 +38,6 @@ import { url_post_refresh,
 const host = "https://localhost:7116";
 
 
-
-
-
 class API {
   private static loading = false;
   private static jwt: string | null;

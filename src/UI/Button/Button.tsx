@@ -10,7 +10,7 @@ interface PropsButton {
   color?: "basic" | "red" | "mini";
   disabled?: boolean;
   onClick?: OnClickHandler;
-  children?: string | JSX.Element| JSX.Element[];
+  children?: string | JSX.Element | JSX.Element[];
   href?: string;
   id?: string;
   required?: boolean;
@@ -45,12 +45,12 @@ export default function Button({
     id: id ?? "",
     required: required ?? false,
     disabled: disabled ?? false,
-    
+
   };
 
   switch (type) {
     case "button":
-      switch(stale){
+      switch (stale) {
         case "basic":
           button = <button {...buttonprops}>{children}</button>;
           break;
@@ -58,15 +58,15 @@ export default function Button({
           button = <a role="button" {...buttonprops}>{children}</a>;
           break;
       }
-    break;
-     
+      break;
+
     case "link":
       button = (
-        <div className={classNames}>
-          <Link to={href ?? ""}>
-            <div className="center">{children}</div>
-          </Link>
-        </div>
+        <Link to={href ?? ""}>
+          <div className={classNames} onClick={onClick}>
+            {children}
+          </div>
+        </Link>
       );
       break;
 
