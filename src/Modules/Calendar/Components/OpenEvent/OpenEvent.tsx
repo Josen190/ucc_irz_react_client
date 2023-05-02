@@ -5,9 +5,11 @@ import { ParamsOpenEvent } from '../Month/Month';
 
 import "./openEvent.scss"
 import Content from 'Components/Content/Content';
-import API from 'Fetch/Api';
+
 import { useAppSelector } from 'Hooks';
 import { ConstSupport } from 'Constatnts/role';
+import getEventId from '../../Fetch/getEventId';
+import deleteEventId from '../../Fetch/deleteEventId';
 
 interface Props {
     event: Event;
@@ -23,7 +25,7 @@ function OpenEvent({ event, setActive }: Props) {
 
 
     useEffect(() => {
-        API.getEventId(event.id).then((event) => {
+        getEventId(event.id).then((event) => {
             setEvent(event);
         }).catch(() => {
             setActive({
@@ -34,7 +36,7 @@ function OpenEvent({ event, setActive }: Props) {
     }, [])
 
     const deleteEvent = () => {
-        API.deleteEventId(event.id).then(() => {
+        deleteEventId(event.id).then(() => {
             setActive({
                 isActive: false,
                 event: null

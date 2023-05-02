@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import API from "../../../../Fetch/Api";
+
 import SvgHeart from "../../../../Assets/icons/Heart";
 import SvgHeartOutline from "../../../../Assets/icons/HeartOutline";
 import { notifyError } from "Components/Notifications/Notifications";

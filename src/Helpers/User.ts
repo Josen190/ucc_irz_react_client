@@ -1,72 +1,54 @@
+import PropsMinUser from "../Fetch/Interface/IMinUser";
 import Image from "./Image";
-import MyDate from "./MyDate";
-import PropsUser, { ParamsUser } from "../Fetch/Interface/IUser";
-import MinUser from "./MinUser";
-import Position from "./Positions";
-import PropsImage from "Fetch/Interface/IImage";
 
-export default class User extends MinUser {
-  birthday: MyDate;
-  aboutMyself: string | null;
-  myDoings: string | null;
-  skills: string | null;
-  subscribersCount: number;
-  subscriptionsCount: number;
-  isSubscription: boolean;
-  email: string;
-  isActiveAccount: boolean;
-  roles: string[];
-  positions: Position[];
+export default class User {
+  private static AuntificationuUser: User | null = null;
+  id: string;
+  firstName: string;
+  surname: string;
+  patronymic: string;
+  image: Image | null;
 
-  constructor(props: ParamsUser)
-  constructor(props: PropsUser)
-  constructor(props: ParamsUser | PropsUser) {
-    super();
-    this.birthday = new MyDate(props.birthday);
-    this.aboutMyself = props.aboutMyself;
-    this.myDoings = props.myDoings;
-    this.skills = props.skills;
-    this.subscribersCount = props.subscribersCount;
-    this.subscriptionsCount = props.subscriptionsCount;
-    this.isSubscription = props.isSubscription;
-    this.email = props.email;
-    this.isActiveAccount = props.isActiveAccount;
-    this.roles = props.roles;
-
-    this.positions = props.positions.map(p => {
-      if (typeof p === "string") {
-        return new Position(p)
-      } else {
-        return new Position(p)
-      }
-
-    })
-
+  constructor(props?: PropsMinUser) {
+    if (!props) {
+      this.id = User.AuntificationuUser?.id ?? "";
+      this.firstName = User.AuntificationuUser?.firstName ?? '';
+      this.surname = User.AuntificationuUser?.surname ?? '';
+      this.patronymic = User.AuntificationuUser?.patronymic ?? '';
+      this.image = User.AuntificationuUser?.image ?? null;
+      return;
+    }
     this.id = props.id;
     this.firstName = props.firstName;
     this.surname = props.surname;
     this.patronymic = props.patronymic ?? "";
-
-    this.image = props.imageId ?
-      typeof props.imageId === 'string' ?
-        new Image({ id: props.imageId }) : new Image(props.imageId)
-      : null;
+    this.image = props.imageId ? new Image({ id: props.imageId }) : null;
   }
 
-  public getType(): ParamsUser {
+  public static setAuntificationuUser(user: User) {
+    User.AuntificationuUser = user;
+  }
+
+  public getFullName(): string {
+    return `${this.firstName} ${this.surname} ${this.patronymic}`;
+  }
+
+  public isAuntification() {
+    return this.id === User.AuntificationuUser?.id;
+  }
+
+  public setImage(image: Image){
+    this.image = new Image(image);
+    return this;
+  }
+
+  public getType(){
     return {
-      ...super.getType(),
-      birthday: this.birthday.toString(),
-      aboutMyself: this.aboutMyself,
-      myDoings: this.myDoings,
-      skills: this.skills,
-      subscribersCount: this.subscribersCount,
-      subscriptionsCount: this.subscriptionsCount,
-      isSubscription: this.isSubscription,
-      email: this.email,
-      isActiveAccount: this.isActiveAccount,
-      roles: this.roles,
-      positions: this.positions.map(x => x.getType()),
+      id: this.id,
+      firstName: this.firstName,
+      surname: this.surname,
+      patronymic: this.patronymic.length !== 0? this.patronymic : null,
+      imageId: this.image ? this.image.getType() : null,
     }
   }
 }

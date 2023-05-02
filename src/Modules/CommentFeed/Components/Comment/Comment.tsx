@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Button from "../../../../UI/Button/Button";
 import UserVisitingCard from "../../../../Components/UserVisitingCard/UserVisitingCard";
 import NewsComments from "../../../../Helpers/NewsComments";
-import MinUser from "Helpers/MinUser";
+import User from "Helpers/User";
 import deletComment from "../../Fetch/deletComment";
 import Content from "Components/Content/Content";
 
@@ -16,7 +16,7 @@ export default function Comment({ comment }: Props) {
   return (
     <div className="tile">
       <div className="row">
-        <UserVisitingCard user={comment.user ?? new MinUser()} />
+        <UserVisitingCard user={comment.user ?? new User()} />
         {isMyComment && (
           <Button type="button" onClick={() => deletComment(comment.id)}>
             Удалить

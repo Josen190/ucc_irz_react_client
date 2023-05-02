@@ -4,12 +4,12 @@ import { useAppSelector } from "Hooks";
 import Button from "UI/Button/Button";
 import InputField from "UI/InputField/InputField";
 import { useContext, useState, useEffect } from "react";
-import User from "Helpers/User";
-import API from "Fetch/Api";
+import Employee from "Helpers/Employee";
 import FormCabinet from "../FormCabinet/FormCabinet";
 import Cabinet from "Helpers/Cabinet";
 import { ConstCabinetsManager } from "Constatnts/role";
 import FormSearchUser from "Modules/FormSearchUser";
+import postEvent from "../../Fetch/postEvent";
 
 
 interface Props {
@@ -20,7 +20,7 @@ interface Props {
 export default function FormNewEvent({ day, setActive }: Props): JSX.Element {
   const user = useAppSelector((s) => {
     const paramsUser = s.authorization.user;
-    return paramsUser ? new User(paramsUser) : null;
+    return paramsUser ? new Employee(paramsUser) : null;
   })
 
   const [date, setDate] = useState<MyDate | null>(day);
@@ -52,7 +52,7 @@ export default function FormNewEvent({ day, setActive }: Props): JSX.Element {
       listenersIds: listeners.length > 0? listeners: null,
     };
 
-    API.postEvent(data).then()
+    postEvent(data).then()
   };
 
   return (

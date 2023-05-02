@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import BlockInfo from "../../../../UI/BlockInfo/BlockInfo";
 import MyDate from "../../../../Helpers/MyDate";
-import User from "../../../../Helpers/User";
+import Employee from "../../../../Helpers/Employee";
 
 import DetailedInfo from "../DetailedInfo/DetailedInfo";
 import Button from "UI/Button/Button";
 import PositionList from "Components/PositionList/PositionList";
 
 interface Props {
-  user: User | null;
+  user: Employee | null;
 }
 
 const Personal_Information = ({ user }: Props) => {
@@ -18,10 +18,9 @@ const Personal_Information = ({ user }: Props) => {
   const birthday = user ? new MyDate(user.birthday).DatetoStr("dd-months-yyyy") : null;
   const myself = user ? user.aboutMyself : null;
   const iDid = user ? user.myDoings : null;
-  const achievements = user ? user.skills : null; //??????????????????????
-  const skillsAndCompetencies = user ? user.skills : null;
+  const skills = user ? user.skills : null;
 
-  const isDetailedInfo = (myself || iDid || achievements || skillsAndCompetencies);
+  const isDetailedInfo = (myself || iDid || skills);
 
   return (
     <div className="column">
@@ -36,15 +35,14 @@ const Personal_Information = ({ user }: Props) => {
           onClick={() => {
             setActive(true);
           }}
-        >Показать подробную инфромацию</Button>
+        >Показать подробную информацию</Button>
       )}
       {active && isDetailedInfo && (
         <DetailedInfo
           setActive={setActive}
           myself={myself ?? undefined}
           iDid={iDid ?? undefined}
-          achievements={achievements ?? undefined}
-          skillsAndCompetencies={skillsAndCompetencies ?? undefined} />
+          skills={skills ?? undefined} />
       )}
     </div>
   );

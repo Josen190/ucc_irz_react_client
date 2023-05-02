@@ -1,5 +1,5 @@
-import MinUser from "Helpers/MinUser";
 import User from "Helpers/User";
+import Employee from "Helpers/Employee";
 import Button from "UI/Button/Button";
 import InputField from "UI/InputField/InputField";
 import React, { useState, useEffect, SetStateAction } from "react";

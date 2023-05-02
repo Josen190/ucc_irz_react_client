@@ -1,12 +1,12 @@
 import PositionList from "Components/PositionList/PositionList";
 import MyDate from "Helpers/MyDate";
-import User from "Helpers/User";
+import Employee from "Helpers/Employee";
 import BlockInfo from "UI/BlockInfo/BlockInfo";
 import React, { useState } from "react";
 import parseMyRole from "../../Helpers/parseMyRole";
 
 interface Props {
-    user: User | null;
+    user: Employee | null;
 }
 
 const UserInformation = ({ user }: Props) => {

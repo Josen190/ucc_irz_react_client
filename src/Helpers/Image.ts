@@ -1,5 +1,4 @@
 import React from "react";
-import API from "../Fetch/Api";
 import { notifyError } from "../Components/Notifications/Notifications";
 import PropsImage from "../Fetch/Interface/IImage";
 import getImage from "Fetch/getImage";

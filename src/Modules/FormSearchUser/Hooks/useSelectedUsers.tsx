@@ -1,4 +1,4 @@
-import MinUser from "Helpers/MinUser";
+import User from "Helpers/User";
 import React, { useCallback, useState } from "react";
 import PushUser from "../Components/PushUser/PushUser";
 
@@ -6,7 +6,7 @@ function useSelectedUsers() {
     const [users, setUsers] = useState<JSX.Element[]>([]);
     const [selectedUsers, setSelectedUsers] = useState<JSX.Element[]>([]);
 
-    const addUsers = (newUsers: MinUser[]) => {
+    const addUsers = (newUsers: User[]) => {
         const userElements = newUsers.map((user) => (
             <PushUser key={user.id} user={user} select={selectUser} unselect={unselectUser} isSelect={true} />
         ));
@@ -26,7 +26,7 @@ function useSelectedUsers() {
             if (userIndex === -1) {
                 return prevUsers;
             }
-            const user = prevUsers.splice(userIndex, 1)[0].props.user as MinUser;
+            const user = prevUsers.splice(userIndex, 1)[0].props.user as User;
             const selectedUser = <PushUser key={user.id} user={user} select={selectUser} unselect={unselectUser} isSelect={false} />;
             setSelectedUsers((prevSelected) => [...prevSelected, selectedUser]);
             return prevUsers;
@@ -41,7 +41,7 @@ function useSelectedUsers() {
             if (selectedUserIndex === -1) {
                 return prevSelected;
             }
-            const user = prevSelected.splice(selectedUserIndex, 1)[0].props.user as MinUser;
+            const user = prevSelected.splice(selectedUserIndex, 1)[0].props.user as User;
             const unselectedUser = <PushUser key={user.id} user={user} select={selectUser} unselect={unselectUser} isSelect={true} />;
             setUsers((prevUsers) => {
                 prevUsers.push(unselectedUser)

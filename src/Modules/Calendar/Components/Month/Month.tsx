@@ -1,4 +1,4 @@
-import API from "Fetch/Api";
+
 import MyDate from "Helpers/MyDate";
 import ContextMenu, { ContextButton } from "Modules/ContextMenu";
 import React, { useState, useEffect } from "react";
@@ -10,6 +10,7 @@ import "./month.scss";
 import useWidth from "../../Hooks/useWidth";
 import showMonth from "../../Helpers/showMonth";
 import OpenEvent from "../OpenEvent/OpenEvent";
+import useGetMyEvents from "../../Hooks/useGetMyEvents";
 
 interface Props {
   year: number;
@@ -38,7 +39,7 @@ export default function Month({ year, numberMonth, setSelectedDay }: Props) {
     isFull: false,
     nameDay: MyDate.nameDayWeekShort,
   });
-  const [listEvents, setListEvents] = useState<Event[]>([]);
+
   const [activeContextMenu, setActiveContextMenu] = useState<boolean>(false);
   const [activeOpenEvent, setActiveOpenEvent] = useState<ParamsOpenEvent>({
     isActive: false,
@@ -56,14 +57,8 @@ export default function Month({ year, numberMonth, setSelectedDay }: Props) {
     lastDayOfCalendar,
     arrDayOfCalendar } = showMonth(year, numberMonth);
 
-
+  const listEvents = useGetMyEvents(firstDayOfCalendar, lastDayOfCalendar);
   useWidth(bounds, setNameDayWeekFull, nameDayWeekUse);
-
-  useEffect(() => {
-    API.getMyEvents(firstDayOfCalendar, lastDayOfCalendar).then((events) => {
-      setListEvents(events);
-    });
-  }, [numberMonth]);
 
   const contextMenu = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, day: MyDate) => {
     event.preventDefault();

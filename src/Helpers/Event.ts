@@ -1,11 +1,11 @@
 import PropsEvent from "../Fetch/Interface/IEvent";
 import Cabinet from "./Cabinet";
-import MinUser from "./MinUser";
+import User from "./User";
 import MyDate from "./MyDate";
 
 export default class Event {
   id: string;
-  creator: MinUser;
+  creator: User;
   title: string;
   start: MyDate;
   end: MyDate;
@@ -18,7 +18,7 @@ export default class Event {
 
   constructor(props: PropsEvent) {
     this.id = props.id;
-    this.creator = new MinUser(props.creator);
+    this.creator = new User(props.creator);
     this.title = props.title;
     this.start = new MyDate(props.start);
     this.end = new MyDate(props.end);

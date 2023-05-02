@@ -1,7 +1,8 @@
 import { url_get_users } from "Constatnts/url";
-import API from "./Api";
-import MinUser from "Helpers/MinUser";
+
+import User from "Helpers/User";
 import PropsMinUser from "./Interface/IMinUser";
+import fetch from "./Fetch";
 
 interface IParams {
     PositionId?: string;
@@ -22,10 +23,10 @@ async function getUsers({ PositionId, Role, IsActive, SearchString, PageIndex, P
     if (typeof IsActive !== 'undefined') params.IsActive = IsActive;
     if (SearchString) params.SearchString = SearchString;
 
-    const result = await API.get(url_get_users, {params})
+    const result = await fetch.get(url_get_users, {params})
         .then((response) => {
             const data = response.data as PropsMinUser[];
-            const users = data.map((user) => new MinUser(user))
+            const users = data.map((user) => new User(user))
             return Promise.resolve(users);
         })
         .catch(() => Promise.reject());

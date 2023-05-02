@@ -1,19 +1,19 @@
 import PropsNewsComments from "../Fetch/Interface/INewsComments";
 import MyDate from "./MyDate";
-import MinUser from "./MinUser";
+import User from "./User";
 
 export default class NewsComments {
   id: string;
   text?: string;
   dateTime?: MyDate;
-  user?: MinUser;
+  user?: User;
 
-  constructor(id: string, text?: string, user?: MinUser, dateTime?: MyDate,);
+  constructor(id: string, text?: string, user?: User, dateTime?: MyDate,);
   constructor(props: PropsNewsComments);
   constructor(
     idOrProps: string | PropsNewsComments,
     text?: string, 
-    user?: MinUser,
+    user?: User,
     dateTime?: MyDate,
   ) {
     if (typeof idOrProps === "string") {
@@ -25,7 +25,7 @@ export default class NewsComments {
       this.id = idOrProps.id;
       this.text = idOrProps.text;
       this.dateTime = new MyDate(idOrProps.dateTime);
-      this.user = new MinUser(idOrProps.user);
+      this.user = new User(idOrProps.user);
     }
   }
 }

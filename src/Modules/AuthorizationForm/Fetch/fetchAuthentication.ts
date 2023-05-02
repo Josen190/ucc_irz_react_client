@@ -1,8 +1,9 @@
-import API from "Fetch/Api";
+
 import { notifyError } from "../../../Components/Notifications/Notifications";
-import User from "Helpers/User";
+import Employee from "Helpers/Employee";
 import getUserMe from "Fetch/getUserMe";
 import { typeError } from "Types/types";
+import fetch from "Fetch/Fetch";
 
 
 const url_post_authenticate = `/api/authentication/authenticate`;
@@ -11,21 +12,20 @@ export default async function fetchAuthentication(email: string, password: strin
 ) {
     const data = { email, password }
 
-    const result = await API.post(url_post_authenticate, data)
+    const result = await fetch.post(url_post_authenticate, data)
         .then(async (response) => {
             if (typeof response.data.jwt !== "string" ||
                 typeof response.data.refreshToken !== "string"
             ) return Promise.reject("что-то пошло не так");
 
-            const _data: { jwt: string, refreshToken: string, user: User | null } = {
+            const _data: { jwt: string, refreshToken: string, user: Employee | null } = {
                 jwt: response.data.jwt,
                 refreshToken: response.data.refreshToken,
                 user: null,
             };
 
-            API.setJwt(_data.jwt);
+            fetch.setRefres(_data.jwt, _data.refreshToken);
             
-            // _data.user = await API.getUserMe()
             _data.user = await getUserMe()
                 .then((user) => user)
                 .catch(() => null);

@@ -1,25 +1,27 @@
 
-import API from "Fetch/Api";
-import MinUser from "Helpers/MinUser";
+
+import User from "Helpers/User";
 import News from "Helpers/News";
 import NewsComments from "Helpers/NewsComments";
 import { notifyError, notifySuccess } from "Components/Notifications/Notifications";
+import fetch from "Fetch/Fetch";
+import { url_post_news_comments } from "Constatnts/url";
 
-async function newNewsComments(newsID: string, text: string, author: MinUser = MinUser.getAuntificationuUser()): Promise<NewsComments> {
+async function newNewsComments(newsID: string, text: string, author: User = new User()): Promise<NewsComments> {
 
-    const result: string | false = await API.postComment(newsID, text)
-    .then((commentId) => {
+  const result = await fetch.post(url_post_news_comments, {
+    newsEntryId: newsID,
+    text: text,
+  })
+    .then((response) => {
       notifySuccess("Комментарий создан");
-      return commentId;
+      return Promise.resolve(new NewsComments(response.data as string, text, author));
     })
     .catch(() => {
       notifyError("Ощибка, попробуйте снова");
-      return false;
+      return Promise.reject(false);;
     });
 
-    if (!result)
-     return Promise.reject(false);
-
-    return Promise.resolve(new NewsComments(result, text, author))
-  }
- export default newNewsComments;
+  return result;
+}
+export default newNewsComments;

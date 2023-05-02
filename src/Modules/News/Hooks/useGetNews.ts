@@ -1,5 +1,5 @@
 
-import API from "Fetch/Api";
+
 import React, { useEffect, useRef, useState } from "react";
 import Tidings from "../Components/Tidings/Tidings";
 import fetchGetNews from "../Fetch/fetchGetNews";
@@ -14,14 +14,14 @@ function useGetNews(
     setDeleteKeyElement: React.Dispatch<React.SetStateAction<string | null>>,
     filter?: INewsFiler,
 ) {
-    const {pageIndex, nextPage, restart} = usePageIndex();
+    const { pageIndex, nextPage, restart } = usePageIndex();
     const [isEnd, setIsEnd] = useState(false)
-   
+
     const prevFilterRef = useRef<INewsFiler>();
 
     useEffect(() => {
         let _arrNews = arrayNews;
-        if (!prevFilterRef.current || prevFilterRef.current !== filter){
+        if (!prevFilterRef.current || prevFilterRef.current !== filter) {
             setArrayNews([]);
             _arrNews = [];
             setIsEnd(false);
@@ -29,11 +29,11 @@ function useGetNews(
         }
 
         prevFilterRef.current = filter;
-        
+
         fetchGetNews(pageIndex, _arrNews, setArrayNews, setDeleteKeyElement, setIsEnd, filter);
     }, [pageIndex, filter]);
 
-    useEndOfPage(nextPage, isEnd);
+    useEndOfPage(nextPage, undefined, isEnd);
 
 }
 

@@ -1,5 +1,6 @@
 import { notifySuccess } from "Components/Notifications/Notifications";
-import API from "Fetch/Api";
+
+import fetch from "Fetch/Fetch";
 
 
 interface dataNewUser{
@@ -14,7 +15,7 @@ const url_post_users_management_register =
   "/api/users_management/register";
 
 async function newUser(data: dataNewUser) {
-    const resule =  await API.post(url_post_users_management_register, data).then(() => {
+    const resule = await fetch.post(url_post_users_management_register, data).then(() => {
         notifySuccess("Сотрудник добавлен")
         return Promise.resolve();
     }).catch((error) => {

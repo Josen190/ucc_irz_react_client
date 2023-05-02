@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import News from "Helpers/News";
 import Image from "Helpers/Image";
-import API from "Fetch/Api";
+
 import { notifyError, notifySuccess } from "Components/Notifications/Notifications";
 import UserVisitingCard from "Components/UserVisitingCard/UserVisitingCard";
 import Button from "UI/Button/Button";
@@ -11,6 +11,7 @@ import CommentsIcon from "../CommentsIcon/CommentsIcon";
 import CommentFeed from "Modules/CommentFeed";
 import { useAppSelector } from "Hooks";
 import { ConstSupport } from "Constatnts/role";
+import deleteTidings from "../../Fetch/deleteTidings";
 
 
 interface Props {
@@ -26,16 +27,7 @@ export default function Tidings({ tidings, deletElement }: Props) {
   const subMenu = useRef<HTMLUListElement>(null);
   const isMyTiding = tidings.author.isAuntification();
 
-  const deleteTidings = (event: any) => {
-    event.preventDefault();
-
-    API.deleteNews(tidings.id)
-      .then(() => {
-        deletElement(tidings.id);
-        notifySuccess("Новость удалена");
-      })
-      .catch(() => notifyError("Ошибка, новотсь не удалена"));
-  };
+ 
 
   useEffect(() => {
     tidings.image?.getImg(setImage);
@@ -61,7 +53,7 @@ export default function Tidings({ tidings, deletElement }: Props) {
               </Button>
               <ul ref={subMenu} className="sub-menu">
                 <ol>
-                  <Button type="button" onClick={(e) => deleteTidings(e)}>
+                  <Button type="button" onClick={() => deleteTidings(tidings.id, deletElement)}>
                     Удалить
                   </Button>
                 </ol>

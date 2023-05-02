@@ -3,7 +3,7 @@ import Image from "../../Helpers/Image";
 import Img from "UI/Img/Img";
 
 import "./Avatar.scss"
-import API from "Fetch/Api";
+
 import getImage from "Fetch/getImage";
 
 interface PropsProfilePicture {

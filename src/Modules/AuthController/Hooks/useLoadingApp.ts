@@ -1,4 +1,4 @@
-import API from "Fetch/Api";
+
 import { useEffect } from "react";
 import { authorization, setUserImage } from "../Reducers/authorizationReduser";
 import { useAppDispatch } from "Hooks";

@@ -1,4 +1,4 @@
-import User from 'Helpers/User'
+import Employee from 'Helpers/Employee'
 import { TablesUser, UserCard } from 'Modules/AdimnsrateUser'
 import React, { useState } from 'react'
 

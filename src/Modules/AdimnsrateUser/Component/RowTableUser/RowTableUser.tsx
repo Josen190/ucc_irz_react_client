@@ -1,11 +1,11 @@
-import User from "Helpers/User";
+import Employee from "Helpers/Employee";
 import { useAppDispatch } from "Hooks";
 import { setUser } from "../../Reducers/UserAdministrationReduser";
 import Button from "UI/Button/Button";
 import React from "react";
 
 interface Props {
-  user: User;
+  user: Employee;
 }
 
 

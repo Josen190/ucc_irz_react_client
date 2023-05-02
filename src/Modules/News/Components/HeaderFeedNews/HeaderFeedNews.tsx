@@ -32,7 +32,6 @@ function HeaderFeedNews({ isLogin, setActive, setFilter }: Props) {
             <Select setValue={setPublicOnly}>
                 <Option value={undefined}>Все</Option>
                 <Option value={true}>Публичные</Option>
-                <Option value={false}>Пользовательские</Option>
             </Select>
             <Select setValue={setLikedOnly}>
                 <Option value={undefined}>Все</Option>

@@ -1,4 +1,5 @@
-import API from "Fetch/Api";
+
+import fetch from "Fetch/Fetch";
 
 const url_post_roles_add_to_user = "/api/roles/add_to_user";
 const url_post_roles_remove_from_user = "/api/roles/remove_from_user";
@@ -16,14 +17,14 @@ function updateRoles(id: string, oldRole: string[], newRole: string[]) {
 
     addRole.forEach(role => {
         console.log(role);
-        API.post(url_post_roles_add_to_user, {
+        fetch.post(url_post_roles_add_to_user, {
             userId: id, 
             role,
         }).then()
     })
 
     removeRole.forEach(role => {
-        API.post(url_post_roles_remove_from_user, {
+        fetch.post(url_post_roles_remove_from_user, {
             userId: id, 
             role,
         }).then()

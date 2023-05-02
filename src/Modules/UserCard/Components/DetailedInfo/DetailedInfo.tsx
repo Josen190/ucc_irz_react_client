@@ -6,11 +6,10 @@ interface Props{
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
   myself?: string;
   iDid?: string;
-  achievements?: string;
-  skillsAndCompetencies?: string;
+  skills?: string;
 }
 
-function DetailedInfo({setActive, myself, iDid, achievements, skillsAndCompetencies}: Props) {
+function DetailedInfo({setActive, myself, iDid, skills}: Props) {
   return (
     <div>
             {myself && (
@@ -19,13 +18,10 @@ function DetailedInfo({setActive, myself, iDid, achievements, skillsAndCompetenc
             {iDid && (
               <BlockInfo title="чем занимался" value={iDid} />
             )}
-            {achievements && (
-              <BlockInfo title="достижения" value={achievements} />
-            )}
-            {skillsAndCompetencies && (
+            {skills && (
               <BlockInfo
-                title="навыки и компетенции"
-                value={skillsAndCompetencies}
+                title="навыки"
+                value={skills}
               />
             )}
             <Button
@@ -35,7 +31,7 @@ function DetailedInfo({setActive, myself, iDid, achievements, skillsAndCompetenc
                 setActive(false);
               }}
             >
-              Скрыть подробную инфромацию
+              Скрыть подробную информацию
             </Button>
           </div>
   )

@@ -1,8 +1,9 @@
 import React from "react";
-import API from "../../../../Fetch/Api";
+
 import { authorization } from "../../Reducers/authorizationReduser";
 import { useAppDispatch, useAppSelector } from "Hooks";
 import useLoadingApp from "../../Hooks/useLoadingApp";
+import fetch from "Fetch/Fetch";
 
 
 
@@ -15,7 +16,7 @@ const AuthController = ({ children }: Props) => {
   
   const dispatch = useAppDispatch()
   const user = useAppSelector((s) => s.authorization.user);
-  API.sendRefreshToken((jwt, refreshToken) => {
+  fetch.sendRefreshToken((jwt, refreshToken) => {
     dispatch(authorization({ jwt, refreshToken, user: (jwt === null || refreshToken === null) ? null : user }))
   });
 

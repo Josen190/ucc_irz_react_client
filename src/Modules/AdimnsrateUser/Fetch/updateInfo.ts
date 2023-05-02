@@ -1,5 +1,6 @@
 import { notifyError, notifySuccess } from "Components/Notifications/Notifications";
-import API from "Fetch/Api";
+
+import fetch from "Fetch/Fetch";
 import MyDate from "Helpers/MyDate";
 
 const url_put_users_management_id_update_reg_info = (id: string) => {
@@ -14,7 +15,7 @@ function updateInfo(id: string, fio: string[], birthday: MyDate) {
     }
     if (fio[3]) data.patronymic = fio[2];
 
-    API.put(url_put_users_management_id_update_reg_info(id), data)
+    fetch.put(url_put_users_management_id_update_reg_info(id), data)
         .then(() => notifySuccess("Информация изменена"))
         .catch(() => notifyError("Ошибка"))
 }

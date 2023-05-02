@@ -1,5 +1,5 @@
 import Image from "Helpers/Image";
-import MinUser from "Helpers/MinUser"
+import User from "Helpers/User"
 import MyDate from "Helpers/MyDate"
 import { IFetchParamsMessage } from "../Type/IMessage";
 

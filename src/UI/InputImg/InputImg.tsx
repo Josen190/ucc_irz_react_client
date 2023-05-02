@@ -36,7 +36,7 @@ export default function InputImg({ view, setImageApi }: Props) {
       </div>
       <div>
         <label>
-          Добавить картинки:
+          Загрузить:
           <input type="file" accept="image/png, image/jpeg" onChange={e => { setImageAll(e.target.files ? e.target.files.item(0) : null) }} />
         </label>
       </div>
