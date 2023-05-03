@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import Personal_Information from '../Information/ProfileInformation'
 import Profile_Navigation from '../Navigation/Profile_Navigation'
 import Profile_Picture from '../../../../Components/Avatar/Avatar'
-import Employee from 'Helpers/Employee';
+import User from 'Helpers/User';
 import Image from 'Helpers/Image';
 
 import { useAppDispatch } from 'Hooks';
@@ -12,7 +12,7 @@ import "./UserCard.scss"
 import getImage from 'Fetch/getImage';
 
 interface Props{
-    user: Employee;
+    user: User;
     isLogin: boolean;
 }
 

@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import Employee from 'Helpers/Employee';
+import User from 'Helpers/User';
 import Image from 'Helpers/Image';
 import { RootState } from 'Store';
 

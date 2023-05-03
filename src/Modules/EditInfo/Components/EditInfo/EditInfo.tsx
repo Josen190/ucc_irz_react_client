@@ -5,7 +5,7 @@ import InputImg from "UI/InputImg/InputImg";
 import { notifySuccess, notifyError } from "Components/Notifications/Notifications";
 import React, { useState, useEffect } from "react";
 import Image from "Helpers/Image";
-import User from "Helpers/User";
+import VisitingUser from "Helpers/VisitingUser";
 import { useAppDispatch } from "Hooks";
 import { setUserImage } from "Modules/AuthController";
 import getUserMe from "Fetch/getUserMe";

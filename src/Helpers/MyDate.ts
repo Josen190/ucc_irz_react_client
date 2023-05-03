@@ -51,14 +51,14 @@ class MyDate extends Date {
     }
   }
   
-  public parseDate(date: MyDate): MyDate {
+  public setNewDate(date: MyDate): MyDate {
     this.setFullYear(date.getFullYear());
     this.setMonth(date.getMonth());
     this.setDate(date.getDate());
     return this;
   }
 
-  public parseTime(time: string): MyDate {
+  public setNewTime(time: string): MyDate {
     const timeRegex = /^([0-1][0-9]|2[0-3]):([0-5][0-9])$/;
 
     if (!timeRegex.test(time)) {

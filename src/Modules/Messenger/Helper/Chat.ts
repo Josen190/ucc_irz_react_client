@@ -1,16 +1,16 @@
-import User from "Helpers/User";
+import VisitingUser from "Helpers/VisitingUser";
 import Message from "./Message";
 import { IFetchParamsChat } from "../Type/IChat";
 
 class Chat{
     id: string;
-    recipient: User;
+    recipient: VisitingUser;
     lastMessage: Message;
     unreadedCount: number;
 
     constructor(params: IFetchParamsChat){
         this.id = params.id;
-        this.recipient = new User(params.recipient);
+        this.recipient = new VisitingUser(params.recipient);
         this.lastMessage = new Message(params.lastMessage);
         this.unreadedCount = params.unreadedCount;
     }

@@ -1,11 +1,11 @@
-import Employee from "Helpers/Employee";
+import User from "Helpers/User";
 
 import PropsUser from "./Interface/IUser";
 import Queue from "Helpers/Queue";
 import { url_get_users_id } from "Constatnts/url";
 import fetch from "./Fetch";
 
-const hashUsers = new Queue<string, Employee>(10);
+const hashUsers = new Queue<string, User>(10);
 
 async function getUserFromId(id: string) {
     const user = hashUsers.getValueByKey(id)
@@ -13,7 +13,7 @@ async function getUserFromId(id: string) {
 
     const result = await fetch.get(url_get_users_id(id))
         .then((response) => {
-            const user = new Employee(response.data as PropsUser)
+            const user = new User(response.data as PropsUser)
             hashUsers.push(user.id, user);
             return Promise.resolve(user);
         })

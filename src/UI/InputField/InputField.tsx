@@ -2,6 +2,8 @@ import React, { ChangeEventHandler } from "react";
 import Textarea from "./Textarea/Textarea";
 import MyDate from "Helpers/MyDate";
 
+import "./InputField.scss"
+
 type s = string | boolean | MyDate;
 
 interface Props<T extends s> {
@@ -23,7 +25,7 @@ interface Props<T extends s> {
   rows?: number;
   required?: boolean;
   onChange?: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
-  onSetValue?: React.Dispatch<React.SetStateAction<T | undefined>> | ((value: T) => void);
+  onSetValue?: React.Dispatch<React.SetStateAction<T | undefined>> | ((value: T | undefined) => void);
   MyConstructor?: { new(...args: any[]): T };
 }
 
@@ -54,7 +56,7 @@ export default function InputField<T extends s>({
         if (e.target instanceof HTMLInputElement && e.target.type === 'checkbox')
           onSetValue(e.target.checked as T);
         else
-          onSetValue(e.target.value as T);
+          onSetValue(e.target.value.length > 0 ? e.target.value as T : undefined);
       }
     }
     if (onChange) onChange(e);
@@ -106,7 +108,7 @@ export default function InputField<T extends s>({
   }
 
   return (
-    <label className="input w-100 mg-buttom-10 column ">
+    <label className="input">
       {title && <h4>{title}</h4>}
       {input}
     </label>

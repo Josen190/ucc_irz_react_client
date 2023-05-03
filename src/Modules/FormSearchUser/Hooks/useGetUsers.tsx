@@ -1,7 +1,7 @@
 import getUsers from "Fetch/getUsers";
 import { useEffect, useState } from "react";
 import PushUser from "../Components/PushUser/PushUser";
-import User from "Helpers/User";
+import VisitingUser from "Helpers/VisitingUser";
 import usePageIndex from "Hooks/usePageIndex";
 import useSelectedUsers from "./useSelectedUsers";
 import useEndOfPage from "Hooks/useEndOfPage";

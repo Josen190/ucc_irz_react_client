@@ -3,7 +3,6 @@ import newUser from '../../Fetch/newUser';
 import Button from 'UI/Button/Button';
 import InputField from 'UI/InputField/InputField';
 import React, { SetStateAction, useState } from 'react'
-import { OnClickHandler } from 'Types/types';
 
 interface Props {
     setActive: React.Dispatch<SetStateAction<boolean>>;
@@ -16,9 +15,8 @@ function FormNewUser({ setActive }: Props) {
     const [email, setEmail] = useState<string>();
     const [birthday, setBirthday] = useState<MyDate>();
     const [error, setError] = useState<string>()
-    const save = () => {
-        console.log(typeof birthday);
 
+    const save = () => {
         if (!firstName) return;
         if (!surname) return;
         if (!email) return;
@@ -30,16 +28,16 @@ function FormNewUser({ setActive }: Props) {
             .then(() => {
                 setActive(false)
             })
-            .catch((error) => { 
-                setError(error as string) 
+            .catch((error) => {
+                setError(error as string)
             })
     }
 
     return (
         <div className='modal' onClick={() => setActive(false)}>
             <div className='tile' onClick={(e) => e.stopPropagation()}>
-                <InputField<string> type='text' onSetValue={setFirstName} placeholder='Фамилия'></InputField>
-                <InputField<string> type='text' onSetValue={setSurname} placeholder='Имя'></InputField>
+                <InputField<string> type='text' onSetValue={setSurname} placeholder='Фамилия'></InputField>
+                <InputField<string> type='text' onSetValue={setFirstName} placeholder='Имя'></InputField>
                 <InputField<string> type='text' onSetValue={setPatronymic} placeholder='Отчество'></InputField>
                 <InputField<string> type='email' onSetValue={setEmail} placeholder='Электронная почта'></InputField>
                 <InputField type='date' onSetValue={setBirthday} MyConstructor={MyDate} placeholder='Отчество'></InputField>

@@ -1,7 +1,7 @@
 import { url_get_users } from "Constatnts/url";
 import fetch from "Fetch/Fetch";
 import PropsUser from "Fetch/Interface/IUser";
-import Employee from "Helpers/Employee";
+import User from "Helpers/User";
 
 async function getUsers(
     pageIndex: number,
@@ -24,7 +24,7 @@ async function getUsers(
         .get(url_get_users, { params })
         .then((response) => {
             const data = response.data as PropsUser[];
-            return Promise.resolve(data.map(paramUser => new Employee(paramUser)))
+            return Promise.resolve(data.map(paramUser => new User(paramUser)))
         }).catch((error) => Promise.reject(error.response.data));
 }
 export default getUsers;

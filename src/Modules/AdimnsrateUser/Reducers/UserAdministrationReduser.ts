@@ -1,16 +1,16 @@
 
 
-import Employee from "Helpers/Employee";
+import User from "Helpers/User";
 import { createSlice } from '@reduxjs/toolkit'
 
 interface IUserAdministrationState {
-    user: ReturnType<Employee['getType']> | null;
+    user: ReturnType<User['getType']> | null;
 }
 
 interface setUser_payload {
     type: string;
     payload: {
-        user: ReturnType<Employee['getType']> | null;
+        user: ReturnType<User['getType']> | null;
     }
 }
 

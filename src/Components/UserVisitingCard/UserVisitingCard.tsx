@@ -1,10 +1,10 @@
 import React from "react";
 import Profile_Picture from "../Avatar/Avatar";
 import { Link } from "react-router-dom";
-import User from "../../Helpers/User";
+import VisitingUser from "../../Helpers/VisitingUser";
 
 interface PropsAuthor {
-  user: User;
+  user: VisitingUser;
 }
 
 export default function UserVisitingCard({ user }: PropsAuthor): JSX.Element {

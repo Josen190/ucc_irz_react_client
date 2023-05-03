@@ -1,4 +1,4 @@
-import Employee from 'Helpers/Employee';
+import User from 'Helpers/User';
 import Button from 'UI/Button/Button'
 import InputField from 'UI/InputField/InputField'
 import React, { MouseEvent, SetStateAction, useState } from 'react'
@@ -8,7 +8,7 @@ import updateInfo from '../../Fetch/updateInfo';
 
 interface Props {
     setActive: React.Dispatch<SetStateAction<boolean>>;
-    user: Employee;
+    user: User;
 }
 
 function FormEditInfoUser({ setActive, user }: Props) {

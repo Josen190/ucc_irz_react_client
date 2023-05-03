@@ -1,6 +1,6 @@
 import React from "react";
 
-import Employee from "Helpers/Employee";
+import User from "Helpers/User";
 import FeedNews from "Modules/News";
 import UserCard from "Modules/UserCard";
 import Button from "UI/Button/Button";
@@ -20,8 +20,8 @@ export async function accountLoader({ params }: any) {
 
 export default function Account() {
   const { isLogin, user: ParamsUser } = useAppSelector((s) => s.authorization);
-  const AuntificationuUser = ParamsUser ? new Employee(ParamsUser) : null;
-  const [user, setUser] = useState<Employee | null>(null);
+  const AuntificationuUser = ParamsUser ? new User(ParamsUser) : null;
+  const [user, setUser] = useState<User | null>(null);
   const [positionUser, setPositionUser] = useState<any | null>(null);
 
   const userId = useLoaderData() as string;

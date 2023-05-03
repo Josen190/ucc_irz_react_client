@@ -11,16 +11,11 @@ export default class Image {
   url?: string;
 
   constructor()
-  constructor(name: string)
-  constructor(props: PropsImage)
-  constructor(nameOrprops?: string | PropsImage) {
-    if (!nameOrprops) {
+  constructor(props: PropsImage) 
+  constructor(props?: PropsImage) {
+    if (!props) {
       this.id = Math.random().toString();
-    } else if (typeof nameOrprops === 'string') {
-      this.id = Math.random().toString();
-      this.name = nameOrprops;
     } else {
-      const props = nameOrprops as PropsImage;
       this.id = props.id ?? Math.random().toString();
       this.name = props.name;
       this.data = props.data;
@@ -28,11 +23,11 @@ export default class Image {
     }
   }
 
-  private setUrl(file: any) {
+  private setUrl(file: File) {
     this.url = URL.createObjectURL(file);
   }
 
-  public getImg(setImage?: React.Dispatch<React.SetStateAction<Image | undefined>>): void {
+  public getImg(setImage?: React.Dispatch<React.SetStateAction<Image>>): void {
     
     getImage(this.id)
       .then((image) => {
@@ -45,15 +40,6 @@ export default class Image {
       .catch(() => {
         notifyError("Ошибка не удалось загрузить изображение");
       });
-  }
-
-  public toFetch(): { [keys: string]: string } | null {
-    if (!this.name || !this.extension || !this.data) return null;
-    return {
-      name: this.name,
-      extension: this.extension,
-      data: this.data,
-    };
   }
 
   public static async toBase64(file: File): Promise<Image> {
@@ -85,7 +71,7 @@ export default class Image {
     return Promise.resolve(image);
   }
 
-  public getType(): PropsImage{
+  public getParams(): PropsImage{
     return{
       id: this.id,
       name: this.name,

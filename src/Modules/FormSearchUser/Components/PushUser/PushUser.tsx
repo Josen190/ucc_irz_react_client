@@ -1,10 +1,10 @@
-import User from "Helpers/User";
+import VisitingUser from "Helpers/VisitingUser";
 import Button from "UI/Button/Button";
 import UserVisitingCard from "Components/UserVisitingCard/UserVisitingCard";
 import React from "react";
 
 interface Props {
-  user: User;
+  user: VisitingUser;
   select: (id: string) => void;
   unselect: (id: string) => void;
   isSelect: boolean;

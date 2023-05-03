@@ -1,40 +1,55 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ChatClass from "../../Helper/Chat";
-import { Navigate, useOutletContext } from "react-router-dom";
+import { Navigate, useLoaderData, useNavigate, useOutletContext } from "react-router-dom";
 import InputField from "UI/InputField/InputField";
 import Button from "UI/Button/Button";
 import PaperPlaneOutline from "Assets/icons/PaperPlaneOutline";
 import useGetMessages from "../../Hooks/useGetMessages";
 import { useAppSelector } from "Hooks";
+import postMessages from "../../Fetch/postMessage";
 
 import "./Chat.scss";
+import User from "Helpers/User";
+import getUserFromId from "Fetch/getUserfromId";
+import fetch from "Fetch/Fetch";
 import InputImg from "UI/InputImg/InputImg";
 import Image from "Helpers/Image";
 
+export async function loading({ params }: any) {
+  return params.id;
+}
 
-export default function Chat() {
-  const chat = useOutletContext() as ChatClass | null;
-  if (!chat) {
-    return <Navigate to={"/messenger"}></Navigate>;
-  }
+export default function NewChat() {
+  const [recipient, setRecipient] = useState<User | null>(null)
+  const recipientId = useLoaderData() as string;
+
+  
+  useEffect(() => {
+    if (!recipientId) return;
+    getUserFromId(recipientId).then((user) => {
+      setRecipient(user);
+    })
+  }, [recipientId])
+  
   const [textSendMessage, setTextSendMessage] = useState<string>();
   const [imageSendMessage, setImageSendMessage] = useState<Image | null>(null);
   const [SearchString, setSearchString] = useState<string>();
   const myId = useAppSelector(s => s.authorization.user ? s.authorization.user.id : '');
-  const {messages, send: sendNewMessage} = useGetMessages(chat.id, SearchString)
+  const {messages, send: sendNewMessage} = useGetMessages(recipientId, SearchString, true)
 
 
   const send = () => {
     if (!textSendMessage) return;
 
-    sendNewMessage(chat.recipient.id, myId, textSendMessage, imageSendMessage);
+    sendNewMessage(recipientId, myId, textSendMessage, imageSendMessage);
     setTextSendMessage(undefined);
   }
 
+  
   return (
     <div className="chat">
       <div className="row">
-        <p>{chat.recipient.getFullName()}</p>
+        <p>{recipient?.getFullName()}</p>
         <InputField type="text" placeholder="поиск" onSetValue={setSearchString}></InputField>
       </div>
       <div className="list-messages">

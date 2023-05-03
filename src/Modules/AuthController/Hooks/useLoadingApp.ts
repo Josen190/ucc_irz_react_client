@@ -17,7 +17,7 @@ export default function useLoadingApp() {
         const { jwt: _jwt, refreshToken: _refreshToken } = getAuthData();
         dispatch(authorization({ jwt: _jwt, refreshToken: _refreshToken, user: null }))
         getUserMe().then((user) => {
-            dispatch(authorization({ jwt: _jwt, refreshToken: _refreshToken, user: user.getType() }))
+            dispatch(authorization({ jwt: _jwt, refreshToken: _refreshToken, user: user.getParams() }))
             if (user.image){
                 getImage(user.image.id).then((image) => {
                     dispatch(setUserImage({image}))

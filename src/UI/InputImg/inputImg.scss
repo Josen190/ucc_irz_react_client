@@ -9,13 +9,29 @@ $size-preview: 150px;
   .preview-avatar {
     display: block;
     margin-right: 10px;
+
     img {
-        width: $size-preview;
-        height: $size-preview;
-        border-radius: 50%;
-        border: 1px solid black;
+      width: $size-preview;
+      height: $size-preview;
+      border-radius: 50%;
+      border: 1px solid black;
     }
-}
+  }
+
+  .preview-messenger {
+    display: block;
+    position: relative;
+    z-index: 5;
+    bottom: 30px;
+    margin-right: 10px;
+
+    img {
+      max-width: 100px;
+      max-height: 50px;
+      width: auto;
+      height: auto;
+      border: 1px solid black;
+    }
+  }
 
 }
-

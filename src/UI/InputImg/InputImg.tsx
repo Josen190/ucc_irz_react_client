@@ -4,7 +4,7 @@ import "./inputImg.scss"
 
 interface Props {
   setImageApi: (image: Image | null) => any
-  view: "avatar"
+  view: "avatar" | "messenger"
 }
 
 export default function InputImg({ view, setImageApi }: Props) {
@@ -27,8 +27,18 @@ export default function InputImg({ view, setImageApi }: Props) {
     })
 
   }
-
   const className = `preview-${view}`;
+  let title: string;
+  switch (view) {
+    case "avatar":
+      title = "Загрузать: ";
+      break;
+    case "messenger":
+      title = "Прекрепить";
+      break;
+  }
+
+
   return (
     <div className="input-img">
       <div className={className}>
@@ -36,7 +46,7 @@ export default function InputImg({ view, setImageApi }: Props) {
       </div>
       <div>
         <label>
-          Загрузить:
+          {title}
           <input type="file" accept="image/png, image/jpeg" onChange={e => { setImageAll(e.target.files ? e.target.files.item(0) : null) }} />
         </label>
       </div>

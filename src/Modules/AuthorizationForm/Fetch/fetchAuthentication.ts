@@ -1,6 +1,6 @@
 
 import { notifyError } from "../../../Components/Notifications/Notifications";
-import Employee from "Helpers/Employee";
+import User from "Helpers/User";
 import getUserMe from "Fetch/getUserMe";
 import { typeError } from "Types/types";
 import fetch from "Fetch/Fetch";
@@ -18,7 +18,7 @@ export default async function fetchAuthentication(email: string, password: strin
                 typeof response.data.refreshToken !== "string"
             ) return Promise.reject("что-то пошло не так");
 
-            const _data: { jwt: string, refreshToken: string, user: Employee | null } = {
+            const _data: { jwt: string, refreshToken: string, user: User | null } = {
                 jwt: response.data.jwt,
                 refreshToken: response.data.refreshToken,
                 user: null,

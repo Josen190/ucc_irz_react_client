@@ -12,14 +12,17 @@ async function postMessages(userId: string, myId: string, text: string, image: I
         text,
         image: image ? image.getParamsToSend() : null,
     }
-    const result = fetch.post(url_post_messages, data).then((response) => {
+    const result = fetch.sendHub('SendMessageAsync', data).then((response) => {
+        console.log("сообщение отправлено");
+        
         const id = response.data as string;
         return Promise.resolve(new Message({
-            id, text, image: null,
+            id, text, imageId: image,
             dateTime: new MyDate().toISOString(),
             senderId: myId,
         }))
-    }).catch(error => Promise.reject(error.response.data))
+    }).catch(error => 
+        Promise.reject(error))
 
     return result;
 }

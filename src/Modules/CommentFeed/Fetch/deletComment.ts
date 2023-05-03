@@ -13,6 +13,6 @@ function deletComment(id: string) {
     .catch(() => {
       notifyError("Ошибка, коментарий не удален");
     });
-};
+}
 
 export default deletComment;

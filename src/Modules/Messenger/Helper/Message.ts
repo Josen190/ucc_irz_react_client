@@ -1,21 +1,23 @@
 import Image from "Helpers/Image";
-import User from "Helpers/User"
+import VisitingUser from "Helpers/VisitingUser"
 import MyDate from "Helpers/MyDate"
-import { IFetchParamsMessage } from "../Type/IMessage";
+import { IFetchParamsMessage, IParamsMessage } from "../Type/IMessage";
 
 
 
-class Message{
+class Message {
     id: string;
     text: string;
-    image: Image |  null;
+    image: Image | null;
     dateTime: MyDate;
     senderId: string;
 
-    constructor(params: IFetchParamsMessage){
+    constructor(params: IParamsMessage)
+    constructor(params: IFetchParamsMessage)
+    constructor(params: IFetchParamsMessage | IParamsMessage) {
         this.id = params.id;
         this.text = params.text;
-        this.image = params.image ? new Image(params.image) : null;
+        this.image = params.imageId ? (typeof params.imageId === 'string' ? new Image({ id: params.imageId }) : params.imageId) : null;
         this.dateTime = new MyDate(params.dateTime);
         this.senderId = params.senderId;
     }

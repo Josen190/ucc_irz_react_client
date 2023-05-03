@@ -6,9 +6,9 @@ import { useState } from "react";
 import Image from "Helpers/Image";
 import "./CreateTidings.scss";
 import News from "Helpers/News";
-import User from "Helpers/User";
+import VisitingUser from "Helpers/VisitingUser";
 import { useAppSelector } from "Hooks";
-import Employee from "Helpers/Employee";
+import User from "Helpers/User";
 
 interface Props {
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
@@ -18,7 +18,7 @@ interface Props {
 export default function CreateTidings({ setActive, updateNews }: Props) {
   const user = useAppSelector((s) => {
     const paramsUser = s.authorization.user;
-    return paramsUser ? new Employee(paramsUser) : null;
+    return paramsUser ? new User(paramsUser) : null;
   });
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -50,7 +50,7 @@ export default function CreateTidings({ setActive, updateNews }: Props) {
         }}
         onSubmit={(e) => {
           e.preventDefault();
-          createNews(user ?? new User(), title, content, isGlobal).then((news) => {
+          createNews(user ?? new VisitingUser(), title, content, isGlobal).then((news) => {
             updateNews(news);
             setActive(false);
           })

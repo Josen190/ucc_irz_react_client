@@ -11,7 +11,7 @@ function useGetMyEvents(firstDay: MyDate, lastDay: MyDate) {
         getMyEvents(firstDay, lastDay).then((events) => {
             setListEvents(events);
         });
-    }, [firstDay, lastDay]);
+    }, [firstDay.getTime()]);
 
     return listEvents;
 }

@@ -1,6 +1,6 @@
 import { url_get_users } from "Constatnts/url";
 
-import User from "Helpers/User";
+import VisitingUser from "Helpers/VisitingUser";
 import PropsMinUser from "./Interface/IMinUser";
 import fetch from "./Fetch";
 
@@ -26,7 +26,7 @@ async function getUsers({ PositionId, Role, IsActive, SearchString, PageIndex, P
     const result = await fetch.get(url_get_users, {params})
         .then((response) => {
             const data = response.data as PropsMinUser[];
-            const users = data.map((user) => new User(user))
+            const users = data.map((user) => new VisitingUser(user))
             return Promise.resolve(users);
         })
         .catch(() => Promise.reject());

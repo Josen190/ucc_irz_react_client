@@ -4,7 +4,7 @@ import { useAppSelector } from "Hooks";
 import Button from "UI/Button/Button";
 import InputField from "UI/InputField/InputField";
 import { useContext, useState, useEffect } from "react";
-import Employee from "Helpers/Employee";
+import User from "Helpers/User";
 import FormCabinet from "../FormCabinet/FormCabinet";
 import Cabinet from "Helpers/Cabinet";
 import { ConstCabinetsManager } from "Constatnts/role";
@@ -20,7 +20,7 @@ interface Props {
 export default function FormNewEvent({ day, setActive }: Props): JSX.Element {
   const user = useAppSelector((s) => {
     const paramsUser = s.authorization.user;
-    return paramsUser ? new Employee(paramsUser) : null;
+    return paramsUser ? new User(paramsUser) : null;
   })
 
   const [date, setDate] = useState<MyDate | null>(day);
@@ -36,8 +36,8 @@ export default function FormNewEvent({ day, setActive }: Props): JSX.Element {
 
   useEffect(() => {
     if (date) {
-      setStartTime(startTime ? startTime.parseDate(date) : null);
-      setEndTime(endTime ? endTime.parseDate(date) : null);
+      setStartTime(startTime ? startTime.setNewDate(date) : null);
+      setEndTime(endTime ? endTime.setNewDate(date) : null);
     }
   }, [date]);
 
@@ -82,7 +82,7 @@ export default function FormNewEvent({ day, setActive }: Props): JSX.Element {
               type="time"
               onChange={(event) => {
                 if (date)
-                  setStartTime(date.parseTime(event.target.value));
+                  setStartTime(date.setNewTime(event.target.value));
               }}
             ></InputField>
             <span>По</span>
@@ -90,7 +90,7 @@ export default function FormNewEvent({ day, setActive }: Props): JSX.Element {
               type="time"
               onChange={(event) => {
                 if (date)
-                  setEndTime(date.parseTime(event.target.value));
+                  setEndTime(date.setNewTime(event.target.value));
               }}
             ></InputField>
           </div>

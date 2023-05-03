@@ -18,7 +18,7 @@ function AuthorizationForm() {
   const login = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     fetchAuthentication(email, password).then((data) => {
-      dispatch(authorization({ jwt: data.jwt, refreshToken: data.refreshToken, user: data.user ? data.user.getType() : null }))
+      dispatch(authorization({ jwt: data.jwt, refreshToken: data.refreshToken, user: data.user ? data.user.getParams() : null }))
       setNext(data.user.id);
     }).catch((error) => {
       setErrorMessege(error as string);

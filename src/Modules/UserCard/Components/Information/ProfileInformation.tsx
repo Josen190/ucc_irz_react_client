@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import BlockInfo from "../../../../UI/BlockInfo/BlockInfo";
 import MyDate from "../../../../Helpers/MyDate";
-import Employee from "../../../../Helpers/Employee";
+import User from "../../../../Helpers/User";
 
 import DetailedInfo from "../DetailedInfo/DetailedInfo";
 import Button from "UI/Button/Button";
 import PositionList from "Components/PositionList/PositionList";
 
 interface Props {
-  user: Employee | null;
+  user: User | null;
 }
 
 const Personal_Information = ({ user }: Props) => {

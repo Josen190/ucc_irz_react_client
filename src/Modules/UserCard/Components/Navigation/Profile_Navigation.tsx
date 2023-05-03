@@ -33,6 +33,9 @@ export default function Profile_Navigation({ isLogin, userID, isSubcribe }: Prop
           {_isSubcribe ? "Отписаться" : "Подписаться"}
         </Button>
       )}
+      <Button type="link" href={`/messenger/new_chat/${userID}`}  color="mini">
+        Написать сообщение
+      </Button>
     </div>
   );
 }

@@ -11,7 +11,7 @@ interface PropsContent {
   title?: string;
   isClipped?: boolean;
   text: string;
-  image?: Image;
+  image?: Image | null;
 }
 
 export default function Content({

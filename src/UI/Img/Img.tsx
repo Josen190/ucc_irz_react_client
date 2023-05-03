@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "../../Helpers/Image";
 
 interface Props {
@@ -6,11 +6,18 @@ interface Props {
 }
 
 function Img({ image }: Props) {
+  const [_image, setImage] = useState(image);
+
+  useEffect(() => {
+    if (!_image.data) return;
+    _image.getImg(setImage);
+
+  })
 
   return (
     <img
-      src={`data:${image.extension};base64,${image.data}`}
-      alt={image.name}
+      src={`data:${_image.extension};base64,${_image.data}`}
+      alt={_image.name}
     ></img>
   );
 }

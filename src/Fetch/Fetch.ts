@@ -1,6 +1,8 @@
 import { url_post_refresh } from "Constatnts/url";
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-
+import * as signalR from '@aspnet/signalr';
+import { IFetchParamsMessage, MessageClass } from "Modules/Messenger";
+import PropsImage from "./Interface/IImage";
 
 interface IRefresh {
     jwt: string;
@@ -15,12 +17,13 @@ class Fetch {
     private host = "https://localhost:7116";
 
     private feth: AxiosInstance;
+    private connectionHub?: signalR.HubConnection;
 
 
     constructor() {
         this.loading = false;
-        this.jwt = null;
-        this.refreshToken = null;
+        this.jwt = localStorage.jwt !== 'null' ? localStorage.jwt : null;
+        this.refreshToken = localStorage.refreshToken !== 'null' ? localStorage.refreshToken : null;
 
         this.feth = axios.create({
             baseURL: this.host,
@@ -40,6 +43,17 @@ class Fetch {
         }
     }
 
+    private createConectionHub() {
+        this.connectionHub = new signalR.HubConnectionBuilder()
+            .withUrl(this.host + '/hubs/chat', {
+                accessTokenFactory: () => this.jwt ?? ''
+            }) // URL хаба SignalR
+            .withHubProtocol(new signalR.JsonHubProtocol())
+            .build();
+        return this.connectionHub;
+
+    }
+
     private async refresh() {
         const data = {
             jwt: this.jwt,
@@ -54,6 +68,8 @@ class Fetch {
             },
         }
 
+
+
         const result = await this.feth.post(url_post_refresh, data, config)
             .then((response) => {
                 const data = response.data as IRefresh;
@@ -67,10 +83,46 @@ class Fetch {
         return result;
     }
 
+    public hubStart() {
+        if (!this.connectionHub) {
+            this.connectionHub = this.createConectionHub();
+        }
+
+        return this.connectionHub.start().then(() => {
+            console.log('Соединение установлено');
+            return Promise.resolve();
+        }).catch((err) => {
+            console.log('Ошибка подключения: ', err);
+            return Promise.reject(err);
+
+        });
+    }
+
     public setRefres(jwt: string | null, refreshToken: string | null) {
         this.setJwt(jwt);
         this.refreshToken = refreshToken;
+        if (this.connectionHub) {
+            this.createConectionHub();
+        }
     }
+
+    /**
+     * onMessage
+     * @param collbak - функция вызываемая при получении сообщения с сервера
+     */
+    public onMessage(collbak: (m: MessageClass) => void) {
+        if (!this.connectionHub) return;
+        this.connectionHub.on('messageReceived', (message) => {
+            collbak(new MessageClass(message as IFetchParamsMessage))
+        });
+
+    }
+
+    public sendHub(methodName: string, message: any) {
+        if (!this.connectionHub) return Promise.reject("нет соединения");
+        return this.connectionHub.invoke(methodName, message);
+    }
+
 
     public get<T = any, R = AxiosResponse<T, any>, D = any>
         (url: string, config?: AxiosRequestConfig<D> | undefined) {
@@ -120,6 +172,9 @@ class Fetch {
         );
     }
 }
+
+
+
 
 const fetch = new Fetch();
 export default fetch;

@@ -9,7 +9,7 @@ function useGetUser(id: string | null) {
         if (!id) return;
 
         getUserFromId(id).then((user) => {
-            dispatch(setUser({ user: user.getType() }))
+            dispatch(setUser({ user: user.getParams() }))
         })
     }, [id])
 

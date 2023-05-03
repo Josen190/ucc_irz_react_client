@@ -1,6 +1,6 @@
-import Employee from "Helpers/Employee";
-import { configureStore, createSlice } from '@reduxjs/toolkit'
 import User from "Helpers/User";
+import { configureStore, createSlice } from '@reduxjs/toolkit'
+import VisitingUser from "Helpers/VisitingUser";
 import Image from "Helpers/Image";
 import fetch from "Fetch/Fetch";
 
@@ -8,7 +8,7 @@ interface IAuthorizationState {
     isLogin: boolean;
     jwt: string | null;
     refreshToken: string | null;
-    user: ReturnType<Employee['getType']> | null;
+    user: ReturnType<User['getParams']> | null;
 
 }
 
@@ -17,7 +17,7 @@ interface authorization_payload {
     payload: {
         jwt: string | null;
         refreshToken: string | null;
-        user: ReturnType<Employee['getType']> | null;
+        user: ReturnType<User['getParams']> | null;
     }
 }
 
@@ -39,7 +39,7 @@ const authorizationReducer = createSlice({
             fetch.setRefres(_jwt, _refreshToken);
 
             if (payload.user)
-                User.setAuntificationuUser(new Employee(payload.user));
+                VisitingUser.setAuntificationuUser(new User(payload.user));
 
             window.localStorage.setItem("jwt", _jwt ?? "null");
             window.localStorage.setItem("refreshToken", _refreshToken ?? "null");
@@ -60,12 +60,12 @@ const authorizationReducer = createSlice({
             if (!_state.user)
                 return { ..._state, user: null }
 
-            const user = new Employee(_state.user)
+            const user = new User(_state.user)
             user.setImage(payload.image);
 
-            User.setAuntificationuUser(user);
+            VisitingUser.setAuntificationuUser(user);
             return {
-                ..._state, user: user.getType()
+                ..._state, user: user.getParams()
             }
         }
     }

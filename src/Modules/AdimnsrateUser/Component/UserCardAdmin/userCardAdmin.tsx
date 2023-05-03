@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Profile_Picture from '../../../../Components/Avatar/Avatar'
-import Employee from 'Helpers/Employee';
+import User from 'Helpers/User';
 import Image from 'Helpers/Image';
 
 import "./UserCardAdmin.scss"
@@ -14,7 +14,7 @@ import useGetUser from '../../Hooks/useGetUser';
 function UserCard() {
     const user = useAppSelector((s) => {
         const ParamsUser = s.userAdministration.user;
-        return ParamsUser ? new Employee(ParamsUser) : null;
+        return ParamsUser ? new User(ParamsUser) : null;
     })
     const [isActive, setActive] = useState(false);
 

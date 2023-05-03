@@ -12,7 +12,8 @@ import Edit from "Pages/Edit/Edit";
 import Messenger from "Pages/Messenger/Messenger";
 import Setting from "Modules/Setting";
 import Staff from "Pages/Staff/Staff";
-import { Chat } from "Modules/Messenger";
+import { Chat, loading } from "Modules/Messenger";
+import { NewChat } from "Modules/Messenger";
 
 
 
@@ -49,12 +50,17 @@ const router = createBrowserRouter(
         {
           path: "messenger",
           element: <Messenger />,
-          children:[
+          children: [
             {
               path: "chat/:id",
               element: <Chat />,
+            },
+            {
+              path: "new_chat/:id",
+              element: <NewChat />,
+              loader: loading
             }
-            
+
           ]
         },
         {

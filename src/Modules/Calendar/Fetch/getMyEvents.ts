@@ -1,4 +1,4 @@
-import { url_get_events_my } from "Constatnts/url";
+import { url_get_events_listenning, url_get_events_my } from "Constatnts/url";
 import fetch from "Fetch/Fetch";
 import PropsEvent from "Fetch/Interface/IEvent";
 import Event from "Helpers/Event";
@@ -9,10 +9,10 @@ async function getMyEvents(
     end: MyDate
 ): Promise<Event[]> {
     const result: PropsEvent[] | undefined = await fetch
-        .get(url_get_events_my, {
+        .get(url_get_events_listenning, {
             params: {
-                Start: start.toString(),
-                End: end.toString(),
+                Start: start.toISOString(),
+                End: end.toISOString(),
             },
         })
         .then((response) => response.data)

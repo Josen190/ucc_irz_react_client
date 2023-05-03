@@ -23,15 +23,9 @@ export default function Tidings({ tidings, deletElement }: Props) {
   const isSuuprt = tidings.isPublic &&
    useAppSelector(s => s.authorization.user ? s.authorization.user.roles.includes(ConstSupport.Id) : false);
   const [isActiveCommentFeed, setIsActiveCommentFeed] = useState(false);
-  const [image, setImage] = useState<Image>();
   const subMenu = useRef<HTMLUListElement>(null);
   const isMyTiding = tidings.author.isAuntification();
 
- 
-
-  useEffect(() => {
-    tidings.image?.getImg(setImage);
-  }, []);
 
   return (
     <div>
@@ -64,7 +58,7 @@ export default function Tidings({ tidings, deletElement }: Props) {
         <Content
           title={tidings.title}
           text={tidings.clippedText}
-          image={image}
+          image={tidings.image}
           isClipped={tidings.isClipped}
           id={tidings.id}
         ></Content>
