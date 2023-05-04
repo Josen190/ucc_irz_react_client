@@ -7,22 +7,28 @@ import MyDate from "Helpers/MyDate";
 import fetch from "Fetch/Fetch";
 
 async function postMessages(userId: string, myId: string, text: string, image: Image | null) {
+    
+
     const data = {
         userId,
         text,
-        image: image ? image.getParamsToSend() : null,
+        Image: image ? image.getParamsToSend() : null,
     }
     const result = fetch.sendHub('SendMessageAsync', data).then((response) => {
         console.log("сообщение отправлено");
-        
+
         const id = response.data as string;
         return Promise.resolve(new Message({
             id, text, imageId: image,
             dateTime: new MyDate().toISOString(),
             senderId: myId,
         }))
-    }).catch(error => 
-        Promise.reject(error))
+    }).catch(error => {
+        console.log(error);
+
+        return Promise.reject(error)
+    }
+    )
 
     return result;
 }

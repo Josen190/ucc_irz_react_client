@@ -11,7 +11,7 @@ export default class Image {
   url?: string;
 
   constructor()
-  constructor(props: PropsImage) 
+  constructor(props: PropsImage)
   constructor(props?: PropsImage) {
     if (!props) {
       this.id = Math.random().toString();
@@ -28,7 +28,7 @@ export default class Image {
   }
 
   public getImg(setImage?: React.Dispatch<React.SetStateAction<Image>>): void {
-    
+
     getImage(this.id)
       .then((image) => {
         this.id = image.id;
@@ -53,7 +53,7 @@ export default class Image {
     const promise = new Promise<void>((resolve, reject) => {
       reader.onloadend = () => {
         const result = reader.result;
-        if (typeof result === "string"){
+        if (typeof result === "string") {
           sendFile.data = result.replace("data:", "").replace(/^.+,/, "");
           resolve();
         } else {
@@ -63,7 +63,7 @@ export default class Image {
     });
     reader.readAsDataURL(file);
     await promise;
-    
+
     if (!sendFile.data) return Promise.reject();
 
     const image = new Image(sendFile);
@@ -71,20 +71,22 @@ export default class Image {
     return Promise.resolve(image);
   }
 
-  public getParams(): PropsImage{
-    return{
+  public getParams(): PropsImage {
+    return {
       id: this.id,
       name: this.name,
       data: this.data,
       extension: this.extension,
-    } 
+    }
   }
 
-  public getParamsToSend(): PropsImage{
-    return{
-      name: this.name,
-      data: this.data,
-      extension: this.extension,
-    } 
+  public getParamsToSend(){
+    if (this.name && this.extension && this.data)
+      return {
+        Name: this.name,
+        Extension: this.extension,
+        Data: this.data,
+      }
+    return null;
   }
 }

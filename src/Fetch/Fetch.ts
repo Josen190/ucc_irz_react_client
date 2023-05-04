@@ -48,7 +48,7 @@ class Fetch {
             .withUrl(this.host + '/hubs/chat', {
                 accessTokenFactory: () => this.jwt ?? ''
             }) // URL хаба SignalR
-            .withHubProtocol(new signalR.JsonHubProtocol())
+            // .withHubProtocol(new signalR.JsonHubProtocol())
             .build();
         return this.connectionHub;
 

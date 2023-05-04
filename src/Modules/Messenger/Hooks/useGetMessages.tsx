@@ -8,11 +8,14 @@ import Image from "Helpers/Image";
 import ClassMessage from "../Helper/Message";
 import deleteMessage from "../Fetch/deleteMessage";
 import { notifyError, notifySuccess } from "Components/Notifications/Notifications";
+import useEndOfPage from "Hooks/useEndOfPage";
 
-function useGetMessages(ChatId: string, SearchString?: string, isNew = false) {
+function useGetMessages(ref: React.MutableRefObject<HTMLDivElement | null>, ChatId: string, SearchString?: string) {
     const { pageIndex, nextPage, restart } = usePageIndex();
     const [messages, setmessages] = useState<JSX.Element[]>([]);
     const [isEnd, setIsEnd] = useState(false)
+
+    // useEndOfPage(nextPage, ref, isEnd);
 
     const deleteMessageInArr = (messageId: string) => {
         deleteMessage(messageId).then(() => {
@@ -22,10 +25,10 @@ function useGetMessages(ChatId: string, SearchString?: string, isNew = false) {
             })
         }).catch((err) => {
             console.log(err);
-            
+
             notifyError("Ошибка")
         })
-        
+
     }
 
     const setValidMessages = (message: ClassMessage) => {
@@ -37,9 +40,13 @@ function useGetMessages(ChatId: string, SearchString?: string, isNew = false) {
 
     const prevChatId = useRef<string>();
     const prevSearchString = useRef<string>();
-    
+
     useEffect(() => {
-        if(isNew) return;
+        fetch.hubStart();
+        fetch.onMessage((message) => setValidMessages(message))
+    }, [])
+
+    useEffect(() => {
         let prevMessages = messages;
         if (!prevChatId.current
             || prevChatId.current !== ChatId || prevSearchString.current !== SearchString) {
@@ -59,16 +66,13 @@ function useGetMessages(ChatId: string, SearchString?: string, isNew = false) {
         })
     }, [pageIndex, ChatId, SearchString]);
 
-    useEffect(() => {
-        fetch.hubStart();
-        fetch.onMessage((message) => setValidMessages(message))
-    }, [])
+    
 
-    const send = (userId: string, myId: string, text: string, image: Image | null) => {
+    const sendNewMessage = (userId: string, myId: string, text: string, image: Image | null) => {
         postMessages(userId, myId, text, image).then((message) => setValidMessages(message));
     }
 
-    return { messages, send };
+    return { messages, sendNewMessage };
 }
 
 export default useGetMessages;

@@ -12,20 +12,9 @@ interface PropsProfilePicture {
 }
 
 export default function Avatar({ type, image }: PropsProfilePicture) {
-  const [_image, setImage] = useState(image);
-
-  useEffect(() => {
-    if (image && !image.data){
-      getImage(image.id).then(image => {
-        setImage(image);
-      })
-    }
-  }, [])
-  
-
   return (
     <div className={"logo " + type}>
-      {_image && <Img image={_image}></Img>}
+      <Img image={image ?? new Image()}></Img>
     </div>
   );
 }

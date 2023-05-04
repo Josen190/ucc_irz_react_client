@@ -13,11 +13,11 @@ import getImage from 'Fetch/getImage';
 
 interface Props{
     user: User;
-    isLogin: boolean;
+    isMyProfile: boolean;
 }
 
 
-function UserCard({user, isLogin}: Props) {
+function UserCard({user, isMyProfile}: Props) {
   const dispatch = useAppDispatch()
   
   useEffect(() => {
@@ -33,7 +33,7 @@ function UserCard({user, isLogin}: Props) {
         <div className="">
           <Profile_Picture type="norm" image={user.image ?? new Image()}></Profile_Picture>
           <Profile_Navigation
-            isLogin={isLogin}
+            isLogin={isMyProfile}
             userID={user ? user.id : null}
             isSubcribe={user ? user.isSubscription : null}
           ></Profile_Navigation>

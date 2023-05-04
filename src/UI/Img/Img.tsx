@@ -9,10 +9,10 @@ function Img({ image }: Props) {
   const [_image, setImage] = useState(image);
 
   useEffect(() => {
-    if (!_image.data) return;
+    if (_image.data) return;
     _image.getImg(setImage);
 
-  })
+  }, [])
 
   return (
     <img

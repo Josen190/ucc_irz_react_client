@@ -19,9 +19,8 @@ interface Props {
 export default function Message({ message, deleteMessage}: Props) {
   const chat = useOutletContext() as Chat;
   if (!chat) return <></>;
-  const myName = useAppSelector(s => s.authorization.user?.firstName);
   const isMy = chat.recipient.id !== message.senderId;
-  const senderName = isMy ? myName : chat.recipient.firstName;
+  const senderName = isMy ? "Я" : chat.recipient.firstName;
 
   return (
     <div className={`message ${isMy ? "my" : ''}`}>
@@ -30,7 +29,7 @@ export default function Message({ message, deleteMessage}: Props) {
         <div className="head">
           <Link to={`/account/${message.senderId}`}>{senderName}</Link>
           <span>{message.dateTime.DatetoStr('dd-months-yyyy hh:mm')}</span>
-          <Button type="button" onClick={() => deleteMessage(message.id)}>Удалить</Button>
+          {isMy && <Button type="button" onClick={() => deleteMessage(message.id)}>Удалить</Button>}
         </div>
         <div>
           {message.text}

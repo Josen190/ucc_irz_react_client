@@ -6,22 +6,25 @@ import Button from 'UI/Button/Button';
 import "./EditRole.scss"
 import { useAppDispatch, useAppSelector } from 'Hooks';
 import updateRoles from '../../Fetch/updateRoles';
+import { ConstSuperAdmin } from 'Constatnts/role';
 
 interface Props {
-  id: string;
-  role: string[];
+  userId: string;
+  oldRole: string[];
   setActive: React.Dispatch<SetStateAction<boolean>>;
 }
 
-function EditRole({ id, role, setActive }: Props) {
+function FormEditRole({ userId, oldRole, setActive }: Props) {
   const myRole = useAppSelector(s => s.authorization.user?.roles)
-  const { roleUser, currentRoles } = useStorageRole(role ?? []);
+  if (!myRole) return <></>;
+  const { roleUser, currentRoles } = useStorageRole(oldRole);
 
   const save = (event: MouseEvent<HTMLButtonElement>) => {
-    updateRoles(id, role, currentRoles);
+    updateRoles(userId, oldRole, currentRoles);
     return;
   }
 
+  const isSupAdmin = oldRole.includes(ConstSuperAdmin.Id) && !myRole.includes(ConstSuperAdmin.Id);
 
   return (
     <div className='modal z-index-20' onClick={() => setActive(false)}>
@@ -30,10 +33,11 @@ function EditRole({ id, role, setActive }: Props) {
         <InputField type='checkbox' value={roleUser.CabinetsManager.get.isSelected} onSetValue={roleUser.CabinetsManager.set} title={roleUser.CabinetsManager.get.name} />
         {myRole && myRole.indexOf("SuperAdmin") > -1
           && <InputField type='checkbox' value={roleUser.Admin.get.isSelected} onSetValue={roleUser.Admin.set} title={roleUser.Admin.get.name} />}
-        <Button type='button' onClick={save}>Сохранить</Button>
+        {!isSupAdmin && <Button type='button' onClick={save}>Сохранить</Button>}
+        {isSupAdmin && <p>Вы не можете редактировать роли суперадминистратора</p>}
       </div>
     </div>
   )
 }
 
-export default EditRole
+export default FormEditRole

@@ -17,7 +17,6 @@ function EditInfo() {
   const [image, setImage] = useState<Image | null>(null)
   const [myself, setMyself] = useState("");
   const [iDid, setIDid] = useState("");
-  const [achievements, setAchievements] = useState("");
   const [skills, setSkills] = useState("");
 
 
@@ -25,7 +24,6 @@ function EditInfo() {
     getUserMe().then((user) => {
       setMyself(user.aboutMyself ?? "");
       setIDid(user.myDoings ?? "");
-      setAchievements(user.skills ?? "");
       setSkills(user.skills ?? "");
     });
   }, []);
@@ -72,7 +70,7 @@ function EditInfo() {
       />
       <InputField
         type="textarea"
-        title="Навыки и компетенции"
+        title="Навыки"
         placeholder="Расскажите о ваших навыках "
         value={skills}
         onChange={(event: any) => {

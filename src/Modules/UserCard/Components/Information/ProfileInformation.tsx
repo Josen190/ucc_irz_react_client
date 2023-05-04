@@ -25,7 +25,6 @@ const Personal_Information = ({ user }: Props) => {
   return (
     <div className="column">
       <h2>{fio}</h2>
-      <BlockInfo title="Роли" value={role}></BlockInfo>
       <BlockInfo title="Дата рождения" value={birthday} />
       <BlockInfo title="Должности" value={<PositionList positions={user ? user.positions : null} />} />
       {!active && isDetailedInfo && (

@@ -4,7 +4,7 @@ import MyDate from "Helpers/MyDate";
 
 import "./InputField.scss"
 
-type s = string | boolean | MyDate;
+type s = string | boolean | MyDate | undefined;
 
 interface Props<T extends s> {
   type:
@@ -25,7 +25,7 @@ interface Props<T extends s> {
   rows?: number;
   required?: boolean;
   onChange?: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
-  onSetValue?: React.Dispatch<React.SetStateAction<T | undefined>> | ((value: T | undefined) => void);
+  onSetValue?: React.Dispatch<React.SetStateAction<T>> | ((value: T) => void);
   MyConstructor?: { new(...args: any[]): T };
 }
 
@@ -56,7 +56,7 @@ export default function InputField<T extends s>({
         if (e.target instanceof HTMLInputElement && e.target.type === 'checkbox')
           onSetValue(e.target.checked as T);
         else
-          onSetValue(e.target.value.length > 0 ? e.target.value as T : undefined);
+          onSetValue(e.target.value as T);
       }
     }
     if (onChange) onChange(e);

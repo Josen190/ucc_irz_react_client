@@ -10,7 +10,7 @@ interface Props {
 export default function ChatList({ select }: Props) {
   const ref = useRef<HTMLDivElement | null>(null)
   const chatList = useGetChatList(ref, select);
-
+  
   return (
     <div ref={ref} className="chat-list column">
       {chatList}
