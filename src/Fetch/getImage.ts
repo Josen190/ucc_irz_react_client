@@ -13,18 +13,17 @@ const url_get_images_id = (id: string) => {
 
 async function getImage(id: string): Promise<Image> {
   const image = hashImage.getValueByKey(id)
-  if (image) return Promise.resolve(image);
+  if (image)
+      return Promise.resolve(image);
 
-  const result = await fetch
-    .get(url_get_images_id(id))
-    .then((response) => {
-      const _image = new Image(response.data as PropsImage)
-      hashImage.push(_image.id, _image);
-      return Promise.resolve(_image);
-    })
-    .catch(() => Promise.reject(null));
-
-  return result;
+  return await fetch
+      .get(url_get_images_id(id))
+      .then((response) => {
+          const _image = new Image(response.data as PropsImage)
+          hashImage.push(_image.id, _image);
+          return Promise.resolve(_image);
+      })
+      .catch(() => Promise.reject(null));
 }
 
 export default getImage;

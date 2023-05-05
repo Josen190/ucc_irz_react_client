@@ -23,7 +23,6 @@ class Fetch {
     private connectionHub?: signalR.HubConnection; // Экземпляр SignalR для установки соединения
 
     /**
-    
     Создает экземпляр класса Fetch
     */
     constructor() {

@@ -2,6 +2,8 @@ import React from "react";
 import { notifyError } from "../Components/Notifications/Notifications";
 import PropsImage from "../Fetch/Interface/IImage";
 import getImage from "Fetch/getImage";
+import ConstImage from "../Constatnts/ConstImage";
+import {Guid} from "guid-ts";
 
 export default class Image {
   id: string;
@@ -11,12 +13,22 @@ export default class Image {
   url?: string;
 
   constructor()
+
+  /**
+   @param props.name имя изображения
+   @param props.extension расширение изображения
+   @param props.data данные изображение в base64
+   */
   constructor(props: PropsImage)
   constructor(props?: PropsImage) {
     if (!props) {
-      this.id = Math.random().toString();
+      this.id = Guid.newGuid().toString();
+      this.name = ConstImage.name;
+      this.extension = ConstImage.extension;
+      this.data = ConstImage.data;
+
     } else {
-      this.id = props.id ?? Math.random().toString();
+      this.id = props.id ?? Guid.newGuid().toString();
       this.name = props.name;
       this.data = props.data;
       this.extension = props.extension;

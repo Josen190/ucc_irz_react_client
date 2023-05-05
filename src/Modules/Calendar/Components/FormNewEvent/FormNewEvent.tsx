@@ -3,25 +3,23 @@ import MyDate from "Helpers/MyDate";
 import { useAppSelector } from "Hooks";
 import Button from "UI/Button/Button";
 import InputField from "UI/InputField/InputField";
-import { useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import User from "Helpers/User";
 import FormCabinet from "../FormCabinet/FormCabinet";
 import Cabinet from "Helpers/Cabinet";
 import { ConstCabinetsManager } from "Constatnts/role";
 import FormSearchUser from "Modules/FormSearchUser";
 import postEvent from "../../Fetch/postEvent";
+import {useNavigate, useOutletContext} from "react-router-dom";
 
+export default function FormNewEvent(): JSX.Element {
+  const navigate = useNavigate();
+  const day = useOutletContext() as MyDate | null;
 
-interface Props {
-  day: MyDate | null;
-  setActive: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export default function FormNewEvent({ day, setActive }: Props): JSX.Element {
   const user = useAppSelector((s) => {
     const paramsUser = s.authorization.user;
     return paramsUser ? new User(paramsUser) : null;
-  })
+  });
 
   const [date, setDate] = useState<MyDate | null>(day);
   const [startTime, setStartTime] = useState<MyDate | null>(day);
@@ -49,17 +47,17 @@ export default function FormNewEvent({ day, setActive }: Props): JSX.Element {
       end: endTime,
       isPublic: isPublic,
       cabinetId: cabinet ? cabinet.id : null,
-      listenersIds: listeners.length > 0? listeners: null,
+      listenersIds: listeners.length > 0 ? listeners : null,
     };
 
-    postEvent(data).then()
+    postEvent(data).then();
   };
 
   return (
     <div
       className="modal"
       onClick={() => {
-        setActive(false);
+        navigate("/calendar");
       }}
     >
       <div
@@ -81,16 +79,14 @@ export default function FormNewEvent({ day, setActive }: Props): JSX.Element {
             <InputField
               type="time"
               onChange={(event) => {
-                if (date)
-                  setStartTime(date.setNewTime(event.target.value));
+                if (date) setStartTime(date.setNewTime(event.target.value));
               }}
             ></InputField>
             <span>По</span>
             <InputField
               type="time"
               onChange={(event) => {
-                if (date)
-                  setEndTime(date.setNewTime(event.target.value));
+                if (date) setEndTime(date.setNewTime(event.target.value));
               }}
             ></InputField>
           </div>
@@ -108,19 +104,40 @@ export default function FormNewEvent({ day, setActive }: Props): JSX.Element {
               setDescription(event.target.value);
             }}
           ></InputField>
-          <InputField type='checkbox' title="Публичное" onSetValue={setIsPublic}></InputField>
-          {user?.roles.includes(ConstCabinetsManager.Id) && startTime && endTime &&
-            <div>
-              <Button type="button" onClick={() => setActiveFormCabinet(true)}>выбрать кабинет</Button>
-              <span>кабинет: {cabinet?.name}</span>
-            </div>
-          }
-          {activeFormCabinet && startTime && endTime &&
-            <FormCabinet start={startTime} end={endTime} setActive={setActiveFormCabinet} setCabinet={setCabinet} />}
-          {!isPublic && <FormSearchUser setSelected={setListeners}></FormSearchUser>}
+          <InputField
+            type="checkbox"
+            title="Публичное"
+            onSetValue={setIsPublic}
+          ></InputField>
+          {user?.roles.includes(ConstCabinetsManager.Id) &&
+            startTime &&
+            endTime && (
+              <div>
+                <Button
+                  type="button"
+                  onClick={() => setActiveFormCabinet(true)}
+                >
+                  выбрать кабинет
+                </Button>
+                <span>кабинет: {cabinet?.name}</span>
+              </div>
+            )}
+          {activeFormCabinet && startTime && endTime && (
+            <FormCabinet
+              start={startTime}
+              end={endTime}
+              setActive={setActiveFormCabinet}
+              setCabinet={setCabinet}
+            />
+          )}
+          {!isPublic && (
+            <FormSearchUser setSelected={setListeners}></FormSearchUser>
+          )}
         </div>
         <div>
-          <Button type="button" onClick={() => newEvent()}>Сохранить</Button>
+          <Button type="button" onClick={() => newEvent()}>
+            Сохранить
+          </Button>
         </div>
       </div>
     </div>

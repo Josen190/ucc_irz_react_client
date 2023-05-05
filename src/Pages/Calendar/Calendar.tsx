@@ -1,10 +1,9 @@
-import React, { Component, useState } from "react";
-import Month from "../../Modules/Calendar/Components/Month/Month";
-import Button from "../../UI/Button/Button";
-import FormNewEvent from "../../Modules/Calendar/Components/FormNewEvent/FormNewEvent";
-import MyDate from "../../Helpers/MyDate";
-
+import React, { useState } from "react";
 import "./calendar.scss";
+import { Outlet, useNavigate } from "react-router-dom";
+import MyDate from "Helpers/MyDate";
+import Button from "UI/Button/Button";
+import {Month} from "Modules/Calendar";
 
 const nameMonth = [
   "Январь",
@@ -23,8 +22,9 @@ const nameMonth = [
 
 const Calendar = () => {
   const [date, setDate] = useState(new MyDate());
-  const [active, setActive] = useState(false);
   const [selectedDay, setSelectedDay] = useState<MyDate | null>(null);
+  const navigate = useNavigate();
+
 
   const nextMonth = () => {
     setDate(new MyDate(date.setMonth(date.getMonth() + 1)));
@@ -35,7 +35,7 @@ const Calendar = () => {
 
   const setEventSelectedDay = (day: MyDate | null) => {
     setSelectedDay(day);
-    setActive(true);
+    navigate("/new_event")
   };
 
   return (
@@ -54,7 +54,7 @@ const Calendar = () => {
               {">"}
             </Button>
           </div>
-          <Button type="button" onClick={() => setActive(true)}>
+          <Button type="button" onClick={() => navigate("/calendar/new_event")}>
             Добавить событие
           </Button>
         </div>
@@ -64,7 +64,7 @@ const Calendar = () => {
         numberMonth={date.getMonth()}
         setSelectedDay={setEventSelectedDay}
       />
-      {active && <FormNewEvent day={selectedDay ?? null} setActive={setActive} />}
+      <Outlet context={selectedDay} />
     </main>
   );
 };

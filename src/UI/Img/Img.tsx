@@ -14,6 +14,8 @@ function Img({ image }: Props) {
 
   }, [])
 
+  console.log(image.data)
+
   return (
     <img
       src={`data:${_image.extension};base64,${_image.data}`}

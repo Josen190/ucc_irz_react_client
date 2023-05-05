@@ -1,9 +1,7 @@
-import Image from "./Image";
 import MyDate from "./MyDate";
 import PropsUser, { ParamsUser } from "../Fetch/Interface/IUser";
 import VisitingUser from "./VisitingUser";
 import Position from "./Positions";
-import PropsImage from "Fetch/Interface/IImage";
 
 export default class User extends VisitingUser {
   birthday: MyDate;
@@ -21,7 +19,14 @@ export default class User extends VisitingUser {
   constructor(props: ParamsUser)
   constructor(props: PropsUser)
   constructor(props: ParamsUser | PropsUser) {
-    super();
+    super({
+      id: props.id,
+      firstName: props.firstName,
+      surname: props.surname,
+      patronymic: props.patronymic,
+      imageId: props.imageId,
+    });
+
     this.birthday = new MyDate(props.birthday);
     this.aboutMyself = props.aboutMyself;
     this.myDoings = props.myDoings;
@@ -41,16 +46,6 @@ export default class User extends VisitingUser {
       }
 
     })
-
-    this.id = props.id;
-    this.firstName = props.firstName;
-    this.surname = props.surname;
-    this.patronymic = props.patronymic ?? "";
-
-    this.image = props.imageId ?
-      typeof props.imageId === 'string' ?
-        new Image({ id: props.imageId }) : new Image(props.imageId)
-      : null;
   }
 
   public getParams(): ParamsUser {

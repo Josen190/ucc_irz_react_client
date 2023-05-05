@@ -14,6 +14,7 @@ import Setting from "Modules/Setting";
 import Staff from "Pages/Staff/Staff";
 import { Chat, loading } from "Modules/Messenger";
 import { NewChat } from "Modules/Messenger";
+import { FormNewEvent } from "Modules/Calendar";
 
 
 
@@ -66,6 +67,12 @@ const router = createBrowserRouter(
         {
           path: "calendar",
           element: <Calendar />,
+          children: [
+          {
+            path: "new_event",
+            element: <FormNewEvent />,
+          }
+          ]
         },
 
 

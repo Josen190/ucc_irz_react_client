@@ -1,4 +1,4 @@
-import { url_get_users } from "Constatnts/url";
+import {url_get_users} from "Constatnts/url";
 
 import VisitingUser from "Helpers/VisitingUser";
 import PropsMinUser from "./Interface/IMinUser";
@@ -23,13 +23,12 @@ async function getUsers({ PositionId, Role, IsActive, SearchString, PageIndex, P
     if (typeof IsActive !== 'undefined') params.IsActive = IsActive;
     if (SearchString) params.SearchString = SearchString;
 
-    const result = await fetch.get(url_get_users, {params})
+    return await fetch.get(url_get_users, {params})
         .then((response) => {
             const data = response.data as PropsMinUser[];
             const users = data.map((user) => new VisitingUser(user))
             return Promise.resolve(users);
         })
         .catch(() => Promise.reject());
-    return result;
 }
 export default getUsers;

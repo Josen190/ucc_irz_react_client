@@ -7,7 +7,7 @@ export default class VisitingUser {
   firstName: string;
   surname: string;
   patronymic: string;
-  image: Image | null;
+  image: Image;
 
   constructor(props?: PropsMinUser) {
     if (!props) {
@@ -15,14 +15,17 @@ export default class VisitingUser {
       this.firstName = VisitingUser.AuntificationuUser?.firstName ?? '';
       this.surname = VisitingUser.AuntificationuUser?.surname ?? '';
       this.patronymic = VisitingUser.AuntificationuUser?.patronymic ?? '';
-      this.image = VisitingUser.AuntificationuUser?.image ?? null;
+      this.image = VisitingUser.AuntificationuUser?.image ?? new Image();
       return;
     }
     this.id = props.id;
     this.firstName = props.firstName;
     this.surname = props.surname;
     this.patronymic = props.patronymic ?? "";
-    this.image = props.imageId ? new Image({ id: props.imageId }) : null;
+    this.image = props.imageId ?
+        typeof props.imageId === 'string' ?
+            new Image({ id: props.imageId }) : new Image(props.imageId)
+        : new Image();
   }
 
   public static setAuntificationuUser(user: VisitingUser) {

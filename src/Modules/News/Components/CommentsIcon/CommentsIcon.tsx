@@ -1,5 +1,5 @@
 import ChatBoxOutline from "Assets/icons/ChatBoxOutline";
-
+import React from "react";
 
 interface Props {
   commentCount: number;
@@ -12,7 +12,7 @@ export default function CommentsIcon({ commentCount, active, setActive }: Props)
     setActive(true);
   };
 
-  let button = (
+  const button = (
     <button className="icon row" onClick={switchComments}>
       <span>{commentCount}</span>
       <ChatBoxOutline></ChatBoxOutline>
