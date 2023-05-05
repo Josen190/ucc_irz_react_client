@@ -1,4 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { userAdministrationReducer } from "Modules/AdimnsrateUser";
 import { authorizationReduser } from "Modules/AuthController";
 import { NewsFilterReduser } from "Modules/News";
 import {
@@ -23,6 +24,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
     authorization: authorizationReduser,
     newsFilter: NewsFilterReduser,
+    userAdministration: userAdministrationReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

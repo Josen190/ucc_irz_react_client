@@ -1,7 +1,9 @@
-import API from "Fetch/Api";
+
 import { useEffect } from "react";
 import { authorization, setUserImage } from "../Reducers/authorizationReduser";
 import { useAppDispatch } from "Hooks";
+import getUserMe from "Fetch/getUserMe";
+import getImage from "Fetch/getImage";
 
 function getAuthData() {
     const jwt = window.localStorage.getItem("jwt");
@@ -13,12 +15,11 @@ export default function useLoadingApp() {
     const dispatch = useAppDispatch()
     useEffect(() => {
         const { jwt: _jwt, refreshToken: _refreshToken } = getAuthData();
-        API.setJwt(_jwt);
-        API.setRefreshToken(_refreshToken);
-        API.getUserMe().then((user) => {
-            dispatch(authorization({ jwt: _jwt, refreshToken: _refreshToken, user: user.getType() }))
+        dispatch(authorization({ jwt: _jwt, refreshToken: _refreshToken, user: null }))
+        getUserMe().then((user) => {
+            dispatch(authorization({ jwt: _jwt, refreshToken: _refreshToken, user: user.getParams() }))
             if (user.image){
-                API.getImage(user.image.id).then((image) => {
+                getImage(user.image.id).then((image) => {
                     dispatch(setUserImage({image}))
                 })
             }

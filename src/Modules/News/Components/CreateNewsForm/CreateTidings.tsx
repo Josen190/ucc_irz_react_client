@@ -1,14 +1,14 @@
 import React from "react";
 import createNews from "../../Fetch/createNews";
 import Button from "UI/Button/Button";
-import Checkbox from "UI/InputField/Checkbox/Checkbox";
 import InputField from "UI/InputField/InputField";
 import { useState } from "react";
 import Image from "Helpers/Image";
 import "./CreateTidings.scss";
 import News from "Helpers/News";
-import MinUser from "Helpers/MinUser";
+import VisitingUser from "Helpers/VisitingUser";
 import { useAppSelector } from "Hooks";
+import User from "Helpers/User";
 
 interface Props {
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
@@ -16,20 +16,26 @@ interface Props {
 }
 
 export default function CreateTidings({ setActive, updateNews }: Props) {
-  const user = useAppSelector((s) => s.authorization.user);
+  const user = useAppSelector((s) => {
+    const paramsUser = s.authorization.user;
+    return paramsUser ? new User(paramsUser) : null;
+  });
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [images, setImages] = useState<Image | null>(null);
   const [isGlobal, setIsGlobal] = useState(false);
 
-  
+
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    Image.toBase64(event.target.files).then((result) => {
+    if (!event.target.files) return;
+    const file = event.target.files.item(0);
+    if (!file) return;
+    Image.toBase64(file).then((result) => {
       setImages(result);
     });
   };
-  
+
   return (
     <div
       className="modal"
@@ -44,7 +50,7 @@ export default function CreateTidings({ setActive, updateNews }: Props) {
         }}
         onSubmit={(e) => {
           e.preventDefault();
-          createNews(user ?? new MinUser(), title, content, isGlobal).then((news) => {
+          createNews(user ?? new VisitingUser(), title, content, isGlobal).then((news) => {
             updateNews(news);
             setActive(false);
           })
@@ -60,7 +66,8 @@ export default function CreateTidings({ setActive, updateNews }: Props) {
           type="textarea"
           rows={15}
           onChange={(event) => {
-           setContent(event.target.value)}}
+            setContent(event.target.value)
+          }}
         />
         <label>
           Добавить картинки:
@@ -72,7 +79,7 @@ export default function CreateTidings({ setActive, updateNews }: Props) {
           )}
         </ul>
 
-        <Checkbox
+        <InputField type="checkbox"
           title="Глобальная новость"
           onChange={(event) => setIsGlobal(event.target.value === "true")}
         />

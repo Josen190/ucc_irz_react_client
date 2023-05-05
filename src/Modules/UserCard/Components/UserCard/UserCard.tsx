@@ -4,27 +4,27 @@ import Profile_Navigation from '../Navigation/Profile_Navigation'
 import Profile_Picture from '../../../../Components/Avatar/Avatar'
 import User from 'Helpers/User';
 import Image from 'Helpers/Image';
-import API from 'Fetch/Api';
+
 import { useAppDispatch } from 'Hooks';
 import { setUserImage } from 'Modules/AuthController';
 
 import "./UserCard.scss"
+import getImage from 'Fetch/getImage';
 
 interface Props{
     user: User;
-    isLogin: boolean;
+    isMyProfile: boolean;
 }
 
 
-function UserCard({user, isLogin}: Props) {
+function UserCard({user, isMyProfile}: Props) {
   const dispatch = useAppDispatch()
   
   useEffect(() => {
     if (!user.image) return;
 
-    API.getImage(user.image.id).then(image => {
+    getImage(user.image.id).then(image => {
       dispatch(setUserImage({image}));
-      
     })
   }, [])
 
@@ -33,7 +33,7 @@ function UserCard({user, isLogin}: Props) {
         <div className="">
           <Profile_Picture type="norm" image={user.image ?? new Image()}></Profile_Picture>
           <Profile_Navigation
-            isLogin={isLogin}
+            isLogin={isMyProfile}
             userID={user ? user.id : null}
             isSubcribe={user ? user.isSubscription : null}
           ></Profile_Navigation>

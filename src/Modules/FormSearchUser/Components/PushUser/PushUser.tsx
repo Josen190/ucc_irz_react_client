@@ -1,20 +1,25 @@
-import MinUser from "Helpers/MinUser";
-import User from "Helpers/User";
+import VisitingUser from "Helpers/VisitingUser";
 import Button from "UI/Button/Button";
 import UserVisitingCard from "Components/UserVisitingCard/UserVisitingCard";
+import React from "react";
 
-interface Props{
-  user: User;
-  pushFun: (user: MinUser) => void;
+interface Props {
+  user: VisitingUser;
+  select: (id: string) => void;
+  unselect: (id: string) => void;
+  isSelect: boolean;
 }
 
-function PushUser({ user, pushFun }: Props) {
+function PushUser({ user, select, unselect, isSelect }: Props) {
   return (
     <div className="row">
       <UserVisitingCard user={user}></UserVisitingCard>
-      <Button type="button" onClick={() => pushFun(user)}>
+      {isSelect && <Button type="button" onClick={() => select(user.id)}>
         Добавить
-      </Button>
+      </Button>}
+      {!isSelect && <Button type="button" onClick={() => unselect(user.id)}>
+        Отменить
+      </Button>}
     </div>
   );
 }

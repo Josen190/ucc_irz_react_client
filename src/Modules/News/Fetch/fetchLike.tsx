@@ -1,18 +1,25 @@
-import API from "Fetch/Api";
+
 import ILikeStatus from "../Types/TypeLike";
 import React from 'react';
+import fetch from "Fetch/Fetch";
+import { url_post_likes_like_news_entry, url_post_likes_unlike_news_entry } from "Constatnts/url";
 
 
 export default async function switchLike(
     newsID: string,
     likeStatus: ILikeStatus,
     like_off: JSX.Element,
-    like_on: JSX.Element): Promise<ILikeStatus> 
-{
+    like_on: JSX.Element): Promise<ILikeStatus> {
     const _isLiked = !likeStatus.isLiked;
     let result;
+
+    const params = {
+        newsEntryId: newsID,
+    };
+
     if (_isLiked) {
-        result = await API.postLike(newsID)
+        result = await fetch
+            .post(url_post_likes_like_news_entry, undefined, { params })
             .then(() => {
                 return {
                     isLiked: _isLiked,
@@ -21,7 +28,7 @@ export default async function switchLike(
                 } as ILikeStatus;
             })
     } else {
-        result = await API.postUnlike(newsID)
+        result = await fetch.post(url_post_likes_unlike_news_entry, undefined, { params })
             .then(() => {
                 return {
                     isLiked: _isLiked,

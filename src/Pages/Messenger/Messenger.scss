@@ -1,0 +1,15 @@
+.messenger {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    grid-column-gap: 10px;
+    align-items: start;
+    box-sizing: border-box;
+    align-self: center;
+    justify-self: center;
+    // border: 1px solid black;
+    margin: 0;
+    height: calc(100vh - 20px - 90px);
+    width: 100%;
+    padding: 5px;
+
+}

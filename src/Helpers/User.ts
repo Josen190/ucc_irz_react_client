@@ -1,11 +1,11 @@
 import Image from "./Image";
 import MyDate from "./MyDate";
 import PropsUser, { ParamsUser } from "../Fetch/Interface/IUser";
-import MinUser from "./MinUser";
+import VisitingUser from "./VisitingUser";
 import Position from "./Positions";
 import PropsImage from "Fetch/Interface/IImage";
 
-export default class User extends MinUser {
+export default class User extends VisitingUser {
   birthday: MyDate;
   aboutMyself: string | null;
   myDoings: string | null;
@@ -53,9 +53,9 @@ export default class User extends MinUser {
       : null;
   }
 
-  public getType(): ParamsUser {
+  public getParams(): ParamsUser {
     return {
-      ...super.getType(),
+      ...super.getParams(),
       birthday: this.birthday.toString(),
       aboutMyself: this.aboutMyself,
       myDoings: this.myDoings,

@@ -1,13 +1,15 @@
-import React from "react";
+import { ChatClass, ChatList } from "Modules/Messenger";
+import React, { useState } from "react";
+import { Outlet } from "react-router";
+
+import './Messenger.scss'
 
 export default function Messenger() {
-  // return (
-  //   <User>
-  //     <main className="tile scroll-fix row">
-  //       <ChatList />
-  //       <Chat />
-  //     </main>
-  //   </User>
-  // );
-  return <div></div>;
+  const [selectedChat, setSelectedChat] = useState<ChatClass | null>(null);
+  return (
+      <main className="tile row messenger">
+        <ChatList select={setSelectedChat}/>
+        <Outlet context={selectedChat}/>
+      </main>
+  );
 }

@@ -1,22 +1,23 @@
 import React, { ReactNode, useState } from "react";
 import { useEffect } from "react";
-import API from "../../Fetch/Api";
+
 import Image from "../../Helpers/Image";
 import News from "../../Helpers/News";
 import Img from "../../UI/Img/Img";
+import getFullTextOfNews from "Fetch/getFullTextOfNews";
 
 interface PropsContent {
   id: string;
   title?: string;
   isClipped?: boolean;
   text: string;
-  image?: Image;
+  image?: Image | null;
 }
 
 export default function Content({
   id,
   title,
-  isClipped,
+  isClipped = false,
   text,
   image,
 }: PropsContent): JSX.Element {
@@ -42,7 +43,7 @@ export default function Content({
   const getNews = (event: any) => {
     event.target.disabled = true;
     
-    API.getFullTextOfNews(id)
+    getFullTextOfNews(id)
       .then((fullText) => {
         setText(fullText);
         setIsClipped(false);

@@ -7,10 +7,8 @@ body {
 .tile {
   background-color: white;
   padding: 20px;
-  border-radius: 6px;
+  border-radius: 5px;
   margin-bottom: 20px;
-  height: min-content;
-  // width: 100%;
   box-sizing: border-box;
 }
 
@@ -45,12 +43,6 @@ h4 {
   margin: 0;
 }
 
-input {
-  height: calc(100% - 10px);
-  width: calc(100% - 10px);
-  margin: 5px;
-}
-
 .menu {
   border-radius: 5px;
   max-width: 200px;
@@ -68,28 +60,6 @@ input {
   }
 }
 
-.logo {
-  // width: 150px;
-  // height: 150px;
-  border-radius: 50%;
-  margin: 0;
-
-  &.norm {
-    width: 180px;
-    height: 180px;
-  }
-
-  &.mini {
-    width: 35px;
-    height: 35px;
-  }
-
-  img {
-    width: 100%;
-    height: 100%;
-  }
-}
-
 .column {
   display: flex;
   flex-direction: column;
@@ -102,30 +72,7 @@ input {
 .row {
   display: flex;
   flex-direction: row;
-}
-
-.mg-10-auto {
-  margin: 10px auto;
-}
-
-.mg-0-20 {
-  margin: 0 20px;
-}
-
-.mg-5-0 {
-  margin: 5px 0;
-}
-
-.mg-top-10 {
-  margin-top: 10px;
-}
-
-.mg-buttom-10 {
-  margin-bottom: 10px;
-}
-
-.mg-0 {
-  margin: 0;
+  align-items: center;
 }
 
 .content {
@@ -136,10 +83,7 @@ input {
   }
 }
 
-// .ionicon {
-//     width: 25px;
-//     height: 25px;
-// }
+
 
 .icon {
   margin-right: 10px;
@@ -161,13 +105,6 @@ input {
   }
 }
 
-.w-100 {
-  width: 100%;
-}
-
-.w-200px {
-  width: 180px;
-}
 
 .col-space-between {
   display: flex;

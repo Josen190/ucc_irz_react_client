@@ -1,7 +1,12 @@
 import React, { ChangeEventHandler } from "react";
 import Textarea from "./Textarea/Textarea";
+import MyDate from "Helpers/MyDate";
 
-interface Props {
+import "./InputField.scss"
+
+type s = string | boolean | MyDate | undefined;
+
+interface Props<T extends s> {
   type:
   | "textarea"
   | "text"
@@ -13,17 +18,18 @@ interface Props {
   title?: string;
   id?: string;
   placeholder?: string;
-  value?: string;
+  value?: string | boolean;
   maxlength?: number;
   minlength?: number;
   name?: string;
   rows?: number;
   required?: boolean;
   onChange?: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
-  onSetValueStr?: React.Dispatch<React.SetStateAction<string>>;
+  onSetValue?: React.Dispatch<React.SetStateAction<T>> | ((value: T) => void);
+  MyConstructor?: { new(...args: any[]): T };
 }
 
-export default function InputField({
+export default function InputField<T extends s>({
   type,
   id,
   title,
@@ -35,35 +41,74 @@ export default function InputField({
   rows,
   required,
   onChange,
-  onSetValueStr,
-}: Props): JSX.Element {
-  const inputprops = {
-    className: "",
-    id: id,
-    placeholder: placeholder,
-    defaultValue: value,
-    autoComplete: "off",
-    maxLength: maxlength,
-    minLength: minlength,
-    name: name,
-  };
+  onSetValue,
+  MyConstructor,
+}: Props<T>): JSX.Element {
 
   let input: JSX.Element = <></>;
 
   const _onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    if (onSetValueStr) onSetValueStr(e.target.value);
+    if (onSetValue) {
+      if (MyConstructor && MyConstructor.name === 'MyDate') {
+        const myDateConstructor = MyConstructor as { new(...args: any[]): T };
+        onSetValue(new myDateConstructor(e.target.value) as T);
+      } else {
+        if (e.target instanceof HTMLInputElement && e.target.type === 'checkbox')
+          onSetValue(e.target.checked as T);
+        else
+          onSetValue(e.target.value as T);
+      }
+    }
     if (onChange) onChange(e);
   };
 
+  const inputprops = {
+    className: "",
+    id: id,
+    placeholder: placeholder,
+    autoComplete: "off",
+    maxLength: maxlength,
+    minLength: minlength,
+    name: name,
+    onChange: _onChange,
+  };
 
-  if (type === "textarea") {
-    input = <Textarea {...inputprops} rows={rows ?? 2} isresize={true} onChange={_onChange} />;
-  } else {
-    input = <input type={type} {...inputprops} required={required ?? false} onChange={_onChange} />;
+  switch (type) {
+    case "textarea": {
+      const _propsTextarea = {
+        ...inputprops,
+        value: value as string,
+        isresize: true,
+        rows: rows ?? 2,
+      }
+      input = <Textarea {..._propsTextarea} />;
+      break;
+    }
+
+    case "checkbox": {
+      const _propsCheckbox = {
+        ...inputprops,
+        defaultChecked: value as boolean,
+        required: required ?? false,
+      }
+      input = <input type={type} {..._propsCheckbox} />;
+      break;
+    }
+
+    default: {
+      const _propsDefault = {
+        ...inputprops,
+        defaultValue: value as string,
+        required: required ?? false,
+      }
+      input = <input type={type} {..._propsDefault} />;
+      break;
+    }
+
   }
 
   return (
-    <label className="input w-100 mg-buttom-10 column ">
+    <label className="input">
       {title && <h4>{title}</h4>}
       {input}
     </label>

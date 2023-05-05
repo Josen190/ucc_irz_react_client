@@ -1,4 +1,4 @@
-import API from "Fetch/Api";
+
 import MyDate from "Helpers/MyDate";
 import ContextMenu, { ContextButton } from "Modules/ContextMenu";
 import React, { useState, useEffect } from "react";
@@ -7,6 +7,10 @@ import Day from "../Day/Day";
 import Event from "Helpers/Event";
 
 import "./month.scss";
+import useWidth from "../../Hooks/useWidth";
+import showMonth from "../../Helpers/showMonth";
+import OpenEvent from "../OpenEvent/OpenEvent";
+import useGetMyEvents from "../../Hooks/useGetMyEvents";
 
 interface Props {
   year: number;
@@ -14,46 +18,34 @@ interface Props {
   setSelectedDay: (day: MyDate | null) => void;
 }
 
-interface PropsScreenPosition {
+interface ParamsNameDayWeekUse {
+  isFull: boolean;
+  nameDay: string[];
+}
+
+interface ParamsScreenPosition {
   screenX: number;
   screenY: number;
   day: MyDate | null;
 }
 
-// numberMonth - нумерация месяцев начинается с 0 - январь ...
-function showMonth(year: number, numberMonth: number) {
-  // получение дня недели для первого дня месяца
-  let firstDayOfMonth = new MyDate(year, numberMonth, 1).getDay();
-  // 0 - воскресенье, 6 - воскресенье
-  firstDayOfMonth = firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1;
-  const firstDayOfCalendar = new MyDate(year, numberMonth, 1);
-  firstDayOfCalendar.setDate(firstDayOfCalendar.getDate() - firstDayOfMonth);
-
-  const indexDay = new MyDate(firstDayOfCalendar);
-  const arrDayOfCalendar: MyDate[][] = [];
-  for (let i = 0; i < 5; i++) {
-    arrDayOfCalendar.push([]);
-    for (let j = 0; j < 7; j++) {
-      arrDayOfCalendar[i].push(new MyDate(indexDay));
-      indexDay.setDate(indexDay.getDate() + 1);
-    }
-  }
-  const lastDayOfCalendar = new MyDate(indexDay);
-  lastDayOfCalendar.setDate(lastDayOfCalendar.getDate() - 1);
-  return { firstDayOfCalendar, lastDayOfCalendar, arrDayOfCalendar };
+export interface ParamsOpenEvent {
+  isActive: boolean;
+  event: ParamsOpenEvent['isActive'] extends true ? Event : null;
 }
 
 export default function Month({ year, numberMonth, setSelectedDay }: Props) {
-  const [nameDayWeekUse, setNameDayWeekFull] = useState<{
-    isFull: boolean;
-    nameDay: string[];
-  }>({
+  const [nameDayWeekUse, setNameDayWeekFull] = useState<ParamsNameDayWeekUse>({
     isFull: false,
     nameDay: MyDate.nameDayWeekShort,
   });
-  const [listEvents, setListEvents] = useState<Event[]>([]);
+
   const [activeContextMenu, setActiveContextMenu] = useState<boolean>(false);
-  const [screenPosition, setScreenPosition] = useState<PropsScreenPosition>({
+  const [activeOpenEvent, setActiveOpenEvent] = useState<ParamsOpenEvent>({
+    isActive: false,
+    event: null
+  });
+  const [screenPosition, setScreenPosition] = useState<ParamsScreenPosition>({
     screenX: 0,
     screenY: 0,
     day: null,
@@ -61,28 +53,12 @@ export default function Month({ year, numberMonth, setSelectedDay }: Props) {
 
   const [ref, bounds] = useMeasure();
 
-  const { firstDayOfCalendar, lastDayOfCalendar, arrDayOfCalendar } = showMonth(
-    year,
-    numberMonth
-  );
+  const { firstDayOfCalendar,
+    lastDayOfCalendar,
+    arrDayOfCalendar } = showMonth(year, numberMonth);
 
-  function onWidth(bounds: RectReadOnly) {
-    if (nameDayWeekUse.isFull && bounds.width < 1050) {
-      setNameDayWeekFull({ isFull: false, nameDay: MyDate.nameDayWeekShort });
-    } else if (!nameDayWeekUse.isFull && bounds.width >= 1050) {
-      setNameDayWeekFull({ isFull: true, nameDay: MyDate.nameDayWeekFull });
-    }
-  }
-
-  useEffect(() => {
-    API.getMyEvents(firstDayOfCalendar, lastDayOfCalendar).then((events) => {
-      setListEvents(events);
-    });
-  }, [numberMonth]);
-
-  useEffect(() => {
-    onWidth(bounds);
-  }, [bounds]);
+  const listEvents = useGetMyEvents(firstDayOfCalendar, lastDayOfCalendar);
+  useWidth(bounds, setNameDayWeekFull, nameDayWeekUse);
 
   const contextMenu = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, day: MyDate) => {
     event.preventDefault();
@@ -124,6 +100,7 @@ export default function Month({ year, numberMonth, setSelectedDay }: Props) {
                       month={numberMonth}
                       listEvents={listEventsDay}
                       activeContextMenu={contextMenu}
+                      setActiveFormEvent={setActiveOpenEvent}
                     />
                   </td>
                 );
@@ -147,6 +124,10 @@ export default function Month({ year, numberMonth, setSelectedDay }: Props) {
           </ContextButton>
         </ContextMenu>
       )}
+      {activeOpenEvent.isActive && activeOpenEvent.event &&
+        <OpenEvent event={activeOpenEvent.event} setActive={setActiveOpenEvent}></OpenEvent>}
+
     </div>
   );
 }
+

@@ -1,7 +1,10 @@
 import React, { Component, useState } from "react";
 import Button from "../../../../UI/Button/Button";
-import API from "../../../../Fetch/Api";
+
 import { notifyError, notifySuccess } from "../../../../Components/Notifications/Notifications";
+import fetch from "Fetch/Fetch";
+import unsubscribe from "../../Fetch/unsubscribe";
+import subcribe from "../../Fetch/subcribe";
 
 interface Props {
   isLogin: boolean;
@@ -11,29 +14,9 @@ interface Props {
 
 export default function Profile_Navigation({ isLogin, userID, isSubcribe }: Props) {
   const [_isSubcribe, setIsSubcribe] = useState(isSubcribe ? true : false);
-  const unsubscribe = () => {
-    if (!userID) return;
-    API.unsubscribe(userID)
-      .then(() => {
-        notifySuccess("Вы отписались");
-        setIsSubcribe(false);
-      })
-      .catch(() => {
-        notifyError("Ошибка, не удалось отписаться");
-      });
-  };
 
-  const subcribe = () => {
-    if (!userID) return;
-    API.subcribe(userID)
-      .then(() => {
-        notifySuccess("Вы подписалиь");
-        setIsSubcribe(true);
-      })
-      .catch(() => {
-        notifyError("Ошибка, не удалось подптсаться");
-      });
-  };
+
+
   return (
     <div className="content-centr column w-200px">
       {isLogin && (
@@ -45,11 +28,14 @@ export default function Profile_Navigation({ isLogin, userID, isSubcribe }: Prop
         <Button
           type="button"
           color={_isSubcribe ? "basic" : "red"}
-          onClick={_isSubcribe ? unsubscribe : subcribe}
+          onClick={() => _isSubcribe ? unsubscribe(userID, setIsSubcribe) : subcribe(userID, setIsSubcribe)}
         >
           {_isSubcribe ? "Отписаться" : "Подписаться"}
         </Button>
       )}
+      <Button type="link" href={`/messenger/new_chat/${userID}`}  color="mini">
+        Написать сообщение
+      </Button>
     </div>
   );
 }

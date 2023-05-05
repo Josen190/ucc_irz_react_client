@@ -1,28 +1,29 @@
-import API from "Fetch/Api";
+
 import Button from "UI/Button/Button";
 import InputField from "UI/InputField/InputField";
 import InputImg from "UI/InputImg/InputImg";
 import { notifySuccess, notifyError } from "Components/Notifications/Notifications";
 import React, { useState, useEffect } from "react";
 import Image from "Helpers/Image";
-import MinUser from "Helpers/MinUser";
+import VisitingUser from "Helpers/VisitingUser";
 import { useAppDispatch } from "Hooks";
 import { setUserImage } from "Modules/AuthController";
+import getUserMe from "Fetch/getUserMe";
+import putUpdateInfo from "../../Fetch/putUpdateInfo";
+import putUpdetePhoto from "../../Fetch/putUpdetePhoto";
 
 function EditInfo() {
   const dispatch = useAppDispatch()
   const [image, setImage] = useState<Image | null>(null)
   const [myself, setMyself] = useState("");
   const [iDid, setIDid] = useState("");
-  const [achievements, setAchievements] = useState("");
   const [skills, setSkills] = useState("");
 
 
   useEffect(() => {
-    API.getUserMe().then((user) => {
+    getUserMe().then((user) => {
       setMyself(user.aboutMyself ?? "");
       setIDid(user.myDoings ?? "");
-      setAchievements(user.skills ?? "");
       setSkills(user.skills ?? "");
     });
   }, []);
@@ -32,17 +33,16 @@ function EditInfo() {
 
   const save = () => {
     if (image && image.name && image.extension && image.data) {
-      API.putUpdetePhoto(image.name, image.extension, image.data).then((id) => {
-        const newImage = new Image({ ...image, id: id })
+      putUpdetePhoto(image.name, image.extension, image.data).then((newImage) => {
         dispatch(setUserImage({image: newImage}))
       })
     }
 
-    API.putUpdateInfo(myself, iDid, achievements, skills)
+    putUpdateInfo(myself, iDid, skills)
       .then(() => {
         notifySuccess("изменения сохранены");
       })
-      .catch((error) => {
+      .catch(() => {
         notifyError("изменения не сохранены");
       });
   };
@@ -70,16 +70,7 @@ function EditInfo() {
       />
       <InputField
         type="textarea"
-        title="Достижения"
-        placeholder="Расскажите о ваших достижениях"
-        value={achievements}
-        onChange={(event: any) => {
-          setAchievements(event.target.value);
-        }}
-      />
-      <InputField
-        type="textarea"
-        title="Навыки и компетенции"
+        title="Навыки"
         placeholder="Расскажите о ваших навыках "
         value={skills}
         onChange={(event: any) => {

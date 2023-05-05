@@ -1,14 +1,14 @@
 import User from "Helpers/User";
 import { configureStore, createSlice } from '@reduxjs/toolkit'
-import API from "Fetch/Api";
-import MinUser from "Helpers/MinUser";
+import VisitingUser from "Helpers/VisitingUser";
 import Image from "Helpers/Image";
+import fetch from "Fetch/Fetch";
 
-export interface IAuthorizationState {
+interface IAuthorizationState {
     isLogin: boolean;
     jwt: string | null;
     refreshToken: string | null;
-    user: ReturnType<User['getType']> | null;
+    user: ReturnType<User['getParams']> | null;
 
 }
 
@@ -17,7 +17,7 @@ interface authorization_payload {
     payload: {
         jwt: string | null;
         refreshToken: string | null;
-        user: ReturnType<User['getType']> | null;
+        user: ReturnType<User['getParams']> | null;
     }
 }
 
@@ -36,16 +36,15 @@ const authorizationReducer = createSlice({
             const _jwt = payload.jwt;
             const _refreshToken = payload.refreshToken;
             const _user = payload.user;
-            API.setJwt(_jwt);
-            API.setRefreshToken(_refreshToken);
+            fetch.setRefres(_jwt, _refreshToken);
 
             if (payload.user)
-                MinUser.setAuntificationuUser(new User(payload.user));
+                VisitingUser.setAuntificationuUser(new User(payload.user));
 
             window.localStorage.setItem("jwt", _jwt ?? "null");
             window.localStorage.setItem("refreshToken", _refreshToken ?? "null");
 
-            const isLogin = _jwt && _refreshToken && _user ? true : false;
+            const isLogin = _jwt && _refreshToken ? true : false;
 
             return {
                 isLogin, jwt: _jwt, refreshToken: _refreshToken, user: _user
@@ -64,9 +63,9 @@ const authorizationReducer = createSlice({
             const user = new User(_state.user)
             user.setImage(payload.image);
 
-            MinUser.setAuntificationuUser(user);
+            VisitingUser.setAuntificationuUser(user);
             return {
-                ..._state, user: user.getType()
+                ..._state, user: user.getParams()
             }
         }
     }
