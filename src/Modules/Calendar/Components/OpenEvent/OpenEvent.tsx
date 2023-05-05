@@ -59,7 +59,7 @@ function OpenEvent({ event, setActive }: Props) {
                     <span>{" " + _event.end.DatetoStr("hh:mm")}</span>
                 </div>
 
-                {_event.listeners &&
+                {_event.listeners && _event.listeners.length > 0 &&
                     <div>
                         <h5>Участники</h5>
                         {_event.listeners.map(user => <UserVisitingCard key={user.id} user={user}></UserVisitingCard>)}

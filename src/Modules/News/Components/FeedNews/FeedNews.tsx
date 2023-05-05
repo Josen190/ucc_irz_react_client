@@ -16,10 +16,8 @@ export default function FeedNews({
   inAccount = false,
   userId,
 }: Props): JSX.Element {
-  const { isLogin, user } = useAppSelector((s) => s.authorization);
+  const { user } = useAppSelector((s) => s.authorization);
   const [active, setActive] = useState(false);
-  const [arrNews, setArrNews] = useState<JSX.Element[]>([]);
-  const [deleteKeyElement, setDeleteKeyElement] = useState<string | null>(null);
   const [filter, setFilter] = useState(
     { AuthorId: userId, 
       PublicOnly: undefined, 
@@ -27,17 +25,12 @@ export default function FeedNews({
       SearchString: undefined 
     })
 
-  useDeleteNewsFromFeed(deleteKeyElement, arrNews, setArrNews);
-  useGetNews(arrNews, setArrNews, setDeleteKeyElement, filter);
+  const {arrNews, update} = useGetNews(filter);
 
-
-  const update = (news: News) => {
-    setArrNews([<Tidings key={news.id + Math.random()} tidings={news} deletElement={setDeleteKeyElement} />, ...arrNews]);
-  };
 
 
   return <div className="column">
-    <HeaderFeedNews isLogin={isLogin && inAccount} setActive={inAccount ? setActive : undefined}
+    <HeaderFeedNews isLogin={user?.id === userId && inAccount} setActive={inAccount ? setActive : undefined}
     setFilter={(v) => {setFilter({...v, AuthorId: userId})}}></HeaderFeedNews>
     {arrNews}
     {active && (<CreateTidings setActive={setActive} updateNews={update} />)}
