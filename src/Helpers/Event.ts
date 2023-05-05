@@ -12,7 +12,7 @@ export default class Event {
   cabinetName: string| null;
   description?: string;
   isPublic?: boolean;
-  listenersIds?: string[];
+  listeners?: VisitingUser[];
   
 
 
@@ -26,6 +26,6 @@ export default class Event {
 
     this.description = props.description;
     this.isPublic = props.isPublic;
-    this.listenersIds = props.listenersIds;
+    this.listeners = props.listeners ? props.listeners.map(p => new VisitingUser(p)) : props.listeners;
   }
 }

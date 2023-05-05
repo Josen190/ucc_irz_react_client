@@ -10,6 +10,7 @@ import { useAppSelector } from 'Hooks';
 import { ConstSupport } from 'Constatnts/role';
 import getEventId from '../../Fetch/getEventId';
 import deleteEventId from '../../Fetch/deleteEventId';
+import UserVisitingCard from 'Components/UserVisitingCard/UserVisitingCard';
 
 interface Props {
     event: Event;
@@ -21,7 +22,7 @@ interface Props {
 function OpenEvent({ event, setActive }: Props) {
     const role = useAppSelector(s => s.authorization.user?.roles)
     const [_event, setEvent] = useState(event);
-    const isMyEvent = _event.creator.isAuntification() || (role ? role.includes(ConstSupport.Id) && (event.isPublic?? false) : false);
+    const isMyEvent = _event.creator.isAuntification() || (role ? role.includes(ConstSupport.Id) && (event.isPublic ?? false) : false);
 
 
     useEffect(() => {
@@ -57,9 +58,14 @@ function OpenEvent({ event, setActive }: Props) {
                     <span>{_event.start.DatetoStr("dd-months-yyyy hh:mm") + " - "}</span>
                     <span>{" " + _event.end.DatetoStr("hh:mm")}</span>
                 </div>
-                <div>
 
-                </div>
+                {_event.listeners &&
+                    <div>
+                        <h5>Участники</h5>
+                        {_event.listeners.map(user => <UserVisitingCard key={user.id} user={user}></UserVisitingCard>)}
+                    </div>
+                }
+
                 <div>
                     {_event.cabinetName && <p>Кабинет: {_event.cabinetName}</p>}
                     {_event.description && <Content id={_event.id} text={_event.description}></Content>}

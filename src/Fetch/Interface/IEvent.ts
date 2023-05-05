@@ -8,6 +8,6 @@ export default interface PropsEvent {
   cabinetName: string | null;
   description?: string;
   isPublic?: boolean;
-  listenersIds?: string[];
+  listeners?: PropsMinUser[];
   creator: PropsMinUser;
 }

@@ -17,7 +17,7 @@ class Fetch {
     private jwt: string | null; // JWT токен
     private refreshToken: string | null; // Токен для обновления JWT
 
-    private host = "https://localhost:7116"; // Экземпляр axios для запросов
+    private host = "https://localhost:7116";
 
     private feth: AxiosInstance; // Экземпляр axios для запросов
     private connectionHub?: signalR.HubConnection; // Экземпляр SignalR для установки соединения
