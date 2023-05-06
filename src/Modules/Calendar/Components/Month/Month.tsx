@@ -1,15 +1,14 @@
 
 import MyDate from "Helpers/MyDate";
 import ContextMenu, { ContextButton } from "Modules/ContextMenu";
-import React, { useState, useEffect } from "react";
-import useMeasure, { RectReadOnly } from "react-use-measure";
+import React, { useState } from "react";
+import useMeasure from "react-use-measure";
 import Day from "../Day/Day";
 import Event from "Helpers/Event";
 
 import "./month.scss";
 import useWidth from "../../Hooks/useWidth";
 import showMonth from "../../Helpers/showMonth";
-import OpenEvent from "../OpenEvent/OpenEvent";
 import useGetMyEvents from "../../Hooks/useGetMyEvents";
 
 interface Props {
@@ -41,10 +40,7 @@ export default function Month({ year, numberMonth, setSelectedDay }: Props) {
   });
 
   const [activeContextMenu, setActiveContextMenu] = useState<boolean>(false);
-  const [activeOpenEvent, setActiveOpenEvent] = useState<ParamsOpenEvent>({
-    isActive: false,
-    event: null
-  });
+
   const [screenPosition, setScreenPosition] = useState<ParamsScreenPosition>({
     screenX: 0,
     screenY: 0,
@@ -100,7 +96,6 @@ export default function Month({ year, numberMonth, setSelectedDay }: Props) {
                       month={numberMonth}
                       listEvents={listEventsDay}
                       activeContextMenu={contextMenu}
-                      setActiveFormEvent={setActiveOpenEvent}
                     />
                   </td>
                 );
@@ -124,9 +119,6 @@ export default function Month({ year, numberMonth, setSelectedDay }: Props) {
           </ContextButton>
         </ContextMenu>
       )}
-      {activeOpenEvent.isActive && activeOpenEvent.event &&
-        <OpenEvent event={activeOpenEvent.event} setActive={setActiveOpenEvent}></OpenEvent>}
-
     </div>
   );
 }

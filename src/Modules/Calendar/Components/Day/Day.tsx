@@ -1,20 +1,19 @@
-import React, { SetStateAction } from "react";
+import React from "react";
 import EventInDay from "../EventInDay/EventInDay";
 import MyDate from "Helpers/MyDate";
 import Event from "Helpers/Event";
 
 import "./day.scss"
-import { ParamsOpenEvent } from "../Month/Month";
+
 
 interface Props{
   day: MyDate, 
   month: number, 
   listEvents: Event[], 
-  activeContextMenu: (event: any, day: any) => void
-  setActiveFormEvent: React.Dispatch<SetStateAction<ParamsOpenEvent>>;
+  activeContextMenu: (event:  React.MouseEvent<HTMLDivElement, MouseEvent>, day: MyDate) => void
 }
 
-export default function Day({ day, month, listEvents, activeContextMenu, setActiveFormEvent }: Props) {
+export default function Day({ day, month, listEvents, activeContextMenu }: Props) {
   const today = new MyDate();
   today.setHours(0, 0, 0, 0);
 
@@ -37,7 +36,7 @@ export default function Day({ day, month, listEvents, activeContextMenu, setActi
       <span> {day.getDate()}</span>
       <div className="column">
         {listEvents.map((event) => {
-          return <EventInDay key={event.id} event={event} setActive={setActiveFormEvent}/>;
+          return <EventInDay key={event.id} event={event}/>;
         })}
       </div>
     </div>

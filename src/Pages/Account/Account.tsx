@@ -4,22 +4,21 @@ import FeedNews from "Modules/News";
 import UserCard from "Modules/UserCard";
 
 import { useState, useEffect } from "react";
-import { useLoaderData } from "react-router";
+import {useParams} from "react-router";
 import { useAppSelector } from "Hooks";
 
 import "./Account.scss";
 import getUserFromId from "Fetch/getUserfromId";
 
-export async function accountLoader({ params }: any) {
-  return params.id;
-}
 
 export default function Account() {
   const { user: ParamsUser } = useAppSelector((s) => s.authorization);
   const AuntificationuUser = ParamsUser ? new User(ParamsUser) : null;
   const [user, setUser] = useState<User | null>(null);
 
-  const userId = useLoaderData() as string;
+  const { userId } = useParams<{ userId: string }>();
+  if (!userId) return <></>
+
 
   useEffect(() => {
     if (AuntificationuUser?.id !== userId) {

@@ -2,10 +2,10 @@ import { createSlice } from '@reduxjs/toolkit'
 
 
 export interface INewsFiler {
-    AuthorId: string | undefined;
-    PublicOnly: boolean | undefined;
-    LikedOnly: boolean | undefined;
-    SearchString: string | undefined;
+    AuthorId?: string;
+    PublicOnly?: boolean;
+    LikedOnly?: boolean;
+    SearchString?: string;
 
 }
 

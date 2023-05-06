@@ -35,7 +35,7 @@ const Calendar = () => {
 
   const setEventSelectedDay = (day: MyDate | null) => {
     setSelectedDay(day);
-    navigate("/new_event")
+    navigate("./new_event")
   };
 
   return (

@@ -3,6 +3,7 @@ import useGetNews from "../..//Hooks/useGetNews";
 import HeaderFeedNews from "../HeaderFeedNews/HeaderFeedNews";
 import { useAppSelector } from "Hooks";
 import {Outlet} from "react-router-dom";
+import {INewsFiler} from "../../Reducers/NewsFilterReduser";
 
 interface Props {
   inAccount?: boolean;
@@ -14,7 +15,7 @@ export default function FeedNews({
   userId,
 }: Props): JSX.Element {
   const { user } = useAppSelector((s) => s.authorization);
-  const [filter, setFilter] = useState(
+  const [filter, setFilter] = useState<INewsFiler>(
     { AuthorId: userId, 
       PublicOnly: undefined, 
       LikedOnly: undefined, 

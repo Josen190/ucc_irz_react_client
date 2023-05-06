@@ -4,7 +4,7 @@ import React from "react";
 import App from "App";
 import News from "Pages/News/News";
 import EditInfo from "Modules/EditInfo";
-import Account, { accountLoader } from "Pages/Account/Account";
+import Account from "Pages/Account/Account";
 import Admin from "Pages/Admin/Admin";
 import Auth from "Pages/Auth/Auth";
 import Calendar from "Pages/Calendar/Calendar";
@@ -14,7 +14,7 @@ import Setting from "Modules/Setting";
 import Staff from "Pages/Staff/Staff";
 import { Chat, loading } from "Modules/Messenger";
 import { NewChat } from "Modules/Messenger";
-import { FormNewEvent } from "Modules/Calendar";
+import {FormNewEvent, OpenEvent} from "Modules/Calendar";
 import {CreateTidings} from "Modules/News";
 
 
@@ -27,9 +27,8 @@ const router = createBrowserRouter(
       //   loader: appLoader,
       children: [
         {
-          path: "account/:id",
+          path: "account/:userId",
           element: <Account />,
-          loader: accountLoader,
           children: [
             {
               path: "new_news",
@@ -75,10 +74,14 @@ const router = createBrowserRouter(
           path: "calendar",
           element: <Calendar />,
           children: [
-          {
-            path: "new_event",
-            element: <FormNewEvent />,
-          }
+            {
+              path: "new_event",
+              element: <FormNewEvent />,
+            },
+            {
+              path: "event/:eventId",
+              element: <OpenEvent />,
+            }
           ]
         },
 

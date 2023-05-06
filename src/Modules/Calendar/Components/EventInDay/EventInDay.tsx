@@ -1,20 +1,17 @@
 import Event from "Helpers/Event";
-import React, { SetStateAction } from "react";
+import React from "react";
 
 import "./eventInDay.scss";
-import { ParamsOpenEvent } from "../Month/Month";
+import {useNavigate} from "react-router-dom";
 
 interface Props {
   event: Event;
-  setActive: React.Dispatch<SetStateAction<ParamsOpenEvent>>;
 }
 
-function EventInDay({ event, setActive }: Props) {
+function EventInDay({ event }: Props) {
+    const navigate = useNavigate()
   return (
-    <div className="event-prev" onClick={() => setActive({
-      isActive: true,
-      event
-    })}>
+    <div className="event-prev" onClick={() => navigate("./event/" + event.id)}>
       <span>{event.start.DatetoStr("hh:mm")}</span>
       <p>{event.title}</p>
     </div>

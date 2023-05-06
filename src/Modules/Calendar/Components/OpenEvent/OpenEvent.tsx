@@ -1,7 +1,6 @@
 import Event from 'Helpers/Event';
 import Button from 'UI/Button/Button'
-import React, { SetStateAction, useEffect, useState } from 'react'
-import { ParamsOpenEvent } from '../Month/Month';
+import React, { useEffect, useState } from 'react'
 
 import "./openEvent.scss"
 import Content from 'Components/Content/Content';
@@ -11,48 +10,42 @@ import { ConstSupport } from 'Constatnts/role';
 import getEventId from '../../Fetch/getEventId';
 import deleteEventId from '../../Fetch/deleteEventId';
 import UserVisitingCard from 'Components/UserVisitingCard/UserVisitingCard';
-
-interface Props {
-    event: Event;
-    setActive: React.Dispatch<SetStateAction<ParamsOpenEvent>>
-}
+import {useParams} from "react-router";
+import {useNavigate} from "react-router-dom";
+import {notifyError} from "../../../../Components/Notifications/Notifications";
 
 
 
-function OpenEvent({ event, setActive }: Props) {
+function OpenEvent() {
+    const { eventId } = useParams<{ eventId: string }>();
+    if (!eventId) return <></>
+
     const role = useAppSelector(s => s.authorization.user?.roles)
-    const [_event, setEvent] = useState(event);
-    const isMyEvent = _event.creator.isAuntification() || (role ? role.includes(ConstSupport.Id) && (event.isPublic ?? false) : false);
 
+    const [_event, setEvent] = useState<Event | null>(null);
+    const [formEvent, setFormEvent] = useState(<></>);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        getEventId(event.id).then((event) => {
+        getEventId(eventId).then((event) => {
             setEvent(event);
         }).catch(() => {
-            setActive({
-                isActive: false,
-                event: null
-            })
+            notifyError("Не удалось загрузить событие")
+            navigate("/calendar");
         })
     }, [])
 
-    const deleteEvent = () => {
-        deleteEventId(event.id).then(() => {
-            setActive({
-                isActive: false,
-                event: null
-            })
-        })
-    }
+    useEffect(() => {
+        if (!_event){
+            setFormEvent(<h3>Загрузка события...</h3>)
+            return;
+        }
 
-    return (
-        <div className='modal' onClick={() => setActive({
-            isActive: false,
-            event: null
-        })}>
-            <div className='tile window' onClick={(e) => {
-                e.stopPropagation();
-            }}>
+        const isMyEvent = _event.creator.isAuntification()
+            || ((role ? role.includes(ConstSupport.Id) && (_event.isPublic ?? false) : false));
+
+        setFormEvent(
+            <>
                 <div className='row'>
                     <p>{_event.title}</p>
                     <span>{_event.start.DatetoStr("dd-months-yyyy hh:mm") + " - "}</span>
@@ -73,6 +66,27 @@ function OpenEvent({ event, setActive }: Props) {
                 <div>
                     {isMyEvent && <Button type='button' onClick={deleteEvent}>Удалить</Button>}
                 </div>
+            </>
+        )
+
+    }, [_event])
+
+    const deleteEvent = () => {
+        deleteEventId(eventId).then(() => {
+            navigate("/calendar");
+        })
+    }
+
+
+
+
+
+    return (
+        <div className='modal' onClick={() => navigate("/calendar")}>
+            <div className='tile window' onClick={(e) => {
+                e.stopPropagation();
+            }}>
+                {formEvent}
             </div>
         </div>
     )
