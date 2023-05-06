@@ -4,6 +4,7 @@ import User from "Helpers/User";
 import getUserMe from "Fetch/getUserMe";
 import { typeError } from "Types/types";
 import fetch from "Fetch/Fetch";
+import getImage from "Fetch/getImage";
 
 
 const url_post_authenticate = `/api/authentication/authenticate`;
@@ -33,10 +34,14 @@ export default async function fetchAuthentication(email: string, password: strin
             if (_data.user === null)
                 return Promise.reject("что-то пошло не так");
 
+            const image = await getImage(_data.user.image.id);
+
+            if (image)
+                _data.user.setImage(image);
+
             return Promise.resolve({ ..._data, user: _data.user});
         })
         .catch((error) => {
-            notifyError("Ошибка авторизации");
             return Promise.reject(error.response.data[0].description as typeError);
         });
 
