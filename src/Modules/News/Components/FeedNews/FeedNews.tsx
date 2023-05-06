@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from "react";
-import useDeleteNewsFromFeed from "../..//Hooks/useDeleteNewsFromFeed";
+import React, { useState } from "react";
 import useGetNews from "../..//Hooks/useGetNews";
-import News from "Helpers/News";
-import Tidings from "../Tidings/Tidings";
 import HeaderFeedNews from "../HeaderFeedNews/HeaderFeedNews";
-import CreateTidings from "../CreateNewsForm/CreateTidings";
 import { useAppSelector } from "Hooks";
+import {Outlet} from "react-router-dom";
 
 interface Props {
   inAccount?: boolean;
@@ -17,7 +14,6 @@ export default function FeedNews({
   userId,
 }: Props): JSX.Element {
   const { user } = useAppSelector((s) => s.authorization);
-  const [active, setActive] = useState(false);
   const [filter, setFilter] = useState(
     { AuthorId: userId, 
       PublicOnly: undefined, 
@@ -25,14 +21,13 @@ export default function FeedNews({
       SearchString: undefined 
     })
 
-  const {arrNews, update} = useGetNews(filter);
+  const {arrNews, newNews} = useGetNews(filter);
 
 
 
   return <div className="column">
-    <HeaderFeedNews isLogin={user?.id === userId && inAccount} setActive={inAccount ? setActive : undefined}
-    setFilter={(v) => {setFilter({...v, AuthorId: userId})}}></HeaderFeedNews>
+    <HeaderFeedNews isLogin={user?.id === userId && inAccount} setFilter={(v) => {setFilter({...v, AuthorId: userId})}} />
     {arrNews}
-    {active && (<CreateTidings setActive={setActive} updateNews={update} />)}
+      <Outlet context={newNews}/>
   </div>;
 }

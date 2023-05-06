@@ -4,3 +4,5 @@ import NewsFilterReduser, {setFilter, INewsFiler} from "./Reducers/NewsFilterRed
 export default FeedNews;
 export {NewsFilterReduser, setFilter};
 export type {INewsFiler};
+
+export {default as CreateTidings} from "./Components/CreateNewsForm/CreateTidings";

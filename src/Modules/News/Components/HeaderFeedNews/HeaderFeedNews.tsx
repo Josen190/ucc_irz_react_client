@@ -3,25 +3,22 @@ import InputField from 'UI/InputField/InputField';
 import Option from 'UI/Select/Option';
 import Select from 'UI/Select/Select';
 import React, { useEffect, useState } from 'react'
+import {useNavigate} from "react-router-dom";
 
 interface Props {
     isLogin: boolean;
-    setActive?: React.Dispatch<React.SetStateAction<boolean>>;
-    setFilter?: (v: any) => void;
+    setFilter?: (v: {PublicOnly?: boolean,
+                 LikedOnly?: boolean,
+                 SearchString?: string}) => void;
 }
 
-// выбор пользователя
-// публичнная?
-// лайки
-// поиск 
-
-// const filter = {AuthorId: userId, PublicOnly: undefined, LikedOnly: undefined, SearchString: undefined};
-
-function HeaderFeedNews({ isLogin, setActive, setFilter }: Props) {
+function HeaderFeedNews({ isLogin, setFilter }: Props) {
     const [PublicOnly, setPublicOnly] = useState<boolean>();
     const [LikedOnly, setLikedOnly] = useState<boolean>();
     const [SearchString, setSearchString] = useState<string>();
-    
+
+    const navigate = useNavigate();
+
 
     useEffect(() => {
         if (setFilter) setFilter({ PublicOnly, LikedOnly, SearchString })
@@ -41,7 +38,9 @@ function HeaderFeedNews({ isLogin, setActive, setFilter }: Props) {
             {isLogin && (
                 <Button
                     type="button"
-                    onClick={() => { if (setActive) setActive(true) }}
+                    onClick={() => {
+                        navigate("./new_news")
+                    }}
                 >
                     Создать новость
                 </Button>

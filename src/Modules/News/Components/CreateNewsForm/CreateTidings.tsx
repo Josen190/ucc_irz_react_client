@@ -1,31 +1,20 @@
 import React from "react";
-import createNews from "../../Fetch/createNews";
 import Button from "UI/Button/Button";
 import InputField from "UI/InputField/InputField";
 import { useState } from "react";
 import Image from "Helpers/Image";
 import "./CreateTidings.scss";
-import News from "Helpers/News";
-import VisitingUser from "Helpers/VisitingUser";
-import { useAppSelector } from "Hooks";
-import User from "Helpers/User";
+import {useNavigate, useOutletContext} from "react-router-dom";
 
-interface Props {
-  setActive: React.Dispatch<React.SetStateAction<boolean>>;
-  updateNews: ((news: News) => void);
-}
+export default function CreateTidings() {
+  const newNews = useOutletContext() as ((title: string, content: string, isGlobal: boolean, image?: Image) =>  Promise<void>);
 
-export default function CreateTidings({ setActive, updateNews }: Props) {
-  const user = useAppSelector((s) => {
-    const paramsUser = s.authorization.user;
-    return paramsUser ? new User(paramsUser) : null;
-  });
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [images, setImages] = useState<Image | null>(null);
   const [isGlobal, setIsGlobal] = useState(false);
 
-
+  const navigate = useNavigate()
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) return;
@@ -40,20 +29,21 @@ export default function CreateTidings({ setActive, updateNews }: Props) {
     <div
       className="modal"
       onClick={() => {
-        setActive(false);
+        navigate("../");
       }}
     >
       <form
         className="column tile"
         onClick={(e) => {
           e.stopPropagation();
+          newNews(title, content, isGlobal, images ?? undefined).then(() => {
+            navigate("../");
+          })
+
         }}
         onSubmit={(e) => {
           e.preventDefault();
-          createNews(user ?? new VisitingUser(), title, content, isGlobal).then((news) => {
-            updateNews(news);
-            setActive(false);
-          })
+
         }}
       >
         <h3>Создать новость</h3>
@@ -86,7 +76,7 @@ export default function CreateTidings({ setActive, updateNews }: Props) {
         <Button
           type="button"
           onClick={() => {
-            setActive(false);
+            navigate("../");
           }}
         >
           Отмена

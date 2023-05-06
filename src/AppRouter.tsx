@@ -15,6 +15,7 @@ import Staff from "Pages/Staff/Staff";
 import { Chat, loading } from "Modules/Messenger";
 import { NewChat } from "Modules/Messenger";
 import { FormNewEvent } from "Modules/Calendar";
+import {CreateTidings} from "Modules/News";
 
 
 
@@ -29,6 +30,12 @@ const router = createBrowserRouter(
           path: "account/:id",
           element: <Account />,
           loader: accountLoader,
+          children: [
+            {
+              path: "new_news",
+              element:  <CreateTidings />,
+            }
+          ]
         },
         {
           path: "edit",

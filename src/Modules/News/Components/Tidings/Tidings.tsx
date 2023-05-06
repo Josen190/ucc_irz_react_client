@@ -1,8 +1,5 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import News from "Helpers/News";
-import Image from "Helpers/Image";
-
-import { notifyError, notifySuccess } from "Components/Notifications/Notifications";
 import UserVisitingCard from "Components/UserVisitingCard/UserVisitingCard";
 import Button from "UI/Button/Button";
 import Content from "Components/Content/Content";
@@ -11,12 +8,12 @@ import CommentsIcon from "../CommentsIcon/CommentsIcon";
 import CommentFeed from "Modules/CommentFeed";
 import { useAppSelector } from "Hooks";
 import { ConstSupport } from "Constatnts/role";
-import deleteTidings from "../../Fetch/deleteTidings";
+
 
 
 interface Props {
   tidings: News;
-  deletElement: any;
+  deletElement: (newsId: string) => void;
 }
 
 export default function Tidings({ tidings, deletElement }: Props) {
@@ -47,7 +44,7 @@ export default function Tidings({ tidings, deletElement }: Props) {
               </Button>
               <ul ref={subMenu} className="sub-menu">
                 <ol>
-                  <Button type="button" onClick={() => deleteTidings(tidings.id, deletElement)}>
+                  <Button type="button" onClick={() => deletElement(tidings.id)}>
                     Удалить
                   </Button>
                 </ol>
