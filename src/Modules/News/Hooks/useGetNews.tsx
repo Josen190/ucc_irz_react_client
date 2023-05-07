@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import fetchGetNews from "../Fetch/fetchGetNews";
 import { INewsFiler } from "../Reducers/NewsFilterReduser";
-import useEndOfPage from "Hooks/useEndOfPage";
 import usePageIndex from "Hooks/usePageIndex";
 import News from "Helpers/News";
 import Tidings from "../Components/Tidings/Tidings";
@@ -16,11 +15,11 @@ import {notifyError, notifySuccess} from "../../../Components/Notifications/Noti
 function useGetNews(
     filter?: INewsFiler,
 ) {
-    const { pageIndex, nextPage, restart } = usePageIndex();
+
+    const { pageIndex, restart, setIsEnd } = usePageIndex();
     const [arrNews, setArrNews] = useState<JSX.Element[]>([]);
-    const [isEnd, setIsEnd] = useState(false)
     const prevFilterRef = useRef<INewsFiler>();
-    useEndOfPage(nextPage, undefined, isEnd);
+
 
     // useDeleteNewsFromFeed(deleteKeyElement, arrNews, setArrNews);
 

@@ -1,32 +1,22 @@
 import React, { useState } from "react";
-import newNewsComments from "../../Fetch/newNewsComments";
 import Button from "UI/Button/Button";
 import InputField from "UI/InputField/InputField";
-import NewsComments from "Helpers/NewsComments";
 
 interface Props {
-  newsID: string;
-  update: (coment: NewsComments) => void;
+  addComment: (text: string) => Promise<void>;
 }
 
-export default function CreateComment({ newsID, update }: Props) {
+export default function CreateComment({ addComment }: Props) {
   const [text, setText] = useState("");
-  const [value, setValue] = useState("");
-
 
   return (
     <form className="tile colume" onSubmit={(e) => {
       e.preventDefault();
-      newNewsComments(newsID, text).then((_comment) => {
-        setText("");
-        setValue("");
-        update(_comment);
-      })
-      
+      addComment(text).then(() => setText(""));
     }}>
       <InputField
         type="textarea"
-        value={value}
+        value={text}
         onSetValue={setText}
       />
       <Button type="submit">Добавть</Button>

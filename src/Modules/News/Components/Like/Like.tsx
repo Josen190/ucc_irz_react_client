@@ -20,7 +20,7 @@ const Like = ({ isLiked, likesCount, newsID }: Props) => {
   const like_on = <SvgHeartOutline size={size}></SvgHeartOutline>;
   const [disabled, setDisabled] = useState(false);
 
-  const [like, setLikeUse] = useState<ILikeStatus>({
+  const [likeStatus, setLikeStatus] = useState<ILikeStatus>({
     isLiked: isLiked,
     likesCount: likesCount,
     like_use: isLiked ? llke_off : like_on,
@@ -30,18 +30,22 @@ const Like = ({ isLiked, likesCount, newsID }: Props) => {
 
 
   return <div className="icon">
-    <Button type="button" onClick={() => {
+    <Button
+        type="button"
+        className="icon row"
+        disabled={disabled}
+        onClick={() => {
       setDisabled(true);
-      switchLike(newsID, like, llke_off, like_on).then((likeStatus) => {
+      switchLike(newsID, likeStatus, llke_off, like_on).then((likeStatus) => {
         setDisabled(false);
-        setLikeUse(likeStatus);
+        setLikeStatus(likeStatus);
     }).catch(() => {
       notifyError("Ошибка, попробуйте снова");
       setDisabled(false);
       })
-  }} className="icon row">
-      <span>{like.likesCount}</span>
-      {like.like_use}
+  }} >
+      <span>{likeStatus.likesCount}</span>
+      {likeStatus.like_use}
     </Button>
   </div>;
 };
