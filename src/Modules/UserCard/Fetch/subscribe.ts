@@ -2,7 +2,7 @@ import { notifySuccess, notifyError } from "Components/Notifications/Notificatio
 import { url_post_subscriptions_unsubscribe } from "Constatnts/url";
 import fetch from "Fetch/Fetch";
 
-const subcribe = (userID: string | null, setIsSubcribe: React.Dispatch<React.SetStateAction<boolean>>) => {
+const subscribe = (userID: string | null, setIsSubcribe: React.Dispatch<React.SetStateAction<boolean>>) => {
     if (!userID) return;
     fetch
       .post(url_post_subscriptions_unsubscribe, undefined, {
@@ -18,4 +18,4 @@ const subcribe = (userID: string | null, setIsSubcribe: React.Dispatch<React.Set
         notifyError("Ошибка, не удалось подптсаться");
       });
   };
-  export default subcribe;
+  export default subscribe;

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import Personal_Information from '../Information/ProfileInformation'
-import Profile_Navigation from '../Navigation/Profile_Navigation'
-import Profile_Picture from '../../../../Components/Avatar/Avatar'
+import PersonalInformation from '../Information/ProfileInformation'
+import ProfileNavigation from '../Navigation/ProfileNavigation'
+import ProfilePicture from '../../../../Components/Avatar/Avatar'
 import User from 'Helpers/User';
 import Image from 'Helpers/Image';
 
@@ -31,16 +31,14 @@ function UserCard({user, isMyProfile}: Props) {
   return (
     <div className="tile UserCard">
         <div className="">
-          <Profile_Picture type="norm" image={user.image ?? new Image()}></Profile_Picture>
-          <Profile_Navigation
+          <ProfilePicture type="norm" image={user.image ?? new Image()} />
+          <ProfileNavigation
             isLogin={isMyProfile}
             userID={user ? user.id : null}
             isSubcribe={user ? user.isSubscription : null}
-          ></Profile_Navigation>
+          />
         </div>
-        <Personal_Information
-          user={user}
-        ></Personal_Information>
+        <PersonalInformation user={user} />
       </div>
   )
 }
