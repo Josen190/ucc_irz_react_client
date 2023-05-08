@@ -1,5 +1,5 @@
 import usePageIndex from "Hooks/usePageIndex";
-import React, { useEffect, useRef, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import getMessages from "../Fetch/getMessages";
 import Message from "../Components/Message/Message";
 import fetch from "Fetch/Fetch";
@@ -7,21 +7,17 @@ import postMessages from "../Fetch/postMessage";
 import Image from "Helpers/Image";
 import ClassMessage from "../Helper/Message";
 import deleteMessage from "../Fetch/deleteMessage";
-import { notifyError, notifySuccess } from "Components/Notifications/Notifications";
-import useEndOfPage from "Hooks/useEndOfPage";
+import {notifyError} from "Components/Notifications/Notifications";
 
 function useGetMessages(ref: React.MutableRefObject<HTMLDivElement | null>, ChatId: string, SearchString?: string) {
-    const { pageIndex, nextPage, restart } = usePageIndex();
-    const [messages, setmessages] = useState<JSX.Element[]>([]);
-    const [isEnd, setIsEnd] = useState(false)
+    const { pageIndex, restart } = usePageIndex(ref);
+    const [messages, setMessages] = useState<JSX.Element[]>([]);
 
-    // useEndOfPage(nextPage, ref, isEnd);
 
     const deleteMessageInArr = (messageId: string) => {
         deleteMessage(messageId).then(() => {
-            setmessages((prev) => {
-                const newMessages = prev.filter((m) => m.key !== messageId)
-                return newMessages;
+            setMessages((prev) => {
+                return prev.filter((m) => m.key !== messageId);
             })
         }).catch((err) => {
             console.log(err);
@@ -32,7 +28,7 @@ function useGetMessages(ref: React.MutableRefObject<HTMLDivElement | null>, Chat
     }
 
     const setValidMessages = (message: ClassMessage) => {
-        setmessages((prev) => {
+        setMessages((prev) => {
             if (prev.length > 0 && prev[0].key === message.id) return prev;
             return [<Message key={message.id} message={message} deleteMessage={deleteMessageInArr}></Message>, ...prev]
         })
@@ -42,17 +38,19 @@ function useGetMessages(ref: React.MutableRefObject<HTMLDivElement | null>, Chat
     const prevSearchString = useRef<string>();
 
     useEffect(() => {
-        fetch.hubStart();
-        fetch.onMessage((message) => setValidMessages(message))
+        fetch.hubStart().then(() => {
+            fetch.onMessage((message) => setValidMessages(message))
+        }).catch(() => {
+            console.error("неудалось подключиться к хабу чата");
+        });
     }, [])
 
     useEffect(() => {
         let prevMessages = messages;
         if (!prevChatId.current
             || prevChatId.current !== ChatId || prevSearchString.current !== SearchString) {
-            setmessages([]);
+            setMessages([]);
             prevMessages = [];
-            setIsEnd(false);
             restart();
         }
 
@@ -62,7 +60,7 @@ function useGetMessages(ref: React.MutableRefObject<HTMLDivElement | null>, Chat
         getMessages(pageIndex, ChatId, SearchString).then((arrMessages) => {
             const _messages = arrMessages.map(message =>
                 <Message key={message.id} message={message} deleteMessage={deleteMessageInArr}></Message>)
-            setmessages([..._messages, ...prevMessages])
+            setMessages([..._messages, ...prevMessages])
         })
     }, [pageIndex, ChatId, SearchString]);
 

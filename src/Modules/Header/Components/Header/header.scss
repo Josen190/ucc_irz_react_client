@@ -1,0 +1,25 @@
+$pantone-295-c: #002856;
+$pantone-289-c: #1f3a60;
+$color-gray-1: #ededed;
+$color-gray-3: #e0e0e0;
+$pantone-200-c: #c11727;
+$pantone-187-c: #ae1926;
+
+
+header{
+  display: flex;
+  flex-direction: row;
+  height: 40px;
+  align-items: stretch;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  margin: 0;
+  padding: 0;
+  background-color: $color-gray-3;
+
+  .logo{
+
+  }
+
+}
+

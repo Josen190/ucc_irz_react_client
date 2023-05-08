@@ -4,7 +4,7 @@ import VisitingUser from "Helpers/VisitingUser";
 import PropsMinUser from "./Interface/IMinUser";
 import fetch from "./Fetch";
 
-interface IParams {
+export interface IParamsGetUsers {
     PositionId?: string;
     Role?: string;
     IsActive?: boolean;
@@ -13,7 +13,7 @@ interface IParams {
     PageSize?: number;
 }
 
-async function getUsers({ PositionId, Role, IsActive, SearchString, PageIndex, PageSize = 10 }: IParams) {
+async function getUsers({ PositionId, Role, IsActive, SearchString, PageIndex, PageSize = 10 }: IParamsGetUsers) {
     const params: { [keys: string]: string | number | boolean } = {
         PageIndex, PageSize,
     }

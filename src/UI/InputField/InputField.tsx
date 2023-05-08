@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler } from "react";
+import React, {ChangeEventHandler, FocusEventHandler} from "react";
 import Textarea from "./Textarea/Textarea";
 import MyDate from "Helpers/MyDate";
 
@@ -7,26 +7,28 @@ import "./InputField.scss"
 type s = string | boolean | MyDate | undefined;
 
 interface Props<T extends s> {
-  type:
-  | "textarea"
-  | "text"
-  | "password"
-  | "email"
-  | "date"
-  | "time"
-  | "checkbox";
-  title?: string;
+  MyConstructor?: { new(...args: unknown[]): T };
   id?: string;
-  placeholder?: string;
-  value?: string | boolean;
   maxlength?: number;
   minlength?: number;
   name?: string;
-  rows?: number;
-  required?: boolean;
+  onBlur?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   onChange?: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+  onFocus?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   onSetValue?: React.Dispatch<React.SetStateAction<T>> | ((value: T) => void);
-  MyConstructor?: { new(...args: any[]): T };
+  placeholder?: string;
+  required?: boolean;
+  rows?: number;
+  title?: string;
+  type:
+      | "textarea"
+      | "text"
+      | "password"
+      | "email"
+      | "date"
+      | "time"
+      | "checkbox";
+  value?: string | boolean;
 }
 
 export default function InputField<T extends s>({
@@ -41,16 +43,18 @@ export default function InputField<T extends s>({
   rows,
   required,
   onChange,
+  onFocus,
+  onBlur,
   onSetValue,
   MyConstructor,
 }: Props<T>): JSX.Element {
 
-  let input: JSX.Element = <></>;
+  let input: JSX.Element;
 
   const _onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (onSetValue) {
       if (MyConstructor && MyConstructor.name === 'MyDate') {
-        const myDateConstructor = MyConstructor as { new(...args: any[]): T };
+        const myDateConstructor = MyConstructor as { new(...args: unknown[]): T };
         onSetValue(new myDateConstructor(e.target.value) as T);
       } else {
         if (e.target instanceof HTMLInputElement && e.target.type === 'checkbox')
@@ -62,7 +66,7 @@ export default function InputField<T extends s>({
     if (onChange) onChange(e);
   };
 
-  const inputprops = {
+  const inputProps = {
     className: "",
     id: id,
     placeholder: placeholder,
@@ -71,12 +75,14 @@ export default function InputField<T extends s>({
     minLength: minlength,
     name: name,
     onChange: _onChange,
+    onFocus: onFocus,
+    onBlur: onBlur,
   };
 
   switch (type) {
     case "textarea": {
       const _propsTextarea = {
-        ...inputprops,
+        ...inputProps,
         value: value as string,
         isresize: true,
         rows: rows ?? 2,
@@ -87,7 +93,7 @@ export default function InputField<T extends s>({
 
     case "checkbox": {
       const _propsCheckbox = {
-        ...inputprops,
+        ...inputProps,
         defaultChecked: value as boolean,
         required: required ?? false,
       }
@@ -97,7 +103,7 @@ export default function InputField<T extends s>({
 
     default: {
       const _propsDefault = {
-        ...inputprops,
+        ...inputProps,
         defaultValue: value as string,
         required: required ?? false,
       }

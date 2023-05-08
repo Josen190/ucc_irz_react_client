@@ -1,9 +1,8 @@
-import React, { Component, useContext } from "react";
+import React from "react";
 import Button from "../../../../UI/Button/Button";
-import Search from "../../../Search/Components/Search/Search";
+import Search from "../Search/Search";
 import { useAppSelector } from "Hooks";
-
-
+import "./header.scss"
 
 export default function Header() {
   const {isLogin, user}= useAppSelector((s)=> s.authorization);
@@ -11,7 +10,7 @@ export default function Header() {
 
   return (
     <header>
-      <div className="content-centr">
+      <div className="logo">
         <h1>IRZ</h1>
       </div>
       {isLogin && <Search></Search>}
