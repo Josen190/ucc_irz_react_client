@@ -1,8 +1,6 @@
-
-import { notifyError } from "../../../Components/Notifications/Notifications";
 import User from "Helpers/User";
 import getUserMe from "Fetch/getUserMe";
-import { typeError } from "Types/types";
+import {typeError} from "Types/types";
 import fetch from "Fetch/Fetch";
 import getImage from "Fetch/getImage";
 
@@ -13,7 +11,7 @@ export default async function fetchAuthentication(email: string, password: strin
 ) {
     const data = { email, password }
 
-    const result = await fetch.post(url_post_authenticate, data)
+    return await fetch.post(url_post_authenticate, data)
         .then(async (response) => {
             if (typeof response.data.jwt !== "string" ||
                 typeof response.data.refreshToken !== "string"
@@ -26,7 +24,7 @@ export default async function fetchAuthentication(email: string, password: strin
             };
 
             fetch.setRefres(_data.jwt, _data.refreshToken);
-            
+
             _data.user = await getUserMe()
                 .then((user) => user)
                 .catch(() => null);
@@ -39,11 +37,9 @@ export default async function fetchAuthentication(email: string, password: strin
             if (image)
                 _data.user.setImage(image);
 
-            return Promise.resolve({ ..._data, user: _data.user});
+            return Promise.resolve({..._data, user: _data.user});
         })
         .catch((error) => {
             return Promise.reject(error.response.data[0].description as typeError);
         });
-
-    return result;
 }

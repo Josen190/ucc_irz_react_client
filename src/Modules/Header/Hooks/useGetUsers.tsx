@@ -27,20 +27,21 @@ function useGetUsers(
 
     useEffect(() => {
         let _usersJsx = usersJsx;
-        const isNewFilter = refSearchString.current && refSearchString.current !== SearchString
+        const isNewFilter = !!refSearchString.current && refSearchString.current !== SearchString;
         if (isNewFilter) {
             _usersJsx = [];
             restart();
             setIsEnd(false);
+            setErrorMessage("Поиск...");
         }
+
+        refSearchString.current = SearchString;
+        refPageIndex.current = PageIndex;
 
         if (refPageIndex.current && refPageIndex.current === PageIndex && !isNewFilter){
             return;
         }
 
-        refSearchString.current = SearchString;
-        refPageIndex.current = PageIndex;
-        
         getUsers({PageIndex, SearchString}).then((users) => {
             if (users.length < 10){
                 setIsEnd(true);
