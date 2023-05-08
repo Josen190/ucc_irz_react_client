@@ -32,10 +32,11 @@ export default async function fetchAuthentication(email: string, password: strin
             if (_data.user === null)
                 return Promise.reject("что-то пошло не так");
 
-            const image = await getImage(_data.user.image.id);
-
-            if (image)
-                _data.user.setImage(image);
+            if (!_data.user.image.isConst){
+                const image = await getImage(_data.user.image.id);
+                if (image)
+                    _data.user.setImage(image);
+            }
 
             return Promise.resolve({..._data, user: _data.user});
         })

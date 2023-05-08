@@ -11,6 +11,7 @@ export default class Image {
   data?: string;
   extension?: string;
   url?: string;
+  isConst: boolean;
 
   constructor()
 
@@ -26,9 +27,15 @@ export default class Image {
       this.name = ConstImage.name;
       this.extension = ConstImage.extension;
       this.data = ConstImage.data;
-
+      this.isConst = true;
     } else {
-      this.id = props.id ?? Guid.newGuid().toString();
+      if (!props.id){
+        this.id = Guid.newGuid().toString();
+        this.isConst = true;
+      }else{
+        this.id = props.id;
+        this.isConst = false;
+      }
       this.name = props.name;
       this.data = props.data;
       this.extension = props.extension;

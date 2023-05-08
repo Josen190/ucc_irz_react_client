@@ -36,11 +36,12 @@ function useGetUsers(
         }
 
         refSearchString.current = SearchString;
-        refPageIndex.current = PageIndex;
 
         if (refPageIndex.current && refPageIndex.current === PageIndex && !isNewFilter){
             return;
         }
+
+        refPageIndex.current = PageIndex;
 
         getUsers({PageIndex, SearchString}).then((users) => {
             if (users.length < 10){
