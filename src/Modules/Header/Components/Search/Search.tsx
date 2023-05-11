@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import InputField from "UI/InputField/InputField";
 import FormGetUser from "../FormGetUser/FormGetUser";
+import "./Search.scss";
 
 export default function Search() {
     const [searchString, setSearchString] = useState<string>();
@@ -8,7 +9,7 @@ export default function Search() {
 
 
   return (
-    <div className="content-centr">
+    <div className="search-container">
       <InputField
           type="text"
           onSetValue={setSearchString}
