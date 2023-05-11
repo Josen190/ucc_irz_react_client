@@ -1,0 +1,27 @@
+.like-icon{
+  margin-right: 5px;
+
+  .button-container{
+    margin: 0;
+    .button{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      background: transparent;
+      transition: 0s;
+      margin: 0;
+      padding: 0;
+
+
+      &:hover{
+        background: transparent;
+        transition: 0s;
+        *{
+          color: black;
+        }
+      }
+    }
+
+  }
+}

@@ -1,0 +1,25 @@
+.header-feed-news{
+  display: grid;
+  grid-template-columns: 1fr repeat(3, min-content);
+  grid-gap: 5px;
+  justify-content: space-between;
+  align-items: center;
+  justify-items: center;
+
+  height: min-content;
+
+  .select{
+    height: 20px;
+    margin: 0;
+  }
+
+  .input{
+    max-width: none;
+    margin: 0;
+  }
+
+  .button-container{
+    margin: 0;
+  }
+
+}

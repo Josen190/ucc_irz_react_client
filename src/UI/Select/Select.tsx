@@ -28,7 +28,9 @@ function Select<T extends typeValue>({ children: optios, setValue }: Props<T>) {
     return (
         <select onChange={(e) => {
             setValue(parser<T>(e.target.value));
-        }}>
+        }}
+                className="select"
+        >
             {optios}
         </select>
     )
