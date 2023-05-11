@@ -1,4 +1,3 @@
-import useEndOfPage from "Hooks/useEndOfPage";
 import usePageIndex from "Hooks/usePageIndex";
 import React, { useEffect, useState } from "react";
 import getCabinet from "../Fetch/getCabinet";
@@ -13,11 +12,10 @@ export default function useGetCabinet(
     searchString: string | undefined,
     coolbac?: () => void,
 ) {
-    const { pageIndex, nextPage } = usePageIndex();
+    const { pageIndex } = usePageIndex();
     const [JSXCabinets, setJSXCabinets] = useState<JSX.Element[]>([]);
     const [curentCabinet, setCurentCabinet] = useState<Cabinet | null>(null);
 
-    useEndOfPage(nextPage);
     useEffect(() => {
 
         const params = {

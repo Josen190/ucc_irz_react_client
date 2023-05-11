@@ -1,6 +1,7 @@
 import Button from "UI/Button/Button";
 import InputField from "UI/InputField/InputField";
 import SvgPaperPlaneOutline from "Assets/icons/PaperPlaneOutline";
+import React from "react";
 
 
 export default function InputMessage() {

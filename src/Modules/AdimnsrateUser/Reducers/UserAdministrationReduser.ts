@@ -1,16 +1,18 @@
-
-
 import User from "Helpers/User";
 import { createSlice } from '@reduxjs/toolkit'
 
 interface IUserAdministrationState {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     user: ReturnType<User['getType']> | null;
 }
 
 interface setUser_payload {
     type: string;
     payload: {
-        user: ReturnType<User['getType']> | null;
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        user: ReturnType<User["getType"]> | null;
     }
 }
 

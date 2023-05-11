@@ -9,7 +9,10 @@ import ClassMessage from "../Helper/Message";
 import deleteMessage from "../Fetch/deleteMessage";
 import {notifyError} from "Components/Notifications/Notifications";
 
-function useGetMessages(ref: React.MutableRefObject<HTMLDivElement | null>, ChatId: string, SearchString?: string) {
+function useGetMessages(
+    ref: React.MutableRefObject<HTMLDivElement | null>,
+    ChatId: string, SearchString?: string
+) {
     const { pageIndex, restart } = usePageIndex(ref);
     const [messages, setMessages] = useState<JSX.Element[]>([]);
 

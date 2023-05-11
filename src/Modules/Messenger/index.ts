@@ -4,4 +4,3 @@ export {default as ChatClass} from "./Helper/Chat";
 export {default as MessageClass} from "./Helper/Message";
 export {default as ChatList} from "./Components/ChatList/ChatList";
 export type {IFetchParamsMessage} from "./Type/IMessage";
-export {loading} from "./Components/Chat/NewChat"

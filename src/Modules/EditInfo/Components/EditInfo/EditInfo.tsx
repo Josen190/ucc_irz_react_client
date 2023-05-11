@@ -5,7 +5,6 @@ import InputImg from "UI/InputImg/InputImg";
 import { notifySuccess, notifyError } from "Components/Notifications/Notifications";
 import React, { useState, useEffect } from "react";
 import Image from "Helpers/Image";
-import VisitingUser from "Helpers/VisitingUser";
 import { useAppDispatch } from "Hooks";
 import { setUserImage } from "Modules/AuthController";
 import getUserMe from "Fetch/getUserMe";
@@ -55,7 +54,9 @@ function EditInfo() {
         title="О себе"
         placeholder="Введите информацию о себе"
         value={myself}
-        onChange={(event: any) => {
+        onChange={(event: unknown) => {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
           setMyself(event.target.value);
         }}
       />
@@ -64,8 +65,10 @@ function EditInfo() {
         title="Чем занимался"
         placeholder="Введите чем вы занимались"
         value={iDid}
-        onChange={(event: any) => {
-          setIDid(event.target.value);
+        onChange={(event: unknown) => {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            setIDid(event.target.value);
         }}
       />
       <InputField
@@ -73,7 +76,9 @@ function EditInfo() {
         title="Навыки"
         placeholder="Расскажите о ваших навыках "
         value={skills}
-        onChange={(event: any) => {
+        onChange={(event: unknown) => {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
           setSkills(event.target.value);
         }}
       />
