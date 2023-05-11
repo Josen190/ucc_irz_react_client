@@ -5,7 +5,7 @@ import fetchAuthentication from '../../Fetch/fetchAuthentication';
 import { Navigate } from 'react-router-dom';
 import { useAppDispatch } from 'Hooks';
 import { authorization } from 'Modules/AuthController';
-
+import "./AuthorizationForm.scss"
 
 function AuthorizationForm() {
   const dispatch = useAppDispatch()
@@ -25,7 +25,7 @@ function AuthorizationForm() {
   }
 
   return (
-    <form onSubmit={login}>
+    <form onSubmit={login} className="authorization-form">
       <InputField
         id="email"
         name="email"
