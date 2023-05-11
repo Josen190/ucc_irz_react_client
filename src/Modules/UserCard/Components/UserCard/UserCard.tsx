@@ -30,7 +30,7 @@ function UserCard({user, isMyProfile}: Props) {
 
   return (
     <div className="tile UserCard">
-        <div className="">
+        <div className="nav">
           <ProfilePicture type="norm" image={user.image ?? new Image()} />
           <ProfileNavigation
             isLogin={isMyProfile}

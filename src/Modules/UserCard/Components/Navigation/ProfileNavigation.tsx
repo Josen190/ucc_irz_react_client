@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "../../../../UI/Button/Button";
 import unsubscribe from "../../Fetch/unsubscribe";
 import subscribe from "../../Fetch/subscribe";
+import "./ProfileNavigation.scss"
 
 interface Props {
   isLogin: boolean;
@@ -15,7 +16,7 @@ export default function ProfileNavigation({ isLogin, userID, isSubcribe }: Props
 
 
   return (
-    <div className="content-centr column w-200px">
+    <div className="profile-navigation">
       {isLogin && (
         <Button type="link" href="/edit/info" color="mini">
           Редактировать профиль
