@@ -74,7 +74,7 @@ $transition-time: 0.1s;
 
 	.button{
 		border-radius: 5px;
-		padding: 2px 5px 5px 5px;
+		padding: 5px  5px 5px 5px;
 		width: 100%;
 		height: 100%;
 		box-sizing: border-box;
@@ -96,5 +96,12 @@ $transition-time: 0.1s;
 			cursor: pointer;
 			outline: inherit;
 		}
+	}
+
+	a{
+		border-radius: 5px;
+		width: 100%;
+		height: 100%;
+		box-sizing: border-box;
 	}
 }
