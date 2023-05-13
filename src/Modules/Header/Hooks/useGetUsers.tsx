@@ -50,7 +50,7 @@ function useGetUsers(
 
             const _rowUser: JSX.Element[] = [..._usersJsx];
             users.forEach(user => {
-                _rowUser.push(<UserVisitingCard key={user.id} user={user} />);
+                _rowUser.push(<UserVisitingCard key={user.id} user={user} onMouseDown={() => false}/>);
             })
             setUsersJsx(_rowUser)
 

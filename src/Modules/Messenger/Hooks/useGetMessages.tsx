@@ -70,7 +70,7 @@ function useGetMessages(
     
 
     const sendNewMessage = (userId: string, myId: string, text: string, image: Image | null) => {
-        postMessages(userId, myId, text, image).then((message) => setValidMessages(message));
+        postMessages(userId, myId, text, image).catch(() => notifyError("ошибка, сообщение не отправлено"));
     }
 
     return { messages, sendNewMessage };

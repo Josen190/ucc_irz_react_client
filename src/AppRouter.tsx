@@ -13,7 +13,6 @@ import Messenger from "Pages/Messenger/Messenger";
 import Setting from "Modules/Setting";
 import Staff from "Pages/Staff/Staff";
 import { Chat } from "Modules/Messenger";
-import { NewChat } from "Modules/Messenger";
 import {FormNewEvent, OpenEvent} from "Modules/Calendar";
 import {CreateTidings} from "Modules/News";
 
@@ -62,11 +61,6 @@ const router = createBrowserRouter(
               path: "chat/:id",
               element: <Chat />,
             },
-            {
-              path: "new_chat/:id",
-              element: <NewChat />,
-            }
-
           ]
         },
         {
