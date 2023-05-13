@@ -36,14 +36,12 @@ export default function CreateTidings() {
         className="column tile"
         onClick={(e) => {
           e.stopPropagation();
-          newNews(title, content, isGlobal, images ?? undefined).then(() => {
-            navigate("../");
-          })
-
         }}
         onSubmit={(e) => {
           e.preventDefault();
-
+          newNews(title, content, isGlobal, images ?? undefined).then(() => {
+            navigate("../");
+          })
         }}
       >
         <h3>Создать новость</h3>
@@ -73,14 +71,14 @@ export default function CreateTidings() {
           title="Глобальная новость"
           onChange={(event) => setIsGlobal(event.target.value === "true")}
         />
-        <Button
-          type="button"
-          onClick={() => {
-            navigate("../");
-          }}
-        >
-          Отмена
-        </Button>
+        {/*<Button*/}
+        {/*  type="button"*/}
+        {/*  onClick={() => {*/}
+        {/*    navigate("../");*/}
+        {/*  }}*/}
+        {/*>*/}
+        {/*  Отмена*/}
+        {/*</Button>*/}
         <Button type="submit">Создать</Button>
       </form>
     </div>

@@ -14,14 +14,32 @@ $transition-time: 0.15s;
     display: flex;
     flex-direction: column;
 
-     input{
-        height: min-content;
+    &.checkbox{
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+      align-items: center;
+
+
+      .title{
         width: 100%;
-        border-radius: 5px;
-        border: 1px solid $pantone-289-c;
-        padding: 5px;
-        transition: $transition-time;
-        box-sizing: border-box;
+      }
+
+      input{
+        margin-right: 10px;
+        height: 15px;
+        width: 15px;
+      }
+    }
+
+     input{
+       height: min-content;
+       width: 100%;
+       border-radius: 5px;
+       border: 1px solid $pantone-289-c;
+       padding: 5px;
+       transition: $transition-time;
+       box-sizing: border-box;
 
        &:focus{
          border: 1px solid $pantone-295-c;
@@ -29,8 +47,8 @@ $transition-time: 0.15s;
        }
      }
 
-      h4{
-        margin-bottom: 5px;
-      }
+    .title{
+      margin-bottom: 5px;
+    }
 
 }

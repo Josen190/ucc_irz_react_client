@@ -114,8 +114,8 @@ export default function InputField<T extends s>({
   }
 
   return (
-    <label className="input">
-      {title && <h4>{title}</h4>}
+    <label className={`input ${type === "checkbox" ? "checkbox" : ""}`}>
+      {title && <h4 className={"title"}>{title}</h4>}
       {input}
     </label>
   );
