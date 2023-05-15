@@ -11,12 +11,12 @@ interface IFilter {
 }
 
 
-function useGetUsers() {
+function useGetUsers(SearchString: string | undefined) {
     const [filter] = useState<IFilter>({
         PositionId: undefined,
         Role: undefined,
         IsActive: undefined,
-        SearchString: undefined,
+        SearchString: SearchString,
     });
     const { pageIndex, } = usePageIndex()
     const { users, selectedUsers, addUsers } = useSelectedUsers();

@@ -11,6 +11,7 @@ import { ConstCabinetsManager } from "Constatnts/role";
 import FormSearchUser from "Modules/FormSearchUser";
 import postEvent from "../../Fetch/postEvent";
 import {useNavigate, useOutletContext} from "react-router-dom";
+import "./FormNewEvent.scss"
 
 export default function FormNewEvent(): JSX.Element {
   const navigate = useNavigate();
@@ -61,7 +62,7 @@ export default function FormNewEvent(): JSX.Element {
       }}
     >
       <div
-        className="column tile"
+        className="tile form-new-event"
         onClick={(e) => {
           e.stopPropagation();
         }}
