@@ -31,8 +31,8 @@ function EditInfo() {
   
 
   const save = () => {
-    if (image && image.name && image.extension && image.data) {
-      putUpdetePhoto(image.name, image.extension, image.data).then((newImage) => {
+    if (image && image.name && image.url) {
+      putUpdetePhoto(image).then((newImage) => {
         dispatch(setUserImage({image: newImage}))
       })
     }
