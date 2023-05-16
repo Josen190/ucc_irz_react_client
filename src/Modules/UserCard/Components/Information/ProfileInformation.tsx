@@ -14,7 +14,6 @@ interface Props {
 const Personal_Information = ({ user }: Props) => {
   const [active, setActive] = useState(false);
   const fio = user ? user.getFullName() : null;
-  const role = user && user.roles ? user.roles.join(" ") : null;
   const birthday = user ? new MyDate(user.birthday).DatetoStr("dd-months-yyyy") : null;
   const myself = user ? user.aboutMyself : null;
   const iDid = user ? user.myDoings : null;

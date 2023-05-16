@@ -1,21 +1,18 @@
 import useGetUsers from '../../Hooks/useGetUsers'
-import React, { useState } from 'react'
+import React from 'react'
 import HeaderTablesUser from '../HeaderTablesUser/HeaderTablesUser';
-import FormNewUser from '../FormNewUser/FormNewUser';
-
-
+import "./TablesUser.scss"
 
 
 function TablesUser() {
-    const [rowUser, setRowUser] = useState<JSX.Element[] | null>(null)
-    const [active, setActive] = useState(false);
 
-    useGetUsers(rowUser ?? [], setRowUser);
+
+    const rowUser = useGetUsers();
 
     return (
-        <div>
-            <HeaderTablesUser setActive={setActive} />
-            <table className='tile'>
+        <div className="table-users-container">
+            <HeaderTablesUser />
+            <table className='table-users tile'>
                 <thead>
                     <tr>
                         <th>ФИО</th>
@@ -27,7 +24,6 @@ function TablesUser() {
                     {rowUser}
                 </tbody>
             </table>
-            {active && <FormNewUser setActive={setActive} />}
         </div>
 
     )

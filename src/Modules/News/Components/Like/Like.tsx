@@ -6,6 +6,7 @@ import { notifyError } from "Components/Notifications/Notifications";
 import Button from "UI/Button/Button";
 import ILikeStatus from "../../Types/TypeLike";
 import switchLike from "../../Fetch/fetchLike";
+import "./Like.scss";
 
 const size = "25px";
 
@@ -16,27 +17,26 @@ interface Props {
 }
 
 const Like = ({ isLiked, likesCount, newsID }: Props) => {
-  const llke_off = <SvgHeart size={size}></SvgHeart>;
+  const like_off = <SvgHeart size={size}></SvgHeart>;
   const like_on = <SvgHeartOutline size={size}></SvgHeartOutline>;
   const [disabled, setDisabled] = useState(false);
 
   const [likeStatus, setLikeStatus] = useState<ILikeStatus>({
     isLiked: isLiked,
     likesCount: likesCount,
-    like_use: isLiked ? llke_off : like_on,
+    like_use: isLiked ? like_off : like_on,
   });
 
 
 
 
-  return <div className="icon">
+  return <div className="like-icon">
     <Button
         type="button"
-        className="icon row"
         disabled={disabled}
         onClick={() => {
       setDisabled(true);
-      switchLike(newsID, likeStatus, llke_off, like_on).then((likeStatus) => {
+      switchLike(newsID, likeStatus, like_off, like_on).then((likeStatus) => {
         setDisabled(false);
         setLikeStatus(likeStatus);
     }).catch(() => {

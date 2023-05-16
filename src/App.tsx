@@ -1,7 +1,7 @@
 import "./App.scss";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate, useLocation } from "react-router-dom";
+import {useNavigate, useLocation} from "react-router-dom";
 import React, { useState } from "react";
 import User from "./Pages/User/User";
 import Visitor from "./Pages/Visitor/Visitor";

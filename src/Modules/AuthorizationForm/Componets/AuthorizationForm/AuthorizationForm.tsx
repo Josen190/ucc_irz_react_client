@@ -2,17 +2,16 @@ import React, { FormEvent, useState } from 'react'
 import InputField from '../../../../UI/InputField/InputField'
 import Button from '../../../../UI/Button/Button';
 import fetchAuthentication from '../../Fetch/fetchAuthentication';
-import { Form, Navigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from 'Hooks';
+import { Navigate } from 'react-router-dom';
+import { useAppDispatch } from 'Hooks';
 import { authorization } from 'Modules/AuthController';
-
+import "./AuthorizationForm.scss"
 
 function AuthorizationForm() {
   const dispatch = useAppDispatch()
-  // const user = useAppSelector((s) => s.authorization.user);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [next, setNext] = useState<string | boolean>(false);
+  const [next, setNext] = useState<string | false>(false);
   const [errorMessege, setErrorMessege] = useState<string>()
 
   const login = (e: FormEvent<HTMLFormElement>) => {
@@ -26,7 +25,7 @@ function AuthorizationForm() {
   }
 
   return (
-    <form onSubmit={login}>
+    <form onSubmit={login} className="authorization-form">
       <InputField
         id="email"
         name="email"

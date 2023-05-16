@@ -18,7 +18,15 @@ export const url_delete_cabinets_id = (id: string) => {
 };
 
 // чат
-export const url_get_chats = "/api/chats";
+export const url_get_chats = "/api/messenger/chats";
+export const url_get_chats_by_participant = "/api/messenger/chats/by_participant";
+export const url_get_messages = "/api/messenger/messages";
+export const url_post_messenger_messages = "/api/messenger/messages"
+export const url_delete_messenger_messages_id = (id: string) => {
+  return `/api/messenger/messages/${id}`;
+};
+
+
 
 // События
 export const url_get_events_my = "/api/events/my";
@@ -32,10 +40,7 @@ export const url_delete_events_id = (id: string) => {
 export const url_post_events = "/api/events";
 
 
-// Сообщения
-export const url_get_messages = "/api/messages";
-export const url_post_messages = "/hubs/chat/SendMessageAsync";
-export const url_delete_messages_id = '/hubs/chat/DeleteMessageAsync';
+
 
 // новости
 export const url_get_news = `/api/news`;

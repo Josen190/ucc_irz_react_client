@@ -1,5 +1,4 @@
 import React from "react";
-import Header from "../../Modules/Header/Components/Header/Header";
 import Menu from "../../Modules/Menu/Components/Menu/Menu";
 import MenuLink from "../../Modules/Menu/Components/MenuLink/MenuLink";
 

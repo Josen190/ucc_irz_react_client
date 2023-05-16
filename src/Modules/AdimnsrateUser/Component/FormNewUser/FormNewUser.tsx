@@ -2,19 +2,18 @@ import MyDate from 'Helpers/MyDate';
 import newUser from '../../Fetch/newUser';
 import Button from 'UI/Button/Button';
 import InputField from 'UI/InputField/InputField';
-import React, { SetStateAction, useState } from 'react'
+import React, { useState } from 'react'
+import {useNavigate} from "react-router-dom";
 
-interface Props {
-    setActive: React.Dispatch<SetStateAction<boolean>>;
-}
-
-function FormNewUser({ setActive }: Props) {
+function FormNewUser() {
     const [firstName, setFirstName] = useState<string>();
     const [surname, setSurname] = useState<string>();
     const [patronymic, setPatronymic] = useState<string>();
     const [email, setEmail] = useState<string>();
     const [birthday, setBirthday] = useState<MyDate>();
     const [error, setError] = useState<string>()
+
+    const navigate = useNavigate();
 
     const save = () => {
         if (!firstName) return;
@@ -26,7 +25,7 @@ function FormNewUser({ setActive }: Props) {
 
         newUser(data)
             .then(() => {
-                setActive(false)
+                navigate("../");
             })
             .catch((error) => {
                 setError(error as string)
@@ -34,7 +33,7 @@ function FormNewUser({ setActive }: Props) {
     }
 
     return (
-        <div className='modal' onClick={() => setActive(false)}>
+        <div className='modal' onClick={() => navigate("../")}>
             <div className='tile' onClick={(e) => e.stopPropagation()}>
                 <InputField<string> type='text' onSetValue={setSurname} placeholder='Фамилия'></InputField>
                 <InputField<string> type='text' onSetValue={setFirstName} placeholder='Имя'></InputField>

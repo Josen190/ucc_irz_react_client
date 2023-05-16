@@ -2,10 +2,10 @@
 Класс Fetch для работы с API и SignalR
 */
 
-import { url_post_refresh } from "Constatnts/url";
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import {url_post_refresh} from "Constatnts/url";
+import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from "axios";
 import * as signalR from '@aspnet/signalr';
-import { IFetchParamsMessage, MessageClass } from "Modules/Messenger";
+import {IFetchParamsMessage, MessageClass} from "Modules/Messenger";
 
 interface IRefresh {
     jwt: string;
@@ -19,7 +19,7 @@ class Fetch {
 
     private host = "https://localhost:7116";
 
-    private feth: AxiosInstance; // Экземпляр axios для запросов
+    private fetch: AxiosInstance; // Экземпляр axios для запросов
     private connectionHub?: signalR.HubConnection; // Экземпляр SignalR для установки соединения
 
     /**
@@ -32,7 +32,7 @@ class Fetch {
         this.refreshToken = localStorage.refreshToken !== 'null' ? localStorage.refreshToken : null;
 
         // Настройка экземпляра axios для отправки запросов
-        this.feth = axios.create({
+        this.fetch = axios.create({
             baseURL: this.host,
             headers: {
                 accept: "*/*",
@@ -48,9 +48,9 @@ class Fetch {
     private setJwt(jwt: string | null): void {
         this.jwt = jwt;
         if (jwt) {
-            this.feth.defaults.headers["authorization"] = `Bearer ${jwt}`;
+            this.fetch.defaults.headers["authorization"] = `Bearer ${jwt}`;
         } else {
-            this.feth.defaults.headers["authorization"] = null;
+            this.fetch.defaults.headers["authorization"] = null;
         }
     }
 
@@ -58,7 +58,7 @@ class Fetch {
     Создает экземпляр класса HubConnection для SignalR
     @returns созданный экземпляр класса HubConnection
     */
-    private createConectionHub() {
+    private createConnectionHub() {
         this.connectionHub = new signalR.HubConnectionBuilder()
             .withUrl(this.host + '/hubs/chat', {
                 accessTokenFactory: () => this.jwt ?? ''
@@ -89,17 +89,15 @@ class Fetch {
 
 
 
-        const result = await this.feth.post(url_post_refresh, data, config)
+        return await this.fetch.post(url_post_refresh, data, config)
             .then((response) => {
                 const data = response.data as IRefresh;
-                this.setRefres(data.jwt, data.refreshToken);
+                this.setRefresh(data.jwt, data.refreshToken);
                 return Promise.resolve(data)
             }).catch(() => {
-                this.setRefres(null, null);
+                this.setRefresh(null, null);
                 return Promise.reject()
-            })
-
-        return result;
+            });
     }
 
     /**
@@ -108,7 +106,7 @@ class Fetch {
     */
     public hubStart() {
         if (!this.connectionHub) {
-            this.connectionHub = this.createConectionHub();
+            this.connectionHub = this.createConnectionHub();
         }
 
         return this.connectionHub.start().then(() => {
@@ -122,26 +120,26 @@ class Fetch {
     }
 
     /**
-    setRefres - обновить токены
+    setRefresh - обновить токены
     @param jwt - текущий JWT токен
     @param refreshToken - текущий refresh токен
     */
-    public setRefres(jwt: string | null, refreshToken: string | null) {
+    public setRefresh(jwt: string | null, refreshToken: string | null) {
         this.setJwt(jwt);
         this.refreshToken = refreshToken;
         if (this.connectionHub) {
-            this.createConectionHub();
+            this.createConnectionHub();
         }
     }
 
     /**
     onMessage - функция, которая вызывается при получении сообщения с сервера
-    @param collbak - функция, которая будет вызвана при получении сообщения
+    @param coolback - функция, которая будет вызвана при получении сообщения
     */
-    public onMessage(collbak: (m: MessageClass) => void) {
+    public onMessage(coolback: (m: MessageClass) => void) {
         if (!this.connectionHub) return;
         this.connectionHub.on('messageReceived', (message) => {
-            collbak(new MessageClass(message as IFetchParamsMessage))
+            coolback(new MessageClass(message as IFetchParamsMessage))
         });
 
     }
@@ -152,30 +150,34 @@ class Fetch {
     @param message - сообщение, которое будет отправлено на сервер
     @returns Promise - возвращает Promise с результатом выполнения запроса на сервере
     */
-    public sendHub(methodName: string, message: any) {
+    public sendHub(methodName: string, message: unknown) {
         if (!this.connectionHub) return Promise.reject("нет соединения");
         return this.connectionHub.invoke(methodName, message);
     }
 
 
-    public get<T = any, R = AxiosResponse<T, any>, D = any>
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    public get<T = unknown, R = AxiosResponse<T, unknown>, D = unknown>
         (url: string, config?: AxiosRequestConfig<D> | undefined) {
-        return this.feth.get(url, config);
+        return this.fetch.get(url, config);
     }
 
-    public post<T = any, R = AxiosResponse<T, any>, D = any>
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    public post<T = unknown, R = AxiosResponse<T, unknown>, D = unknown>
         (url: string, data?: D | undefined, config?: AxiosRequestConfig<D> | undefined) {
-        return this.feth.post(url, data, config);
+        return this.fetch.post(url, data, config);
     }
 
-    public delete<T = any, R = AxiosResponse<T, any>, D = any>
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    public delete<T = unknown, R = AxiosResponse<T, unknown>, D = unknown>
         (url: string, config?: AxiosRequestConfig<D> | undefined) {
-        return this.feth.delete(url, config);
+        return this.fetch.delete(url, config);
     }
 
-    public put<T = any, R = AxiosResponse<T, any>, D = any>
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    public put<T = unknown, R = AxiosResponse<T, unknown>, D = unknown>
         (url: string, data?: D | undefined, config?: AxiosRequestConfig<D> | undefined) {
-        return this.feth.put(url, data, config);
+        return this.fetch.put(url, data, config);
     }
 
 
@@ -184,7 +186,7 @@ class Fetch {
      * @param collbac - функция, которая вызывается после успешной обновления токенов
      */
     public async sendRefreshToken(collbac: (jwt: string | null, refreshToken: string | null) => void) {
-        this.feth.interceptors.response.use(
+        this.fetch.interceptors.response.use(
             (response) => response,
             async (error) => {
                 const status = error.response ? error.response.status : null;
@@ -197,7 +199,7 @@ class Fetch {
                             "Bearer " + data.jwt;
                         error.config.baseURL = this.host;
                         this.loading = false;
-                        return this.feth.request(error.config);
+                        return this.fetch.request(error.config);
                     })
                         .catch(() => {
                             collbac(null, null);

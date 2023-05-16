@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import Button from "../../../../UI/Button/Button";
 import unsubscribe from "../../Fetch/unsubscribe";
 import subscribe from "../../Fetch/subscribe";
+import "./ProfileNavigation.scss"
+import {useNavigate} from "react-router-dom";
+import getChatId from "Fetch/getChatId";
 
 interface Props {
   isLogin: boolean;
@@ -11,11 +14,16 @@ interface Props {
 
 export default function ProfileNavigation({ isLogin, userID, isSubcribe }: Props) {
   const [_isSubcribe, setIsSubcribe] = useState(isSubcribe ?? false);
+    const navigate = useNavigate()
 
+  const newMessenge = () => {
+        if (!userID) return;
+        getChatId(userID).then(id => navigate(`/messenger/chat/${id}`));
+  }
 
 
   return (
-    <div className="content-centr column w-200px">
+    <div className="profile-navigation">
       {isLogin && (
         <Button type="link" href="/edit/info" color="mini">
           Редактировать профиль
@@ -30,7 +38,7 @@ export default function ProfileNavigation({ isLogin, userID, isSubcribe }: Props
           {_isSubcribe ? "Отписаться" : "Подписаться"}
         </Button>
       )}
-      <Button type="link" href={`/messenger/new_chat/${userID}`}  color="mini">
+      <Button type="button" onClick={newMessenge} color="mini">
         Написать сообщение
       </Button>
     </div>

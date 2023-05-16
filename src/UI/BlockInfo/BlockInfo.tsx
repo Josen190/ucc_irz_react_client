@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
+import "./BlockInfo.scss"
 
 interface Props {
   title: string;
@@ -7,9 +8,9 @@ interface Props {
 
 export default function BlockInfo({ title, value }: Props) {
   return (
-    <span>
+    <span className="block-info">
       <h5>{title}: </h5>
-      {typeof value === 'string' ? <p>{value}</p> : <div>{value}</div>}
+      {typeof value === 'string' ? <p>{value}</p> : <div className="block-info-content">{value}</div>}
     </span>
   );
 }

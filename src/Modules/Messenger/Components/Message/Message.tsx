@@ -1,9 +1,7 @@
-import Avatar from "Components/Avatar/Avatar";
 import MessageClass from "../../Helper/Message";
 import React from "react";
 import { Link, useOutletContext } from "react-router-dom";
 import Chat from "../../Helper/Chat";
-import { useAppSelector } from "Hooks";
 import './Message.scss'
 import Img from "UI/Img/Img";
 import Button from "UI/Button/Button";

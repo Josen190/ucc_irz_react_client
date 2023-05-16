@@ -35,7 +35,7 @@ export default class News {
       this.author = author ?? new VisitingUser();
       this.isPublic = isPublic ?? false;
       this.commentCount = 0;
-      this.isClipped = fullText && fullText.length > sizeClippedText? true : false; 
+      this.isClipped = !!(fullText && fullText.length > sizeClippedText);
 
     } else{
       this.id = idOrProps.id;

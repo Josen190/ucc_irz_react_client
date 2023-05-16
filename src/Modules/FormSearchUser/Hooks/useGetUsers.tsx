@@ -1,10 +1,8 @@
 import getUsers from "Fetch/getUsers";
 import { useEffect, useState } from "react";
-import PushUser from "../Components/PushUser/PushUser";
-import VisitingUser from "Helpers/VisitingUser";
 import usePageIndex from "Hooks/usePageIndex";
 import useSelectedUsers from "./useSelectedUsers";
-import useEndOfPage from "Hooks/useEndOfPage";
+
 interface IFilter {
     PositionId?: string;
     Role?: string;
@@ -13,16 +11,15 @@ interface IFilter {
 }
 
 
-function useGetUsers() {
-    const [filter, setFilter] = useState<IFilter>({
+function useGetUsers(SearchString: string | undefined) {
+    const [filter] = useState<IFilter>({
         PositionId: undefined,
         Role: undefined,
         IsActive: undefined,
-        SearchString: undefined,
+        SearchString: SearchString,
     });
-    const { pageIndex, nextPage, restart } = usePageIndex()
-    useEndOfPage(nextPage)
-    const { users, selectedUsers, addUsers, clearUsers } = useSelectedUsers();
+    const { pageIndex, } = usePageIndex()
+    const { users, selectedUsers, addUsers } = useSelectedUsers();
 
     useEffect(() => {
         getUsers({ ...filter, PageIndex: pageIndex }).then(addUsers);

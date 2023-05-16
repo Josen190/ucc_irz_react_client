@@ -12,10 +12,10 @@ import Edit from "Pages/Edit/Edit";
 import Messenger from "Pages/Messenger/Messenger";
 import Setting from "Modules/Setting";
 import Staff from "Pages/Staff/Staff";
-import { Chat, loading } from "Modules/Messenger";
-import { NewChat } from "Modules/Messenger";
+import { Chat } from "Modules/Messenger";
 import {FormNewEvent, OpenEvent} from "Modules/Calendar";
 import {CreateTidings} from "Modules/News";
+import {FormEditInfoUser, FormEditRole, FormNewUser, UserCard} from "Modules/AdimnsrateUser";
 
 
 
@@ -24,7 +24,6 @@ const router = createBrowserRouter(
     {
       path: "/",
       element: <App />,
-      //   loader: appLoader,
       children: [
         {
           path: "account/:userId",
@@ -59,15 +58,9 @@ const router = createBrowserRouter(
           element: <Messenger />,
           children: [
             {
-              path: "chat/:id",
+              path: "chat/:chatId",
               element: <Chat />,
             },
-            {
-              path: "new_chat/:id",
-              element: <NewChat />,
-              loader: loading
-            }
-
           ]
         },
         {
@@ -87,8 +80,6 @@ const router = createBrowserRouter(
 
 
       ],
-
-
     },
     {
       path: "admin",
@@ -97,6 +88,29 @@ const router = createBrowserRouter(
         {
           path: "staff",
           element: <Staff />,
+          children: [
+            {
+              path: "./",
+              element: <p>Тест ыроларывоаолывраолы</p>
+            },
+            {
+              path: ":userId",
+              element: <UserCard />,
+              children: [
+                {
+                  path: "edit_info",
+                  element: <FormEditInfoUser />
+                },
+                {
+                  path: "edit_role",
+                  element: <FormEditRole />
+                },
+              ]
+            },{
+            path: "new_staff",
+              element: <FormNewUser />
+            }
+          ]
         },
         {
           path: "role",

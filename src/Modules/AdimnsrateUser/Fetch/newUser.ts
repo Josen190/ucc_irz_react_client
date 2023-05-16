@@ -1,4 +1,4 @@
-import { notifySuccess } from "Components/Notifications/Notifications";
+import {notifySuccess} from "Components/Notifications/Notifications";
 
 import fetch from "Fetch/Fetch";
 
@@ -15,15 +15,13 @@ const url_post_users_management_register =
   "/api/users_management/register";
 
 async function newUser(data: dataNewUser) {
-    const resule = await fetch.post(url_post_users_management_register, data).then(() => {
+    return await fetch.post(url_post_users_management_register, data).then(() => {
         notifySuccess("Сотрудник добавлен")
         return Promise.resolve();
     }).catch((error) => {
         notifySuccess("Ошибка")
         return Promise.reject(error.response.data[0].description);
-    })
-
-    return resule;
+    });
 }
 
 export default newUser;

@@ -4,6 +4,7 @@ import Option from 'UI/Select/Option';
 import Select from 'UI/Select/Select';
 import React, { useEffect, useState } from 'react'
 import {useNavigate} from "react-router-dom";
+import "./HeaderFeedNews.scss";
 
 interface Props {
     isLogin: boolean;
@@ -26,6 +27,7 @@ function HeaderFeedNews({ isLogin, setFilter }: Props) {
 
     return (
         <div className='header-feed-news'>
+            <InputField type='text' onSetValue={(v: string) => setSearchString(v.length == 0 ? undefined : v)} placeholder='Искать' />
             <Select setValue={setPublicOnly}>
                 <Option value={undefined}>Все</Option>
                 <Option value={true}>Публичные</Option>
@@ -34,7 +36,6 @@ function HeaderFeedNews({ isLogin, setFilter }: Props) {
                 <Option value={undefined}>Все</Option>
                 <Option value={true}>Понравившиеся</Option>
             </Select>
-            <InputField type='text' onSetValue={(v: string) => setSearchString(v.length == 0 ? undefined : v)} placeholder='Искать' />
             {isLogin && (
                 <Button
                     type="button"

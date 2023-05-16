@@ -1,33 +1,34 @@
 import useStorageRole from '../../Hooks/useStorageRole'
 import InputField from 'UI/InputField/InputField'
-import React, { MouseEvent, SetStateAction, useState } from 'react'
+import React from 'react'
 import Button from 'UI/Button/Button';
 
 import "./EditRole.scss"
-import { useAppDispatch, useAppSelector } from 'Hooks';
+import { useAppSelector } from 'Hooks';
 import updateRoles from '../../Fetch/updateRoles';
 import { ConstSuperAdmin } from 'Constatnts/role';
+import {useNavigate, useOutletContext} from "react-router-dom";
+import User from "Helpers/User";
 
-interface Props {
-  userId: string;
-  oldRole: string[];
-  setActive: React.Dispatch<SetStateAction<boolean>>;
-}
 
-function FormEditRole({ userId, oldRole, setActive }: Props) {
+function FormEditRole() {
   const myRole = useAppSelector(s => s.authorization.user?.roles)
   if (!myRole) return <></>;
-  const { roleUser, currentRoles } = useStorageRole(oldRole);
 
-  const save = (event: MouseEvent<HTMLButtonElement>) => {
-    updateRoles(userId, oldRole, currentRoles);
+
+  const user = useOutletContext<User>()
+  const navigation = useNavigate();
+  const { roleUser, currentRoles } = useStorageRole(user.roles);
+
+  const save = () => {
+    updateRoles(user.id, user.roles, currentRoles);
     return;
   }
 
-  const isSupAdmin = oldRole.includes(ConstSuperAdmin.Id) && !myRole.includes(ConstSuperAdmin.Id);
+  const isSupAdmin = user.roles.includes(ConstSuperAdmin.Id) && !myRole.includes(ConstSuperAdmin.Id);
 
   return (
-    <div className='modal z-index-20' onClick={() => setActive(false)}>
+    <div className='modal z-index-20' onClick={() => navigation("../")}>
       <div className='tile' onClick={(e) => e.stopPropagation()}>
         <InputField type='checkbox' value={roleUser.Support.get.isSelected} onSetValue={roleUser.Support.set} title={roleUser.Support.get.name} />
         <InputField type='checkbox' value={roleUser.CabinetsManager.get.isSelected} onSetValue={roleUser.CabinetsManager.set} title={roleUser.CabinetsManager.get.name} />

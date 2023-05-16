@@ -2,9 +2,13 @@
     width: 100%;
     height: min-content;
     display: grid;
-    grid-template-columns: min-content 1fr;
+    grid-template-columns: max-content 1fr;
     grid-column-gap: 20px;
     justify-content: center;
     justify-items: stretch;
     align-items: start;
+
+    .nav{
+        width: 150px;
+    }
 }

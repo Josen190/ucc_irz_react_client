@@ -1,5 +1,4 @@
 import Image from "Helpers/Image";
-import VisitingUser from "Helpers/VisitingUser"
 import MyDate from "Helpers/MyDate"
 import { IFetchParamsMessage, IParamsMessage } from "../Type/IMessage";
 

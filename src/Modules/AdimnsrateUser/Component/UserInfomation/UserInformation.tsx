@@ -2,8 +2,9 @@ import PositionList from "Components/PositionList/PositionList";
 import MyDate from "Helpers/MyDate";
 import User from "Helpers/User";
 import BlockInfo from "UI/BlockInfo/BlockInfo";
-import React, { useState } from "react";
+import React from "react";
 import parseMyRole from "../../Helpers/parseMyRole";
+import "./UserInformation.scss";
 
 interface Props {
     user: User | null;
@@ -22,17 +23,22 @@ const UserInformation = ({ user }: Props) => {
 
 
     return (
-        <div className="column">
+        <div className="user-info">
             <h2>{fio}</h2>
-            <BlockInfo title="Роли" value={role} />
-            <BlockInfo title="Почта" value={email} />
-            <BlockInfo title="Дата рождения" value={birthday} />
-            <BlockInfo title="Должности" value={<PositionList positions={user ? user.positions : null} />} />
-            <BlockInfo title="о себе" value={myself} />
-            <BlockInfo title="чем занимался" value={iDid} />
-            <BlockInfo title="достижения" value={achievements} />
-            <BlockInfo title="навыки и компетенции" value={skillsAndCompetencies} />
-
+            <div className="info">
+                <div>
+                    <BlockInfo title="Роли" value={role} />
+                    <BlockInfo title="Почта" value={email} />
+                    <BlockInfo title="Дата рождения" value={birthday} />
+                    <BlockInfo title="Должности" value={<PositionList positions={user ? user.positions : null} />} />
+                </div>
+                <div>
+                    <BlockInfo title="о себе" value={myself} />
+                    <BlockInfo title="чем занимался" value={iDid} />
+                    <BlockInfo title="достижения" value={achievements} />
+                    <BlockInfo title="навыки и компетенции" value={skillsAndCompetencies} />
+                </div>
+            </div>
         </div>
     );
 };

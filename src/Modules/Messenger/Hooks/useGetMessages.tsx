@@ -9,7 +9,10 @@ import ClassMessage from "../Helper/Message";
 import deleteMessage from "../Fetch/deleteMessage";
 import {notifyError} from "Components/Notifications/Notifications";
 
-function useGetMessages(ref: React.MutableRefObject<HTMLDivElement | null>, ChatId: string, SearchString?: string) {
+function useGetMessages(
+    ref: React.MutableRefObject<HTMLDivElement | null>,
+    ChatId: string, SearchString?: string
+) {
     const { pageIndex, restart } = usePageIndex(ref);
     const [messages, setMessages] = useState<JSX.Element[]>([]);
 
@@ -67,7 +70,7 @@ function useGetMessages(ref: React.MutableRefObject<HTMLDivElement | null>, Chat
     
 
     const sendNewMessage = (userId: string, myId: string, text: string, image: Image | null) => {
-        postMessages(userId, myId, text, image).then((message) => setValidMessages(message));
+        postMessages(userId, myId, text, image).catch(() => notifyError("ошибка, сообщение не отправлено"));
     }
 
     return { messages, sendNewMessage };

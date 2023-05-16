@@ -1,0 +1,38 @@
+.chat-list{
+  .button-container{
+    width: 100%;
+
+    .button{
+      border-radius: 0;
+      border: 0;
+    }
+
+    .chat-button{
+      display: flex;
+      flex-direction: row;
+
+      .info{
+        display: flex;
+        flex-direction: column;
+
+        .last-message{
+          display: flex;
+          flex-direction: row;
+          font-size: 12px;
+
+          justify-content: space-between;
+          align-items: center;
+
+          p{
+            margin: 0;
+            width: calc(100% - 15px);
+            text-align: left;
+            overflow: hidden;
+            height: 20px;
+          }
+        }
+      }
+    }
+
+  }
+}

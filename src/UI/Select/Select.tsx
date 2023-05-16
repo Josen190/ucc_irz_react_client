@@ -1,4 +1,5 @@
 import React, { SetStateAction } from 'react'
+import "./Select.scss";
 
 type typeValue = number | string | boolean | undefined;
 
@@ -26,9 +27,12 @@ function parser<T>(value: string): T {
 
 function Select<T extends typeValue>({ children: optios, setValue }: Props<T>) {
     return (
-        <select onChange={(e) => {
-            setValue(parser<T>(e.target.value));
-        }}>
+        <select
+            onChange={(e) => {
+                setValue(parser<T>(e.target.value));
+            }}
+            className="select"
+        >
             {optios}
         </select>
     )

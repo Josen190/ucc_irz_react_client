@@ -1,6 +1,3 @@
-import VisitingUser from "Helpers/VisitingUser";
-import User from "Helpers/User";
-import Button from "UI/Button/Button";
 import InputField from "UI/InputField/InputField";
 import React, { useState, useEffect, SetStateAction } from "react";
 import useGetUsers from "../../Hooks/useGetUsers";
@@ -12,12 +9,9 @@ interface Props{
 }
 
 export default function FormSearchUser({setSelected}: Props): JSX.Element {
-  const [searchString, setSearchString] = useState<string>();
-  const [isActive, setIsActive] = useState<boolean>();
-  const [role, setRole] = useState<string>();
-  const [positionId, setPositionId] = useState<string>();
+  const [searchString, setSearchString] = useState<string | undefined>();
 
-  const {users, selectedUsers} = useGetUsers();
+  const {users, selectedUsers} = useGetUsers(searchString);
 
   useEffect(() =>{
     setSelected(selectedUsers.map(JUser => JUser.props.user.id as string))
@@ -25,6 +19,7 @@ export default function FormSearchUser({setSelected}: Props): JSX.Element {
 
   return (
     <div>
+        <p>Добавить сотрудников</p>
       <div>
         <InputField
           type="text"
@@ -33,7 +28,7 @@ export default function FormSearchUser({setSelected}: Props): JSX.Element {
           }}
         ></InputField>
       </div>
-      <div>{selectedUsers}</div>
+        {selectedUsers.length > 0 && <div className="select-user">{selectedUsers}</div>}
       <div>{users}</div>
     </div>
   );

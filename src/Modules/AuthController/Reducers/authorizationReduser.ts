@@ -1,5 +1,5 @@
 import User from "Helpers/User";
-import { configureStore, createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import VisitingUser from "Helpers/VisitingUser";
 import Image from "Helpers/Image";
 import fetch from "Fetch/Fetch";
@@ -36,7 +36,7 @@ const authorizationReducer = createSlice({
             const _jwt = payload.jwt;
             const _refreshToken = payload.refreshToken;
             const _user = payload.user;
-            fetch.setRefres(_jwt, _refreshToken);
+            fetch.setRefresh(_jwt, _refreshToken);
 
             if (payload.user)
                 VisitingUser.setAuntificationuUser(new User(payload.user));
@@ -44,7 +44,7 @@ const authorizationReducer = createSlice({
             window.localStorage.setItem("jwt", _jwt ?? "null");
             window.localStorage.setItem("refreshToken", _refreshToken ?? "null");
 
-            const isLogin = _jwt && _refreshToken ? true : false;
+            const isLogin = !!(_jwt && _refreshToken);
 
             return {
                 isLogin, jwt: _jwt, refreshToken: _refreshToken, user: _user

@@ -1,8 +1,7 @@
-import React, { ReactNode, useState } from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
 
 import Image from "../../Helpers/Image";
-import News from "../../Helpers/News";
 import Img from "../../UI/Img/Img";
 import getFullTextOfNews from "Fetch/getFullTextOfNews";
 

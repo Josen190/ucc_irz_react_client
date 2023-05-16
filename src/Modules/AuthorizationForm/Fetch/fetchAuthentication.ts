@@ -23,7 +23,7 @@ export default async function fetchAuthentication(email: string, password: strin
                 user: null,
             };
 
-            fetch.setRefres(_data.jwt, _data.refreshToken);
+            fetch.setRefresh(_data.jwt, _data.refreshToken);
 
             _data.user = await getUserMe()
                 .then((user) => user)

@@ -7,7 +7,7 @@ interface Props {
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function CommentsIcon({ commentCount, active, setActive }: Props) {
+export default function CommentsIcon({ commentCount, setActive }: Props) {
   const switchComments = () => {
     setActive(true);
   };

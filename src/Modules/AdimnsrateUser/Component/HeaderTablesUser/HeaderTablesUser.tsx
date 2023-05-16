@@ -1,16 +1,14 @@
-
 import Button from 'UI/Button/Button';
 import React from 'react'
+import {useNavigate} from "react-router-dom";
+import "./HeaderTablesUser.scss"
 
-interface Props {
-    setActive?: React.Dispatch<React.SetStateAction<boolean>>;
-}
+function HeaderTablesUser() {
+    const navigate = useNavigate()
 
-
-function HeaderTablesUser({ setActive }: Props) {
     return (
-        <div className='header-feed-news'>
-            <Button type="button" onClick={() => { if(setActive) setActive(true) }}>
+        <div className='header-table-users'>
+            <Button type="button" onClick={() => { navigate("/admin/staff/new_staff") }}>
                 Добавить сотрудника
             </Button>
         </div>

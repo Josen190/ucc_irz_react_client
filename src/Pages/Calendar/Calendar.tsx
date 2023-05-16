@@ -41,12 +41,12 @@ const Calendar = () => {
   return (
     <main className="tile calendar">
       <div>
-        <div className="row">
-          <div className="row">
+        <div className="calendar-header">
+          <div className="calendar-nav">
             <Button type="button" onClick={prevMonth}>
               {"<"}
             </Button>
-            <div className="row">
+            <div className="month-name">
               <span>{nameMonth[date.getMonth()]}</span>
               <span>{date.getFullYear()}</span>
             </div>

@@ -10,15 +10,16 @@ header{
   display: flex;
   flex-direction: row;
   height: 40px;
-  align-items: stretch;
+  align-items: center;
   justify-content: space-between;
   flex-wrap: nowrap;
   margin: 0;
-  padding: 0;
+  padding: 0 10px;
   background-color: $color-gray-3;
 
   .logo{
-
+    width: 30px;
+    height: 30px;
   }
 
 }
