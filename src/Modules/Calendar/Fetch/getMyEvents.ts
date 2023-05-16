@@ -1,4 +1,4 @@
-import { url_get_events_listenning, url_get_events_my } from "Constatnts/url";
+import { url_get_events_listenning } from "Constatnts/url";
 import fetch from "Fetch/Fetch";
 import PropsEvent from "Fetch/Interface/IEvent";
 import Event from "Helpers/Event";

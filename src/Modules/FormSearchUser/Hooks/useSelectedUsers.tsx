@@ -1,5 +1,5 @@
 import VisitingUser from "Helpers/VisitingUser";
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import PushUser from "../Components/PushUser/PushUser";
 
 function useSelectedUsers() {

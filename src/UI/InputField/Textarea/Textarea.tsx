@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, Component, createRef, FunctionComponent } from "react";
+import React, { ChangeEventHandler, createRef, FunctionComponent } from "react";
 
 interface TextareaProps {
   className?: string;

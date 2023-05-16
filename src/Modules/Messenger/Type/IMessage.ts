@@ -1,5 +1,3 @@
-import PropsImage from "Fetch/Interface/IImage";
-import PropsMinUser from "Fetch/Interface/IMinUser";
 import Image from "Helpers/Image";
 
 export interface IFetchParamsMessage{

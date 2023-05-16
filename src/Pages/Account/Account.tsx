@@ -27,7 +27,7 @@ export default function Account() {
       setUser(AuntificationuUser);
     }
 
-  }, []);
+  }, [userId]);
 
   const isLogin = user ? user.isAuntification() : false;
 

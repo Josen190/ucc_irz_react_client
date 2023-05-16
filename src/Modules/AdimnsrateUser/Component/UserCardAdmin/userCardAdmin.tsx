@@ -1,33 +1,46 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Profile_Picture from '../../../../Components/Avatar/Avatar'
-import User from 'Helpers/User';
 import Image from 'Helpers/Image';
 
 import "./UserCardAdmin.scss"
 import Button from 'UI/Button/Button';
 import UserInformation from '../UserInfomation/UserInformation';
-import FormEditInfoUser from '../FormEditInfoUser/FormEditInfoUser';
-import { useAppSelector } from 'Hooks';
 import useGetUser from '../../Hooks/useGetUser';
+import {ConstSuperAdmin} from "../../../../Constatnts/role";
+import {Outlet, useNavigate} from "react-router-dom";
+import {useParams} from "react-router";
 
 
 function UserCard() {
-    const user = useAppSelector((s) => {
-        const ParamsUser = s.userAdministration.user;
-        return ParamsUser ? new User(ParamsUser) : null;
-    })
-    const [isActive, setActive] = useState(false);
+    const {userId} = useParams<{userId: string}>()
+    const navigation = useNavigate();
+    if (!userId){
 
-    useGetUser(user ? user.id : null);
+        navigation("/admin/staff");
+        return <></>
+    }
+    const user = useGetUser(userId);
+
+    if (!user){
+        navigation("/admin/staff");
+        return <></>
+    }
+
+    const isSuperAdmin = user.roles.includes(ConstSuperAdmin.Id);
 
     return (
-        <div className="tile">
-            <div className='UserCard'>
+        <div className="UserCard-admin">
+            <div className='info-user'>
                 <Profile_Picture type="norm" image={user && user.image ? user.image : new Image()} />
                 <UserInformation user={user} />
             </div>
-            <Button type='button' onClick={() => setActive(true)}>Редактировать</Button>
-            {isActive && user && <FormEditInfoUser user={user} setActive={setActive}></FormEditInfoUser>}
+            <div className="button-opportunities">
+                <Button type='button' onClick={() => navigation("./edit_info")}>Редактировать</Button>
+                {!isSuperAdmin && <Button type="button" onClick={() => navigation("./edit_role")}>Изменить роли</Button>}
+            </div>
+
+
+            <Outlet context={user}/>
         </div>
     )
 }

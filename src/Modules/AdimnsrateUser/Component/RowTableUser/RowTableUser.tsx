@@ -1,8 +1,7 @@
 import User from "Helpers/User";
-import { useAppDispatch } from "Hooks";
-import { setUser } from "../../Reducers/UserAdministrationReduser";
-import Button from "UI/Button/Button";
 import React from "react";
+import {useNavigate} from "react-router-dom";
+import {arrayRole} from "../../../../Constatnts/role";
 
 interface Props {
   user: User;
@@ -10,10 +9,10 @@ interface Props {
 
 
 function RowTableUser({ user }: Props) {
-  const dispatch = useAppDispatch();
+  const navigate = useNavigate()
 
   const open = () => {
-    dispatch(setUser({ user: user.getParams() }))
+      navigate(`./${user.id}`);
   };
 
   return (
@@ -21,7 +20,9 @@ function RowTableUser({ user }: Props) {
     <tr onClick={open}>
       <td>{user.getFullName()}</td>
       <td>{user.email}</td>
-      <td>{user.roles.join(", ")}</td>
+      <td>{user.roles.map((v) => {
+          return arrayRole.find((el) => el.Id === v)?.name;
+      }).join(", ")}</td>
     </tr>
   );
 }

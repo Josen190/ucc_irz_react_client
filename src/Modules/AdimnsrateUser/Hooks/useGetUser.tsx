@@ -1,18 +1,19 @@
 import getUserFromId from "Fetch/getUserfromId";
-import { useAppDispatch } from "Hooks";
-import { useEffect } from "react";
-import { setUser } from "../Reducers/UserAdministrationReduser";
+import {useEffect, useState} from "react";
+import User from "Helpers/User";
 
 function useGetUser(id: string | null) {
-    const dispatch = useAppDispatch();
+    const [user, setUser] = useState<User>()
+
     useEffect(() => {
         if (!id) return;
 
         getUserFromId(id).then((user) => {
-            dispatch(setUser({ user: user.getParams() }))
+            setUser(user);
         })
     }, [id])
 
+    return user;
 }
 
 export default useGetUser;

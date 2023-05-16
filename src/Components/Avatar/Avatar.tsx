@@ -1,10 +1,9 @@
-import React, { Component, useEffect, useState } from "react";
+import React from "react";
 import Image from "../../Helpers/Image";
 import Img from "UI/Img/Img";
 
 import "./Avatar.scss"
 
-import getImage from "Fetch/getImage";
 
 interface PropsProfilePicture {
   type: "mini" | "norm";

@@ -18,3 +18,5 @@ export const ConstAdmin = {
     Id: "Admin", 
     name: "Администратор"
 }
+
+export const arrayRole = [ConstAdmin, ConstSuperAdmin, ConstSupport, ConstCabinetsManager];

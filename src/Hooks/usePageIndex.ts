@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import useEndOfPage from "./useEndOfPage";
 
 export default function usePageIndex(componentRef?: React.RefObject<HTMLElement>) {

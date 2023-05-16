@@ -1,25 +1,32 @@
-import { useEffect } from "react";
+import {useEffect, useState} from "react";
 import getUsers from "../Fetch/getUsers";
 import React from "react";
 import usePageIndex from "Hooks/usePageIndex";
 import RowTableUser from "../Component/RowTableUser/RowTableUser";
 
 
-async function useGetUsers(
-    rowUser: JSX.Element[],
-    setRowUser: React.Dispatch<React.SetStateAction<JSX.Element[] | null>>,
-    searchString?: string, isActive?: boolean, role?: string, positionId?: string) {
+function useGetUsers(
+   searchString?: string, isActive?: boolean, role?: string, positionId?: string) {
 
-    const {pageIndex} = usePageIndex();
+    const [rowUser, setRowUser] = useState<JSX.Element[]>([])
+    const {pageIndex, setIsEnd} = usePageIndex();
+
+
 
     useEffect(() => {
         getUsers(pageIndex, searchString, isActive, role, positionId).then((users) => {
             const _rowUser: JSX.Element[] = [...rowUser];
+            if (users.length < 10){
+                setIsEnd(true);
+            }
+
             (users.forEach(user => {
                 _rowUser.push(<RowTableUser key={user.id} user={user} />);
             }))
             setRowUser(_rowUser)
         })
     }, [pageIndex])
+
+    return rowUser;
 }
 export default useGetUsers;

@@ -1,5 +1,4 @@
 import PropsEvent from "../Fetch/Interface/IEvent";
-import Cabinet from "./Cabinet";
 import VisitingUser from "./VisitingUser";
 import MyDate from "./MyDate";
 

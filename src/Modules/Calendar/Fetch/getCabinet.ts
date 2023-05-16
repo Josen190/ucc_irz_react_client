@@ -1,4 +1,4 @@
-import { url_get_cabinets } from "Constatnts/url";
+import {url_get_cabinets} from "Constatnts/url";
 
 import fetch from "Fetch/Fetch";
 import PropsCabinet from "Fetch/Interface/ICabinet";
@@ -24,16 +24,14 @@ async function getCabinet({FreeOnly, Start, End, PageIndex, SearchString, PageSi
     }
     if (SearchString) params.SearchString = SearchString;
 
-    const result =  fetch.get(url_get_cabinets, {params}).then((response) => {
+    return fetch.get(url_get_cabinets, {params}).then((response) => {
         const _arrCabinet: Cabinet[] = [];
-        response.data.forEach((cabinet:PropsCabinet)=> {
+        response.data.forEach((cabinet: PropsCabinet) => {
             _arrCabinet.push(new Cabinet(cabinet))
         });
 
         return Promise.resolve(_arrCabinet);
-    }).catch(() => Promise.reject())
-
-    return result;
+    }).catch(() => Promise.reject());
 }
 
 export default getCabinet;
