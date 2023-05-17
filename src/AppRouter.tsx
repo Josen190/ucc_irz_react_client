@@ -16,6 +16,7 @@ import { Chat } from "Modules/Messenger";
 import {FormNewEvent, OpenEvent} from "Modules/Calendar";
 import {CreateTidings} from "Modules/News";
 import {FormEditInfoUser, FormEditRole, FormEditUserPosition, FormNewUser, UserCard} from "Modules/AdimnsrateUser";
+import UserPositionAll from "./Components/UserPositionAll/UserPositionAll";
 
 
 
@@ -32,6 +33,10 @@ const router = createBrowserRouter(
             {
               path: "new_news",
               element:  <CreateTidings />,
+            },
+            {
+              path: "positions",
+              element:  <UserPositionAll />,
             }
           ]
         },
@@ -109,6 +114,10 @@ const router = createBrowserRouter(
                   path: "edit_position",
                   element: <FormEditUserPosition />
                 },
+                {
+                  path: "positions",
+                  element:  <UserPositionAll />,
+                }
               ]
             },{
             path: "new_staff",
