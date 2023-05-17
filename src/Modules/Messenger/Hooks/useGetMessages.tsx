@@ -13,7 +13,7 @@ function useGetMessages(
     ref: React.MutableRefObject<HTMLDivElement | null>,
     ChatId: string, SearchString?: string
 ) {
-    const { pageIndex, restart } = usePageIndex(ref);
+    const { PageIndex, restart } = usePageIndex(ref);
     const [messages, setMessages] = useState<JSX.Element[]>([]);
 
 
@@ -60,12 +60,12 @@ function useGetMessages(
         prevChatId.current = ChatId;
         prevSearchString.current = SearchString;
 
-        getMessages(pageIndex, ChatId, SearchString).then((arrMessages) => {
+        getMessages(PageIndex, ChatId, SearchString).then((arrMessages) => {
             const _messages = arrMessages.map(message =>
                 <Message key={message.id} message={message} deleteMessage={deleteMessageInArr}></Message>)
             setMessages([..._messages, ...prevMessages])
         })
-    }, [pageIndex, ChatId, SearchString]);
+    }, [PageIndex, ChatId, SearchString]);
 
     
 

@@ -15,7 +15,7 @@ import Staff from "Pages/Staff/Staff";
 import { Chat } from "Modules/Messenger";
 import {FormNewEvent, OpenEvent} from "Modules/Calendar";
 import {CreateTidings} from "Modules/News";
-import {FormEditInfoUser, FormEditRole, FormNewUser, UserCard} from "Modules/AdimnsrateUser";
+import {FormEditInfoUser, FormEditRole, FormEditUserPosition, FormNewUser, UserCard} from "Modules/AdimnsrateUser";
 
 
 
@@ -104,6 +104,10 @@ const router = createBrowserRouter(
                 {
                   path: "edit_role",
                   element: <FormEditRole />
+                },
+                {
+                  path: "edit_position",
+                  element: <FormEditUserPosition />
                 },
               ]
             },{

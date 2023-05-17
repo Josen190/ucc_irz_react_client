@@ -8,15 +8,15 @@ function useGetChatList(
     componentRef: React.RefObject<HTMLElement>, 
     setSelectedChat: React.Dispatch<React.SetStateAction<Chat | null>>
     ) {
-    const { pageIndex } = usePageIndex(componentRef);
+    const { PageIndex } = usePageIndex(componentRef);
     const [chatList, setChatList] = useState<JSX.Element[]>([]);
 
     useEffect(() => {
-        getChatList(pageIndex).then(chats => {
+        getChatList(PageIndex).then(chats => {
             const _chatList = chats.map((chat => <ChatButton key={chat.id} chat={chat} select={setSelectedChat} />))
             setChatList([...chatList, ..._chatList]);
         })
-    }, [pageIndex])
+    }, [PageIndex])
 
     return chatList;
 }

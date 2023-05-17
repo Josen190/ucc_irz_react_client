@@ -8,7 +8,7 @@ import deletComment from "../Fetch/deletComment";
 import {notifyError, notifySuccess} from "../../../Components/Notifications/Notifications";
 
 function useGetNewsComment(newsId: string, componentRef: React.RefObject<HTMLDivElement>) {
-    const { pageIndex, setIsEnd} = usePageIndex(componentRef)
+    const { PageIndex, setIsEnd} = usePageIndex(componentRef)
     const [commentArr, setCommentArr] = useState<JSX.Element[]>([]);
 
     const deleteCommentFromFeed = async (commentId: string) => {
@@ -25,7 +25,7 @@ function useGetNewsComment(newsId: string, componentRef: React.RefObject<HTMLDiv
 
 
     useEffect(() => {
-        getNewsComment(pageIndex, newsId).then((newsComments) => {
+        getNewsComment(PageIndex, newsId).then((newsComments) => {
             const _commentArr = newsComments.map((comment) =>
                 <Comment key={comment.id} comment={comment} deleteComment={deleteCommentFromFeed} />
             );
@@ -34,7 +34,7 @@ function useGetNewsComment(newsId: string, componentRef: React.RefObject<HTMLDiv
             }
             setCommentArr([...commentArr, ..._commentArr]);
         });
-    }, [pageIndex]);
+    }, [PageIndex]);
 
     const addComment = async (text: string) => {
         return await newNewsComments(newsId, text).then((_comment) => {

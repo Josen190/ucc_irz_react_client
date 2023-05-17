@@ -12,7 +12,7 @@ export default function useGetCabinet(
     searchString: string | undefined,
     coolbac?: () => void,
 ) {
-    const { pageIndex } = usePageIndex();
+    const { PageIndex } = usePageIndex();
     const [JSXCabinets, setJSXCabinets] = useState<JSX.Element[]>([]);
     const [curentCabinet, setCurentCabinet] = useState<Cabinet | null>(null);
 
@@ -23,7 +23,7 @@ export default function useGetCabinet(
             Start: start,
             End: end,
             SearchString: searchString,
-            PageIndex: pageIndex,
+            PageIndex: PageIndex,
         }
 
         getCabinet(params).then((arrCabinet) => {
@@ -34,7 +34,7 @@ export default function useGetCabinet(
             setJSXCabinets(_JSXCabinets);
         })
 
-    }, [pageIndex]);
+    }, [PageIndex]);
 
     return {JSXCabinets, curentCabinet};
 }

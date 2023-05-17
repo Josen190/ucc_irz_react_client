@@ -16,7 +16,7 @@ function useGetNews(
     filter?: INewsFiler,
 ) {
 
-    const { pageIndex, restart, setIsEnd } = usePageIndex();
+    const { PageIndex, restart, setIsEnd } = usePageIndex();
     const [arrNews, setArrNews] = useState<JSX.Element[]>([]);
     const prevFilterRef = useRef<INewsFiler>();
 
@@ -47,7 +47,7 @@ function useGetNews(
             prevNews = [];
         }
 
-        fetchGetNews(pageIndex, filter).then(tidings => {
+        fetchGetNews(PageIndex, filter).then(tidings => {
             if (tidings.length < 10) {
                 setIsEnd(true);
             }
@@ -66,7 +66,7 @@ function useGetNews(
         })
 
         prevFilterRef.current = filter;
-    }, [pageIndex, filter]);
+    }, [PageIndex, filter]);
 
 
     const update = (news: News) => {

@@ -36,6 +36,7 @@ function UserCard() {
             </div>
             <div className="button-opportunities">
                 <Button type='button' onClick={() => navigation("./edit_info")}>Редактировать</Button>
+                <Button type='button' onClick={() => navigation("./edit_position")}>Изменить должность</Button>
                 {!isSuperAdmin && <Button type="button" onClick={() => navigation("./edit_role")}>Изменить роли</Button>}
             </div>
 

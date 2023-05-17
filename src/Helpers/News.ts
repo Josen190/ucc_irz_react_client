@@ -41,7 +41,7 @@ export default class News {
       this.id = idOrProps.id;
       this.title = idOrProps.title;
       this.clippedText = idOrProps.text;
-      this.image = idOrProps.imageId ? new Image({ id: idOrProps.imageId }) : null;
+      this.image = idOrProps.imageId ? new Image(idOrProps.imageId) : null;
       this.dateTime = new MyDate(idOrProps.dateTime);
       this.isLiked = idOrProps.isLiked;
       this.likesCount = idOrProps.likesCount;

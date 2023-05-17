@@ -7,7 +7,7 @@ import parseMyRole from "../../Helpers/parseMyRole";
 import "./UserInformation.scss";
 
 interface Props {
-    user: User | null;
+    user: User ;
 }
 
 const UserInformation = ({ user }: Props) => {

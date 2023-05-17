@@ -27,8 +27,7 @@ function EditInfo() {
     });
   }, []);
 
-  console.log(image);
-  
+
 
   const save = () => {
     if (image && image.name && image.url) {

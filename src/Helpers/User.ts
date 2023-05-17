@@ -1,5 +1,5 @@
 import MyDate from "./MyDate";
-import PropsUser, { ParamsUser } from "../Fetch/Interface/IUser";
+import PropsUser, {ParamsUser} from "../Fetch/Interface/IUser";
 import VisitingUser from "./VisitingUser";
 import Position from "./Positions";
 
@@ -14,11 +14,10 @@ export default class User extends VisitingUser {
   email: string;
   isActiveAccount: boolean;
   roles: string[];
-  positions: Position[];
+  positions: Position[] | null;
 
-  constructor(props: ParamsUser)
-  constructor(props: PropsUser)
-  constructor(props: ParamsUser | PropsUser) {
+
+  constructor(props: PropsUser){
     super({
       id: props.id,
       firstName: props.firstName,
@@ -38,30 +37,27 @@ export default class User extends VisitingUser {
     this.isActiveAccount = props.isActiveAccount;
     this.roles = props.roles;
 
-    this.positions = props.positions.map(p => {
+    this.positions = props.positions ? props.positions.map(p => {
       if (typeof p === "string") {
         return new Position(p)
       } else {
         return new Position(p)
       }
-
-    })
+    }) : null;
   }
 
-  public getParams(): ParamsUser {
-    return {
-      ...super.getParams(),
-      birthday: this.birthday.toString(),
-      aboutMyself: this.aboutMyself,
-      myDoings: this.myDoings,
-      skills: this.skills,
-      subscribersCount: this.subscribersCount,
-      subscriptionsCount: this.subscriptionsCount,
-      isSubscription: this.isSubscription,
-      email: this.email,
-      isActiveAccount: this.isActiveAccount,
-      roles: this.roles,
-      positions: this.positions.map(x => x.getType()),
-    }
-  }
+  public getParams = (): ParamsUser => ({
+    ...super.getParams(),
+    birthday: this.birthday.toString(),
+    aboutMyself: this.aboutMyself,
+    myDoings: this.myDoings,
+    skills: this.skills,
+    subscribersCount: this.subscribersCount,
+    subscriptionsCount: this.subscriptionsCount,
+    isSubscription: this.isSubscription,
+    email: this.email,
+    isActiveAccount: this.isActiveAccount,
+    roles: this.roles,
+    positions: this.positions ? this.positions.map(x => x.getType()) : null,
+  });
 }

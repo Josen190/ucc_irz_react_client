@@ -8,7 +8,7 @@ import Button from "UI/Button/Button";
 import PositionList from "Components/PositionList/PositionList";
 
 interface Props {
-  user: User | null;
+  user: User;
 }
 
 const Personal_Information = ({ user }: Props) => {

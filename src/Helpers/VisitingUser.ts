@@ -24,7 +24,7 @@ export default class VisitingUser {
     this.patronymic = props.patronymic ?? "";
     this.image = props.imageId ?
         typeof props.imageId === 'string' ?
-            new Image(props.imageId) : props.imageId
+            new Image(props.imageId) : new Image(props.imageId.id, props.imageId.url)
         : new Image();
   }
 
