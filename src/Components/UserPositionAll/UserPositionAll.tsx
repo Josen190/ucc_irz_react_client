@@ -1,7 +1,7 @@
 import React from "react";
 import {useParams} from "react-router";
 import {useNavigate} from "react-router-dom";
-import useGetPosition from "../../Hooks/useGetPositions";
+import useGetUserPosition from "../../Hooks/useGetUserPositions";
 
 function userPositionAll() {
     const {userId} = useParams();
@@ -11,7 +11,7 @@ function userPositionAll() {
         return <></>;
     }
 
-    const userPositionJSX = useGetPosition(userId)
+    const userPositionJSX = useGetUserPosition(userId)
 
 
     return (

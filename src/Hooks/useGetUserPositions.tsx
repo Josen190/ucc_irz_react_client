@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import getUserPosition from "Fetch/getUserPosition";
 import RowUserPosition from "../Components/RowUserPosition/RowUserPosition";
 
-function useGetPosition(userId: string) {
+function useGetUserPosition(userId: string) {
     const [userPositionJSX, setUserPosition] = useState<JSX.Element[]>([]);
 
 
@@ -19,4 +19,4 @@ function useGetPosition(userId: string) {
     return userPositionJSX;
 }
 
-export default useGetPosition;
+export default useGetUserPosition;

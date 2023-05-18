@@ -17,6 +17,7 @@ import {FormNewEvent, OpenEvent} from "Modules/Calendar";
 import {CreateTidings} from "Modules/News";
 import {FormEditInfoUser, FormEditRole, FormEditUserPosition, FormNewUser, UserCard} from "Modules/AdimnsrateUser";
 import UserPositionAll from "./Components/UserPositionAll/UserPositionAll";
+import {TablesPosition} from "Modules/AdimnsratePosition";
 
 
 
@@ -126,8 +127,8 @@ const router = createBrowserRouter(
           ]
         },
         {
-          path: "role",
-          element: <div />,
+          path: "positions",
+          element: <TablesPosition />,
         },
       ],
     },
