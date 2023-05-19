@@ -7,7 +7,7 @@ import "./TablesUser.scss"
 function TablesUser() {
 
 
-    const rowUser = useGetUsers();
+    const rowUser = useGetUsers(undefined, );
 
     return (
         <div className="table-users-container">
