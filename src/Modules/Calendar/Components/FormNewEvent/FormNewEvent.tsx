@@ -137,7 +137,7 @@ export default function FormNewEvent(): JSX.Element {
         </div>
         <div>
           <Button type="button" onClick={() => newEvent()}>
-            Сохранить
+            Создать
           </Button>
         </div>
       </div>

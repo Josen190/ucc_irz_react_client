@@ -9,13 +9,13 @@ import useGetUser from '../../Hooks/useGetUser';
 import {ConstSuperAdmin} from "../../../../Constatnts/role";
 import {Outlet, useNavigate} from "react-router-dom";
 import {useParams} from "react-router";
+import putActiveAccount from "../../Fetch/putActiveAccount";
 
 
 function UserCard() {
     const {userId} = useParams<{userId: string}>()
     const navigation = useNavigate();
     if (!userId){
-
         navigation("/admin/staff");
         return <></>
     }
@@ -38,6 +38,9 @@ function UserCard() {
                 <Button type='button' onClick={() => navigation("./edit_info")}>Редактировать</Button>
                 <Button type='button' onClick={() => navigation("./edit_position")}>Изменить должность</Button>
                 {!isSuperAdmin && <Button type="button" onClick={() => navigation("./edit_role")}>Изменить роли</Button>}
+                <Button type='button' onClick={() => putActiveAccount(userId, !user?.isActiveAccount)}>
+                    {user?.isActiveAccount ? "Дизактивировать аккаунт" : "Активировать аккаунт"}
+                </Button>
             </div>
 
 

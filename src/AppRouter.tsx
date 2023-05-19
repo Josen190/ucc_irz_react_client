@@ -18,6 +18,7 @@ import {CreateTidings} from "Modules/News";
 import {FormEditInfoUser, FormEditRole, FormEditUserPosition, FormNewUser, UserCard} from "Modules/AdimnsrateUser";
 import UserPositionAll from "./Components/UserPositionAll/UserPositionAll";
 import {TablesPosition} from "Modules/AdimnsratePosition";
+import FormPasswordRecovery from "./Modules/PasswordRecovery/Components/FormPasswordRecovery";
 
 
 
@@ -136,6 +137,10 @@ const router = createBrowserRouter(
       path: "login",
       element: <Auth />,
     },
+    {
+      path: "password_recovery",
+      element: <FormPasswordRecovery />
+    }
   ],
   { basename: "/" }
 );
