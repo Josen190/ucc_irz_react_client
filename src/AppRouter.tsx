@@ -13,7 +13,7 @@ import Messenger from "Pages/Messenger/Messenger";
 import Setting from "Modules/Setting";
 import Staff from "Pages/Staff/Staff";
 import { Chat } from "Modules/Messenger";
-import {FormNewEvent, OpenEvent} from "Modules/Calendar";
+import {FormAllCabinet, FormNewEvent, OpenEvent} from "Modules/Calendar";
 import {CreateTidings} from "Modules/News";
 import {FormEditInfoUser, FormEditRole, FormEditUserPosition, FormNewUser, UserCard} from "Modules/AdimnsrateUser";
 import UserPositionAll from "./Components/UserPositionAll/UserPositionAll";
@@ -77,6 +77,10 @@ const router = createBrowserRouter(
             {
               path: "new_event",
               element: <FormNewEvent />,
+            },
+            {
+              path: "cabinets",
+              element: <FormAllCabinet />
             },
             {
               path: "event/:eventId",
@@ -146,5 +150,3 @@ const router = createBrowserRouter(
 );
 
 export default router;
-
-// старая версия
