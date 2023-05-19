@@ -54,7 +54,7 @@ export default function Tidings({ tidings, deletElement }: Props) {
         </div>
         <Content
           title={tidings.title}
-          text={tidings.clippedText}
+          text={tidings.text}
           image={tidings.image}
           isClipped={tidings.isClipped}
           id={tidings.id}
