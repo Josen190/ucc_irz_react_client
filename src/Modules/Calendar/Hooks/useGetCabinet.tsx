@@ -4,26 +4,27 @@ import getCabinet from "../Fetch/getCabinet";
 import MyDate from "Helpers/MyDate";
 import Cabinet from "Helpers/Cabinet";
 import RowCabinetInForm from "../Components/RowCabinetInForm/RowCabinetInForm";
+import CabinetCard from "../Components/CabinetCard/CabinetCard";
 
-export default function useGetCabinet(
+function useGetCabinet(
     freeOnly: boolean,
-    start: MyDate,
-    end: MyDate,
-    searchString: string | undefined,
+    searchString?: string,
+    start?: MyDate,
+    end?: MyDate,
     coolbac?: () => void,
 ) {
-    const { pageIndex } = usePageIndex();
+    const { PageIndex } = usePageIndex();
     const [JSXCabinets, setJSXCabinets] = useState<JSX.Element[]>([]);
     const [curentCabinet, setCurentCabinet] = useState<Cabinet | null>(null);
 
     useEffect(() => {
 
         const params = {
-            FreeOnly: freeOnly,
+            // FreeOnly: freeOnly,
             Start: start,
             End: end,
             SearchString: searchString,
-            PageIndex: pageIndex,
+            PageIndex: PageIndex,
         }
 
         getCabinet(params).then((arrCabinet) => {
@@ -34,7 +35,9 @@ export default function useGetCabinet(
             setJSXCabinets(_JSXCabinets);
         })
 
-    }, [pageIndex]);
+    }, [PageIndex]);
 
     return {JSXCabinets, curentCabinet};
 }
+
+export default useGetCabinet;

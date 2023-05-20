@@ -13,9 +13,12 @@ import Messenger from "Pages/Messenger/Messenger";
 import Setting from "Modules/Setting";
 import Staff from "Pages/Staff/Staff";
 import { Chat } from "Modules/Messenger";
-import {FormNewEvent, OpenEvent} from "Modules/Calendar";
+import {FormAllCabinet, FormNewEvent, OpenEvent} from "Modules/Calendar";
 import {CreateTidings} from "Modules/News";
-import {FormEditInfoUser, FormEditRole, FormNewUser, UserCard} from "Modules/AdimnsrateUser";
+import {FormEditInfoUser, FormEditRole, FormEditUserPosition, FormNewUser, UserCard} from "Modules/AdimnsrateUser";
+import UserPositionAll from "./Components/UserPositionAll/UserPositionAll";
+import {TablesPosition} from "Modules/AdimnsratePosition";
+import FormPasswordRecovery from "./Modules/PasswordRecovery/Components/FormPasswordRecovery";
 
 
 
@@ -32,6 +35,10 @@ const router = createBrowserRouter(
             {
               path: "new_news",
               element:  <CreateTidings />,
+            },
+            {
+              path: "positions",
+              element:  <UserPositionAll />,
             }
           ]
         },
@@ -72,6 +79,10 @@ const router = createBrowserRouter(
               element: <FormNewEvent />,
             },
             {
+              path: "cabinets",
+              element: <FormAllCabinet />
+            },
+            {
               path: "event/:eventId",
               element: <OpenEvent />,
             }
@@ -105,6 +116,14 @@ const router = createBrowserRouter(
                   path: "edit_role",
                   element: <FormEditRole />
                 },
+                {
+                  path: "edit_position",
+                  element: <FormEditUserPosition />
+                },
+                {
+                  path: "positions",
+                  element:  <UserPositionAll />,
+                }
               ]
             },{
             path: "new_staff",
@@ -113,8 +132,8 @@ const router = createBrowserRouter(
           ]
         },
         {
-          path: "role",
-          element: <div />,
+          path: "positions",
+          element: <TablesPosition />,
         },
       ],
     },
@@ -122,10 +141,12 @@ const router = createBrowserRouter(
       path: "login",
       element: <Auth />,
     },
+    {
+      path: "password_recovery",
+      element: <FormPasswordRecovery />
+    }
   ],
   { basename: "/" }
 );
 
 export default router;
-
-// старая версия

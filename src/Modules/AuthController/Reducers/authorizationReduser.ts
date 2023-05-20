@@ -61,7 +61,7 @@ const authorizationReducer = createSlice({
                 return { ..._state, user: null }
 
             const user = new User(_state.user)
-            user.setImage(payload.image);
+            // user.setImage(payload.image);
 
             VisitingUser.setAuntificationuUser(user);
             return {

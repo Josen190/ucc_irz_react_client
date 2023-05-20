@@ -1,6 +1,4 @@
 import Image from "Helpers/Image";
-
-import PropsImage from "./Interface/IImage";
 import Queue from "Helpers/Queue";
 import fetch from "./Fetch";
 
@@ -17,10 +15,12 @@ async function getImage(id: string): Promise<Image> {
       return Promise.resolve(image);
 
   return await fetch
-      .get(url_get_images_id(id))
+      .get(url_get_images_id(id), {
+          responseType: 'blob'
+      })
       .then((response) => {
-          const _image = new Image(response.data as PropsImage)
-          hashImage.push(_image.id, _image);
+          const blob = new Blob([response.data])
+          const _image = new Image(blob, id);
           return Promise.resolve(_image);
       })
       .catch(() => Promise.reject(null));

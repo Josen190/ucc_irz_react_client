@@ -2,7 +2,7 @@ import React, { FormEvent, useState } from 'react'
 import InputField from '../../../../UI/InputField/InputField'
 import Button from '../../../../UI/Button/Button';
 import fetchAuthentication from '../../Fetch/fetchAuthentication';
-import { Navigate } from 'react-router-dom';
+import {Link, Navigate} from 'react-router-dom';
 import { useAppDispatch } from 'Hooks';
 import { authorization } from 'Modules/AuthController';
 import "./AuthorizationForm.scss"
@@ -43,7 +43,10 @@ function AuthorizationForm() {
         onSetValue={setPassword}
       />
       {errorMessege && <p className='error'>{errorMessege}</p>}
-      <Button type="submit" >Войти</Button>
+        <div className="nav-auth-form">
+            <Link to="/password_recovery">Забыли пароль?</Link>
+            <Button type="submit" >Войти</Button>
+        </div>
       {next && <Navigate to={`/account/${next}`} />}
     </form>
   )

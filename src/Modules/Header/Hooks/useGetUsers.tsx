@@ -17,7 +17,7 @@ function useGetUsers(
     componentRef: React.RefObject<HTMLDivElement>,
     {SearchString}: IFilter) {
 
-    const {pageIndex: PageIndex, restart, setIsEnd} = usePageIndex(componentRef);
+    const {PageIndex: PageIndex, restart, setIsEnd} = usePageIndex(componentRef);
 
     const [usersJsx, setUsersJsx] = useState<JSX.Element[]>([]);
     const [errorMessage, setErrorMessage] = useState<string>("Поиск...");

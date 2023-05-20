@@ -6,8 +6,7 @@ import MyDate from "./MyDate";
 export default class News {
   id: string;
   title: string;
-  clippedText: string;
-  fullText: string | undefined;
+  text: string;
   image: Image | null;
   dateTime: MyDate;
   isLiked: boolean;
@@ -26,8 +25,7 @@ export default class News {
 
       this.id = idOrProps;
       this.title = title ?? "";
-      this.clippedText = fullText ? fullText : "";
-      this.fullText = fullText ?? "";
+      this.text = fullText ? fullText : "";
       this.image = image ?? null;
       this.dateTime = new MyDate();
       this.isLiked = false;
@@ -40,8 +38,8 @@ export default class News {
     } else{
       this.id = idOrProps.id;
       this.title = idOrProps.title;
-      this.clippedText = idOrProps.text;
-      this.image = idOrProps.imageId ? new Image({ id: idOrProps.imageId }) : null;
+      this.text = idOrProps.text;
+      this.image = idOrProps.imageId ? new Image(idOrProps.imageId) : null;
       this.dateTime = new MyDate(idOrProps.dateTime);
       this.isLiked = idOrProps.isLiked;
       this.likesCount = idOrProps.likesCount;
@@ -52,4 +50,10 @@ export default class News {
     }
     
   }
+
+  public setFullText(text: string){
+    this.text += text;
+    this.isClipped = false;
+  }
+
 }

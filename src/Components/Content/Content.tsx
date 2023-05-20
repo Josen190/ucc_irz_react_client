@@ -1,29 +1,19 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 
-import Image from "../../Helpers/Image";
 import Img from "../../UI/Img/Img";
 import getFullTextOfNews from "Fetch/getFullTextOfNews";
+import News from "Helpers/News";
 
 interface PropsContent {
-  id: string;
-  title?: string;
-  isClipped?: boolean;
-  text: string;
-  image?: Image | null;
+  news: News;
 }
 
-export default function Content({
-  id,
-  title,
-  isClipped = false,
-  text,
-  image,
-}: PropsContent): JSX.Element {
+export default function Content({news}: PropsContent): JSX.Element {
   const [_isClipped, setIsClipped] = useState<boolean | null>(
-    isClipped ?? null
+      news.isClipped ?? null
   );
-  const [_text, setText] = useState<string>(text);
+  const [_text, setText] = useState<string>(news.text);
   const [formattedText, setFormattedText] = useState<JSX.Element[] | null>(
     null
   );
@@ -42,9 +32,10 @@ export default function Content({
   const getNews = (event: any) => {
     event.target.disabled = true;
     
-    getFullTextOfNews(id)
+    getFullTextOfNews(news.id)
       .then((fullText) => {
-        setText(fullText);
+        news.setFullText(fullText);
+        setText(news.text);
         setIsClipped(false);
         event.target.disabled = false;
       })
@@ -55,7 +46,7 @@ export default function Content({
 
   return (
     <div className="content">
-      {title && <h5>{title}</h5>}
+      {news.title && <h5>{news.title}</h5>}
       <div>
         {formattedText}
         {_isClipped !== null && _isClipped && (
@@ -64,7 +55,7 @@ export default function Content({
           </a>
         )}
       </div>
-      {image && <Img image={image} />}
+      {news.image && <Img image={news.image} />}
     </div>
   );
 }

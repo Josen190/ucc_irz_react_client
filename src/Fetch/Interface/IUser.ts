@@ -1,6 +1,6 @@
 import PropsImage from "./IImage";
 import PropsMinUser from "./IMinUser";
-import PropsPosition from "./IPositions";
+import IFetchPositions from "./IFetchPositions";
 
 export default interface PropsUser extends PropsMinUser {
   birthday: string;
@@ -13,10 +13,10 @@ export default interface PropsUser extends PropsMinUser {
   email: string;
   isActiveAccount: boolean;
   roles: string[];
-  positions: string[];
+  positions: IFetchPositions[] | null;
 }
 
-export interface ParamsUser extends  Omit<Omit<PropsUser, 'positions'>, 'imageId'>{
+export interface ParamsUser extends  Omit<PropsUser, 'imageId'>{
     imageId: PropsImage | null;
-    positions: PropsPosition[];
 }
+

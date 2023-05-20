@@ -13,7 +13,7 @@ async function createNews(author: VisitingUser, title: string, content: string, 
     title: title,
     text: content,
     isPublic: isPublic,
-    image: image ? image.getParamsToSend() : null,
+    image: image ? image.formData : null,
   };
 
   return await fetch.post(url_post_news, data)
