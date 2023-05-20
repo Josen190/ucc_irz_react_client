@@ -3,7 +3,7 @@ import Button from 'UI/Button/Button'
 import React, { useEffect, useState } from 'react'
 
 import "./openEvent.scss"
-import Content from 'Components/Content/Content';
+import Content from 'UI/Content/Content';
 
 import { useAppSelector } from 'Hooks';
 import { ConstSupport } from 'Constatnts/role';
