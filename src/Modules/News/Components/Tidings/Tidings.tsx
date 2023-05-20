@@ -2,12 +2,13 @@ import React, { useRef, useState } from "react";
 import News from "Helpers/News";
 import UserVisitingCard from "Components/UserVisitingCard/UserVisitingCard";
 import Button from "UI/Button/Button";
-import Content from "Components/Content/Content";
+import Content from "UI/Content/Content";
 import Like from "../Like/Like";
 import CommentsIcon from "../CommentsIcon/CommentsIcon";
 import CommentFeed from "Modules/CommentFeed";
 import { useAppSelector } from "Hooks";
 import { ConstSupport } from "Constatnts/role";
+import ContentNews from "../ContentNews/ContentNews";
 
 
 
@@ -52,13 +53,7 @@ export default function Tidings({ tidings, deletElement }: Props) {
             </div>
           )}
         </div>
-        <Content
-          title={tidings.title}
-          text={tidings.text}
-          image={tidings.image}
-          isClipped={tidings.isClipped}
-          id={tidings.id}
-        ></Content>
+        <ContentNews news={tidings}></ContentNews>
         <div className="row">
           <Like
             likesCount={tidings.likesCount}
