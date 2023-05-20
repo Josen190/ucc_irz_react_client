@@ -2,7 +2,6 @@ import React, { useRef, useState } from "react";
 import News from "Helpers/News";
 import UserVisitingCard from "Components/UserVisitingCard/UserVisitingCard";
 import Button from "UI/Button/Button";
-import Content from "UI/Content/Content";
 import Like from "../Like/Like";
 import CommentsIcon from "../CommentsIcon/CommentsIcon";
 import CommentFeed from "Modules/CommentFeed";
