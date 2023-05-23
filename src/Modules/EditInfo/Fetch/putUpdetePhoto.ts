@@ -5,8 +5,14 @@ import Image from "Helpers/Image";
 async function putUpdetePhoto(
     image: Image
 ) {
+    if (!image.blob) return Promise.reject();
+
+    const formData = new FormData();
+    const file = new File([image.blob], image.name ?? '')
+    formData.append("Image", file);
+
     return await fetch
-        .put(url_put_users_me_update_photo, image.formData, {
+        .put(url_put_users_me_update_photo, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }

@@ -7,7 +7,7 @@ export default class Image {
   name?: string;
   url?: string;
   isConst: boolean;
-  readonly formData = new FormData();
+  blob?: Blob;
 
   constructor()
   constructor(imageId: string)
@@ -28,6 +28,7 @@ export default class Image {
         }
       }else{
         this.id = param2 ?? Guid.newGuid().toString();
+        this.blob = pram1;
         this.url = URL.createObjectURL(pram1);
       }
       this.isConst = false;
@@ -36,7 +37,6 @@ export default class Image {
 
   public setUrl(file: File) {
     this.url = URL.createObjectURL(file);
-    this.formData.append(this.name ?? "file", file);
   }
 
   public setId(id: string){
@@ -44,8 +44,7 @@ export default class Image {
   }
 
   public static getImg(file: File) {
-    console.log(new Blob([file]))
-    const img = new Image(Guid.newGuid().toString())
+    const img = new Image(new Blob([file]), Guid.newGuid().toString())
     img.setUrl(file)
     return img;
   }
