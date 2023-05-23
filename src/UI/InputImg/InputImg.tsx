@@ -49,7 +49,7 @@ export default function InputImg({ view, setImageApi }: Props) {
   return (
     <div className={"input-img" + " view-" + view}>
       <div className={className}>
-        <img src={image?.url} />
+        <img src={image?.url} alt={image?.name}/>
       </div>
       <div className={"img-"+view}>
         <label>
