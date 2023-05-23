@@ -10,13 +10,13 @@ import {url_post_news} from "Constatnts/url";
 async function createNews(author: VisitingUser, title: string, content: string, isPublic: boolean, image?: Image): Promise<News> {
 
     const data = new FormData();
-    data.append('Title', title); // Установите значение заголовка
-    data.append('Text', content); // Установите значение текста
-    if (image && image.blob) {
-        const file = new File([image.blob], 'logo.png', { type: 'image' })
+    data.append('Title', title);
+    data.append('Text', content);
+    if (image) {
+        const file = new File([image.blob], image.name, { type: image.file?.type })
         data.append('Image', file);
-    } // Добавьте двоичные данные изображения
-    data.append('IsPublic', String(isPublic)); // Установите значение IsPublic
+    }
+    data.append('IsPublic', String(isPublic));
 
 
 

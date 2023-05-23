@@ -4,19 +4,20 @@ import {Guid} from "guid-ts";
 
 export default class Image {
   id: string;
-  name?: string;
+  name: string;
   url?: string;
   isConst: boolean;
-  blob?: Blob;
+  blob = new Blob();
+  file?: File;
 
   constructor()
   constructor(imageId: string)
   constructor(imageId: string, url?: string)
   constructor(blob: Blob, imageId: string)
   constructor(pram1?: Blob | string, param2?: string) {
+    this.name = "init_img";
     if (!pram1) {
       this.id = Guid.newGuid().toString();
-      this.name = "init_img";
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       this.url = require("Assets/init_img.jpg").toString() as string;
       this.isConst = true;
@@ -46,6 +47,8 @@ export default class Image {
   public static getImg(file: File) {
     const img = new Image(new Blob([file]), Guid.newGuid().toString())
     img.setUrl(file)
+    img.name = file.name;
+    img.file = file;
     return img;
   }
 

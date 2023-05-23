@@ -21,7 +21,7 @@ export default function InputImg({ view, setImageApi }: Props) {
 
     const _image = Image.getImg(file);
     setImage(_image);
-
+    setImageApi(_image);
     // Image.toBase64(file).then(image => {
     //   setImage(image);
     //   setImageApi(image);
