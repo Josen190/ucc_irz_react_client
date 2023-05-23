@@ -5,6 +5,7 @@ import { useState } from "react";
 import Image from "Helpers/Image";
 import "./CreateTidings.scss";
 import {useNavigate, useOutletContext} from "react-router-dom";
+import InputImg from "UI/InputImg/InputImg";
 
 export default function CreateTidings() {
   const newNews = useOutletContext() as ((title: string, content: string, isGlobal: boolean, image?: Image) =>  Promise<void>);
@@ -16,14 +17,12 @@ export default function CreateTidings() {
 
   const navigate = useNavigate()
 
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!event.target.files) return;
-    const file = event.target.files.item(0);
-    if (!file) return;
-    Image.toBase64(file).then((result) => {
-      setImages(result);
-    });
-  };
+  // const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (!event.target.files) return;
+  //   const file = event.target.files.item(0);
+  //   if (!file) return;
+  //   Image.setUrl(file);
+  // };
 
   return (
     <div
@@ -57,15 +56,17 @@ export default function CreateTidings() {
             setContent(event.target.value)
           }}
         />
-        <label>
-          Добавить картинки:
-          <input type="file" onChange={handleImageChange} />
-        </label>
-        <ul>
-          {images && (
-            <img className="image" src={images.data} alt="Новость" />
-          )}
-        </ul>
+
+        <InputImg view="news" setImageApi={setImages}></InputImg>
+        {/*<label>*/}
+        {/*  Добавить картинки:*/}
+        {/*  <input type="file" onChange={handleImageChange} />*/}
+        {/*</label>*/}
+        {/*<ul>*/}
+        {/*  {images && (*/}
+        {/*    <img className="image" src={images.url} alt="Новость" />*/}
+        {/*  )}*/}
+        {/*</ul>*/}
 
         <InputField type="checkbox"
           title="Глобальная новость"

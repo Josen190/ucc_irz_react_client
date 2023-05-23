@@ -3,7 +3,7 @@ import "./BlockInfo.scss"
 
 interface Props {
   title: string;
-  value: string | JSX.Element | null;
+  value: string | JSX.Element | null | undefined;
 }
 
 export default function BlockInfo({ title, value }: Props) {

@@ -5,7 +5,7 @@ import ImageOutline from "../../Assets/icons/ImageOutline";
 
 interface Props {
   setImageApi: (image: Image | null) => unknown;
-  view: "avatar" | "messenger"
+  view: "avatar" | "messenger" | "news"
 }
 
 export default function InputImg({ view, setImageApi }: Props) {
@@ -19,13 +19,16 @@ export default function InputImg({ view, setImageApi }: Props) {
       return;
     }
 
-    Image.toBase64(file).then(image => {
-      setImage(image);
-      setImageApi(image);
-    }).catch(() => {
-      setImage(null);
-      setImageApi(null);
-    })
+    const _image = Image.getImg(file);
+    setImage(_image);
+
+    // Image.toBase64(file).then(image => {
+    //   setImage(image);
+    //   setImageApi(image);
+    // }).catch(() => {
+    //   setImage(null);
+    //   setImageApi(null);
+    // })
 
   }
   const className = `preview-${view}`;
@@ -36,6 +39,9 @@ export default function InputImg({ view, setImageApi }: Props) {
       break;
     case "messenger":
       title = <ImageOutline />;
+      break;
+    case "news":
+      title = "Добавить картинки:"
       break;
   }
 

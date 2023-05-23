@@ -3,15 +3,18 @@ import fetch from "Fetch/Fetch";
 import Image from "Helpers/Image";
 
 async function putUpdetePhoto(
-    name: string, extension: string, data: string
+    image: Image
 ) {
     return await fetch
-        .put(url_put_users_me_update_photo, {
-            name, extension, data
+        .put(url_put_users_me_update_photo, image.formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
         })
         .then((response) => {
             const id = response.data as string
-            return Promise.resolve(new Image({ id, name, extension, data }))
+            image.setId(id);
+            return Promise.resolve(image)
         })
         .catch(() => Promise.reject(null));
 }

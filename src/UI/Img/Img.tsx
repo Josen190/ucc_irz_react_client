@@ -10,7 +10,7 @@ function Img({ image }: Props) {
   const [_image, setImage] = useState(image);
 
   useEffect(() => {
-    if (_image.data && _image.extension) return;
+    if (_image.url) return;
     getImage(_image.id)
         .then(image => setImage(image))
         .catch(() => setImage(new Image()));
@@ -19,7 +19,7 @@ function Img({ image }: Props) {
 
   return (
     <img
-      src={`data:${_image.extension};base64,${_image.data}`}
+      src={_image.url}
       alt={_image.name}
     ></img>
   );

@@ -16,7 +16,7 @@ async function getUsers(
         PageSize: pageSize,
     };
     if (searchString) params.SearchString = searchString;
-    if (isActive) params.IsActive = isActive;
+    if (typeof isActive !== 'undefined') params.IsActive = isActive;
     if (role) params.Role = role;
     if (positionId) params.PositionId = positionId;
 

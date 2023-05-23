@@ -9,12 +9,12 @@ function useGetUsers(
    searchString?: string, isActive?: boolean, role?: string, positionId?: string) {
 
     const [rowUser, setRowUser] = useState<JSX.Element[]>([])
-    const {pageIndex, setIsEnd} = usePageIndex();
+    const {PageIndex, setIsEnd} = usePageIndex();
 
 
 
     useEffect(() => {
-        getUsers(pageIndex, searchString, isActive, role, positionId).then((users) => {
+        getUsers(PageIndex, searchString, isActive, role, positionId).then((users) => {
             const _rowUser: JSX.Element[] = [...rowUser];
             if (users.length < 10){
                 setIsEnd(true);
@@ -25,7 +25,7 @@ function useGetUsers(
             }))
             setRowUser(_rowUser)
         })
-    }, [pageIndex])
+    }, [PageIndex])
 
     return rowUser;
 }

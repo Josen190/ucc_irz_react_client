@@ -6,23 +6,23 @@ import Cabinet from "Helpers/Cabinet";
 import MyDate from "Helpers/MyDate";
 
 interface IParams{
-    FreeOnly: boolean,
-    Start: MyDate,
-    End: MyDate,
-    SearchString: string | undefined,
+    // FreeOnly: boolean,
+    Start?: MyDate,
+    End?: MyDate,
+    SearchString?: string,
     PageIndex: number,
     PageSize?: number,
 }
 
-async function getCabinet({FreeOnly, Start, End, PageIndex, SearchString, PageSize = 10 }: IParams) {
+async function getCabinet({Start, End, PageIndex, SearchString, PageSize = 10 }: IParams) {
     const params: {[keys: string]: string | number | boolean} = {
-        FreeOnly, 
-        Start: Start.toISOString(), 
-        End: End.toISOString(), 
         PageIndex,
         PageSize, 
     }
+    // if (typeof FreeOnly !== 'undefined') params.FreeOnly = FreeOnly;
     if (SearchString) params.SearchString = SearchString;
+    if (Start) params.Start = Start.toISOString();
+    if (End) params.End = End.toISOString();
 
     return fetch.get(url_get_cabinets, {params}).then((response) => {
         const _arrCabinet: Cabinet[] = [];

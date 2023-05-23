@@ -6,9 +6,10 @@ import User from "../../../../Helpers/User";
 import DetailedInfo from "../DetailedInfo/DetailedInfo";
 import Button from "UI/Button/Button";
 import PositionList from "Components/PositionList/PositionList";
+import {useNavigate} from "react-router-dom";
 
 interface Props {
-  user: User | null;
+  user: User;
 }
 
 const Personal_Information = ({ user }: Props) => {
@@ -21,11 +22,15 @@ const Personal_Information = ({ user }: Props) => {
 
   const isDetailedInfo = (myself || iDid || skills);
 
+  const navigate = useNavigate();
+
   return (
     <div className="column">
       <h2>{fio}</h2>
       <BlockInfo title="Дата рождения" value={birthday} />
-      <BlockInfo title="Должности" value={<PositionList positions={user ? user.positions : null} />} />
+      <div onClick={() => navigate("./positions")}>
+          <BlockInfo title="Должности" value={<PositionList positions={user ? user.positions : null} />} />
+      </div>
       {!active && isDetailedInfo && (
         <Button
           type="button"

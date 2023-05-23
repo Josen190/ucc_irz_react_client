@@ -5,5 +5,5 @@ export default interface PropsMinUser {
   firstName: string;
   surname: string;
   patronymic: string | null;
-  imageId: string | null | PropsImage;
+  imageId: null | string | PropsImage;
 }

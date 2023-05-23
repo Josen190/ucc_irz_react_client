@@ -71,7 +71,10 @@ export const url_post_likes_unlike_news_entry =
 export const url_get_positions = "/api/positions";
 export const url_post_positions = "/api/positions";
 export const url_put_positions_id = (id: string) => {
-  return `/api/positions${id}`;
+  return `/api/positions/${id}`;
+};
+export const url_delete_positions_id = (id: string) => {
+  return `/api/positions/${id}`;
 };
 export const url_post_positions_add_pos_to_user =
   "/api/positions/add_pos_to_user";

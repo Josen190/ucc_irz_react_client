@@ -5,9 +5,10 @@ import BlockInfo from "UI/BlockInfo/BlockInfo";
 import React from "react";
 import parseMyRole from "../../Helpers/parseMyRole";
 import "./UserInformation.scss";
+import {useNavigate} from "react-router-dom";
 
 interface Props {
-    user: User | null;
+    user: User ;
 }
 
 const UserInformation = ({ user }: Props) => {
@@ -21,6 +22,7 @@ const UserInformation = ({ user }: Props) => {
     const achievements = user ? user.skills : null; //??????????????????????
     const skillsAndCompetencies = user ? user.skills : null;
 
+    const navigate = useNavigate();
 
     return (
         <div className="user-info">
@@ -30,7 +32,9 @@ const UserInformation = ({ user }: Props) => {
                     <BlockInfo title="Роли" value={role} />
                     <BlockInfo title="Почта" value={email} />
                     <BlockInfo title="Дата рождения" value={birthday} />
-                    <BlockInfo title="Должности" value={<PositionList positions={user ? user.positions : null} />} />
+                    <div onClick={() => navigate("./positions")}>
+                        <BlockInfo title="Должности" value={<PositionList positions={user ? user.positions : null} />} />
+                    </div>
                 </div>
                 <div>
                     <BlockInfo title="о себе" value={myself} />

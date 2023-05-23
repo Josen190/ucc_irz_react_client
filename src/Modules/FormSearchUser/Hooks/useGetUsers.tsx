@@ -18,12 +18,12 @@ function useGetUsers(SearchString: string | undefined) {
         IsActive: undefined,
         SearchString: SearchString,
     });
-    const { pageIndex, } = usePageIndex()
+    const { PageIndex, } = usePageIndex()
     const { users, selectedUsers, addUsers } = useSelectedUsers();
 
     useEffect(() => {
-        getUsers({ ...filter, PageIndex: pageIndex }).then(addUsers);
-    }, [pageIndex, filter]);
+        getUsers({ ...filter, PageIndex: PageIndex }).then(addUsers);
+    }, [PageIndex, filter]);
 
     return {users, selectedUsers}
 }

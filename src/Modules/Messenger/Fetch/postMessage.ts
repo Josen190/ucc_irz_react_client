@@ -6,7 +6,7 @@ async function postMessages(userId: string, myId: string, text: string, image: I
     const data = {
         userId,
         text,
-        Image: image ? image.getParamsToSend() : null,
+        Image: image ? image.formData : null,
     }
 
     return fetch.post(url_post_messenger_messages, data);
