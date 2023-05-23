@@ -7,7 +7,7 @@ interface PropsButton {
   type: "button" | "link" | "submit";
   stale?: "basic" | "link";
   title?: string;
-  color?: "basic" | "red" | "mini";
+  color?: "basic" | "red" | "mini" | "red-reverse";
   disabled?: boolean;
   onClick?: OnClickHandler;
   children?: string | JSX.Element | JSX.Element[];
