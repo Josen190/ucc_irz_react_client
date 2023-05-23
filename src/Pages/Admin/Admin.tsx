@@ -22,7 +22,8 @@ export default function Admin() {
     <div className="admin-page">
       <Menu>
         <MenuLink href="/admin/staff">Сотрудники</MenuLink>
-        <MenuLink href="/admin/positions">Должности</MenuLink>
+          <MenuLink href="/admin/positions">Должности</MenuLink>
+          <MenuLink href="/news">Назад</MenuLink>
       </Menu>
       <div>
         <Outlet />
