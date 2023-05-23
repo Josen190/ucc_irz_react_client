@@ -30,17 +30,21 @@ export default function ProfileNavigation({ isLogin, userID, isSubcribe }: Props
         </Button>
       )}
       {!isLogin && (
-        <Button
-          type="button"
-          color={_isSubcribe ? "basic" : "red"}
-          onClick={() => _isSubcribe ? unsubscribe(userID, setIsSubcribe) : subscribe(userID, setIsSubcribe)}
-        >
-          {_isSubcribe ? "Отписаться" : "Подписаться"}
-        </Button>
+          <>
+              <Button
+                  type="button"
+                  color={_isSubcribe ? "basic" : "red"}
+                  onClick={() => _isSubcribe ? unsubscribe(userID, setIsSubcribe) : subscribe(userID, setIsSubcribe)}
+              >
+                  {_isSubcribe ? "Отписаться" : "Подписаться"}
+              </Button>
+              <Button type="button" onClick={newMessenge} color="mini">
+                  Написать сообщение
+              </Button>
+          </>
       )}
-      <Button type="button" onClick={newMessenge} color="mini">
-        Написать сообщение
-      </Button>
+
+
     </div>
   );
 }
