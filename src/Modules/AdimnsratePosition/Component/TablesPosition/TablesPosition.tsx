@@ -8,9 +8,9 @@ function TablesPosition() {
     const {positionsJSX, newPosition} = useGetPositions();
 
     return (
-        <div className="table-users-container">
+        <div className="table-position-container">
             <HeaderTablesPosition newPosition={newPosition}/>
-            <table className='table-users tile'>
+            <table className='table-position tile'>
                 <tbody>
                     {positionsJSX}
                 </tbody>
