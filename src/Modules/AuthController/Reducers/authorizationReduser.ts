@@ -67,11 +67,27 @@ const authorizationReducer = createSlice({
             return {
                 ..._state, user: user.getParams()
             }
-        }
+        },
+
+        logOut() {
+            localStorage.jwt = 'null';
+            localStorage.refreshToken = 'null';
+            return {
+                isLogin: false,
+                jwt: null,
+                refreshToken: null,
+                user: null
+            }
+        },
+
     }
 })
 
 
 
-export const { authorization, setUserImage } = authorizationReducer.actions
+export const {
+    authorization,
+    setUserImage ,
+    logOut,
+} = authorizationReducer.actions
 export default authorizationReducer.reducer
