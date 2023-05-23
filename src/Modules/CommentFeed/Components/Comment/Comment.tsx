@@ -3,7 +3,7 @@ import Button from "../../../../UI/Button/Button";
 import UserVisitingCard from "../../../../Components/UserVisitingCard/UserVisitingCard";
 import NewsComments from "../../../../Helpers/NewsComments";
 import VisitingUser from "Helpers/VisitingUser";
-import Content from "Components/Content/Content";
+import Content from "UI/Content/Content";
 
 interface Props {
   comment: NewsComments;
@@ -23,7 +23,7 @@ export default function Comment({ comment, deleteComment }: Props) {
           </Button>
         )}
       </div>
-      <Content id={comment.id} text={comment.text ?? ''}></Content>
+      <Content text={comment.text}></Content>
     </div>
   );
 }

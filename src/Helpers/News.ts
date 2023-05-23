@@ -4,17 +4,17 @@ import VisitingUser from "./VisitingUser";
 import MyDate from "./MyDate";
 
 export default class News {
-  id: string;
-  title: string;
-  text: string;
-  image: Image | null;
-  dateTime: MyDate;
-  isLiked: boolean;
-  likesCount: number;
-  author: VisitingUser;
-  isPublic: boolean;
-  commentCount: number;
-  isClipped: boolean;
+  public readonly id: string;
+  public title: string;
+  public text: string;
+  public image: Image | null;
+  public readonly dateTime: MyDate;
+  public isLiked: boolean;
+  public likesCount: number;
+  public readonly author: VisitingUser;
+  public readonly isPublic: boolean;
+  public commentCount: number;
+  public isClipped: boolean;
 
   constructor(id: string, title: string, fullText: string, isPublic: boolean, author: VisitingUser, image?: Image)
   constructor(props: PropsNews) 
@@ -52,7 +52,8 @@ export default class News {
   }
 
   public setFullText(text: string){
-    this.text += text;
+    // this.text += text;
+    this.text = text;
     this.isClipped = false;
   }
 
