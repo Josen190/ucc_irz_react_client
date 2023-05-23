@@ -70,7 +70,7 @@ export default function FormNewEvent(): JSX.Element {
         <div>
           <InputField
             type="date"
-            value={day?.DatetoStr("yyyy-mm-dd")}
+            defaultValue={day?.DatetoStr("yyyy-mm-dd")}
             onChange={(event) => {
               setDate(new MyDate(event.target.value));
             }}

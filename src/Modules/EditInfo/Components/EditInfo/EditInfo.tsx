@@ -52,7 +52,7 @@ function EditInfo() {
         type="textarea"
         title="О себе"
         placeholder="Введите информацию о себе"
-        value={myself}
+        defaultValue={myself}
         onChange={(event: unknown) => {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
@@ -63,7 +63,7 @@ function EditInfo() {
         type="textarea"
         title="Чем занимался"
         placeholder="Введите чем вы занимались"
-        value={iDid}
+        defaultValue={iDid}
         onChange={(event: unknown) => {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
@@ -74,7 +74,7 @@ function EditInfo() {
         type="textarea"
         title="Навыки"
         placeholder="Расскажите о ваших навыках "
-        value={skills}
+        defaultValue={skills}
         onChange={(event: unknown) => {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore

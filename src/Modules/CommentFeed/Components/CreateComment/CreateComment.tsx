@@ -16,7 +16,7 @@ export default function CreateComment({ addComment }: Props) {
     }}>
       <InputField
         type="textarea"
-        value={text}
+        defaultValue={text}
         onSetValue={setText}
       />
       <Button type="submit">Добавть</Button>

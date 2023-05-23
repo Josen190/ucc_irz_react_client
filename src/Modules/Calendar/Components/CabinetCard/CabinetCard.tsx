@@ -16,7 +16,7 @@ function CabinetCard(props: Props) {
         <tr className="row-cabinet">
             <td>
                 {!isEdit && <p>{name}</p>}
-                {isEdit && <InputField type="text" value={name} onSetValue={setName} placeholder="Название должности"/> }
+                {isEdit && <InputField type="text" defaultValue={name} onSetValue={setName} placeholder="Название должности"/> }
             </td>
             <td>
                 {!isEdit && <Button type="button" onClick={() => setIsEdit(true)}>Изменить</Button>}
