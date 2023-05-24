@@ -1,30 +1,38 @@
-import PropsEvent from "../Fetch/Interface/IEvent";
 import VisitingUser from "./VisitingUser";
 import MyDate from "./MyDate";
+import Cabinet from "Helpers/Cabinet";
 
 export default class Event {
   id: string;
   creator: VisitingUser;
   title: string;
+  description?: string;
   start: MyDate;
   end: MyDate;
-  cabinetName: string| null;
-  description?: string;
-  isPublic?: boolean;
-  listeners?: VisitingUser[];
-  
+  cabinet: Cabinet | null;
+  isPublic: boolean;
+  listeners: VisitingUser[] | null;
 
 
-  constructor(props: PropsEvent) {
-    this.id = props.id;
-    this.creator = new VisitingUser(props.creator);
-    this.title = props.title;
-    this.start = new MyDate(props.start);
-    this.end = new MyDate(props.end);
-    this.cabinetName = props.cabinetName;
-
-    this.description = props.description;
-    this.isPublic = props.isPublic;
-    this.listeners = props.listeners ? props.listeners.map(p => new VisitingUser(p)) : props.listeners;
+  constructor(
+      id: string,
+      title: string,
+      start: MyDate,
+      end: MyDate,
+      isPublic: boolean,
+      creator: VisitingUser,
+      cabinet: Cabinet | null,
+      listeners: VisitingUser[] | null,
+      description?: string,
+  ) {
+    this.id = id;
+    this.creator = creator;
+    this.title = title;
+    this.start = start;
+    this.end = end;
+    this.cabinet = cabinet;
+    this.description = description;
+    this.isPublic = isPublic;
+    this.listeners = listeners;
   }
 }
