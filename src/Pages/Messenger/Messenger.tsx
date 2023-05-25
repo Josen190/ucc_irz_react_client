@@ -1,7 +1,6 @@
 import { ChatClass, ChatList } from "Modules/Messenger";
 import React, { useState } from "react";
 import { Outlet } from "react-router";
-
 import './Messenger.scss'
 
 export default function Messenger() {

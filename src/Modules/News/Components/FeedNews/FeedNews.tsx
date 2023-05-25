@@ -24,8 +24,6 @@ export default function FeedNews({
 
   const {arrNews, newNews} = useGetNews(filter);
 
-
-
   return <div className="column">
     <HeaderFeedNews isLogin={user?.id === userId && inAccount} setFilter={(v) => {setFilter({...v, AuthorId: userId})}} />
     {arrNews}

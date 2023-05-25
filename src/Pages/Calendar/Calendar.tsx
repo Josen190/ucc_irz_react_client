@@ -5,26 +5,10 @@ import MyDate from "Helpers/MyDate";
 import Button from "UI/Button/Button";
 import {Month} from "Modules/Calendar";
 
-const nameMonth = [
-  "Январь",
-  "Февраль",
-  "Март",
-  "Апрель",
-  "Май",
-  "Июнь",
-  "Июль",
-  "Август",
-  "Сентябрь",
-  "Октябрь",
-  "Ноябрь",
-  "Декабрь",
-];
-
 const Calendar = () => {
   const [date, setDate] = useState(new MyDate());
   const [selectedDay, setSelectedDay] = useState<MyDate | null>(null);
   const navigate = useNavigate();
-
 
   const nextMonth = () => {
     setDate(new MyDate(date.setMonth(date.getMonth() + 1)));
@@ -47,7 +31,7 @@ const Calendar = () => {
               {"<"}
             </Button>
             <div className="month-name">
-              <span>{nameMonth[date.getMonth()]}</span>
+              <span>{MyDate.months[date.getMonth()]}</span>
               <span>{date.getFullYear()}</span>
             </div>
             <Button type="button" onClick={nextMonth}>

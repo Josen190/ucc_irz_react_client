@@ -28,8 +28,6 @@ const Like = ({ isLiked, likesCount, newsID }: Props) => {
   });
 
 
-
-
   return <div className="like-icon">
     <Button
         type="button"

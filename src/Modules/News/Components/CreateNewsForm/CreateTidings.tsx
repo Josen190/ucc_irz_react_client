@@ -17,13 +17,6 @@ export default function CreateTidings() {
 
   const navigate = useNavigate()
 
-  // const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   if (!event.target.files) return;
-  //   const file = event.target.files.item(0);
-  //   if (!file) return;
-  //   Image.setUrl(file);
-  // };
-
   return (
     <div
       className="modal"
