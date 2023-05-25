@@ -32,10 +32,10 @@ function FormEditInfoUser() {
     return (
         <div className='modal' onClick={() => navigation("../")}>
             <div className='tile' onClick={(e) => e.stopPropagation()}>
-                <InputField type='text' placeholder='Фамилия' value={firstNamem} onSetValue={setFirstName}></InputField>
-                <InputField type='text' placeholder='Имя' value={surname} onSetValue={setSurname}></InputField>
-                <InputField type='text' placeholder='Отчество' value={patronymic} onSetValue={setPatronymic}></InputField>
-                <InputField type='date' title='дата рождения' value={user.birthday.toString()} onSetValue={setBirthday} MyConstructor={MyDate} ></InputField>
+                <InputField type='text' placeholder='Фамилия' defaultValue={firstNamem} onSetValue={setFirstName}></InputField>
+                <InputField type='text' placeholder='Имя' defaultValue={surname} onSetValue={setSurname}></InputField>
+                <InputField type='text' placeholder='Отчество' defaultValue={patronymic} onSetValue={setPatronymic}></InputField>
+                <InputField type='date' title='дата рождения' defaultValue={user.birthday.toString()} onSetValue={setBirthday} MyConstructor={MyDate} ></InputField>
 
 
                 <Button type="button" onClick={save}>Сохранить</Button>

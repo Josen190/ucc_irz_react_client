@@ -28,7 +28,8 @@ interface Props<T extends s> {
       | "date"
       | "time"
       | "checkbox";
-  value?: string | boolean;
+  defaultValue?: string | boolean;
+  Value?: string | boolean;
 }
 
 export default function InputField<T extends s>({
@@ -36,7 +37,8 @@ export default function InputField<T extends s>({
   id,
   title,
   placeholder,
-  value,
+  defaultValue,
+  Value,
   maxlength,
   minlength,
   name,
@@ -83,7 +85,7 @@ export default function InputField<T extends s>({
     case "textarea": {
       const _propsTextarea = {
         ...inputProps,
-        value: value as string,
+        value: Value as string,
         isresize: true,
         rows: rows ?? 2,
       }
@@ -94,7 +96,8 @@ export default function InputField<T extends s>({
     case "checkbox": {
       const _propsCheckbox = {
         ...inputProps,
-        defaultChecked: value as boolean,
+        defaultChecked: defaultValue as boolean,
+        checked: Value as boolean,
         required: required ?? false,
       }
       input = <input type={type} {..._propsCheckbox} />;
@@ -104,10 +107,11 @@ export default function InputField<T extends s>({
     default: {
       const _propsDefault = {
         ...inputProps,
-        defaultValue: value as string,
+        defaultValue: defaultValue as string,
+        value: Value as string,
         required: required ?? false,
       }
-      input = <input type={type} {..._propsDefault} />;
+      input = <input type={type} {..._propsDefault}/>;
       break;
     }
 

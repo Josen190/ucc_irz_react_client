@@ -12,7 +12,7 @@ function HeaderTablesPosition({newPosition}: Props) {
 
 
     return (
-        <div className='header-table-users'>
+        <div className='header-table-position'>
             <InputField type="text" onSetValue={setName} placeholder="Название должности"/>
             <Button type="button" onClick={() => newPosition(name)}>
                 Добавить должность

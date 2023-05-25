@@ -40,6 +40,19 @@ $transition-time: 0.1s;
 	}
 }
 
+.color-red-reverse {
+	background: $color-gray-3;
+	border-color: $pantone-289-c;
+	color: black;
+	transition: $transition-time;
+
+	&:hover {
+		background: $pantone-200-c;
+		border-color: $pantone-187-c;
+		transition: $transition-time;
+	}
+}
+
 .color-mini {
 	background: $color-gray-1;
 	border-color: $color-gray-3;

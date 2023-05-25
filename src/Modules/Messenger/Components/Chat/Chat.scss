@@ -1,3 +1,10 @@
+$pantone-295-c: #002856;
+$pantone-289-c: #1f3a60;
+$color-gray-1: #ededed;
+$color-gray-3: #e0e0e0;
+$pantone-200-c: #c11727;
+$pantone-187-c: #ae1926;
+
 .chat {
     display: grid;
     grid-template-rows: 30px calc(100vh - 20px - 90px - 10px - 30px - 50px) 50px;
@@ -32,6 +39,20 @@
 
         }
 
+        .button-container{
+
+
+
+            .button {
+                border: 0;
+                background: white;
+                color: black;
+
+                &:hover{
+                    background: none;
+                }
+            }
+        }
 
     }
 }

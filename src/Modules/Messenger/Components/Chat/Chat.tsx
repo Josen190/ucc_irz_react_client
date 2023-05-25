@@ -29,7 +29,8 @@ export default function Chat() {
     if (!textSendMessage) return;
 
     sendNewMessage(chat.recipient.id, myId, textSendMessage, imageSendMessage);
-    // setTextSendMessage(undefined);
+    setTextSendMessage('');
+    setImageSendMessage(null);
   }
 
   return (
@@ -42,8 +43,8 @@ export default function Chat() {
         {messages}
       </div>
       <div className="input-message">
-        <InputField type="text" placeholder="ведите сообщение" value={textSendMessage} onSetValue={setTextSendMessage}></InputField>
-        <InputImg view="messenger" setImageApi={(img) => setImageSendMessage(img)}></InputImg>
+        <InputField type="text" placeholder="ведите сообщение" Value={textSendMessage} onSetValue={setTextSendMessage}></InputField>
+        <InputImg view="messenger" setImageApi={(img) => setImageSendMessage(img)} value={imageSendMessage}/>
         <Button type="button" onClick={send}><PaperPlaneOutline></PaperPlaneOutline></Button>
       </div>
     </div>

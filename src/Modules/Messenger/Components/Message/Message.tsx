@@ -22,14 +22,14 @@ export default function Message({ message, deleteMessage}: Props) {
 
   return (
     <div className={`message ${isMy ? "my" : ''}`}>
-      {/* <Avatar type="mini" /> */}
-      <div className="column">
+       {/*<Avatar type="mini" /> */}
+      <div className="message-main">
         <div className="head">
           <Link to={`/account/${message.senderId}`}>{senderName}</Link>
           <span>{message.dateTime.DatetoStr('dd-months-yyyy hh:mm')}</span>
-          {isMy && <Button type="button" onClick={() => deleteMessage(message.id)}>Удалить</Button>}
+          {isMy && <Button type="button" color="red-reverse" onClick={() => deleteMessage(message.id)}>Удалить</Button>}
         </div>
-        <div>
+        <div className="content">
           {message.text}
           {message.image && <Img image={message.image}></Img>}
         </div>

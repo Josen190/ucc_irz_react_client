@@ -18,6 +18,8 @@ function useGetMessages(
 
 
     const deleteMessageInArr = (messageId: string) => {
+        if (!confirm("Удалить сообщение?")) return;
+
         deleteMessage(messageId).then(() => {
             setMessages((prev) => {
                 return prev.filter((m) => m.key !== messageId);

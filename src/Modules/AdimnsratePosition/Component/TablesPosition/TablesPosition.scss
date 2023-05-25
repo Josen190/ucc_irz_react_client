@@ -6,11 +6,15 @@ $pantone-200-c: #c11727;
 $pantone-187-c: #ae1926;
 
 
-.table-users-container{
-  width: 100%;
+.table-position-container{
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
 
-  .table-users{
+  .table-position{
     width: 100%;
+
+
     tbody{
       tr{
         margin-bottom: 2px;

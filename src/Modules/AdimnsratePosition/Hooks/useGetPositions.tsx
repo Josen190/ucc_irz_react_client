@@ -22,6 +22,8 @@ function useGetPositions(searchString?: string) {
     }
 
     const deletePositionJSX = (positionId: string) => {
+        if (!confirm("Удалить должность?")) return;
+
       deletePosition(positionId).then(() => {
           setPositionsJSX((prevState) =>
               prevState.filter((positionJsx) => positionJsx.key !== positionId)
