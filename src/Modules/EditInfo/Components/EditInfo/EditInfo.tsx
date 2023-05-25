@@ -33,6 +33,9 @@ function EditInfo() {
     if (image && image.name && image.url) {
       putUpdetePhoto(image).then((newImage) => {
         dispatch(setUserImage({image: newImage}))
+          notifySuccess("фото обновлено");
+      }).catch(() => {
+          notifyError("фото не обновлено");
       })
     }
 

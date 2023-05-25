@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import useEndOfPage from "./useEndOfPage";
 
 export default function usePageIndex(componentRef?: React.RefObject<HTMLElement>) {
-    const [PageIndex, setPageIndex] = useState(0);
+    const startIndex = 0;
+    const [PageIndex, setPageIndex] = useState(startIndex);
     const [isEnd, setIsEnd] = useState(false)
     const nextPage = () => {
         setPageIndex(PageIndex + 1);
     }
     const restart = () => {
-        setPageIndex(1);
+        setPageIndex(startIndex);
         setIsEnd(false);
     }
 

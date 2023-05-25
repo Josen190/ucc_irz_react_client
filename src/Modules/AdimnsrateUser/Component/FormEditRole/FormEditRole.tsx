@@ -9,6 +9,7 @@ import updateRoles from '../../Fetch/updateRoles';
 import { ConstSuperAdmin } from 'Constatnts/role';
 import {useNavigate, useOutletContext} from "react-router-dom";
 import User from "Helpers/User";
+import {notifySuccess} from "../../../../Components/Notifications/Notifications";
 
 
 function FormEditRole() {
@@ -21,7 +22,10 @@ function FormEditRole() {
   const { roleUser, currentRoles } = useStorageRole(user.roles);
 
   const save = () => {
-    updateRoles(user.id, user.roles, currentRoles);
+    updateRoles(user.id, user.roles, currentRoles).then(() => {
+      notifySuccess("Инхормация изменена")
+      navigation("../")
+    });
     return;
   }
 

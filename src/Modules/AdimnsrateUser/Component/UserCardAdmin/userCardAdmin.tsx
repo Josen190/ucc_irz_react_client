@@ -37,7 +37,7 @@ function UserCard() {
     return (
         <div className="UserCard-admin">
             <div className='info-user'>
-                <Profile_Picture type="norm" image={user && user.image ? user.image : new Image()} />
+                <Profile_Picture type="norm" image={user.image} />
                 <UserInformation user={user} />
             </div>
             <div className="button-opportunities">

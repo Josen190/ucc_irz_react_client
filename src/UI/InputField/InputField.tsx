@@ -15,6 +15,7 @@ interface Props<T extends s> {
   onBlur?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   onChange?: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   onFocus?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+  onEnter?: () => void;
   onSetValue?: React.Dispatch<React.SetStateAction<T>> | ((value: T) => void);
   placeholder?: string;
   required?: boolean;
@@ -49,6 +50,7 @@ export default function InputField<T extends s>({
   onBlur,
   onSetValue,
   MyConstructor,
+                                                  onEnter
 }: Props<T>): JSX.Element {
 
   let input: JSX.Element;
@@ -66,7 +68,14 @@ export default function InputField<T extends s>({
       }
     }
     if (onChange) onChange(e);
+
   };
+
+  const _onKeyUp = (e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    if(e.key === "Enter" && onEnter) {
+      onEnter();
+    }
+  }
 
   const inputProps = {
     className: "",
@@ -79,6 +88,7 @@ export default function InputField<T extends s>({
     onChange: _onChange,
     onFocus: onFocus,
     onBlur: onBlur,
+    onKeyUp: _onKeyUp,
   };
 
   switch (type) {
@@ -100,7 +110,7 @@ export default function InputField<T extends s>({
         checked: Value as boolean,
         required: required ?? false,
       }
-      input = <input type={type} {..._propsCheckbox} />;
+      input = <input type={type} {..._propsCheckbox}/>;
       break;
     }
 

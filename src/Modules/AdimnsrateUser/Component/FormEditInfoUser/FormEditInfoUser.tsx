@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import updateInfo from '../../Fetch/updateInfo';
 import MyDate from 'Helpers/MyDate';
 import {useNavigate, useOutletContext} from "react-router-dom";
+import {notifySuccess} from "../../../../Components/Notifications/Notifications";
 
 
 function FormEditInfoUser() {
@@ -25,7 +26,10 @@ function FormEditInfoUser() {
         const fio = [firstNamem, surname];
         if (patronymic.length > 0) fio.push(patronymic);
         
-        updateInfo(user.id, fio, birthday);
+        updateInfo(user.id, fio, birthday).then(() => {
+            notifySuccess("Инхормация изменена")
+            navigation("../")
+        });
     }
 
 
