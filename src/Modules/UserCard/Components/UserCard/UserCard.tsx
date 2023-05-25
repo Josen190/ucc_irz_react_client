@@ -26,7 +26,7 @@ function UserCard({user, isMyProfile}: Props) {
     getImage(user.image.id).then(image => {
       dispatch(setUserImage({image}));
     })
-  }, [])
+  }, [user.id])
 
   return (
     <div className="tile UserCard">

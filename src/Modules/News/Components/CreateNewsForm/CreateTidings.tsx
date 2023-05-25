@@ -51,28 +51,10 @@ export default function CreateTidings() {
         />
 
         <InputImg view="news" setImageApi={setImages}></InputImg>
-        {/*<label>*/}
-        {/*  Добавить картинки:*/}
-        {/*  <input type="file" onChange={handleImageChange} />*/}
-        {/*</label>*/}
-        {/*<ul>*/}
-        {/*  {images && (*/}
-        {/*    <img className="image" src={images.url} alt="Новость" />*/}
-        {/*  )}*/}
-        {/*</ul>*/}
-
         <InputField type="checkbox"
           title="Глобальная новость"
           onChange={(event) => setIsGlobal(event.target.value === "true")}
         />
-        {/*<Button*/}
-        {/*  type="button"*/}
-        {/*  onClick={() => {*/}
-        {/*    navigate("../");*/}
-        {/*  }}*/}
-        {/*>*/}
-        {/*  Отмена*/}
-        {/*</Button>*/}
         <Button type="submit">Создать</Button>
       </form>
     </div>

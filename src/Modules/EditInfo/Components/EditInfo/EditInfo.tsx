@@ -28,7 +28,6 @@ function EditInfo() {
   }, []);
 
 
-
   const save = () => {
     if (image && image.name && image.url) {
       putUpdetePhoto(image).then((newImage) => {
