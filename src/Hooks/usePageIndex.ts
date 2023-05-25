@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-import useEndOfPage from "./useEndOfPage";
 
 export default function usePageIndex(componentRef?: React.RefObject<HTMLElement>) {
     const [PageIndex, setPageIndex] = useState(0);

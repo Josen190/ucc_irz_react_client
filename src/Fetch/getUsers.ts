@@ -1,9 +1,3 @@
-import {url_get_users} from "Constatnts/url";
-
-import VisitingUser from "Helpers/VisitingUser";
-import PropsMinUser from "./Interface/IMinUser";
-import fetch from "./Fetch";
-
 export interface IParamsGetUsers {
     PositionId?: string;
     Role?: string;

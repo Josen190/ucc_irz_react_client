@@ -1,9 +1,3 @@
-import fetch from "Fetch/Fetch";
-import {url_get_positions} from "../Constatnts/url";
-import Position from "Helpers/Positions";
-import IFetchPositions from "Fetch/Interface/IFetchPositions";
-
-
 async function getPosition(PageIndex: number, SearchString?: string, PageSize = 20) {
     return await fetch.get(url_get_positions, {params: {
             SearchString,
@@ -15,5 +9,3 @@ async function getPosition(PageIndex: number, SearchString?: string, PageSize = 
 
     })
 }
-
-export default getPosition;

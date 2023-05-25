@@ -1,6 +1,3 @@
-import React, {useEffect, useState} from "react";
-import getUserPosition from "Fetch/getUserPosition";
-import RowUserPosition from "../Components/RowUserPosition/RowUserPosition";
 
 function useGetUserPosition(userId: string) {
     const [userPositionJSX, setUserPosition] = useState<JSX.Element[]>([]);
@@ -18,5 +15,3 @@ function useGetUserPosition(userId: string) {
 
     return userPositionJSX;
 }
-
-export default useGetUserPosition;

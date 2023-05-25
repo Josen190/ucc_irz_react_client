@@ -1,8 +1,3 @@
-import React, {useRef, useState} from 'react';
-import {useNavigate, useOutletContext} from "react-router-dom";
-import User from "Helpers/User";
-import useEditUserPosition from "../../Hooks/useEditUserPosition";
-import InputField from "UI/InputField/InputField";
 
 function FormEditUserPosition() {
     const user = useOutletContext<User>()

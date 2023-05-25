@@ -1,8 +1,3 @@
-import MyDate from "./MyDate";
-import PropsUser, {ParamsUser} from "../Fetch/Interface/IUser";
-import VisitingUser from "./VisitingUser";
-import Position from "./Positions";
-
 export default class User extends VisitingUser {
   birthday: MyDate;
   aboutMyself: string | null;

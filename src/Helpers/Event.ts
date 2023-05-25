@@ -1,7 +1,3 @@
-import PropsEvent from "../Fetch/Interface/IEvent";
-import VisitingUser from "./VisitingUser";
-import MyDate from "./MyDate";
-
 export default class Event {
   id: string;
   creator: VisitingUser;

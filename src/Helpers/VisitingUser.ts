@@ -1,6 +1,3 @@
-import PropsMinUser from "../Fetch/Interface/IMinUser";
-import Image from "./Image";
-
 export default class VisitingUser {
   private static AuntificationuUser: VisitingUser | null = null;
   id: string;

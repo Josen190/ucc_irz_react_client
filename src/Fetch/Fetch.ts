@@ -1,12 +1,3 @@
-/**
-Класс Fetch для работы с API и SignalR
-*/
-
-import {url_post_refresh} from "Constatnts/url";
-import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from "axios";
-import * as signalR from '@aspnet/signalr';
-import {IFetchParamsMessage, MessageClass} from "Modules/Messenger";
-
 interface IRefresh {
     jwt: string;
     refreshToken: string;
@@ -22,9 +13,6 @@ class Fetch {
     private fetch: AxiosInstance; // Экземпляр axios для запросов
     private connectionHub?: signalR.HubConnection; // Экземпляр SignalR для установки соединения
 
-    /**
-    Создает экземпляр класса Fetch
-    */
     constructor() {
         this.loading = false;
         // Получение токенов из локального хранилища
@@ -41,10 +29,6 @@ class Fetch {
         });
     }
 
-    /**
-    Устанавливает JWT токен для запросов к API
-    @param jwt - JWT токен
-    */
     private setJwt(jwt: string | null): void {
         this.jwt = jwt;
         if (jwt) {
@@ -54,10 +38,6 @@ class Fetch {
         }
     }
 
-    /**
-    Создает экземпляр класса HubConnection для SignalR
-    @returns созданный экземпляр класса HubConnection
-    */
     private createConnectionHub() {
         this.connectionHub = new signalR.HubConnectionBuilder()
             .withUrl(this.host + '/hubs/chat', {
@@ -69,10 +49,6 @@ class Fetch {
 
     }
 
-    /**
-    Обновляет токены авторизации
-    @returns промис с данными об обновленных токенах
-    */
     private async refresh() {
         const data = {
             jwt: this.jwt,
@@ -100,10 +76,6 @@ class Fetch {
             });
     }
 
-    /**
-    Запускает подключение к SignalR
-    @returns Promise - возвращает Promise, который разрешится, когда соединение будет установлено
-    */
     public hubStart() {
         if (!this.connectionHub) {
             this.connectionHub = this.createConnectionHub();
@@ -119,11 +91,7 @@ class Fetch {
         });
     }
 
-    /**
-    setRefresh - обновить токены
-    @param jwt - текущий JWT токен
-    @param refreshToken - текущий refresh токен
-    */
+
     public setRefresh(jwt: string | null, refreshToken: string | null) {
         this.setJwt(jwt);
         this.refreshToken = refreshToken;
@@ -132,10 +100,7 @@ class Fetch {
         }
     }
 
-    /**
-    onMessage - функция, которая вызывается при получении сообщения с сервера
-    @param coolback - функция, которая будет вызвана при получении сообщения
-    */
+
     public onMessage(coolback: (m: MessageClass) => void) {
         if (!this.connectionHub) return;
         this.connectionHub.on('messageReceived', (message) => {
@@ -144,12 +109,7 @@ class Fetch {
 
     }
 
-    /**
-    sendHub - отправить сообщение на сервер через SignalR
-    @param methodName - название метода на сервере
-    @param message - сообщение, которое будет отправлено на сервер
-    @returns Promise - возвращает Promise с результатом выполнения запроса на сервере
-    */
+
     public sendHub(methodName: string, message: unknown) {
         if (!this.connectionHub) return Promise.reject("нет соединения");
         return this.connectionHub.invoke(methodName, message);
@@ -180,11 +140,6 @@ class Fetch {
         return this.fetch.put(url, data, config);
     }
 
-
-    /**
-     * sendRefreshToken
-     * @param collbac - функция, которая вызывается после успешной обновления токенов
-     */
     public async sendRefreshToken(collbac: (jwt: string | null, refreshToken: string | null) => void) {
         this.fetch.interceptors.response.use(
             (response) => response,
@@ -212,9 +167,5 @@ class Fetch {
         );
     }
 }
-
-
-
-
 const fetch = new Fetch();
 export default fetch;

@@ -1,7 +1,3 @@
-import { useScroll } from "react-ui-animate";
-import React, {useState} from "react";
-
-
 
 export default function useEndOfPage(callback: () => void, componentRef?: React.RefObject<HTMLElement>, isEnd = false, revers = false) {
   const [fullHeight, setFullHeight]

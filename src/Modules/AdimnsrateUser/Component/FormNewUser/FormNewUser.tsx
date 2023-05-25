@@ -1,9 +1,3 @@
-import MyDate from 'Helpers/MyDate';
-import newUser from '../../Fetch/newUser';
-import Button from 'UI/Button/Button';
-import InputField from 'UI/InputField/InputField';
-import React, { useState } from 'react'
-import {useNavigate} from "react-router-dom";
 
 function FormNewUser() {
     const [firstName, setFirstName] = useState<string>();

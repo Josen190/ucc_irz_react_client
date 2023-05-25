@@ -5,8 +5,6 @@ import "./TablesUser.scss"
 
 
 function TablesUser() {
-
-
     const rowUser = useGetUsers(undefined, );
 
     return (

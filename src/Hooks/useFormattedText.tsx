@@ -1,4 +1,3 @@
-import React, {useEffect, useState} from "react";
 
 function useFormattedText(text: string) {
     const [formattedText, setFormattedText] = useState<JSX.Element[] | null>(

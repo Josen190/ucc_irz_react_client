@@ -1,7 +1,3 @@
-import PropsImage from "../Fetch/Interface/IImage";
-import {Guid} from "guid-ts";
-
-
 export default class Image {
   id: string;
   name: string;

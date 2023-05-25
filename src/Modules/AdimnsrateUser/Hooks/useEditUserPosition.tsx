@@ -10,7 +10,6 @@ import {notifyError, notifySuccess} from "../../../Components/Notifications/Noti
 import getUserPosition from "Fetch/getUserPosition";
 
 
-//
 function useEditUserPosition(componentRef: React.RefObject<HTMLElement>, user: User, SearchString?: string) {
     const { PageIndex, restart, onEnd } = usePageIndex(componentRef)
     const navigate = useNavigate();

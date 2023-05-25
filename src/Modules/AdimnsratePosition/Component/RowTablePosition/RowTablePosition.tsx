@@ -1,7 +1,3 @@
-import React, {useState} from "react";
-import Position from "Helpers/Positions";
-import Button from "UI/Button/Button";
-import InputField from "UI/InputField/InputField";
 
 interface Props {
     position: Position;

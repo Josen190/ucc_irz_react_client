@@ -1,10 +1,4 @@
-import User from 'Helpers/User';
-import Button from 'UI/Button/Button'
-import InputField from 'UI/InputField/InputField'
-import React, { useState } from 'react'
-import updateInfo from '../../Fetch/updateInfo';
-import MyDate from 'Helpers/MyDate';
-import {useNavigate, useOutletContext} from "react-router-dom";
+
 
 
 function FormEditInfoUser() {
