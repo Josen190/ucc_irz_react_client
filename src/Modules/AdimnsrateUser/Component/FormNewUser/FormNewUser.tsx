@@ -4,6 +4,7 @@ import Button from 'UI/Button/Button';
 import InputField from 'UI/InputField/InputField';
 import React, { useState } from 'react'
 import {useNavigate} from "react-router-dom";
+import {ModalForm} from "UI/Modal";
 
 function FormNewUser() {
     const [firstName, setFirstName] = useState<string>();
@@ -33,17 +34,14 @@ function FormNewUser() {
     }
 
     return (
-        <div className='modal' onClick={() => navigate("../")}>
-            <div className='tile' onClick={(e) => e.stopPropagation()}>
+        <ModalForm title={"Создать"} confirm={save}>
                 <InputField<string> type='text' onSetValue={setSurname} placeholder='Фамилия'></InputField>
                 <InputField<string> type='text' onSetValue={setFirstName} placeholder='Имя'></InputField>
                 <InputField<string> type='text' onSetValue={setPatronymic} placeholder='Отчество'></InputField>
                 <InputField<string> type='email' onSetValue={setEmail} placeholder='Электронная почта'></InputField>
                 <InputField type='date' onSetValue={setBirthday} MyConstructor={MyDate} placeholder='Отчество'></InputField>
-                {error && <p>{error}</p>}
-                <Button type="button" onClick={save}>Сохранить</Button>
-            </div>
-        </div >
+                {/*{error && <p>{error}</p>}*/}
+        </ModalForm>
     )
 }
 

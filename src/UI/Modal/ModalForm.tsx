@@ -1,8 +1,9 @@
-import React from "react";
+import React, {RefObject} from "react";
 import styled from "styled-components";
-import ModalBG from "UI/Modal/ModalBG";
+import ModalBG from "./ModalBG";
 import {Form, useNavigate} from "react-router-dom";
 import {baseTheme} from "../../Styles/Theme.stales";
+import {Button} from "UI/Button";
 
 const FormStale = styled(Form)`
   display: grid;
@@ -27,25 +28,31 @@ const FormControl = styled.div`
 `
 
 
-interface Props{
+interface Props extends React.HTMLProps<HTMLFormElement>{
     children: JSX.Element | JSX.Element[];
+    title: string;
+    confirm: () => void;
+    close?: () => void;
+    ref?: RefObject<HTMLFormElement>
 }
 
-export default function ModalForm({children}: Props) {
+export default function ModalForm({children, title, confirm, close, ref}: Props) {
     const navigate = useNavigate()
 
+    const _close = () => {
+        if (close) close();
+        navigate("../");
+    }
+
     return (
-        <ModalBG
-            onClick={() => {
-                navigate("../");
-            }}
-        >
-            <FormStale>
+        <ModalBG onClick={_close}>
+            <FormStale onSubmit={confirm} ref={ref}>
                 <FormContent>
                     {children}
                 </FormContent>
                 <FormControl>
-
+                    <Button type={"button"} view={"red-reverse"} onClick={_close}>Отмена</Button>
+                    <Button type={"submit"} view={"basic"}>{title}</Button>
                 </FormControl>
             </FormStale>
         </ModalBG>

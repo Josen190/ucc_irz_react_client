@@ -1,11 +1,12 @@
 import React from "react";
-import Button from "UI/Button/Button";
+import {Button} from "UI/Button/";
 import InputField from "UI/InputField/InputField";
 import { useState } from "react";
 import Image from "Helpers/Image";
 import "./CreateTidings.scss";
 import {useNavigate, useOutletContext} from "react-router-dom";
 import InputImg from "UI/InputImg/InputImg";
+import {ModalForm} from "UI/Modal";
 
 export default function CreateTidings() {
   const newNews = useOutletContext() as ((title: string, content: string, isGlobal: boolean, image?: Image) =>  Promise<void>);
@@ -17,71 +18,35 @@ export default function CreateTidings() {
 
   const navigate = useNavigate()
 
-  // const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   if (!event.target.files) return;
-  //   const file = event.target.files.item(0);
-  //   if (!file) return;
-  //   Image.setUrl(file);
-  // };
+  const confirm = () => {
+    newNews(title, content, isGlobal, images ?? undefined).then(() => {
+      navigate("../");
+    })
+  }
+
 
   return (
-    <div
-      className="modal"
-      onClick={() => {
-        navigate("../");
-      }}
-    >
-      <form
-        className="column tile"
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
-        onSubmit={(e) => {
-          e.preventDefault();
-          newNews(title, content, isGlobal, images ?? undefined).then(() => {
-            navigate("../");
-          })
-        }}
-      >
+      <ModalForm title={"Создать"} confirm={confirm}>
         <h3>Создать новость</h3>
         <InputField
-          type="text"
-          title="Заголовок"
-          onChange={(event) => setTitle(event.target.value)}
+            type="text"
+            title="Заголовок"
+            onChange={(event) => setTitle(event.target.value)}
         />
         <InputField
-          type="textarea"
-          rows={15}
-          onChange={(event) => {
-            setContent(event.target.value)
-          }}
+            type="textarea"
+            rows={15}
+            onChange={(event) => {
+              setContent(event.target.value)
+            }}
         />
 
         <InputImg view="news" setImageApi={setImages}></InputImg>
-        {/*<label>*/}
-        {/*  Добавить картинки:*/}
-        {/*  <input type="file" onChange={handleImageChange} />*/}
-        {/*</label>*/}
-        {/*<ul>*/}
-        {/*  {images && (*/}
-        {/*    <img className="image" src={images.url} alt="Новость" />*/}
-        {/*  )}*/}
-        {/*</ul>*/}
 
         <InputField type="checkbox"
-          title="Глобальная новость"
-          onChange={(event) => setIsGlobal(event.target.value === "true")}
+                    title="Глобальная новость"
+                    onChange={(event) => setIsGlobal(event.target.value === "true")}
         />
-        {/*<Button*/}
-        {/*  type="button"*/}
-        {/*  onClick={() => {*/}
-        {/*    navigate("../");*/}
-        {/*  }}*/}
-        {/*>*/}
-        {/*  Отмена*/}
-        {/*</Button>*/}
-        <Button type="submit">Создать</Button>
-      </form>
-    </div>
+      </ModalForm>
   );
 }

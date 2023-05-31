@@ -1,7 +1,5 @@
-import styled, {css, FlattenSimpleInterpolation} from "styled-components";
-import React from "react";
+import styled, {css} from "styled-components";
 import {baseTheme} from "../../Styles/Theme.stales";
-import {Path} from "@remix-run/router/history";
 
 const viewBasic = css`
   background: ${baseTheme.colors.gray3};

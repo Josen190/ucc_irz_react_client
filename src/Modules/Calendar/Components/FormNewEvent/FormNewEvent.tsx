@@ -12,6 +12,7 @@ import FormSearchUser from "Modules/FormSearchUser";
 import postEvent from "../../Fetch/postEvent";
 import {useNavigate, useOutletContext} from "react-router-dom";
 import "./FormNewEvent.scss"
+import {ModalForm} from "UI/Modal";
 
 export default function FormNewEvent(): JSX.Element {
   const navigate = useNavigate();
@@ -55,18 +56,7 @@ export default function FormNewEvent(): JSX.Element {
   };
 
   return (
-    <div
-      className="modal"
-      onClick={() => {
-        navigate("/calendar");
-      }}
-    >
-      <div
-        className="tile form-new-event"
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
-      >
+    <ModalForm title={"Создать"} confirm={newEvent}>
         <div>
           <InputField
             type="date"
@@ -135,12 +125,6 @@ export default function FormNewEvent(): JSX.Element {
             <FormSearchUser setSelected={setListeners}></FormSearchUser>
           )}
         </div>
-        <div>
-          <Button type="button" onClick={() => newEvent()}>
-            Создать
-          </Button>
-        </div>
-      </div>
-    </div>
+    </ModalForm>
   );
 }

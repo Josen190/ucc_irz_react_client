@@ -1,11 +1,11 @@
 import User from 'Helpers/User';
-import Button from 'UI/Button/Button'
 import InputField from 'UI/InputField/InputField'
 import React, { useState } from 'react'
 import updateInfo from '../../Fetch/updateInfo';
 import MyDate from 'Helpers/MyDate';
 import {useNavigate, useOutletContext} from "react-router-dom";
 import {notifySuccess} from "../../../../Components/Notifications/Notifications";
+import {ModalForm} from "UI/Modal";
 
 
 function FormEditInfoUser() {
@@ -17,10 +17,6 @@ function FormEditInfoUser() {
     const [surname, setSurname] = useState(user.surname);
     const [patronymic, setPatronymic] = useState(user.patronymic);
     const [birthday, setBirthday] = useState(user.birthday);
-
-    // const [atviveEditRole, setActiveEditRole] = useState(false);
-
-
 
     const save = () => {
         const fio = [firstNamem, surname];
@@ -34,17 +30,12 @@ function FormEditInfoUser() {
 
 
     return (
-        <div className='modal' onClick={() => navigation("../")}>
-            <div className='tile' onClick={(e) => e.stopPropagation()}>
+        <ModalForm title={"Создать"} confirm={save}>
                 <InputField type='text' placeholder='Фамилия' defaultValue={firstNamem} onSetValue={setFirstName}></InputField>
                 <InputField type='text' placeholder='Имя' defaultValue={surname} onSetValue={setSurname}></InputField>
                 <InputField type='text' placeholder='Отчество' defaultValue={patronymic} onSetValue={setPatronymic}></InputField>
                 <InputField type='date' title='дата рождения' defaultValue={user.birthday.toString()} onSetValue={setBirthday} MyConstructor={MyDate} ></InputField>
-
-
-                <Button type="button" onClick={save}>Сохранить</Button>
-            </div>
-        </div >
+        </ModalForm>
     )
 }
 

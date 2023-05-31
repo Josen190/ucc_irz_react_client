@@ -3,6 +3,7 @@ import InputField from "UI/InputField/InputField";
 import React, {useRef, useState} from "react";
 import useAdministrateCabinet from "../../Hooks/useAdmistrateCabinet";
 import Button from "UI/Button/Button";
+import {ModalForm} from "UI/Modal";
 
 
 function FormAllCabinet() {
@@ -13,19 +14,16 @@ function FormAllCabinet() {
 
 
     return (
-        <div>
-            <Form ref={ref} onSubmit={() => newCabinet(name ?? '')}>
+        <ModalForm ref={ref} title={"Добавить кабинет"} confirm={() => newCabinet(name ?? '')}>
                 <div>
                     <InputField type="text" onSetValue={setName}/>
-                    <Button type="submit">Добавить кабинет</Button>
                 </div>
                 <table>
                     <tbody>
                     {cabinetCards}
                     </tbody>
                 </table>
-            </Form>
-        </div>
+        </ModalForm>
     )
 }
 
