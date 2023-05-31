@@ -1,81 +1,64 @@
-import React, { MouseEventHandler } from "react";
-import "./button.scss";
+import React from "react";
 import { Link } from "react-router-dom";
-import { OnClickHandler } from "Types/types";
+import {Path} from "@remix-run/router/history";
+import InputButton from "./InputButton";
+import * as C from "./Button.c"
 
-interface PropsButton {
+interface PropsButton extends React.HTMLProps<HTMLInputElement>{
   type: "button" | "link" | "submit";
   stale?: "basic" | "link";
-  title?: string;
-  color?: "basic" | "red" | "mini" | "red-reverse";
-  disabled?: boolean;
-  onClick?: OnClickHandler;
+  view?: "basic" | "red" | "gray" | "red-reverse";
   children?: string | JSX.Element | JSX.Element[];
-  href?: string;
-  id?: string;
-  required?: boolean;
-  className?: string;
+  to?: string | Partial<Path>,
 }
 
 export default function Button({
-  type,
-  stale = "basic",
-  title,
-  color = "basic",
-  disabled,
-  onClick,
-  children,
-  href,
-  id,
-  required,
-  className = "",
-}: PropsButton) {
+                                 type,
+                                 stale = "basic",
+                                 view = "basic",
+                                 children,
+                                 to,
+                                 ...rest
+                               }: PropsButton) {
+
   let button: JSX.Element | null = null;
-  const classNames = `button color-${color} ${className}`;
-
-  const buttonprops = {
-    className: classNames,
-    disabled: disabled ?? false,
-    onClick: onClick,
-  };
-
-  const submitProps = {
-    value: title ?? "",
-    onClick: onClick as MouseEventHandler<HTMLInputElement> | undefined,
-    id: id ?? "",
-    required: required ?? false,
-    disabled: disabled ?? false,
-
-  };
 
   switch (type) {
+    case "link":
+      button = (
+          <Link to={to ?? ""}>
+              <InputButton type="button">
+                  {children}
+              </InputButton>
+          </Link>
+      );
+      break;
+
     case "button":
       switch (stale) {
         case "basic":
-          button = <button {...buttonprops}>{children}</button>;
+          button = <InputButton type={type}>
+              {children}
+          </InputButton>
           break;
         case "link":
-          button = <a role="button" {...buttonprops}>{children}</a>;
+          button = (
+              <a
+                  role="button"
+                  {...rest as React.HTMLProps<HTMLAnchorElement>}
+              >
+                {children}
+              </a>
+          );
           break;
       }
       break;
 
-    case "link":
-      button = (
-        <Link to={href ?? ""}>
-          <div className={classNames} onClick={onClick}>
-            {children}
-          </div>
-        </Link>
-      );
-      break;
-
     case "submit":
       button = (
-        <label className={classNames}>
-          {children}
-          <input type={"submit"} {...submitProps} />
-        </label>
+          <InputButton type={type}>
+              {children}
+          </InputButton>
       );
       break;
 
@@ -84,5 +67,7 @@ export default function Button({
       break;
   }
 
-  return <div className={`button-container`}>{button}</div>;
+  return <C.StyledButtonContainer view={view}>
+      {button}
+  </C.StyledButtonContainer>;
 }
