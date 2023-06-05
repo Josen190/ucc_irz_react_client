@@ -9,6 +9,7 @@ import { Outlet } from "react-router-dom";
 import { useEffect } from "react";
 import { useAppSelector } from "Hooks";
 import Header from "Modules/Header";
+import PopUpMessage from "./UI/PopUpMessage/Components/PopUpMessage";
 
 
 function App() {
@@ -37,7 +38,8 @@ function App() {
 
   return (
     <div>
-      <ToastContainer></ToastContainer>
+      <PopUpMessage />
+      <ToastContainer />
       <Header></Header>
       {content}
     </div>

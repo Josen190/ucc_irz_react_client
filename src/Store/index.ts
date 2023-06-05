@@ -12,6 +12,7 @@ import {
     REGISTER,
 } from 'redux-persist'
 import storage from "redux-persist/lib/storage";
+import popUpStore from "../UI/PopUpMessage/Reduser/PopUpStore";
 
 
 const persistConfig = {
@@ -23,6 +24,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
     authorization: authorizationReduser,
     newsFilter: NewsFilterReduser,
+    popUp: popUpStore,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
