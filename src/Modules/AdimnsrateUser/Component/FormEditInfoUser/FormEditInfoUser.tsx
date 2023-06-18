@@ -1,11 +1,13 @@
 import User from 'Helpers/User';
-import InputField from 'UI/InputField/InputField'
-import React, { useState } from 'react'
+import React from 'react'
 import updateInfo from '../../Fetch/updateInfo';
-import MyDate from 'Helpers/MyDate';
 import {useNavigate, useOutletContext} from "react-router-dom";
 import {notifySuccess} from "../../../../Components/Notifications/Notifications";
-import {ModalForm} from "UI/Modal";
+import {ModalForm} from "UI/Form";
+import { Input, InputText } from 'UI/Input';
+import useText from 'Hooks/useText';
+import useDate from 'Hooks/useDate';
+
 
 
 function FormEditInfoUser() {
@@ -13,14 +15,16 @@ function FormEditInfoUser() {
     const user = useOutletContext<User>()
     const navigation = useNavigate();
 
-    const [firstNamem, setFirstName] = useState(user.firstName);
-    const [surname, setSurname] = useState(user.surname);
-    const [patronymic, setPatronymic] = useState(user.patronymic);
-    const [birthday, setBirthday] = useState(user.birthday);
+    const [firstNamem, setFirstName] = useText(user.firstName);
+    const [surname, setSurname] = useText(user.surname);
+    const [patronymic, setPatronymic] = useText(user.patronymic);
+    const [birthday, setBirthday] = useDate(user.birthday);
 
     const save = () => {
+        if (!firstNamem || !surname || !birthday) return;
+
         const fio = [firstNamem, surname];
-        if (patronymic.length > 0) fio.push(patronymic);
+        if (patronymic && patronymic.length > 0) fio.push(patronymic);
         
         updateInfo(user.id, fio, birthday).then(() => {
             notifySuccess("Инхормация изменена")
@@ -31,10 +35,23 @@ function FormEditInfoUser() {
 
     return (
         <ModalForm title={"Создать"} confirm={save}>
-                <InputField type='text' placeholder='Фамилия' defaultValue={firstNamem} onSetValue={setFirstName}></InputField>
-                <InputField type='text' placeholder='Имя' defaultValue={surname} onSetValue={setSurname}></InputField>
-                <InputField type='text' placeholder='Отчество' defaultValue={patronymic} onSetValue={setPatronymic}></InputField>
-                <InputField type='date' title='дата рождения' defaultValue={user.birthday.toString()} onSetValue={setBirthday} MyConstructor={MyDate} ></InputField>
+            <InputText 
+                placeholder='Фамилия' 
+                defaultValue={firstNamem} 
+                onSetValue={setFirstName} />
+            <InputText 
+                placeholder='Имя' 
+                defaultValue={surname} 
+                onSetValue={setSurname} />
+            <InputText 
+                placeholder='Отчество' 
+                defaultValue={patronymic} 
+                onSetValue={setPatronymic} />
+            <Input 
+                type='date' 
+                title='дата рождения' 
+                defaultValue={user.birthday.toString()} 
+                onSetValue={setBirthday} />
         </ModalForm>
     )
 }

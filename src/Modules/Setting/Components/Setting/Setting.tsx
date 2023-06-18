@@ -1,10 +1,9 @@
 import React from "react";
-
-import Button from "UI/Button/Button";
-import InputField from "UI/InputField/InputField";
 import { notifySuccess, notifyError } from "Components/Notifications/Notifications";
 import { useState } from "react";
 import putChangePassword from "../../Fetch/putChangePassword";
+import { Input } from "UI/Input";
+import { Button } from "UI/Button";
 
 
 function Setting() {
@@ -30,17 +29,17 @@ function Setting() {
     <form onSubmit={(e) => { e.preventDefault(); save(); }}>
       <div>
         <h4>Изменить пароль</h4>
-        <InputField
+        <Input
           type={"password"}
           placeholder={"Старый пароль"}
           onChange={(e) => setCurrentPassword(e.target.value)}
         />
-        <InputField
+        <Input
           type={"password"}
           placeholder={"Новый пароль"}
           onChange={(e) => setNewPassword(e.target.value)}
         />
-        <InputField
+        <Input
           type={"password"}
           placeholder={"Повторить пароль"}
           onChange={(e) => setRePassword(e.target.value)}

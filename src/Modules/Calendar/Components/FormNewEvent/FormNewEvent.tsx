@@ -1,8 +1,6 @@
 import React from "react";
 import MyDate from "Helpers/MyDate";
 import { useAppSelector } from "Hooks";
-import Button from "UI/Button/Button";
-import InputField from "UI/InputField/InputField";
 import { useState, useEffect } from "react";
 import User from "Helpers/User";
 import FormCabinet from "../FormCabinet/FormCabinet";
@@ -12,7 +10,9 @@ import FormSearchUser from "Modules/FormSearchUser";
 import postEvent from "../../Fetch/postEvent";
 import {useNavigate, useOutletContext} from "react-router-dom";
 import "./FormNewEvent.scss"
-import {ModalForm} from "UI/Modal";
+import {ModalForm} from "UI/Form";
+import { InputCheckbox, InputDate, InputText } from "UI/Input";
+import { Button } from "UI/Button";
 
 export default function FormNewEvent(): JSX.Element {
   const navigate = useNavigate();
@@ -58,48 +58,42 @@ export default function FormNewEvent(): JSX.Element {
   return (
     <ModalForm title={"Создать"} confirm={newEvent}>
         <div>
-          <InputField
-            type="date"
+          <InputDate
             defaultValue={day?.DatetoStr("yyyy-mm-dd")}
             onChange={(event) => {
               setDate(new MyDate(event.target.value));
             }}
-          ></InputField>
+          />
           <div className="row">
             <span>С</span>
-            <InputField
-              type="time"
+            <InputDate
               onChange={(event) => {
                 if (date) setStartTime(date.setNewTime(event.target.value));
               }}
-            ></InputField>
+            ></InputDate>
             <span>По</span>
-            <InputField
-              type="time"
+            <InputDate
               onChange={(event) => {
                 if (date) setEndTime(date.setNewTime(event.target.value));
               }}
-            ></InputField>
+            ></InputDate>
           </div>
-          <InputField
-            type="text"
+          <InputText
             placeholder="Заголовок"
             onChange={(event) => {
               setTitle(event.target.value);
             }}
-          ></InputField>
-          <InputField
-            type="textarea"
+          ></InputText>
+          <textarea
             placeholder="Опписание"
             onChange={(event) => {
               setDescription(event.target.value);
             }}
-          ></InputField>
-          <InputField
-            type="checkbox"
+          ></textarea>
+          <InputCheckbox
             title="Публичное"
             onSetValue={setIsPublic}
-          ></InputField>
+          />
           {user?.roles.includes(ConstCabinetsManager.Id) &&
             startTime &&
             endTime && (

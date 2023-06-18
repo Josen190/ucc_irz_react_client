@@ -1,10 +1,13 @@
-import React from "react";
+import React, { InputHTMLAttributes } from "react";
 import { Link } from "react-router-dom";
 import {Path} from "@remix-run/router/history";
 import InputButton from "./InputButton";
 import * as C from "./Button.c"
 
-interface PropsButton extends React.HTMLProps<HTMLInputElement>{
+
+
+
+interface PropsButton extends InputHTMLAttributes<HTMLInputElement>{
   type: "button" | "link" | "submit";
   stale?: "basic" | "link";
   view?: "basic" | "red" | "gray" | "red-reverse";

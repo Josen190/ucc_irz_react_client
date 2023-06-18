@@ -2,8 +2,8 @@ import React, {useRef, useState} from 'react';
 import {useNavigate, useOutletContext} from "react-router-dom";
 import User from "Helpers/User";
 import useEditUserPosition from "../../Hooks/useEditUserPosition";
-import InputField from "UI/InputField/InputField";
-import {ModalForm} from "UI/Modal";
+import {ModalForm} from "UI/Form";
+import { InputText } from 'UI/Input';
 
 function FormEditUserPosition() {
     const user = useOutletContext<User>()
@@ -19,7 +19,7 @@ function FormEditUserPosition() {
                 {userPositionJSX}
             </div>
             <div>
-                <InputField type="text" onSetValue={setSearchString}></InputField>
+                <InputText onSetValue={setSearchString}/>
                 {positionJSX}
             </div>
         </ModalForm>

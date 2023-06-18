@@ -1,7 +1,8 @@
 import React, {useState} from "react";
 import Cabinet from "Helpers/Cabinet";
-import InputField from "UI/InputField/InputField";
-import Button from "UI/Button/Button";
+import { InputText } from "UI/Input";
+import useText from "Hooks/useText";
+import { Button } from "UI/Button";
 
 interface Props {
     cabinet: Cabinet;
@@ -11,12 +12,15 @@ interface Props {
 
 function CabinetCard(props: Props) {
     const [isEdit, setIsEdit] = useState(false);
-    const [name, setName] = useState<string>(props.cabinet.name);
+    const [name, setName] = useText(props.cabinet.name);
     return (
         <tr className="row-cabinet">
             <td>
                 {!isEdit && <p>{name}</p>}
-                {isEdit && <InputField type="text" defaultValue={name} onSetValue={setName} placeholder="Название должности"/> }
+                {isEdit && <InputText 
+                                defaultValue={name} 
+                                onSetValue={setName} 
+                                placeholder="Название должности"/> }
             </td>
             <td>
                 {!isEdit && <Button type="button" onClick={() => setIsEdit(true)}>Изменить</Button>}
@@ -26,7 +30,8 @@ function CabinetCard(props: Props) {
                                            setIsEdit(false);
                                            return;
                                        }
-                                       props.edit(props.cabinet.id, name).then(() => setIsEdit(false));
+                                       if (name)
+                                            props.edit(props.cabinet.id, name).then(() => setIsEdit(false));
                                    }} >Сохранить</Button>}
             </td>
             <td>

@@ -1,18 +1,18 @@
-import MyDate from 'Helpers/MyDate';
+import React from 'react'
 import newUser from '../../Fetch/newUser';
-import Button from 'UI/Button/Button';
-import InputField from 'UI/InputField/InputField';
-import React, { useState } from 'react'
 import {useNavigate} from "react-router-dom";
-import {ModalForm} from "UI/Modal";
+import {ModalForm} from "UI/Form";
+import { InputDate, InputText } from 'UI/Input';
+import useText from 'Hooks/useText';
+import useDate from 'Hooks/useDate';
 
 function FormNewUser() {
-    const [firstName, setFirstName] = useState<string>();
-    const [surname, setSurname] = useState<string>();
-    const [patronymic, setPatronymic] = useState<string>();
-    const [email, setEmail] = useState<string>();
-    const [birthday, setBirthday] = useState<MyDate>();
-    const [error, setError] = useState<string>()
+    const [firstName, setFirstName] = useText();
+    const [surname, setSurname] = useText();
+    const [patronymic, setPatronymic] = useText();
+    const [email, setEmail] = useText();
+    const [birthday, setBirthday] = useDate();
+    const [error, setError] = useText()
 
     const navigate = useNavigate();
 
@@ -35,11 +35,11 @@ function FormNewUser() {
 
     return (
         <ModalForm title={"Создать"} confirm={save}>
-                <InputField<string> type='text' onSetValue={setSurname} placeholder='Фамилия'></InputField>
-                <InputField<string> type='text' onSetValue={setFirstName} placeholder='Имя'></InputField>
-                <InputField<string> type='text' onSetValue={setPatronymic} placeholder='Отчество'></InputField>
-                <InputField<string> type='email' onSetValue={setEmail} placeholder='Электронная почта'></InputField>
-                <InputField type='date' onSetValue={setBirthday} MyConstructor={MyDate} placeholder='Отчество'></InputField>
+                <InputText onSetValue={setSurname} placeholder='Фамилия'></InputText>
+                <InputText onSetValue={setFirstName} placeholder='Имя'></InputText>
+                <InputText onSetValue={setPatronymic} placeholder='Отчество'></InputText>
+                <InputText onSetValue={setEmail} placeholder='Электронная почта'></InputText>
+                <InputDate onSetValue={setBirthday} placeholder='Отчество'></InputDate>
                 {/*{error && <p>{error}</p>}*/}
         </ModalForm>
     )

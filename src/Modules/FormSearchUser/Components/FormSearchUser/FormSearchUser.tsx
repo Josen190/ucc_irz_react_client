@@ -1,6 +1,6 @@
-import InputField from "UI/InputField/InputField";
 import React, { useState, useEffect, SetStateAction } from "react";
 import useGetUsers from "../../Hooks/useGetUsers";
+import { InputText } from "UI/Input";
 
 
 
@@ -21,12 +21,11 @@ export default function FormSearchUser({setSelected}: Props): JSX.Element {
     <div>
         <p>Добавить сотрудников</p>
       <div>
-        <InputField
-          type="text"
+        <InputText
           onChange={(e) => {
             setSearchString(e.target.value);
           }}
-        ></InputField>
+        ></InputText>
       </div>
         {selectedUsers.length > 0 && <div className="select-user">{selectedUsers}</div>}
       <div>{users}</div>

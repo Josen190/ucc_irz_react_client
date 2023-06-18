@@ -12,7 +12,7 @@ const viewBasic = css`
     transition: ${baseTheme.durations.ms300};
     
   }
-}
+
 `
 
 const viewRed = css`
@@ -27,7 +27,7 @@ const viewRed = css`
     color: white;
     
   }
-}
+
 `
 
 const viewRedReverse = css`
@@ -42,7 +42,7 @@ const viewRedReverse = css`
     transition: ${baseTheme.durations.ms300};
     
   }
-}
+
 `
 
 const viewGray = css`
@@ -56,7 +56,7 @@ const viewGray = css`
     transition: ${baseTheme.durations.ms300};
     
   }
-}
+
 `
 
 interface Props{
@@ -97,8 +97,6 @@ export const StyledButtonContainer  = styled.div.attrs<Props>(props => {
     box-sizing: border-box;
   }
 `
-
-
 
 export const StyledAnchor = styled.a`
   border-radius: 5px;

@@ -1,12 +1,11 @@
 import React from "react";
-import {Button} from "UI/Button/";
-import InputField from "UI/InputField/InputField";
 import { useState } from "react";
 import Image from "Helpers/Image";
 import "./CreateTidings.scss";
 import {useNavigate, useOutletContext} from "react-router-dom";
-import InputImg from "UI/InputImg/InputImg";
-import {ModalForm} from "UI/Modal";
+import {ModalForm} from "UI/Form";
+import { InputCheckbox, InputText } from "UI/Input";
+import { InputImg } from "UI/InputImg";
 
 export default function CreateTidings() {
   const newNews = useOutletContext() as ((title: string, content: string, isGlobal: boolean, image?: Image) =>  Promise<void>);
@@ -28,13 +27,11 @@ export default function CreateTidings() {
   return (
       <ModalForm title={"Создать"} confirm={confirm}>
         <h3>Создать новость</h3>
-        <InputField
-            type="text"
+        <InputText
             title="Заголовок"
             onChange={(event) => setTitle(event.target.value)}
         />
-        <InputField
-            type="textarea"
+        <textarea
             rows={15}
             onChange={(event) => {
               setContent(event.target.value)
@@ -43,9 +40,9 @@ export default function CreateTidings() {
 
         <InputImg view="news" setImageApi={setImages}></InputImg>
 
-        <InputField type="checkbox"
-                    title="Глобальная новость"
-                    onChange={(event) => setIsGlobal(event.target.value === "true")}
+        <InputCheckbox 
+          title="Глобальная новость"
+          onChange={(event) => setIsGlobal(event.target.value === "true")}
         />
       </ModalForm>
   );

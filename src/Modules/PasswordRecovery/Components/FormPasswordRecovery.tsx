@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import {Form} from "react-router-dom";
-import InputField from "UI/InputField/InputField";
-import Button from "UI/Button/Button";
 import postResetPasswordUrl from "../Fetch/postResetPasswordUrl";
+import { InputText } from "UI/Input";
+import { Button } from "UI/Button";
 
 function FormPasswordRecovery() {
     const [email, setEmail] = useState<string>();
@@ -21,7 +21,7 @@ function FormPasswordRecovery() {
     return (
         <div>
             <Form onSubmit={resetPassword}>
-                <InputField type="email" onSetValue={setEmail} placeholder="Электронная почта"></InputField>
+                <InputText onSetValue={setEmail} placeholder="Электронная почта" />
                 <Button type="submit">Отпарвить</Button>
             </Form>
         </div>

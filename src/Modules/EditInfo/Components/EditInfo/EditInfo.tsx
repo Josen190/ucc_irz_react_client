@@ -1,7 +1,4 @@
 
-import Button from "UI/Button/Button";
-import InputField from "UI/InputField/InputField";
-import InputImg from "UI/InputImg/InputImg";
 import { notifySuccess, notifyError } from "Components/Notifications/Notifications";
 import React, { useState, useEffect } from "react";
 import Image from "Helpers/Image";
@@ -10,6 +7,8 @@ import { setUserImage } from "Modules/AuthController";
 import getUserMe from "Fetch/getUserMe";
 import putUpdateInfo from "../../Fetch/putUpdateInfo";
 import putUpdetePhoto from "../../Fetch/putUpdetePhoto";
+import { InputImg } from "UI/InputImg";
+import { Button } from "UI/Button";
 
 function EditInfo() {
   const dispatch = useAppDispatch()
@@ -51,8 +50,7 @@ function EditInfo() {
   return (
     <form onSubmit={(e) => { e.preventDefault(); save() }}>
       <InputImg view="avatar" setImageApi={setImage} />
-      <InputField
-        type="textarea"
+      <textarea
         title="О себе"
         placeholder="Введите информацию о себе"
         defaultValue={myself}
@@ -62,8 +60,7 @@ function EditInfo() {
           setMyself(event.target.value);
         }}
       />
-      <InputField
-        type="textarea"
+      <textarea
         title="Чем занимался"
         placeholder="Введите чем вы занимались"
         defaultValue={iDid}
@@ -73,8 +70,7 @@ function EditInfo() {
             setIDid(event.target.value);
         }}
       />
-      <InputField
-        type="textarea"
+      <textarea
         title="Навыки"
         placeholder="Расскажите о ваших навыках "
         defaultValue={skills}

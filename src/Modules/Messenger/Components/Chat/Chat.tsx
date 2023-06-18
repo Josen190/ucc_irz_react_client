@@ -1,15 +1,14 @@
 import React, { useRef, useState } from "react";
 import ChatClass from "../../Helper/Chat";
 import { Navigate, useOutletContext } from "react-router-dom";
-import InputField from "UI/InputField/InputField";
-import Button from "UI/Button/Button";
 import PaperPlaneOutline from "Assets/icons/PaperPlaneOutline";
 import useGetMessages from "../../Hooks/useGetMessages";
 import { useAppSelector } from "Hooks";
-
 import "./Chat.scss";
-import InputImg from "UI/InputImg/InputImg";
 import Image from "Helpers/Image";
+import { InputText } from "UI/Input";
+import { InputImg } from "UI/InputImg";
+import { Button } from "UI/Button";
 
 
 export default function Chat() {
@@ -37,15 +36,17 @@ export default function Chat() {
     <div className="chat">
       <div className="row">
         <p>{chat.recipient.getFullName()}</p>
-        <InputField type="text" placeholder="поиск" onSetValue={setSearchString}></InputField>
+        <InputText placeholder="поиск" onSetValue={setSearchString}></InputText>
       </div>
       <div className="list-messages">
         {messages}
       </div>
       <div className="input-message">
-        <InputField type="text" placeholder="ведите сообщение" Value={textSendMessage} onSetValue={setTextSendMessage}></InputField>
-        <InputImg view="messenger" setImageApi={(img) => setImageSendMessage(img)} value={imageSendMessage}/>
-        <Button type="button" onClick={send}><PaperPlaneOutline></PaperPlaneOutline></Button>
+        <InputText placeholder="ведите сообщение" value={textSendMessage} onSetValue={setTextSendMessage}></InputText>
+        <InputImg view="messenger" setImageApi={(img) => setImageSendMessage(img)}/>
+        <Button type="button" onClick={send}>
+          <PaperPlaneOutline />
+        </Button>
       </div>
     </div>
   );
